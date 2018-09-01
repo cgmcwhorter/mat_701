@@ -1,0 +1,143 @@
+\documentclass[11pt, twoside]{article}
+
+\usepackage[]{geometry}
+
+\usepackage{
+	amsmath,
+  	amssymb,
+  	amsthm,
+	bbm,
+  	%bm,              		% boldsymbol
+  	bookmark,        		% replaces (and loads) hyperref
+	%chngcntr,		% for counterwithin
+	enumerate,
+	environ,			% Tikz Scale Pictures
+	fancyhdr,			% better headers
+	float,				% forced image placement
+  	mathrsfs,        		% mathscr
+  	mathtools,       		% allows prescript
+  	microtype,       		% improved looks
+	multicol,
+  	tikz-cd,         		% better commutative diagrams
+  	thmtools,        		% custom end to example environment
+	%totcount,		% define counters
+	%wrapfig,
+	xcolor,
+  	mat701_notes 		% custom style file
+}
+
+
+
+\definecolor{SUOrange}{RGB}{212,69,0}
+
+\usetikzlibrary{calc,matrix,arrows,shapes.geometric,positioning,decorations.pathmorphing}
+\tikzset{snake it/.style={-stealth,
+decoration={snake, 
+    amplitude = .4mm,
+    segment length = 2mm,
+    post length=0.9mm},decorate}}
+
+
+
+\usetikzlibrary{hobby}
+\usetikzlibrary{decorations.fractals} % For cantor
+
+
+
+
+\usepackage[
+	hyperref = true,      	% links to online documents
+  	backend  = bibtex,    % use bibtex instead of biber
+  	sorting  = nyt,       	% sorts by (name, year, title)
+  	style  = alphabetic 	% citations look like [Har77]
+]{biblatex}
+%\addbibresource{rings_mods.bib}
+
+\usepackage[all]{xy}
+\hypersetup{
+	colorlinks = true,
+  	linkcolor  = blue,
+  	urlcolor   = cyan
+}
+\PassOptionsToPackage{hyphens}{url}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14pt}
+\fancyhead[CE]{}
+\fancyhead[CO]{}
+\fancyhead[RE]{\thepage}
+\fancyhead[LO]{\thepage}
+
+
+%\usepackage[bitstream-charter]{mathdesign}
+%\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+
+
+\begin{document}
+
+
+
+\pagestyle{empty}
+\begin{flushright}
+\begin{tabular}{ll}
+\raisebox{-.5\height}{\includegraphics[scale=0.25]{syracuse_seal.jpg}} & {\color{SUOrange}\Huge Syracuse University } \\
+\end{tabular}
+\end{flushright}
+\vspace{2in}
+
+{\color{SUOrange} \Huge \noindent MATH 701: \\[0.2cm] Real Variables I \\[0.2cm] 
+\rule{0.65\textwidth}{0.05cm} \\[0.2cm]}
+
+{\color{SUOrange} \large \noindent Professor: Dr. Leonid Kovalev \\ Notes By: Caleb McWhorter }
+
+\vfill
+\begin{center} {\huge \color{SUOrange} Fall 2018} \end{center}
+
+
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\setcounter{section}{-1}
+\setcounter{page}{1}
+
+
+\input{sections/introduction/introduction.tex}
+\input{sections/first/first.tex}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
