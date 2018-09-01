@@ -9,6 +9,7 @@
 *.blg
 *.idx
 *.synctex.gz
+*.run.xml
 
 # OS generated files #
 ######################
