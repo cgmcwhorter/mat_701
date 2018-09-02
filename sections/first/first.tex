@@ -1,12 +1,6 @@
 % !TEX root = ../../mat701_notes.tex
 \newpage
-
-% bit on expanding real analysis. ultimate goal to integrate spaces of functions, along lines of functional analysis. ie use functions instead of real numbers.
-
-% SKip chapters 1--2 of book & Being with chapter 3
-
 \section{Lebesgue Outer Measure}
-
 
 We want to assign a notion of `size' to sets. We denote this `size' by $\nu$. Let $\R^n= \{(x_1,\ldots,x_n) \colon x_i \in \R\}$ denote ordinary Euclidean space. By an `interval' in $\R^n$, we mean a set $\{ (a_1,b_1) \times (a_2,b_2) \times \cdots \times (a_n,b_n) \colon a_i,b_i \in \R^n, a_i<b_i\}$. By a closed interval in $\R^n$, we mean a set $\{ [a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_n,b_n] \colon a_i,b_i \in \R^n, a_i<b_i\}$. We will often say `box', which will always mean an open or closed interval in $\R^n$. 
 	\[
@@ -32,14 +26,28 @@ In defining a `size' for sets, it makes sense to begin with a simple shape like 
 
 
 \noindent But the question remains, how do we generalize this to an arbitrary region $E$? Given the above definition, it is natural to try to generalize to arbitrary sets $E$ by approximating $E$ by boxes, i.e. an open covering $\{I_k\}$ by intervals.
+	\[
+	\begin{scaletikzpicturetowidth}{0.3\textwidth}
+	\begin{tikzpicture}[thick,scale=\tikzscale]
+	\blobfive{0}{0}
+	\pbox{-4.5}{-3}{3}{5}
+	\pbox{-6.5}{-3.5}{2.5}{3.5}
+	\pbox{-2}{2.5}{2}{5}
+	\pbox{-4}{-0.5}{3.5}{3.5}
+	\pbox{2}{-1.5}{4.5}{2.5}
+	\pbox{-1}{-2}{5.5}{3.5}
+	\pbox{-2.5}{-3.5}{2}{3.5}
+	\end{tikzpicture}
+	\end{scaletikzpicturetowidth}
+	\]
 
-% Blob picture covered by boxes
 
 It then becomes clear that whatever the measure of $E$ is, it should satisfy
 	\[
 	\nu(E) \leq \sum_k \nu(I_k),
 	\]
 since the intervals cover $E$. After all, it would be strange indeed to allow $E$ to have greater measure than its covering. Furthermore measure is going to be defined in terms of coverings, then the measure need be invariant of the choice of covering. These ideas are our guiding principles. So we take the following definition 
+
 
 \begin{dfn}[Outer Measure]
 For a set $E \subset \R^n$, the outer measure (or exterior measure) of $E$, denoted $\ext{E}$, is the function $\nu: \R^n \to [0,\infty)$ given by
@@ -49,10 +57,12 @@ For a set $E \subset \R^n$, the outer measure (or exterior measure) of $E$, deno
 where the infimum is taken over all \emph{countable} coverings $\{I_k\}$ of $E$. 
 \end{dfn}
 
-The coining of `outer measure' is immediately obvious---we are measuring the size of a set via external objects, namely the open cover. However, less obvious is the need to restrict to countable coverings. The need to eliminate uncountable coverings is apparent as then trouble arises defining the summation. But why not only allow finite coverings? For this consider the case $E= \Q \cap [0,1]$. 
 
-% insert dotted unit interval [0,1]
-In any finite covering of $[0,1]$ by intervals, the intervals cannot all be pairwise disjoint. The reader will confirm, with a bit of thought, that if the intervals were all pairwise disjoint then there would be a rational number missed by the `covering.' But this contradicts the fact that the collection was an open cover. The the only possible open covering by intervals is the entire interval itself so that $\inf \sum \nu(I_k)=1$. This violates the notation that there isn't any `length' or `area' here since we have a sparse collection of points. Furthermore, the same logic applies to the set $E'=\Q^C \cap [0,1]$. So if the outer measure of $E$ were 1, then this would be true too of $E'$. But clearly the outer measure of $[0,1]$ is 1. Now $[0,1]=E \cup E'$, and $E \cap E'=\emptyset$. As $1+1 \neq 1$, this breaks countable subadditivity of the measure we are trying to define. By defining the outer measure in terms of countable covers, we obtain the expected answer $\ext{E}=0$. 
+The coining of `outer measure' is immediately obvious---we are measuring the size of a set via external objects, namely the open cover. However, less obvious is the need to restrict to countable coverings. The need to eliminate uncountable coverings is apparent as then trouble arises defining the summation. But why not only allow finite coverings? For this consider the case $E= \Q \cap [0,1]$. In any finite covering of $[0,1]$ by intervals, the intervals cannot all be pairwise disjoint. The reader will confirm, with a bit of thought, that if the intervals were all pairwise disjoint then there would be a rational number missed by the `covering.' But this contradicts the fact that the collection was an open cover. The the only possible open covering by intervals is the entire interval itself so that $\inf \sum \nu(I_k)=1$. This violates the notation that there isn't any `length' or `area' here since we have a sparse collection of points. 
+
+
+Furthermore, the same logic applies to the set $E'=\Q^C \cap [0,1]$. So if the outer measure of $E$ were 1, then this would be true too of $E'$. But clearly the outer measure of $[0,1]$ is 1. Now $[0,1]=E \cup E'$, and $E \cap E'=\emptyset$. As $1+1 \neq 1$, this breaks countable subadditivity of the measure we are trying to define. By defining the outer measure in terms of countable covers, we obtain the expected answer $\ext{E}=0$. 
+
 
 \begin{ex}
 Let $E=\Q \cap [0,1]$ and $\ep>0$ be given. Since $\Q$ is countable, so too is $E$ countable. Enumerate the rationals in $E$ as $\{q_1,q_2,\ldots,q_n,\ldots\}$. Now the set $\{O_n\}_{n \in \N}$, where $O_n:= (q_n- \frac{1}{2^{n+k+1}}, q_n+\frac{1}{2^{n+k+1}})$ and $k \in \N$ is fixed, is a (countable) open covering of $E$ by intervals. Furthermore, the $O_n$ are pairwise disjoint. Choose $k$ sufficiently large so that $2^{-k}<\ep$. The measure of this covering is then
@@ -60,6 +70,7 @@ Let $E=\Q \cap [0,1]$ and $\ep>0$ be given. Since $\Q$ is countable, so too is $
 	\sum_{n=1}^\infty \nu(O_n)= \sum_{n=1}^\infty \left[ \left(q_n+\frac{1}{2^{n+k+1}}\right) - \left(q_n- \frac{1}{2^{n+k+1}}\right) \right]= \sum_{n=1}^\infty 2 \cdot \dfrac{1}{2^{n+k+1}}= \dfrac{1}{2^k} \sum_{n=1}^\infty \dfrac{1}{2^n}= \dfrac{1}{2^k}<\ep.
 	\] \xqed
 \end{ex}
+
 
 As a final remark, observe that the exterior measure is a function to the nonnegative extended real line; that is, the exterior measure allows infinite values. Sets with an infinite exterior measure are considered measurable. For example, our intuition is that $\R$ should have infinite length and the reader routinely verifies that $\ext{\R}=\infty$. The outer measure $\ext{\cdot}$ defined above does meet all our guiding principles as the following proposition verifies. 
 
@@ -86,14 +97,26 @@ The result then follows by letting $\ep$ tend to 0. \qed \\
 \noindent If one wants to generalize the notion of outer measures to spaces beyond $\R^n$, one can take the properties of Proposition~\ref{prop:outermprop} as the axioms for this abstract measure. 
 
 
-Note in general we do not have $\ext{\bigcup E_k}= \sum \ext{E}$ even if the $E_k$ are disjoint or even in the case of finite unions! Equality holds when the sets are, in a sense, `unentangled.' By this, we mean that open coverings of one set tend to be disjoint from open coverings of the other set. If this is the case, the sets have to be covered separately. 
-
-% Separate sets case
-
-\noindent However if the sets are `entangled', then their open covers result in a great deal of `multiple-covering' for the union. This excess covering allows one to more `efficiently' cover the union---hence the smaller measure, see the example on the right below. 
-
-% E1 swirl and E2 sparse dots, lots of overlap
-% here covers have to overlap so get strict inequality
+Note in general we do not have $\ext{\bigcup E_k}= \sum \ext{E}$ even if the $E_k$ are disjoint or even in the case of finite unions! Equality holds when the sets are, in a sense, `unentangled.' By this, we mean that open coverings of one set tend to be disjoint from open coverings of the other set. If this is the case, the sets have to be covered separately, see the example on the left below. However if the sets are `entangled', then their open covers result in a great deal of `multiple-covering' for the union. This excess covering allows one to more `efficiently' cover the union---hence the smaller measure, see the example on the right below. 
+	\[
+	\begin{scaletikzpicturetowidth}{0.5\textwidth}
+	\begin{tikzpicture}[thick,scale=\tikzscale]
+	\blobfour{-3}{3}
+	\blobseven{7}{-1}
+	\pbox{-6}{0.5}{7}{3.5}
+	\pbox{-8.5}{-1.5}{4.5}{3.5}
+	\pbox{-3}{4.5}{2}{3.7}
+	\pbox{-4}{1.5}{3.5}{4.2}
+	\pbox{7}{0}{1.6}{4}
+	\pbox{2}{0}{2}{3}
+	\pbox{4}{-2}{3}{2}
+	\pbox{4.5}{-4.5}{4}{4}
+	\pbox{4.8}{-1}{3.3}{2.6}
+	\pbox{6.5}{-2}{2.3}{5.6}
+	\pbox{0.5}{-5.5}{6.2}{5}
+	\end{tikzpicture}
+	\end{scaletikzpicturetowidth}
+	\]
 
 
 There are many connections between Topology and Measure Theory, especially in the case of $\R^n$. Topology on $\R^n$ is primarily interested in the structure of open and compact sets. This will prove useful for us since our measure is defined in terms of open sets. As an example, take the following theorem. 
@@ -262,54 +285,73 @@ Every closed set $A \subset \R^n$ is measurable.
 	\] \qed \\
 
 
+As it turns out, the measurability of a set is equivalent to the measurability of its complement. This turns out to be useful in circumstances where one set is `nicer' than the other. 
 
 
-As it turns out, the measurability of a set is equivalent to the measurability of its complement. This turns out to be useful in circumstances where one set is `nicer' than the other. To prove this, we make use of the following proposition. 
+\begin{thm}
+If $E$ is measurable, then $E^C$ is measurable.
+\end{thm}
 
-
-
-
-
-
-
-
-
-% Following if and only if 
-\begin{prop} \label{prop:nearclosedmeas}
-If $A$ is a set such that for all $\ep>0$, there exists a closed set $F \subset A$ with $\ext{A \setminus F}<\ep$, then $A$ is measurable. 
-\end{prop}
-
-\pf Choose $\ep=1/k$ and get $F_k$. Now $B= \bigcup_{k=1}^\infty F_k \subset A$, and is measurable. Since $\ext{A \setminus B} \leq |A \setminus F_k|< 1/k$, we know that $|A \setminus B|=0$. Therefore, $A$ is measurable. \qed \\
+\pf Suppose that $E$ is measurable. For $k \in \N$, choose an open set $G_k$ such that $E \subset G_k$ and $\ext{G_k \setminus E}<1/k$. Now as $G_k$ is open, $G_k^C$ is closed, and hence measurable by Theorem~\ref{thm:closedmeas}. Let $G:= \bigcup_k G_K^C$. Being the countable union of measurable sets, $G$ is measurable, and $G \subset E^C$. Write $E^C= G \cup Z$, where $Z= E^C \setminus G$. Then $Z \subset E^C \setminus G_k^C= G_k \setminus E$, and therefore, $\ext{Z}< 1/k$ for all $k$. Hence, $\ext{Z}=0$, and so $Z$ is measurable. But then $E^C$ is the union of measurable sets, and is thus measurable. \qed \\
 
 % Oval labeled A, with box F_k inside. 
 
+While we have previously approximated sets by open sets containing them, we can do the same internally with closed sets and obtain the same notion of measurable, as the following proposition shows.
 
 
-Now $A= B \cup (A \setminus B)$ is measurable. 
+\begin{prop} \label{prop:nearclosedmeas}
+A set $E \subset \R^n$ is measurable if and only if given $\ep>0$, there exists a closed set $F \subset E$ such that $\ext{E \setminus F}< \ep$. 
+\end{prop}
+
+\pf $E$ is measurable if and only if $E^C$ is measurable, i.e. if and only if given $\ep>0$, there exists an open set $G$ with $E^C \subset G$ and $\ext{G \setminus E^C}<\ep$. But such an open set $G$ exists, noting that $G \setminus E^C=E \setminus F$, if and only if $G^C$ is closed, $F \subset E$, and $\ext{E \setminus F}<\ep$. \qed \\
 
 
 
-\begin{cor}
-If $A$ is measurable, then $A^C$ is measurable.
-\end{cor}
 
-% Picture blog G surrpoudngin box A. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Picture blob G surrpoudngin box A. 
 % If A \subset G, then G^C \subset A^C and G^C closed. 
 % |A^C \setminus G^C|_e = |G \setminus A|_e < \ep
 
 
 
-% In fact, prop is if and only if. 
-
-% Conclusion, the family of measurable sets is a \sigma-algebra, meaning it is closed under complements and countable unions. So any countable set ops? are okay. 
 
 
-
-% There are two important sigma algebras on \R^n. The Borel \sigma lagebra: the smallest sigma lagebra containing all open sets. The Lebesgue \sigma-algebra: the sigma algebra containing all measurable sets. 
-
-
-% Note Borel subset lebesgue and the inclusion is proper. 
-
+The previous theorems and propositions have shown that the complements of measurable sets are measurable, and countable unions and intersections of measurable sets are measurable. This is a special case of the more general notion of $\sigma$-algebras. 
 
 \begin{dfn}[$\sigma$-algebra]
 A nonempty collection of sets $\Sigma$ is called a $\sigma$-algebra if it satisfies
@@ -320,94 +362,23 @@ A nonempty collection of sets $\Sigma$ is called a $\sigma$-algebra if it satisf
 \end{dfn}
 
 
+Note that any collection of sets closed under countable unions is closed under countable intersections as $\left[\bigcap_k U_k \right]^C= \bigcup_k U_k^C$. The empty set and entire space are necessarily measurable sets. Generally, they are elements of any $\sigma$-algebra. Furthermore, if $\{E_k\}$ is a collection of measurable sets, then so are $\limsup$ and $\liminf$,
+	\[
+	\limsup E_k= \bigcap_{j=1}^\infty \bigcup_{k=j}^\infty \quad\text{and}\quad \liminf E_k= \bigcup_{j=1}^\infty \bigcap_{k=j}^\infty E_k.
+	\]
+We shall work with two special $\sigma$-algebras in particular.
 
 
+\begin{dfn}[Borel $\sigma$-algebra]
+The Borel $\sigma$-algebra is the smallest $\sigma$-algebra containing all open subsets of $\R^n$. 
+\end{dfn}
 
 
+\begin{dfn}[Lebesgue $\sigma$-algebra]
+The Lebesgue $\sigma$-algebra is the $\sigma$-algebra containing all measurable sets. 
+\end{dfn}
 
-
-
-
-%\begin{tikzpicture}
-%%% Blob
-%\path[draw,use Hobby shortcut,closed=true]
-%(0,0) .. (.5,1) .. (1,3) .. (.3,4) .. (-1,2);
-%\begin{scope}[xshift=4cm]
-%\draw (0,0) to [quick curve through={(0,0) (.5,1) .. (1,3) .. (.3,4) .. (-1,2)}] (0,0) ;
-%\end{scope}
-%%% Curvy line using hobby
-%%\path[draw,-stealth,use Hobby shortcut,closed=false]
-%%(-1.5,0) .. (-2.2,-2.2) .. (-2.8,-3);
-%%\draw[xshift=-.5cm,-stealth] (-1.5,0) to [quick curve through={(-2.2,-2.2)}] (-2.8,-3) ;
-%% Cury line without hobby
-%%\path[draw,xshift=.5cm]
-%%(-1.5,0) edge[out=-95,in=45,-stealth] (-2.8,-3);
-%%\path[draw,xshift=1cm,-stealth]
-%%(-1.5,0) to[out=-95,in=45] (-2.8,-3);
-%\end{tikzpicture}
-
-%\newpage
-%
-%	\[
-%	\begin{tikzpicture}[thick]
-%	\draw (0,0) circle (1);
-%	\draw (0+1,0+1) circle (1);
-%	\pbox{1}{1}{3}{4}
-%	\end{tikzpicture}
-%	\]
-%
-%
-%\begin{scaletikzpicturetowidth}{0.3\textwidth}
-%\begin{tikzpicture}[thick,scale=\tikzscale]
-%\path[shade,draw,use Hobby shortcut,closed=true]
-%	(0,0) .. (1,1) .. (3,-1) .. (-1,-2) .. (-1, 2);
-%\end{tikzpicture}
-%\end{scaletikzpicturetowidth}
-%
-%\begin{scaletikzpicturetowidth}{0.3\textwidth}
-%\begin{tikzpicture}[thick,scale=\tikzscale]
-%\path[shade,draw,use Hobby shortcut,closed=true]
-%	(-1,-1) .. (0,2) .. (3,-1) .. (1,-1) .. (0,-3) .. (-1,-1);
-%\end{tikzpicture}
-%\end{scaletikzpicturetowidth}
-%
-%\begin{scaletikzpicturetowidth}{0.3\textwidth}
-%\begin{tikzpicture}[thick,scale=\tikzscale]
-%\path[shade,draw,use Hobby shortcut,closed=true]
-%	(-4,-3) .. (-2,3) .. (0,1) .. (2,4) .. (3,-1) .. (1,-4) .. (-1,-2) .. (-4,-3);
-%\end{tikzpicture}
-%\end{scaletikzpicturetowidth}
-%
-%
-%\begin{scaletikzpicturetowidth}{0.3\textwidth}
-%\begin{tikzpicture}[thick,scale=\tikzscale]
-%\path[shade,draw,use Hobby shortcut,closed=true]
-%	(-3,3) .. (-5,1) .. (-1,-2) .. (0,-5) .. (3,-3) .. (5,1) .. (3,3) .. (0,5) .. (-3,3);
-%\end{tikzpicture}
-%\end{scaletikzpicturetowidth}
-%
-%
-%\begin{scaletikzpicturetowidth}{0.3\textwidth}
-%\begin{tikzpicture}[thick,scale=\tikzscale]
-%\path[shade,draw,use Hobby shortcut,closed=true]
-%	(-2,2) .. (2,4) .. (0,-3) .. (-4,3);
-%\end{tikzpicture}
-%\end{scaletikzpicturetowidth}
-%
-%\begin{scaletikzpicturetowidth}{0.3\textwidth}
-%\begin{tikzpicture}[thick,scale=\tikzscale]
-%\path[shade,draw,use Hobby shortcut,closed=true]
-%	(-2,-2) .. (2,-4) .. (0,3) .. (-4,-3);
-%\end{tikzpicture}
-%\end{scaletikzpicturetowidth}
-%
-%
-%\begin{scaletikzpicturetowidth}{0.3\textwidth}
-%\begin{tikzpicture}[thick,scale=\tikzscale]
-%\path[shade,draw,use Hobby shortcut,closed=true]
-%	(1,1) .. (1.5,6) .. (3,-1) .. (-6,0) .. (-1,3) .. (1,1);
-%\end{tikzpicture}
-%\end{scaletikzpicturetowidth}
+Note that the Borel $\sigma$-algebra is \emph{strictly} contained in the Lebesgue $\sigma$-algebra---though this is not simple to see. 
 
 
 
