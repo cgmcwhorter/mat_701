@@ -142,7 +142,7 @@ Any subset of a set with outer measure zero has outer measure zero, and the coun
 \end{cor}
 
 
-Theorem~\ref{thm:closeopenset} says we can always approximate any set by an open set with approximately the same size, i.e. approximately the same exterior measure. However, this does not mean that $|G \setminus E|_e \leq \ep$. We do know that $G = E \cup (G\setminus E)$. By subaddivitivity, we have $|G|_e \leq |E|_e + |G \setminus E|_e$. But we do not know the measure of the second set. The set $G$ from Theorem~\ref{thm:closeopenset} is a special case of more general type of set.
+Theorem~\ref{thm:closeopenset} says we can always approximate any set by an open set with approximately the same size, i.e. approximately the same exterior measure. However, this does not mean that $|G \sm E|_e \leq \ep$. We do know that $G = E \cup (G\sm E)$. By subaddivitivity, we have $|G|_e \leq |E|_e + |G \sm E|_e$. But we do not know the measure of the second set. The set $G$ from Theorem~\ref{thm:closeopenset} is a special case of more general type of set.
 
 
 \begin{dfn}[$G_\delta$-Set]
@@ -152,7 +152,7 @@ A $G_\delta$ set is a countable intersection of open sets.
 \noindent Notationally, $G$ is because the set is open, and $\delta$ stems from the fact we are using an intersection.
 
 
-However, it is still important to note that $|G \setminus E|_e$ could be very large. Now while Corollary~\ref{cor:countmeasurezero} states that countable sets have outer measure zero, it need not be the case that uncountable sets need have positive measure. 
+However, it is still important to note that $|G \sm E|_e$ could be very large. Now while Corollary~\ref{cor:countmeasurezero} states that countable sets have outer measure zero, it need not be the case that uncountable sets need have positive measure. 
 
 
 \begin{ex}[Cantor Set] \label{ex:cantor}
@@ -202,7 +202,7 @@ More generally, $\ext{I} = \nu(I)$ for all intervals in $\R^n$ and $\ext{\bigcup
 
 
 \begin{dfn}[Measurable]
-A set $E \subset \R^n$ is measurable if for all $\ep>0$, there exists an open set $G$ such that $G \supset E$ and $\ext{G \setminus E} < \ep$.
+A set $E \subset \R^n$ is measurable if for all $\ep>0$, there exists an open set $G$ such that $G \supset E$ and $\ext{G \sm E} < \ep$.
 \end{dfn}
 
 Essentially, a set is measurable if it can be well approximated by open sets. We choose the above notion of `closeness' in order to obtain additivity of measures. Notice we also have mentioned the underlying topology via the use of `open.' We are able to avoid invoking the underlying topology using greater abstraction, which shall come later. Note that we always have an open set such that $\ext{G} < \ext{E}+\ep$ (c.f. Theorem~\ref{thm:closeopenset}), but this alone is weaker than the above definition; that is, if $E$ is measurable then it satisfies the properties in Theorem~\ref{thm:closeopenset}. As a matter of notation, if $E$ is measurable, we define $|E|:= \ext{E}$. The following propositions follow immediately from our definition.
@@ -218,7 +218,7 @@ Every open set is measurable.
 If $\ext{E}=0$, then $E$ is measurable. 
 \end{prop}
 
-\pf Choose $G$ such that $\ext{G}<\ext{E}+\ep=\ep$. But then $\ext{G \setminus E} \leq \ext{G}<\ep$. \qed \\
+\pf Choose $G$ such that $\ext{G}<\ext{E}+\ep=\ep$. But then $\ext{G \sm E} \leq \ext{G}<\ep$. \qed \\
 
 \begin{prop}
 A countable union of measurable sets is measurable, and 
@@ -227,9 +227,9 @@ A countable union of measurable sets is measurable, and
 	\]
 \end{prop}
 
-\pf Let $\ep>0$. For each $k$, choose an open set $G_k$ such that $E_k \subset G_k$ and $\ext{G_k\setminus E_k}< \ep/2^k$. Now $G:= \bigcup_k G_k$ is open, and $E \subset G$. Moreover since $G \setminus E \subset \bigcup_k (G_k \setminus E_k)$, we have
+\pf Let $\ep>0$. For each $k$, choose an open set $G_k$ such that $E_k \subset G_k$ and $\ext{G_k\sm E_k}< \ep/2^k$. Now $G:= \bigcup_k G_k$ is open, and $E \subset G$. Moreover since $G \sm E \subset \bigcup_k (G_k \sm E_k)$, we have
 	\[
-	\ext{G\setminus E} \leq \ext{\bigcup_k (G_k \setminus E_k)} \leq \sum_k \ext{G_k \setminus E_k}< \ep.
+	\ext{G\sm E} \leq \ext{\bigcup_k (G_k \sm E_k)} \leq \sum_k \ext{G_k \sm E_k}< \ep.
 	\]
 Therefore, $\bigcup_k E_k$ is measurable. The fact that $\left|\bigcup_k E_k\right| \leq \sum_k |E_k|$ follows from Proposition~\ref{prop:outermprop}. \qed \\
 
@@ -241,7 +241,7 @@ Therefore, $\bigcup_k E_k$ is measurable. The fact that $\left|\bigcup_k E_k\rig
 All intervals are measurable.
 \end{prop}
 
-\pfsk We prove this only in the two dimensional case to avoid unnecessary complications. Given an interval $I=[a,b]$, choose $I'=[a',b']$ such that $I \subset \interior I'$ and $\nu(I')< \nu(I)+\ep$. We need to show that $\ext{I' \setminus I}<\ep$. Now $I' \setminus I=[a',a) \cup (b,b']$, and $\ext{I' \setminus I} \leq a-a'+b'-b= (b'-a') - (b-a)<\ep$, as desired. Alternatively, $I$ is the union of its interior and boundary. Proving the boundary has measure zero, l.t.r., then it follows from Proposition~\ref{prop:openmeasurable} and Proposition~\ref{prop:zeromeasurable} that $I$ is measurable.\qed \\
+\pfsk We prove this only in the two dimensional case to avoid unnecessary complications. Given an interval $I=[a,b]$, choose $I'=[a',b']$ such that $I \subset \interior I'$ and $\nu(I')< \nu(I)+\ep$. We need to show that $\ext{I' \sm I}<\ep$. Now $I' \sm I=[a',a) \cup (b,b']$, and $\ext{I' \sm I} \leq a-a'+b'-b= (b'-a') - (b-a)<\ep$, as desired. Alternatively, $I$ is the union of its interior and boundary. Proving the boundary has measure zero, l.t.r., then it follows from Proposition~\ref{prop:openmeasurable} and Proposition~\ref{prop:zeromeasurable} that $I$ is measurable.\qed \\
 
 
 As we have seen, open sets are easily seen to be measurable. But the case of closed sets is more complicated. For example in $\R$, every open set is the countable union of intervals of the form $(a_k,b_k)$. These intervals can even be taken to be disjoint. However, the same is not true for closed sets---take the Cantor set for example, c.f. Example~\ref{ex:cantor}. However, we do have that in $\R^n$ every open set is a countable union of non-overlapping intervals. To prove this we shall make use of dyadic cubes.
@@ -279,7 +279,7 @@ Therefore, $\ext{A} + \ext{B} \leq \ext{A \cup B}$, as desired. \qed \\
 Every closed set $A \subset \R^n$ is measurable. 
 \end{thm}
 
-\pf Given $\ep>0$, we can choose $G \supset A$ such that $\ext{G}<\ext{A}+\ep$. Now $G \setminus A$ is open. By Lemma~\ref{lem:tiling}, we can write $G\setminus A=\bigcup_{k=1}^\infty I_k$, where the $I_k$ are non-overlapping open intervals. We want to show that $\sum \nu(I_k)<\ep$, which will imply that $\ext{G \setminus A}<\ep$. It suffices to show that $\sum_{k=1}^N \nu(I_k)<\ep$ for all $N$. Let $K= \bigcup_{k=1}^N I_k$, which is compact and disjoint from $A$. But $A$ is closed so that $\dist(K,A)>0$. But then 
+\pf Given $\ep>0$, we can choose $G \supset A$ such that $\ext{G}<\ext{A}+\ep$. Now $G \sm A$ is open. By Lemma~\ref{lem:tiling}, we can write $G\sm A=\bigcup_{k=1}^\infty I_k$, where the $I_k$ are non-overlapping open intervals. We want to show that $\sum \nu(I_k)<\ep$, which will imply that $\ext{G \sm A}<\ep$. It suffices to show that $\sum_{k=1}^N \nu(I_k)<\ep$ for all $N$. Let $K= \bigcup_{k=1}^N I_k$, which is compact and disjoint from $A$. But $A$ is closed so that $\dist(K,A)>0$. But then 
 	\[
 	\ext{K \cup A}=\ext{K}+\ext{A}= \sum \nu(I_k) + \ext{A} \leq \ext{G} < \ext{A} + \ep.
 	\] \qed \\
@@ -292,7 +292,7 @@ As it turns out, the measurability of a set is equivalent to the measurability o
 If $E$ is measurable, then $E^C$ is measurable.
 \end{thm}
 
-\pf Suppose that $E$ is measurable. For $k \in \N$, choose an open set $G_k$ such that $E \subset G_k$ and $\ext{G_k \setminus E}<1/k$. Now as $G_k$ is open, $G_k^C$ is closed, and hence measurable by Theorem~\ref{thm:closedmeas}. Let $G:= \bigcup_k G_K^C$. Being the countable union of measurable sets, $G$ is measurable, and $G \subset E^C$. Write $E^C= G \cup Z$, where $Z= E^C \setminus G$. Then $Z \subset E^C \setminus G_k^C= G_k \setminus E$, and therefore, $\ext{Z}< 1/k$ for all $k$. Hence, $\ext{Z}=0$, and so $Z$ is measurable. But then $E^C$ is the union of measurable sets, and is thus measurable. \qed \\
+\pf Suppose that $E$ is measurable. For $k \in \N$, choose an open set $G_k$ such that $E \subset G_k$ and $\ext{G_k \sm E}<1/k$. Now as $G_k$ is open, $G_k^C$ is closed, and hence measurable by Theorem~\ref{thm:closedmeas}. Let $G:= \bigcup_k G_K^C$. Being the countable union of measurable sets, $G$ is measurable, and $G \subset E^C$. Write $E^C= G \cup Z$, where $Z= E^C \sm G$. Then $Z \subset E^C \sm G_k^C= G_k \sm E$, and therefore, $\ext{Z}< 1/k$ for all $k$. Hence, $\ext{Z}=0$, and so $Z$ is measurable. But then $E^C$ is the union of measurable sets, and is thus measurable. \qed \\
 
 % Oval labeled A, with box F_k inside. 
 
@@ -300,10 +300,10 @@ While we have previously approximated sets by open sets containing them, we can 
 
 
 \begin{prop} \label{prop:nearclosedmeas}
-A set $E \subset \R^n$ is measurable if and only if given $\ep>0$, there exists a closed set $F \subset E$ such that $\ext{E \setminus F}< \ep$. 
+A set $E \subset \R^n$ is measurable if and only if given $\ep>0$, there exists a closed set $F \subset E$ such that $\ext{E \sm F}< \ep$. 
 \end{prop}
 
-\pf $E$ is measurable if and only if $E^C$ is measurable, i.e. if and only if given $\ep>0$, there exists an open set $G$ with $E^C \subset G$ and $\ext{G \setminus E^C}<\ep$. But such an open set $G$ exists, noting that $G \setminus E^C=E \setminus F$, if and only if $G^C$ is closed, $F \subset E$, and $\ext{E \setminus F}<\ep$. \qed \\
+\pf $E$ is measurable if and only if $E^C$ is measurable, i.e. if and only if given $\ep>0$, there exists an open set $G$ with $E^C \subset G$ and $\ext{G \sm E^C}<\ep$. But such an open set $G$ exists, noting that $G \sm E^C=E \sm F$, if and only if $G^C$ is closed, $F \subset E$, and $\ext{E \sm F}<\ep$. \qed \\
 
 
 
@@ -345,7 +345,7 @@ A set $E \subset \R^n$ is measurable if and only if given $\ep>0$, there exists 
 
 % Picture blob G surrpoudngin box A. 
 % If A \subset G, then G^C \subset A^C and G^C closed. 
-% |A^C \setminus G^C|_e = |G \setminus A|_e < \ep
+% |A^C \sm G^C|_e = |G \sm A|_e < \ep
 
 
 
@@ -388,6 +388,252 @@ Note that the Borel $\sigma$-algebra is \emph{strictly} contained in the Lebesgu
 
 
 
+
+% Missing Lecture
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Friday Class
+ \subsection{Characterization of Measurable Sets}
+ 
+ By definition, $A$ is measurable if and only if for all $\ep>0$, there exists an open set $G \supset A$ such that $\ext{G \sm A}<\ep$. But this makes use of the underlying topology. Can we avoid this? After all, all this `open set-ness' is about continuity. Continuity is not even a requirement for integration, which is an end goal of ours. So we would like a description of measurability which avoids Topology entirely. Ironically, we shall first need more Topology.
+ 
+ Recall that $G_\delta$ is a set which is the countable intersection of open sets, $F_\sigma$ is the countable union of closed sets, $G_{\delta,\sigma}$ are the countable intersection of closed sets.\footnote{Generally, $G$ denotes open, $F$ denotes closed, $\delta$ is for countable intersections, and $\sigma$ is for countable unions.} One can even continue this to absurdity, i.e. $G_{\delta\sigma\delta\sigma}$. Furthermore, these are all subclasses of the Borel $\sigma$-algebra. But are all Borel created by these procedures, i.e. formed by countable union or intersections of open or closed sets? It turns out that this is not the case. Though it is difficult to construct a set which is not a Borel set. 
+ 
+ \begin{thm} \label{thm:borelplusmeasure}
+ $E$ is measurable if and only if $E= H \sm Z$ if and only if $E= F \cup Z$. 
+ \end{thm}
+
+\pf For all $k$, there exists an open set $G_k \supset E$ such that $|G_k\sm E| \subset 1/k$. Then $H= \bigcap_k G_k$ works ($Z=H \sm E$ has measure zero). 
+
+
+
+% 2<->3
+Simply take complements
+
+2 or 3->1 Because Borel sets are measurable, measure 0 implies measurable. 
+
+
+
+
+Theorem~\ref{thm:borelplusmeasure} essentially states that measurable sets are the Borel sets `plus or minus' the measure zero sets. 
+
+% Think of $H$ as $G_\delta$, $|Z|=0$ and $F$ as $F_\sigma$, $|Z|=0$
+
+% Still using Borel so still havent quite avoided topology. 
+
+\begin{rem}
+This is different (in fact stronger) than $E \subset H$, $H$ is a $G_\delta$ set with the same outer measure, i.e. $\ext{H}=\ext{E}$. 
+\end{rem}
+
+\begin{thm}[Carath\'eodory]
+$E$ is measurable if and only if for all $A \subset \R^n$, $\ext{A \cap E}+\ext{A\sm E}=\ext{A}$.
+\end{thm}
+
+\pf Suppose that $E$ is measurable. Choose a $G_\delta$ set $H$ such that $A \subset H$ and $\ext{H}=\ext{A}$. Since $H= (H \cap E) \cup (H \sm E)$, and these are measurable sets, we have
+	\[
+	|A|_e=|H|= |H \cap E| + |H \sm E|.
+	\]
+But then $\ext{A} = |H|= |H \cap E| + |H\sm E| \geq \ext{A \cap E} + \ext{A \sm E}$. By subadditivity, this must be an equality. 
+
+Now suppose that all $A \subset \R^n$, $\ext{A \cap E}+\ext{A\sm E}=\ext{A}$. Let $A$ be a $G_\delta$ set such that $E \subset A$ and $\ext{E}=|A|$. Then on the left side of the equation, we have $\ext{E}+\ext{A\sm E}= |A|=\ext{E}$. Hence, $\ext{A \sm E}=0$, so $E$ is $G_\delta$ minus a measure zero set. Here we have subtracted $\ext{E}$. But what if this is not finite? 
+
+But how to deal with sets of infinite measure? We know that $E= \bigcup_{j=1}^\infty E_j$ and $E_j= E \cap [-j,j]^n$. So it suffices to prove that $E_j$ has the property $\ext{A \cap E_j}+\ext{A\sm E_j}=\ext{A}$. [Since $E_j$ is measurable, then so are the countable union of the $E_j$.] We need to show that for all $A \subset \R^n$, we have $\ext{A \cap E_j} + \ext{A \cap E_j^C}=\ext{A}$. We know that $E$ satisfies this property so that $\ext{A}= \ext{A \cap E} + \ext{A \cap E^C}$. We know also that $Q_j:= [-j,j]^n$ satisfies this property, so $\ext{A \cap E}= \ext{A \cap E \cap Q}+ \ext{A \cap E \cap Q^C}$. Similarly, we have $\ext{A \cap E^C}= \ext{A \cap E^C \cap Q}+ \ext{A \cap E^C \cap Q^C}$. Combing these gives
+	\[
+	\ext{A}= \ext{A \cap E \cap Q} + \ext{A \cap E \cap Q^C} + \ext{A \cap E^C \cap Q}+ \ext{A \cap E^C \cap Q^C} \geq \ext{A \cap E_j} + \ext{A \cap E_j^C},
+	\]
+as desired. \qed \\
+
+% No reference in theorem to open/closed. Could even use as def of measurable. describes measurability by how set intersects with other sets. When defined abstractly, this is taken to be the definition of measure.
+
+% blob A. E blob cutting through left side. shade two regions in intersection and setminus. Must add to A. Note 
+
+%Note that always have $\ext{A \cap E}+\ext{A\sm E} \geq \ext{A}$ by subadditivity. 
+
+
+
+
+
+
+% 09/10/2018
+
+% Quiz: What if we require this for measurable $A$ only? That is, what if A only splits measurable sets into the inequality. Answer is yes. This is found via the proof of Caratheodory THeorem. TO be specific, let quiz problem ineq be star. So if E satisfies * for all measurable sets A, then it satisfies star for all sets A. 
+
+% pf: Given arb A, let K \supset A be G_\delta set, |K|_e = |A|_e. Did not change right hand side, left hand inequality side could only go up. We know star holds for K, so star holds for A. 
+
+
+
+
+\subsection{Continuous \& Lipschitz Transformations}
+
+If $E \subset \R^n$ is measurable, and $f: \R^n \to \R^n$ is continuous, is $f(E)$ always measurable? The answer to this is no. We shall see this shortly. 
+
+
+\begin{lem} \label{lem:rcontfun}
+There is a continuous function $f: \R \to \R$ and a set $E$ with $|E|=0$, such that $|f(E)|>0$.
+\end{lem}
+
+\pfsk 
+
+% Cantor set vs Fat Cantor set, removing only 1/4: 1/4 removed, 1/16 removed each (so 1/8th total), 1/64 removed so 1/16 removed. each stage remove 2^j intervals of side 4^{-j}.
+
+% Cont map $f: [0,1] \to [0,1] such that $f(K)=L$.
+
+% K = \cap K_j regular cantor set
+% L = \cap L_j fat cantor set.
+
+% Map K_j onto L_j in a piecewise linear way. $f_j$ is continuous and sup |f_j - f_{j+1}| \leq 2^{-j}. from the translation/stretch/shrink definition
+
+% conclude f_j \to f uniformly. But then f continuous and f(K)=L. Now L has positive measure. 
+
+
+\begin{lem} \label{lem:unmeassubset}
+If $|A|>0$, then there exists $B \subset A$ such that $B$ is not measurable. 
+\end{lem}
+
+
+
+
+We now can show that it is not necessarily that if $E \subset \R^n$ is measurable, and $f: \R^n \to \R^n$ is continuous, that $f(E)$ always measurable. To see this, choose $f$ and $E$ as in Lemma~\ref{lem:rcontfun}. By Lemma~\ref{lem:unmeassubset}, there exists a non-measurable subset of $f(E)$, say $W$. Let $V:= f^{-1}(W) \cap E$. Observe that $f(V)=W$, and that $V$ is measurable (being a subset of measure zero). 
+
+\begin{dfn}[Lipschitz]
+We say that $f$ is Lipschitz if there exists $L$ such that $|f(x)-f(y)| \leq L|x-y|$ for all $x$, $y$ in the domain of $f$. 
+\end{dfn}
+
+That is, Lipschitz functions are the special case of uniformly continuous functions where we can always choose $\delta=\ep/L$. Therefore, if $f$ is Lipschitz then it is uniformly continuous, and hence also continuous. However, not all uniformly continuous functions are Lipschitz. 
+
+% Plot f(x)= x^(1/3). 
+
+The Lipschitz condition can be thought of as the boundedness of secant lines for a given function. 
+
+Lipschitz maps preserve sets of measure zero.
+
+\begin{thm} \label{thm:lipmeaszero}
+If $f: \R^n \to \R^m$ is Lipschitz and $|E|=0$, then $|f(E)|=0$. 
+\end{thm}
+
+\pf For every $\ep>0$, there exists a countable cover of $E$ by intervals $\{I_k\}$ so that $\sum |I_k| < \ep$. 
+
+
+% I_k horizontal line, box around annulus, label annulus f(I_k)
+% I_k has small volume but the interval needed to cover f(I_k) may not be.
+% Works for cubes, which is sufficient to consider, by triling open sets
+
+$\ext{E}= \inf \{ \sum \nu(I_k) \colon \bigcup I_k \supset E, \text{ and }I_k \text{ cubes}\}$.
+
+Tile interior of $I_k'$ by dyadic cubes. 
+
+So we have covering with cubes with $\sum \nu(I_k)<\ep$. $|f(I_k)| \leq C |I_k|$ by geometry. Note that $C$ depends on $L$ and $n$. Now cube has diameter at most $L \cdot a \sqrt{n}$. A cube of side length $2L a \sqrt{n}$ covers it. 
+
+% Picture rectangle I_k, with dotted box around it I_k', and small boxes covering it.
+
+But then $|f(E)| \leq C \sum |I_k| \leq C\ep$. Therefore, $|f(E)|=0$. \qed \\
+
+
+\begin{thm}
+If $E$ is measurable and $f$ is Lipschitz, then $f(E)$ is measurable.
+\end{thm}
+
+\pf Since $E$ is measurable, write $E= H \cup Z$, where $H$ is $F_\sigma$ and $|Z|=0$. Now $F_\sigma$ sets are the countable union of closed sets, which is equivalent to the countable union of compact sets. 
+
+% Curve line, draw box in box over cover
+
+%F \cap [-j,j]^n compact. 
+
+Since $f$ sends compact sets to compact sets, $f$ preserves `$F_\sigma$-ness.' We know by Theorem~\ref{thm:lipmeaszero} that if $|E|=0$, then $f(E)=0$. But then $f(E)= f(H) \cup f(Z)$, a union of $F_\sigma$ set and a set of measure zero. \qed \\
+
+
+% Common trick, writing union of growing sets. Idea is if whole thing not Liptschitz, maybe pieces are.
+
+
+% Insert blerb about stretching measure zero set to positive measure set.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Quiz
+% Suppose $A_1 \supset A_2 \supset A_4 \supset \cdots$ is a nested sequence of measurable subsets of $\R^n$ such that $|A_1|<\infty$. Claim $|A_k \sm A_{k+1}| \to 0$ as $k \to \infty$. 
+
+% True: |A_k| - |A_{k+1}| and |A_k| \to |\cap A_j| by limit properties, converge to diff to 0. or could do by
+% Contradiction: Measure intersection finite, so convergent sequence real numbers, then to 0 by cauchy criterion.
+% or A_1 = (A_1\sm A_2) \cup (A_2 \sm A_3) \cup \cdots and use countable additivity, ie.. $\sum |A_k \sm A_{k+1}| = |\cup (A_k \sm A_{k+1}| \leq |A_1|<\infty. 
 
 
 
