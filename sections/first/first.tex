@@ -582,6 +582,68 @@ Since $f$ sends compact sets to compact sets, $f$ preserves `$F_\sigma$-ness.' W
 
 
 
+% 09/12/2018
+
+
+Recall Cantor set maps to fat cantor set. 
+
+% show factor construction then fat cantor with arrows leading over
+
+% we cut out \ep_1, 2\ep_2, 4 \ep_4,...
+% \sum_{k=1}^\infty 2^{k-1} \ep_k = \frac{1}{2}, or anything in [0,1) want sum \frac{1}{2^{k+1}}, so \ep_k = \dfrac{1}{4^k} works. |f_k-f_{k+1}| \leq 2^{-k}, |f_k^{-1} - f_{k+1}^{-1} \leq 2^{-k} so f homeomorphism. So whrn W subset F is nonmeasurable, V=f^{-1}(W) is measurable but not borel. If V was Borel, then W=(f^{-1})^{-1}(V) would be too, noting hw preimage of borel is borel.
+
+\begin{thm}
+The continuous image of a Borel set is measurable. 
+\end{thm}
+
+
+
+Not true that continuous map of Borel is Borel. 
+
+
+No explicit examples of non-measurable sets exist. 
+
+
+Axiom of Choice: For all collections of nonempty sets $\{E_\alpha\}$, one can choose an element from each $E_\alpha$, i.e. there exists a function $f: \mathcal{A} \to \bigcup E_\alpha$ such that $f(\alpha) \in E_\alpha$ for all $\alpha$. Said differently, $\prod_{\alpha \in \mathcal{A}} E_\alpha \neq \emptyset$. 
+
+
+
+Vitali Set: A nonmeasurable subset of $[0,1]$. Equivalence relation $x \sim y$ if $x-y \in \Q$. Let $\{E_\alpha\}_{\alpha \in \mathcal{A}}$ be equivalence classes. Each $E_\alpha$ is countable. Index set $\mathcal{A}$ is uncountable. By AC, we can prove one element from each $E_\alpha \cap [0,1]$. This gives a set $V \subset [0,1]$. We claim that $V$ is nonmeasurable. Indeed, $V+\Q=\R$, in that $A \pm B =\{ a \pm b \colon a \in A, b \in B\}$. Meaning, $\bigcup_{q \in \Q} (V+q)=\R$. But then $\ext{V}>0$ (otherwise, we get $\ext{\R}=0$). But $\bigcup_{q \in \Q \cap [0,1]} \subset [0,2]$. So we have a disjoint union of countably many translated copies of $V$. If $V$ were measurable, we would obtain $|[0,2]| \geq \sum_{q \in \Q \cap [0,1]} |V+q|= \infty$. 
+
+%So intertwined, can fit infinitely many of them in an interval, without having their measurable go to zero. In a sense, $C+ (\Q \cap [0,1]) \subset [0,2]$. 
+
+
+\begin{lem} \label{lem:density}
+If $E \subset \R$ and $|E|>0$, then there exists an interval $I$ such that $|E \cap I|> (1-\ep) |I|$. 
+\end{lem}
+
+\pf There exists an open set $G$ such that $G \supset E$ and $|G|< \frac{|E|}{1-\ep}$. Now $G= \cup (a_k,b_k)$, disjoint and union contains set $E$. So $|E|= \sum_k |E \cap (a_k,b_k)$ and $|G|= \sum_k |(a_k,b_k)|$. If for all $k$, $| E \cap (a_k,b_k)| \leq (1- \ep)(b_k-a_k)$, then $\sum_k$ yields $|E| \leq (1-\ep)|G|$, contradiction. 
+
+
+
+\begin{lem} \label{lem:subzero}
+If $E \subset \R$ and $|E|>0$, then $E \setminus E$ contains a neighborhood of 0. 
+\end{lem}
+
+% Note that $V - V$ does not contain rational numbers except 0. So $V$ does not have a measurable subset of positive measure. 
+
+% Note for result to be true, if move set bit, then still positive measure?
+
+\pf We claim there exists $\delta>0$ such that if $|x|<\delta$, then $E \cap (E+x) \neq \emptyset$. $x \in E \setminus E$ if and only if $E+x$ intersects $E$. $X= a-b$ if and only if $h+x=a$, where $a,b \in E$. Let $I$ be an interval, $|E \cap I|> \frac{2}{3} |I|$. Let $\delta= \frac{1}{3} |I|$. If $|x|<\delta$.
+	\[
+	|I \cup (I+\delta)| \leq \frac{4}{3} |I|. 
+	\]
+If $E$ and $E+x$ were disjoint, then $| (E \cap I) \cup (E \cap I +x)|= 2|E \cap I|> \frac{4}{3} |I|> |I \cup (I+x)|$, a contradiction (since one is a subset of the other). \qed \\
+
+
+
+\begin{thm}
+If $E \subset \R$, $|E|>0$, then there exists $E \subset E$ such that $W$ is nonmeasurable. 
+\end{thm}
+
+\pf Since $\bigcup_{q \in \Q} (V+q)=\R$, where $V$ vitali set. We have $\bigcup_{q \in \Q} [(V+q) \cap E]=E$. So there exists $q$ such that $\ext{(V+q) \cap E} >0$. But $(V+q) \cap E$ is nonmeasurable as $V+q$ has no measurable subsets of positive measure. 
+
+$((V+q)-(V+q)= V-V$ is disjoint from $\Q$. \qed \\
 
 
 
@@ -603,28 +665,7 @@ Since $f$ sends compact sets to compact sets, $f$ preserves `$F_\sigma$-ness.' W
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+% f: \R \to \R by f(x)=\sin(x^2)$. Claim $f$ is Lipschitz. 
 
 
 
