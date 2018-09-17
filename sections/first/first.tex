@@ -647,6 +647,93 @@ $((V+q)-(V+q)= V-V$ is disjoint from $\Q$. \qed \\
 
 
 
+% Missing Friday Day
+
+
+
+
+
+
+
+
+%%%%%%%
+
+
+
+
+	\begin{table}{h}
+	\begin{tabular}{|c|c|c|c|} \hline
+	\diagbox{is}{(*)} & Open & Borel & Measurable \\ \hline
+	Open & Continuous & --- & --- \\ \hline
+	Borel & Borel measurable & Borel measurable & --- \\ \hline
+	Measurable & Measurable & Measurable & ? \\ \hline
+	\end{tabular}
+	\end{table}
+
+% Where (*) is ``preimage of\dots''. 
+
+
+When can we say that $f \circ g$ is measurable? What data about $f$ and $g$ would ensure this? 
+We know that if $f$ is measurable and $g$ is continuous does not work from previous discussion. One possibility ensuring this would be $f$ is continuous and $g$ is measurable as $(f \circ g)^{-1}(U)= g^{-1}(f^{-1}(U))$, as $U$ is open $f^{-1}(U)$ is open and $g^{-1}$ of open is measurable (assuming $g$ takes values in $\R$ and $f$ is continuous on some open set containing the range of $g$). More generally, this will hold if $f$ is Borel measurable on some Borel set containing the range of $g$ and $g$ measurable and real-valued. 
+
+
+\begin{ex}
+If $f$ is measurable (and $\R$-valued) then $f^2$ is measurable, $f^2= \phi \circ f$, where $\phi(t)=t^2$. Similarly, $|f|$ is measurable since $|f|= \phi \circ f$, where $\phi(t)=|t|$. Also, $\sgn(f) = \begin{cases} 1, & f=0 \\ 0, & f=0 \\ -1, & f<0 \end{cases}$ is measurable since sign is Borel measurable (simple to see by checking preimages). So is floor(x), where floor is supremum of integers which are at most x. As is ceilin(x), defined mutatis mutandis. [They are both monotone,]
+
+%Provide graphs
+\end{ex}
+
+
+\begin{thm}
+If $f,g$ are measurable, then $f \pm g$, $fg$, and $f/g$ ($g \neq 0$ a.e.) are measurable.
+\end{thm}
+
+\pf $\{f+g>a\}= \bigcup_{b+c>a, b,c \in \Q} \left[ \{f>b\} \cap \{g>c\} \right]$ hence measurable set (countable union of measurable sets). Just need to prove equality. $\supset$ is obvious. Need only prove $\subset$. Suppose $f(x)+g(x)>a$. Let $\ep= f(x)+g(x)-a$. Use density of rationals to find $b \in \Q$ such that $f(x)- \ep/2<b<f(x)$ and $c \in \Q$ such that $g(x) - \ep/2<c<g(x)$. But then $b+c>f(x)+g(x)0\ep=a$. 
+
+Now $fg= \dfrac{1}{4} \left[ (f+g)^2 - (f-g)^2 \right]$ is then measurable. For quotient only need reciprocal. We know $\frac{1}{g}$ is $\phi \circ g$, where $\phi(t)=\frac{1}{t}$, which is continuous on $\R \setminus \{0\}$. Now $g$ is nonzero almost everywhere, $\phi$ contains range of $g$ (ignoring set where range is $g=0$, since we can ignore for measurability). \qed \\
+
+
+% f^g= e^{g\log f}$, so long as $f$ positive. Then measurability of this simple. 
+
+Another way could combine is max of functions. Better to generalize to countable. So countable sup/inf of measurable functions is measurable.
+
+\begin{thm}
+The above statement, including infinite values. 
+\end{thm}
+
+\pf IF $f_k: E \to \overline{R}$ is measurable for all $k \in \N$, then $\sup_k f_k$ and $\inf_k$ are measurable. So $g(x)= \sup_{k \in \N} f_k(x)$ is measurable. Same for inf. 
+
+
+	\[
+	\begin{split}
+	\{g>a\}&= \bigcup_{k \in \N} \{f_k>a\} \\
+	\{g \geq a\}& \\
+	\{g<a\}& \\
+	\{g \leq a\}& \\
+	\end{split}
+	\]
+First case done. Other follow similarly. HAND WAVE! For inf
+	\[
+	\{ \inf_k f_k<a\}= \bigcup_{k \in \N} \{f_k<a\}.
+	\]
+\qed \\
+
+
+
+
+
+\begin{thm}
+Suppose $f_k: E \to \overline{R}$ are measurable, then
+%	\[
+%	\begin{split}
+%	\limsup_{k \to \infty} f_k&:= \inf_{m \in \N} \sup_{k \geq m} f_k \\
+%	\liminf_{k \to \infty} f_k:= \sup_{m \in \N} \inf_{\k \geq m } f_k
+%	\end{split}
+%	\]
+are measurable. 
+\end{thm}
+
+\pf Follows immediately from preceding result. [lim$=$ limsup$=$liminf when it exists.] \qed \\
 
 
 
@@ -656,8 +743,44 @@ $((V+q)-(V+q)= V-V$ is disjoint from $\Q$. \qed \\
 
 
 
+Approximation: Given measurable $f$, find `simple' functions $f_k$ such that $f_k \to f$ pointwise. Here by simple we mean finite range. 
+
+\begin{dfn}[Simple]
+$g$ is simple if its range is finite subset of $\R$. [Need measurable?]
+\end{dfn}
 
 
+Need this to build notion of integration. 
+
+\begin{thm}
+For all measurable functions, there exists $f_k$ such that $f_k \to f$ pointwise. If $f \geq 0$, we can take $f_1 \leq f_2 \leq \cdots$.
+\end{thm}
+
+\pf $2^{-k} floor(2^k f)$. (floor to $\dfrac{integer}{2^k}$). This converges monotonically since increasing $k$ shortens the rounding distance, and then not as much difference so this converges to $f$ uniformly. Range not finite but countable. So just need to distribute the values among many functions. 
+	\[
+	f_k(x)=
+	\begin{cases}
+	\dfrac{j-1}{2^k}, & \dfrac{j-1}{2^k} \leq f(x) < \dfrac{j}{2^k}
+	k, & f(x) \geq k
+	\end{cases}
+	\]
+$f_k$ simple and $f_k \to f$. Now $f_k= \min(k,\max(-k,2^{-k}floor(2^kf)))$. $f \geq 0$, then $f_1 \leq f_2 \leq \cdots$. 
+\qed \\
+
+
+
+% Give some examples with plots, usually not continuous. 
+
+
+
+
+
+
+
+% Quiz 
+% Let f(x)=1$ if $x \in \Q$ and $f(x)=0$ otherwise. Claim $f$ is measurable function on $\R$. 
+
+% \{f>a\}=\Q or \R and both measurable. So true.
 
 
 
