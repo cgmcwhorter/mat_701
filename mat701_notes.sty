@@ -43,8 +43,10 @@
 
 
 % Tikz
-\newcommand{\pbox}[4]{\draw (#1,#2) -- (#1+#4,#2) -- (#1+#4,#2+#3) -- (#1,#2+#3) -- (#1,#2);}
-\newcommand{\pshadebox}[4]{\draw[fill=gray!15] (#1,#2) -- (#1+#4,#2) -- (#1+#4,#2+#3) -- (#1,#2+#3) -- (#1,#2);}
+\newcommand{\pbox}[4]{\draw (#1,#2) -- (#1,#4) -- (#3,#4) -- (#3,#2) -- (#1,#2);}
+\newcommand{\pshadebox}[4]{\draw[fill=gray!15] (#1,#2) -- (#1,#4) -- (#3,#4) -- (#3,#2) -- (#1,#2);}
+\newcommand{\pabox}[4]{\draw  (#1,#2) -- (#1+#4,#2) -- (#1+#4,#2+#3) -- (#1,#2+#3) -- (#1,#2);}
+\newcommand{\pashadebox}[4]{\draw[fill=gray!15] (#1,#2) -- (#1+#4,#2) -- (#1+#4,#2+#3) -- (#1,#2+#3) -- (#1,#2);}
 \newcommand{\cir}[3]{\draw (#1,#2) circle (#3);}
 \newcommand{\blobone}[2]{%
 	\path[shade,draw,use Hobby shortcut,closed=true]

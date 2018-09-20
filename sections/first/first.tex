@@ -30,13 +30,13 @@ In defining a `size' for sets, it makes sense to begin with a simple shape like 
 	\begin{scaletikzpicturetowidth}{0.3\textwidth}
 	\begin{tikzpicture}[thick,scale=\tikzscale]
 	\blobfive{0}{0}
-	\pbox{-4.5}{-3}{3}{5}
-	\pbox{-6.5}{-3.5}{2.5}{3.5}
-	\pbox{-2}{2.5}{2}{5}
-	\pbox{-4}{-0.5}{3.5}{3.5}
-	\pbox{2}{-1.5}{4.5}{2.5}
-	\pbox{-1}{-2}{5.5}{3.5}
-	\pbox{-2.5}{-3.5}{2}{3.5}
+	\pabox{-4.5}{-3}{3}{5}
+	\pabox{-6.5}{-3.5}{2.5}{3.5}
+	\pabox{-2}{2.5}{2}{5}
+	\pabox{-4}{-0.5}{3.5}{3.5}
+	\pabox{2}{-1.5}{4.5}{2.5}
+	\pabox{-1}{-2}{5.5}{3.5}
+	\pabox{-2.5}{-3.5}{2}{3.5}
 	\end{tikzpicture}
 	\end{scaletikzpicturetowidth}
 	\]
@@ -103,17 +103,17 @@ Note in general we do not have $\ext{\bigcup E_k}= \sum \ext{E}$ even if the $E_
 	\begin{tikzpicture}[thick,scale=\tikzscale]
 	\blobfour{-3}{3}
 	\blobseven{7}{-1}
-	\pbox{-6}{0.5}{7}{3.5}
-	\pbox{-8.5}{-1.5}{4.5}{3.5}
-	\pbox{-3}{4.5}{2}{3.7}
-	\pbox{-4}{1.5}{3.5}{4.2}
-	\pbox{7}{0}{1.6}{4}
-	\pbox{2}{0}{2}{3}
-	\pbox{4}{-2}{3}{2}
-	\pbox{4.5}{-4.5}{4}{4}
-	\pbox{4.8}{-1}{3.3}{2.6}
-	\pbox{6.5}{-2}{2.3}{5.6}
-	\pbox{0.5}{-5.5}{6.2}{5}
+	\pabox{-6}{0.5}{7}{3.5}
+	\pabox{-8.5}{-1.5}{4.5}{3.5}
+	\pabox{-3}{4.5}{2}{3.7}
+	\pabox{-4}{1.5}{3.5}{4.2}
+	\pabox{7}{0}{1.6}{4}
+	\pabox{2}{0}{2}{3}
+	\pabox{4}{-2}{3}{2}
+	\pabox{4.5}{-4.5}{4}{4}
+	\pabox{4.8}{-1}{3.3}{2.6}
+	\pabox{6.5}{-2}{2.3}{5.6}
+	\pabox{0.5}{-5.5}{6.2}{5}
 	\end{tikzpicture}
 	\end{scaletikzpicturetowidth}
 	\]
@@ -391,22 +391,47 @@ Note that the Borel $\sigma$-algebra is \emph{strictly} contained in the Lebesgu
 
 % Missing Lecture
 
+   \includegraphics[width=2in]{rep1.png} 
+
+
+Recall that if $E$ is measurable, then there exists $G$ open such that $\ext{G\setminus E}<\ep$. Also $F$ closed, $F \subset E$, $\ext{E\setminus F}<\ep$> 
+
+Quiz: SUppose $A \subset \R$ is measurable set. Claim for all $\ep>0$, there is a compact set $K \subset A$ such that $\ext{A \setminus K}<\ep$. 
+
+$\R$ is measurable, $K$ interval. $|\R \setminus k|=\infty$ for all compact sets. 
 
 
 
 
+\subsection{Properties of Measurable Sets}
+
+Recall $|E| \defeq \ext{E}$ when $E$ is measurable. 
+
+\begin{thm}[Countable Additivity]
+If $\{E_\alpha\}$ are measurable and disjoint, then $\left|\bigcup_{n=1}^\infty E_k \right| = \sum_{k=1}^\infty |E_k|$. 
+\end{thm}
+
+
+Recall we have subadditivity $\left| \bigcup E_k \right| \leq \sum |E_k|$.
+
+\pf Suffices to show $\sum |E_k| \leq |E|$, where $E= \bigcup_k E_k$. Suffices to show $\sum_{k=1}^N |E_k| \leq |E|$ for all $N$. We have $\ext{A \cup B}= \ext{A} + \ext{B}$ if $\dist(A,B)>0$ (true for disjoint compact sets). 
+
+
+   \includegraphics[width=2in]{rep2.png} 
 
 
 
+First assume each $E_\alpha$ is bounded. Choose compact (closed and bounded) subset $A_\alpha \subset E_k$ such that $\ext{E_\alpha \setminus A_\alpha} < \ep/2^k$. So 
+	\[
+	\left| \bigcup_{k=1}^N A_k \right| = \sum_{k=1}^N |A_\alpha| \geq \sum_{k=1}^N |E_\alpha| - \ep 
+	\]
+Since $\bigcup_{k=1}^N A_\alpha \subset E$, we get $|E| \geq \sum_{k=1}^N |E_\alpha| - \ep$.
+	\[
+	|A_1 \cup A_2 \cup A_3| = |A_1 \cup A_2| + |A_3| = |A_1| + |A_2 \setminus A_3| + \cdots 
+	\]
 
 
-
-
-
-
-
-
-
+% second desktop image
 
 
 
@@ -649,7 +674,7 @@ $((V+q)-(V+q)= V-V$ is disjoint from $\Q$. \qed \\
 
 % Missing Friday Day
 
-
+% images 1,2,3 desktop
 
 
 
@@ -760,7 +785,7 @@ For all measurable functions, there exists $f_k$ such that $f_k \to f$ pointwise
 	\[
 	f_k(x)=
 	\begin{cases}
-	\dfrac{j-1}{2^k}, & \dfrac{j-1}{2^k} \leq f(x) < \dfrac{j}{2^k}
+	\dfrac{j-1}{2^k}, & \dfrac{j-1}{2^k} \leq f(x) < \dfrac{j}{2^k} \\
 	k, & f(x) \geq k
 	\end{cases}
 	\]
@@ -772,6 +797,153 @@ $f_k$ simple and $f_k \to f$. Now $f_k= \min(k,\max(-k,2^{-k}floor(2^kf)))$. $f 
 % Give some examples with plots, usually not continuous. 
 
 
+
+
+
+\begin{dfn}
+$f: E \to \R$ is continuous at $a \in E$ if for all $\ep>0$, there exists $\delta>0$ such that if $x \in E$ and $|x-a|<\delta$, then $|f(x)-f(a)|<\ep$.
+\end{dfn}
+
+Why better than normal definition with limit? Because $a$ can be a limit point not not defined there. Take $f(x)=1/x^2$, rather like allowing $f(0)=\infty$. 
+
+
+Semincontinuity means rather than bounding difference from above below, means one of inequality $-\ep<f(x)-f(a)<\ep$ holds. 
+
+
+
+
+\begin{dfn}[Upper Semicontinuous (usc)]
+$f: E \to \overline{\R}$ is upper semicontinuous at $a \in E$ if for all $y>f(a)$, there exists $\delta>0$ such that if $|x-a|<\delta$, then $f(x)<y$. 
+\end{dfn}
+
+% red horizontal line, y, passing through line coming from solid point, below open circle then horizontal line down left, value a below holes.
+
+% If a horzitaonl line above a point on graph, its above its neightborhood.
+
+% Now same image with roles of lines switches and horizontal line passing through the middle. 
+
+\begin{dfn}[Lower Semicontinuous (lsc)]
+$f: E \to \overline{\R}$ is upper semicontinuous at $a \in E$ if for all $y>f(a)$, there exists $\delta>0$ such that if $|x-a|<\delta$, then $f(x)>y$. 
+\end{dfn}
+
+\begin{ex}
+	\[
+	f(x)=
+	\begin{cases}
+	\dfrac{1}{x^2}, & x \neq 0 \\
+	\infty, & x=0
+	\end{cases}
+	\]
+% give graph 
+This is usc (automatically because of the $\infty$ value, why?) and lsc. 
+\end{ex}
+
+Both types of these functions are measurable. 
+
+
+
+Remark: lsc -> measurable
+usc-> measurable
+
+\pf if $f$ usc on measurable $E$, then $\{f>a\}$ is open in $E$. So $\{f>a\}=E \cap U$. Hence $\{f>a\}$ is measurable.
+
+For USC, use $\{f<a\}$.
+
+
+% line, hole, point above it, USC. `USC kicking a field goal.' 
+
+% Book: f usc/lsc/cts relative to E means f|_E is usc/lsc/cnt on E. Illstrate difference between ??
+
+% Ex: f=\chi_\Q. Not continuous anywhere (at any point). But restricting to rationals is continuous. So book says relative to \Q. 
+
+
+
+BV function
+
+Given $f: [a,b] \to \R$, define $V(f; a,b)=\sup_p \sum_{i=1}^n |f(x_i)-f(x_{i-1})|$ sup over all partitions $P:a=x_0<x_1<\cdots<x_n=b$. $V(x^2; -1,1)=2$ (P=\{-1,0,1\} gives the maximum value. ) 
+
+% Give plot.
+
+\begin{dfn}
+$f$ is BV on $[a,b]$ if $V(f; a,b)<\infty$
+\end{dfn}
+
+Interesting not called finite variation. 
+
+
+Something which is not BV is 
+	\[
+	f(x)=
+	\begin{cases}
+	\sin(1/x), & x \in (0,1] \\
+	0, & x=0
+	\end{cases}
+	\]
+% give plot
+% Choose partition where only +/- 1. So valuation at least +2+2+2+.... So clearly not BV. 
+
+
+% Property: if $f$ is monotone, $V(f;a,b)= |f(a)-f(b)|$ (telescopes).
+%2. V MONOTONE AND ADDITIVE WRT intervals: if $[a,b] \subset [c,d]$, then $V(f;a,b) \leq V(f; c,d)$. 
+% if a \leq b \leq c, then V(f;a,c)= V(f; a,b) + V(f; b,c).  proof same as for riemann integral.
+
+\begin{thm}
+If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$ and $\int_a^b |f'| \; dx$ (riemann integral), then $V(f;a,b)= \int_a^b |f'| \; dx$.
+\end{thm}
+
+C.f. examples above. 
+
+
+\pf Mean Value Theorem. 
+	\[
+	\sum_i |f(x_i) - f(x_{i-1})| = \sum_i |f'(\xi_i)| (x_i-x_{i-1})
+	\]
+$x_{i-1}< \xi_i < x_i$. the above converges to integral. \qed \\
+
+3. Subadditive wrt $f$:
+$V(f+g; a,b) \leq V(f; a,b) + V(g; a,b)$. 
+
+\pf Triangle inequality.
+	\[
+	[f(x_i) + g(x_i)] - (f(x_{i-1}) + g(x_{i-1})) |
+	\]
+then use triangle splits into two and done. 
+
+Why not exactly like integral, i.e. strict inequality. Take nonconstant function $f$ and then $g= -f$. Note $f+g$ identically zero. 
+
+
+
+
+Sum of monotone functions are bounded variation. 
+
+
+
+\begin{thm}[BV Decomposition]
+If $f$ is BV on $[a,b]$, then there exists increasing $g$, $h$ on $[a,b]$ such that $f= g-h$. 
+\end{thm}
+
+\pf Let $g(x)= V(f; a,x)$, increasing (mononticity wrt interval). This forces $h(x):= g(x) - f(x)$. Why is $h(x) \leq h(y)$ for $x \leq y$? $V(f;a,x) - f(x) \leq V(f; a,y) - f(y)$. Why? $f(y)-f(x) \leq V(f; a,y) - V(f; a,x)= V(f;x,y)$, clearly this right side is $ \geq |f(x)-f(y)|$. \qed \\
+
+
+
+
+
+
+
+
+
+% quiz
+% Suppose $f: \R \to \R$ is measurable. Define
+%	\[
+%	g(x)=
+%	\begin{cases}
+%	|f(x)|, & |f(x)| \geq 1 \\
+%	0, & \text{otherwise}
+%	\end{cases}
+%	\]
+%Claim that $g$ is measurable function on $\R$.
+
+% $g= f \cdot \chi_{\{ |f| \geq 1\}}$ so measurable.another is piece by piece: $E= \{|f| \geq 1\}$. now g measurable on E. g|_{E^C} is measurable since 0 there. \{g>a\}= \{g|_E>a} \cup {g_{E^C}>a}$.. Or g= \phi \circ f, there phi horizontal line segment -1 to 1 at 0, open circles, then y=x elsewhere, so that measurable, Borel measurable. 
 
 
 
