@@ -932,6 +932,113 @@ If $f$ is BV on $[a,b]$, then there exists increasing $g$, $h$ on $[a,b]$ such t
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Now near end of Ch. 4
+
+
+% Reminder: unf conv: \sup|f_k -f| \to 0
+
+% Ex: f_k(x)=x^2$ on $[0,1]$ f(x)=0 for all x. 
+% here E(\ep)= [0,1-\ep] works. 
+% sup_{E(\ep)} |f_k-f|= (1-\ep)^k \to 0
+% |E|<\infty is important. Give picture with moving e^{-x^2}, aka moving mound. Converges to 0 but not uniformly. Only have uniform convergce on (-\infty,a]. 
+% Need f defined on \R otherwise uniform makes no sense, i.e. no infty in domain. Take horizontal lines at y=n, i.e. f_k=k. Then makes no sense. 
+
+
+\begin{thm}[Egorov's Theorem]
+Suppose $\{f_k\}$ is a collection of measurable functions, $f_k: E \to \R$, $|E|<\infty$, and $f_k \to f$ a.e., where $f: E \to \R$. Then for all $\ep>0$, there exists a closed set $E(\ep) \subset E$ such that $f_k \to f$ uniformly on $E(\ep)$ and $|E \setminus E(\ep)|<\ep$. 
+\end{thm}
+
+\pf We need to find a set on which $\{f_k\}$ converges uniformly. It suffices to find, for each $j \in \N$, $E_j \subset E$ such that $|E \setminus E_j|< \ep/2^j$, and $\sup_{E_j} |f-f_k| \leq 1/j$ for sufficiently large $k$. Indeed, letting $E(\ep):= \bigcap_j E_j$, then $f_k \to f$ uniformly on $E(\ep)$, and $|E \setminus E(\ep)| \leq \sum_j \ep/2^j<\ep$. 
+
+To find $E_j$, consider the set $G_m:=\{ x \colon |f_k(x)-f(x)| <1/j \text{ for all } k \geq m\}$. Since $|f_k-f| \to 0$ a.e., $\bigcup_m G_m$ is almost $E$, i.e. $\ms{\bigcup G_m}= |E|$. By continuity of measure for nested unions, $|G_m| \to |E|$. Therefore, there exists $m$ such that $|E \setminus G_m|< \ep/2^j$. Defining $E_j:= G_m$ completes the proof. \qed \\
+
+
+% `Closed' comes for free: if we find any measurable E(\ep), then it will have a closed subset of almost the same measure. 
+
+% Common tool is introducing sets such as the G_m's. See this in topology by using nested sequences of compact sets and concluding about intersections. 
+
+% where is measure of finite? the |E\setminus G_m| < \ep/2^j., do not want to subtract infinities. 
+
+
+
+\begin{thm}[Lusin's Theorem]
+Let $E$ be a measurable set. A function $f: E \to \R$ is measurable if and only if for all $\ep>0$, there exists a closed set $E(\ep) \subset E$ such that $f\big|_{E(\ep)}$ is continuous, and $|E\setminus E(\ep)|<\ep$.
+\end{thm}
+
+\pf Suppose that $f$ is a simple function, i.e. $f= \sum_{k=1}^n a_k \chi_{E_k}$, where $E_1,\ldots,E_n$ are disjoint measurable sets. Choose a closed subset $E_k' \subset E_k$ such that $|E_k \setminus E_k'| < \ep/n$. Then $E(\ep):= \bigcup_{k=1}^n E_k'$ so that $|E\setminus E(\ep)|<\ep$. It only remains to check that $f\big|_{E(\ep)}$ is continuous, but this is immediate as the preimage of any set is closed.  
+
+% Cross shape, each labeled E_1...E_4. Then small dotted around inside labeled E_k'
+
+Now suppose only that $|E|<\infty$. There is a collection of simple functions $\{f_k\}$ such that $f_k \to f$ pointwise. Choose some $E(\ep/2^k)$ for $f_k$ as in the case above. By Egorov's Theorem, $f_k \to f$ uniformly on a set $E(\ep)$. Now $f$ is continuous on $E(\ep) \cap \left(\bigcap_k E_k(\ep/2^k)\right)$, which has compliment of measure at most $\ep+ \sum_k \ep/2^k=2\ep$. 
+
+% Picture of nested shells. 
+
+Now suppose that $|E|=\infty$. Write $E= \bigcup \left[ E \cap \{ |j| \leq |x| \leq j+1\}\right]$. In each shell, we have $E_j(\ep/2^j)$, closed set such that $f\big|_{E_j(\ep/2^j)}$ is continuous. Note that $f$ continuous on $\bigcup_j E_j(\ep/2^j)$. \qed \\
+
+
+
+
+The converse direction of Lusin's theorem is simple since $f\big|_{E(1/j)}$ is continuous, then we have $f$ Borel on $\bigcup E(1/j)$ simply because $\{x \in \bigcup E(1/j) \colon f>a \}= \bigcup \{x \in E(1/j) \colon f>a\}$, countable union of Borel sets. and the rest has measure 0. 
+
+
+
+
+
+
+% Ex:  This does not imply $f$ is continuous - does not have to be anywehre, take $f= \chi_\Q$. Let E(\ep)= \Q^C, then f\big|_{E(\ep)} is continuous \equiv 0.
+
+% Ex:  if f= \chi_C, where C is the cantor set. Take E(\ep)= \R \setminus C
+
+% Ex: f= \chi_F, F fat cantor set. If $\ep<|F|$, we must keep some $x \in F$. then must remove $\{x \colon |x-x_0|<\delta\} \setminus F, which has positive measure. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% quiz
+% Let $f(x)= \sin(1/x)$ for $x \neq 0$ and $f(0)=0$. Claim $f$ is upper semicontinuous on $\R$.
+% No: Take horizontal line above y=0, suppose to cover chunk around 0 but does not, so not usc. To make usc, would need to be 1 or bigger at x=0 for usc. 
+
+
+
+
+
+
 % quiz
 % Suppose $f: \R \to \R$ is measurable. Define
 %	\[
