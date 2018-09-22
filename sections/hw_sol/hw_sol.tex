@@ -1,0 +1,388 @@
+% !TEX root = ../../mat701_notes.tex
+\newpage
+\section{Homework Solutions}
+
+
+% HW 1
+\begin{hwsol}
+Given an arbitrary set $A \subset \R$ and a number $c>0$, let $B = \{ ca \colon a \in A \}$. Prove that $\ext{B} = c \ext{A}$. \\
+
+\pf Given $\ep>0$, let $\{[s_k, t_k]\}$ be a countable cover of $A$ such that 
+        \[
+        \sum_k (t_k-s_k) \leq  \ext{A} + \ep 
+        \]
+The intervals $[c s_k, c t_k]$ cover $B$, since every point of $B$ is of the form $ca$ where $a\in A$ is covered by some interval $[s_k, t_k]$. Therefore, 
+        \[
+        \ext{B} \leq \sum_k (ct_k-cs_k)= c \sum_k (t_k-s_k) \le  c \ext{A} + \ep
+        \]
+Since $\ep>0$ was arbitrary, it follows that $\ext{B} \le c \ext{A}$.
+
+It remains to observe that $A=c^{-1} B$, which by the above implies $\ext{A} \leq c^{-1} \ext{B}$, i.e., $\ext{B} \geq c \ext{A}$. Thus,  $\ext{B} = c \ext{A}$. \qed \\
+\end{hwsol}
+
+
+% HW 2
+\begin{hwsol} 
+Suppose that a set $A \subset \R$ is measurable. Prove that for every $c>0$ the set $B = \{ ca \colon a \in A \}$ is also measurable. \\
+
+\pf Given $\ep>0$, let $G$ be an open set that contains $A$ and satisfies $\ext{G \setminus A} <  \ep/c$. Since the function $f(x) = x/c$ is continuous, the preimage of $G$ under this function is also open. This preimage $f^{-1}(G)$ is $cG$. Since $A \subset G$, it follows that $B \subset cG$. Moreover by Problem~\ref{hw:1},
+        \[
+        \ext{(cG)\setminus B}= \ext{c(G\setminus A)}=  c \ext{G \setminus A} < \ep.
+        \]
+Since $\ep$ was arbitrary, this  proves that $B$ is measurable. \qed \\
+\end{hwsol}
+
+
+% HW 3
+\begin{hwsol}
+Given a sequence of continuous functions $f_k: \R \to \R$, let $B$ be the set of all points $x \in \R$ such that the sequence $\{ f_k(x) \}$ is bounded. Prove that $B$ is a measurable set. [\emph{Hint: try to construct $B$ from the sets $\{x \colon |f_k(x)| \leq M\}$ by using countable unions and intersections.}] \\
+
+\pf For $k, m \in \N$, let 
+        \[ 
+        A(k, m) = \{ x \in \R \colon |f_k(x)| \leq m \}= f_k^{-1}([-m, m]).
+        \]
+Being the preimage of a closed set under a continuous function, $A(k, m)$ is closed, and in particular measurable. Let
+        \[
+        A:= \bigcup_{m=1}^\infty \bigcap_{k=1}^\infty A(k, m),
+        \]
+which is also measurable, being obtained from measurable sets by countable set operations. We claim that $A=B$. 
+
+If $x \in A$, then there exists $m \in \N$ such that $|f_k(x)| \leq m$ for all $k \in \N$, which shows the sequence $\{ f_k(x) \}$ is bounded. 
+
+Conversely, if the sequence $\{ f_k(x) \}$ is bounded, then there exists $m \in \N$ such that all elements of the sequence are at most $m$ in absolute value. This means $|f_k(x)| \leq m$ for all $k$, hence $x \in A$. \qed \\
+\end{hwsol}
+
+
+% HW 4
+\begin{hwsol}
+Given a sequence of continuous functions $f_k \colon \R \to \R$, let $C$ be the set of all points $x \in \R$ such that $\ds \lim_{k \to \infty} f_k(x)= 0$. Prove that $C$ is a measurable set. \\
+
+\pf For $k, m \in \N$, let 
+        \[ 
+        A(k, m) = \{ x \in \R \colon |f_k(x)| < 1/m \} = f_k^{-1}((-1/m, 1/m)).
+        \]
+Being the preimage of an open set under a continuous function, $A(k, m)$ is open, and in particular measurable. Let
+        \[
+        A:=  \bigcap_{m=1}^\infty \bigcup_{N=1}^\infty \bigcap_{k=N}^\infty A(k, m).
+        \]
+This set is also measurable, being obtained from measurable sets by countable set operations. We claim that $A=C$. 
+
+Suppose $x \in A$. Given $\ep>0$, pick $m \in \N$ such that $1/m \leq \ep$. Since $x \in \bigcup_{N=1}^\infty \bigcap_{k=N}^\infty A(k, m)$, there exists $N$ such that $x \in \bigcap_{k=N}^\infty A(k, m)$, which means $|f_k(x)|< 1/m$ for all $k \geq N$. Thus, $|f_k(x)|< \ep$ for all $k \geq N$, which proves $\ds\lim_{k \to \infty} f_k(x) = 0$. 
+
+Conversely, suppose $x \in C$. Given $m \in \N$, use the definition of the limit $\ds\lim_{k \to \infty} f_k(x)= 0$ to find $N$ such that $|f_k(x)|< 1/m$ for all $k \geq N$. The latter means $x \in \bigcap_{k=N}^\infty A(k, m)$. Therefore, for every $m \in \N$ the inclusion $x \in \bigcup_{N=1}^\infty \bigcap_{k=N}^\infty A(k, m)$ holds. This means $x \in A$. \qed \\
+\end{hwsol}
+
+
+% HW 5
+\begin{hwsol} 
+Prove that the set
+        \[
+        A = \{ x \in \R \colon \exists k \in \N \text{ such that } |2^x-2^k| \leq 1 \}
+        \]
+is measurable and $|A|<\infty$. \\
+
+\pf For each $k \in \N$, the inequality $|2^x-2^k| \leq 1$ is equivalent to $\log_2(2^k-1)\leq x \leq \log_2(2^k+1)$. Thus, $A=\bigcup_{k=1}^\infty I_k$, where $I_k = [\log_2(2^k-1), \log_2(2^k+1)]$. Begin an interval, each $I_k$ is measurable. Hence, $A$ is measurable. By countable subadditivity of measure, 
+$|A| \leq \sum_{k=1}^\infty |I_k|$. It remains to show the series $\sum_{k=1}^\infty |I_k|$ converges. This can be done by the comparison test, limit comparison test, or the ratio test. We use the Limit Comparison Test with $\sum_{k=1}^\infty 2^{-k}$ as a reference series:
+        \[
+        \begin{split}
+        \dfrac{|I_k|}{2^{-k}} &= \dfrac{\log_2(2^k+1) -  \log_2(2^k-1)}{2^{-k}} \\ 
+        &= \dfrac{k + \log_2(1+2^{-k}) -  (k+\log_2(1-2^{-k}))}{2^{-k}} \\ 
+        &= \dfrac{\log_2(1+2^{-k}) -  \log_2(1-2^{-k})}{2^{-k}} \\ 
+        &= \dfrac{1}{\log 2} \left\{ \frac{\log(1+2^{-k})}{2^{-k}} +  \frac{\log(1-2^{-k})}{-2^{-k}} \right\} \ma{k\to\infty} \frac{2}{\log 2}
+        \end{split}
+        \]
+Here the last step is based on $\ds\lim_{x \to 0} \dfrac{\log(1+x)}{x}= 1$. Since $\sum_{k=1}^\infty 2^{-k}$ converges, so does $\sum_{k=1}^\infty |I_k|$. \qed \\
+\end{hwsol}
+
+
+% HW 6
+\begin{hwsol} 
+Prove that the set
+        \[
+        A = \{ x \in [0, 1] \colon \forall q \in \N \; \exists p \in \N \text{ such that } |x-p/q| \leq 1/q^2\}
+        \]
+is measurable and $|A|=0$. \\
+
+\pf Let $A_q = \bigcup_{p=1}^\infty  E(p,q)$, where $E(p, q) = \left[\frac{p}{q} - \frac{1}{q^2}, \frac{p}{q} + \frac{1}{q^2}\right]\cap [0,1] $. This is a countable union of measurable sets $E(p, q)$ (which are intervals, possibly empty), so it is measurable. Then the set $A= \bigcap_{q \in \N} A_q$ is measurable too. 
+
+We have $|E(p, q)| \leq 2/q^2$ by construction of $E(p, q)$. Also, when $p > q+1$, we have $\frac{p}{q} - \frac{1}{q^2} \geq 1+  \frac{1}{q}-\frac{1}{q^2} \geq 1$, which implies $E(p, q)= \emptyset$. By subadditivity,  
+        \[  
+        |A_q| \leq \sum_{p=1}^\infty |E(p, q)| \leq \sum_{p=1}^{q+1} \frac{2}{q^2}= \frac{2q+2}{q^2} 
+         \]
+By monotonicity, $|A| \leq |A_q|$ for each $q$. Since $|A_q| \ma{q \to \infty} 0$, it follows that $|A|=0$. \qed \\
+\end{hwsol}
+
+
+% HW 7
+\begin{hwsol}
+Suppose $E$ and $Z$ are sets in $\mathbb R^n$ such that $E\cup Z$ is measurable and $|Z|=0$. Prove that $E$ is measurable. \\
+
+\pf Since $Z \setminus E \subset Z$, the monotonicity of outer measure implies $\ext{Z \setminus E}=0$, hence $Z \setminus E$ is measurable. Then 
+        \[
+        E = (E\cup Z)\setminus (Z\setminus E)
+        \]
+is measurable, being the difference of two measurable sets. [This could be done with Carath\'eodory's Theorem or with the ``$G_\delta$ minus a null set'' theorem, but it is easier without.] \qed \\
+\end{hwsol}
+
+
+% HW 8
+\begin{hwsol}
+Given a continuous function $f \colon \R^n \to \R^n$, define $\mathcal{M}= \{ E \subset \R^n \colon f^{-1}(E) \text{ is Borel} \}$. 
+	\begin{enumerate}[(a)]
+	\item Prove that $\mathcal{M}$ is a $\sigma$-algebra.
+	\item Prove that if $E$ is Borel, then $f^{-1}(E)$ is Borel. [\emph{Hint: Use (a).}]
+	\end{enumerate}
+
+\pf
+\begin{enumerate}[(a)]
+\item This proof does not involve $f$ being continuous; the argument works for any map $f$. Taking preimages commutes with any set operations: for example, 
+        \[
+        f^{-1}(E^C)= \{ x \colon f(x) \in E^C \}= \{ x \colon f(x) \notin E \} = (f^{-1}(E))^C
+        \]
+and 
+        \[
+        f^{-1}\left( \bigcup_i E_i \right)= \{ x \colon \exists i \ f(x) \in E_i \}= \bigcup_i f^{-1}(E_i).
+        \]
+If $E \in \mathcal{M}$, then $f^{-1}(E^C) = f^{-1}(E)^C$ is the complement of a Borel set, and hence is Borel. Hence, $E^C\ in \mathcal{M}$. Also, if $E_k \in \mathcal{M}$ for each $k \in \N$, then 
+        \[
+        f^{-1}\left( \bigcup_k E_k \right)=  \bigcup_k f^{-1}(E_k) 
+        \]
+is the countable union of Borel sets, and hence is Borel. Therefore, $\bigcup_k E_k\in \mathcal M$. 
+
+The definition of a $\sigma$-algebra in the book also requires us to check that $\mathcal{M}$ is nonempty: to do this, it suffices to notice that $f^{-1}(\emptyset)=\emptyset$ is Borel, hence $\emptyset \in \mathcal{M}$.  
+
+\item Since $f$ is continuous, the preimage of any open set under $f$ is open, and is hence Borel. This means $\mathcal{M}$ contains all open sets. By definition, the Borel $\sigma$-algebra $\mathcal{B}$ is the \emph{smallest} $\sigma$-algebra that contains all open sets. Thus, $\mathcal{B} \subset \mathcal{M}$, which by definition of $\mathcal{M}$ means that $f^{-1}(E)$ is Borel whenever $E$ is Borel.
+
+\noindent [It is tempting to approach statement (b) by ``writing a Borel set $E$ in terms of open/closed sets'' and concluding that $f^{-1}(E)$ can also be written in this way. But there is no such structural formula for Borel sets: one can only get the proper subclasses like $G_\delta$, $G_{\delta\sigma}$, $G_{\delta\sigma\delta}$, and so on. The whole story is complicated: see  \href{https://en.wikipedia.org/wiki/Borel_hierarchy}{Borel hierarchy} on Wikipedia).]
+\end{enumerate} \qed \\
+\end{hwsol}
+
+
+% HW 9
+\begin{hwsol}
+Suppose $f \colon \R \to \R$ is a function with a continuous derivative. Prove that for every measurable set $E$, the set $f(E)$ is also measurable. [\emph{Hint: although $f$ need not be Lipschitz, its restriction to any bounded interval is Lipschitz.}] \\
+
+\pf For each $j \in \N$, the set $E_j= E \cap [-j, j]$ is measurable, as the intersection of two measurable sets is measurable. Since $E= \bigcup_j E_j$, it follows that  $f(E)=\bigcup_j f(E_j)$. So it suffices to prove $f(E_j)$ is measurable for every $j$.
+
+The derivative $f'$, being continuous, is bounded on the interval $[-j, j]$. By the Mean Value Theorem, $f$ is Lipschitz on $[-j, j]$: indeed, $|f(a)-f(b)| \leq |a-b| \sup_{[-j, j]} |f'|$. A technical detail arises: we only proved the measurability of images for Lipschitz functions on all of $\R^n$. To get around this, define 
+        \[
+        f_j(x)= 
+        \begin{cases} 
+        f(x),  & x \in [-j, j] \\ 
+        f(-j), & x< -j  \\ 
+        f(j),  & x> j
+        \end{cases}
+        \]
+Such an extended function $f_j$ is Lipschitz continuous on all of $\R$. Indeed in each of the three closed intervals $(-\infty, -j]$, $[-j, j]$, $[j, \infty)$, the Lipschitz condition holds by construction. For arbitrary $a<b$, partition the interval $[a, b]$ by the points $\{-j, j\}$ should they lie there, and apply the Lipschitz continuity to each interval, and use the triangle inequality.  
+
+Conclusion: $f_j(E_j)$, which is the same as $f(E_j)$, is measurable. \qed \\
+
+[Note: In fact, for every set $E \subset \R^n$, any Lipschitz function $f: E \to \R^n$ can be extended to a Lipschitz function $F: \R^n \to \R^n$. Therefore, when discussing the measurability of $f(E)$, it suffices to check that $f$ is Lipschitz on the set $E$. 
+
+\pfsk It suffices to extend a real-valued Lipschitz function $f: E \to \R$, because the vector-valued case follows by extending each component. Let $L$ be the Lipschitz constant of $f$, and define, for every $x \in \R^n$,
+        \[
+        F(x)= \inf_{a\in E} (f(a) + L|x-a|).
+        \]
+It is an exercise with the definition of $\inf$ to prove that $F$ is Lipschitz with constant $L$, and that $F(x)=f(x)$ when $x \in A$. \qed \\
+
+\noindent Remark: Extending a map $f: E \to \R^n$ in the above fashion, one finds the Lipschitz constant of the extension is at most $L \sqrt{n}$, where $L$ is the Lipschitz constant of the original map. There is a deeper extension theorem (due to Kirszbraun) according to which an extension with the same Lipschitz constant $L$ exists.]
+\end{hwsol}
+
+
+% HW 10
+\begin{hwsol}
+Given a set $E \subset [0, \infty)$, define a function $f: [0, \infty) \to [0, \infty)$ by $f(x)= \ext{E\cap [0, x]}$. 
+	\begin{enumerate}[(a)]
+	\item Prove that $f$ is Lipschitz continuous.
+	\item Prove that for every number $b$ with $0< b< \ext{E}$ there exists a set $F \subset E$ such that $\ext{F}=b$.
+	\end{enumerate}
+
+\pf 
+\begin{enumerate}[(a)]
+\item We claim that $0 \leq f(b)-f(a) \leq b-a$ for any $a,b \in [0, \infty)$ such that $a<b$; this yields the Lipschitz continuity with constant 1. On one hand, $f(b) \geq f(a)$ by the monotonicity of outer measure: $E \cap [0, a] \subset E \cap [0, b]$. On the other, $ E \cap [0, b] \subset (E \cap [0, a]) \cup [a, b]$, which implies
+        \[
+        f(b) \leq \ext{(E \cap [0, a]) \cup [a, b]} \leq \ext{E \cap [0, a]} + |[a, b]|= f(a) + (b-a)
+        \]
+by subadditivity. 
+
+\item By Theorem 3.27 in the textbook, the outer measure is continuous under nested unions even if the sets are not measurable. Since $E=\bigcup_{k \in \N} (E \cap [0, k])$, it follows that
+        \[
+        \ext{E}= \lim_{k \to \infty} \ext{E\cap [0, k]}= \lim_{k \to \infty} f(k).
+        \]
+Since $b< \ext{E}$, by the definition of limit there exists $k$ such that $f(k)>b$. Also, $f(0)= |E \cap \{0\}|= 0$. Applying the Intermediate Value Theorem to $f$ on the interval $[0, k]$ (which is possible since $f$ is continuous by part (a)), we conclude that there exists $x \in (0, k)$ such that $f(x)=b$. Then the set $F=|E \cap [0, x]|$ meets the requirements. 
+\end{enumerate} \qed \\
+\end{hwsol}
+
+
+% HW 11
+\begin{hwsol}
+Show that there exists a nested sequence of sets $E_1 \supset E_2 \supset \cdots$ such that 
+$\ext{E_1}< \infty$ and $\bigcap_{k=1}^\infty E_k= \emptyset$ but $\ds\lim_{k \to \infty } \ext{E_k}> 0$; that is, outer measure is not continuous under nested intersections. [\emph{Hint: Use the translates of the Vitali set.}] \\
+
+\pf Let $V \subset [0, 1]$ be the Vitali set described in these notes: recall that  $\ext{V}>0$ and that the sets $V+q$ are disjoint for all $q \in \Q$. Let 
+        \[
+        E_k= \bigcup_{j=k}^\infty \left( V + \dfrac{1}{j} \right).
+        \]
+Then $E_1 \subset V + [0, 1] \subset [0, 2]$, hence $\ext{E_1} \leq 2 < \infty$. 
+
+Suppose $x \in \bigcap_{k=1}^\infty E_k$. This means that for each $k \in \N$ there exists $j \geq k$ such that $x \in V+1/j$. In particular, $x \in V+1/j$ for infinitely many distinct values of $j$. But this is impossible as the sets $V+1/j$ are disjoint, a contradiction. Therefore, $\bigcap_{k=1}^\infty E_k$ is empty.
+
+The sets $E_k$ are nested by construction, hence $\ext{E_k}$ is a non-increasing sequence. It is bounded from below by $\ext{V}$ because each $E_k$ contains a translated copy of $V$. Thus, $\lim_{k \to \infty} \ext{E_k} \geq \ext{V}> 0$. \qed \\
+\end{hwsol}
+
+
+% HW 12
+\begin{hwsol}
+Show that for the standard middle-third Cantor set $C \subset [0, 1]$, the difference set $C-C$ contains a neighborhood of $0$. [\emph{Hint: $C$ is the intersection of nested sets $C_n$ where $C_0=[0, 1]$  and $C_{n+1}= \frac13C_n \cup (\frac13 C_n+\frac23)$. Find $C_n-C_n$ using induction.}] \\
+
+\noindent\emph{Remark: This shows that having $|E|>0$ is not necessary for $E-E$ to contain a neighborhood of $0$.} \\
+
+\pf Recall that $A-B = \{a-b\colon a\in A, b\in B\}$. This definition implies that 
+	\[
+        (A_1 \cup A_2) - (B_1 \cup B_2)= \bigcup_{i, j=1}^2 (A_i - B_j) \tag{*}
+	\]
+Furthermore, for any  $t \in \R$ we have $(A+t) - B = (A+B)+ t$, $A-(B+t)= (A-B) - t$, and $tA - tB = t(A-B)$; all these follow directly from the definition. 
+
+The equality $C_0 - C_0= [-1, 1]$ holds because, on one hand, $|x-y| \leq 1$ when $x, y\in [0, 1]$, while on the other, $C_0-C_0 \supset [0, 1] -\{0, 1\}= [0, 1] \cup [-1, 0]= [-1, 1]$.  
+
+Assume $C_n - C_n = [-1, 1]$. Use the relation $C_{n+1}= \frac13C_n \cup (\frac13 C_n+\frac23)$ and distribute the difference according to (*) and other properties stated at the beginning:  
+        \[
+        \begin{split}
+        C_{n+1} - C_{n+1}&= \left( \frac13C_n - \frac13C_n \right) \cup \left( \frac13C_n-\frac13C_n + \frac23\right)\cup \left( \frac13C_n-\frac13C_n - \frac23\right) \\ 
+        &= [-1/3, 1/3] \cup ([-1/3, 1/3] + 2/3) \cup ([-1/3, 1/3] - 2/3) \\ 
+        &= [-1/3, 1/3] \cup [1/3, 1] \cup  [-1 , -1/3] = [-1, 1] 
+        \end{split}
+        \]
+The set $\left( \frac13C_n + \frac23\right)- \left(\frac13C_n +\frac23 \right)$ is not included above because it is the same as $\left( \frac13C_n-\frac13C_n \right)$. By induction, $C_n-C_n=[-1, 1]$ for all $n$. 
+
+Since $C \subset C_n$ for every $n$, it follows that $C - C\subset [-1, 1]$. To prove the reverse inclusion, fix $a \in [-1, 1]$. For each $n$, there exist $x_n, y_n \in C_n$ such that $x_n - y_n= a$. Since all these numbers are contained in $[0, 1]$, we can pick a convergent subsequence  $\{ x_{n_k} \}$. So, $x_{n_k}\to x$ and since $x_{n_k} - y_{n_k}= a$, we also have $y_{n_k} \to y$ where $y$ is such that $x - y=a$.  
+
+It remains to prove that $x, y \in C$. For each $m \in \N$ we have $x_{n_k}, y_{n_k} \in C_m$ for $k \geq m$ by construction. Since $C_m$ is compact, it follows that $x, y \in C_m$.  And since this holds for every $m \in \N$, we have $x, y \in C$. \qed \\
+\end{hwsol}
+
+
+% HW 13
+\begin{hwsol}
+Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
+
+\pf Let $B = f(\mathbb R^n)$, a countable subset of $\mathbb R$. For any $a\in \mathbb R$ we have
+        \[
+        \{f>a\}= \bigcup_{b \in B, \ b>a} f^{-1}(b),
+        \]
+which is a countable union of measurable sets, and is hence measurable. The domain of $f$, which is $\R^n$, is also measurable. Thus $f$ is measurable. \qed \\
+\end{hwsol}
+
+
+% HW 14
+\begin{hwsol}
+Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:13} would not be true. \\
+
+\pf The statement in Problem~\ref{hw:13} is made for any $n$. To disprove it, it suffices to show it fails for some $n$. With massive loss of generality, let $n=1$. Let $V \subset [0, 1]$ be a Vitali set, and define $f\colon \R \to \R$ by
+        \[
+        f(x)= 
+        \begin{cases} 
+        x+1, & x \in V \\ 
+        -|x|, & x \notin V 
+        \end{cases}
+        \]
+By construction $\{f>0\}= V$, which is nonmeasurable. Thus, $f$ is nonmeasurable. On the other hand, for every $t \in \R$ the set $f^{-1}(t)$ is finite and therefore measurable. Indeed, if $t$ is negative, $f(x)=t$ holds for at most two values of $x$; and when $t \geq 0$, there is at most one such value. \qed \\
+\end{hwsol}
+
+\noindent [Remark: If we wanted to construct such an example on $\R^n$ for every $n$, one way is to let 
+        \[
+        f(x_1,\ldots, x_n)= 
+        \begin{cases} 
+        x_1+1, & \forall i \; x_i \in V; \\ 
+        -|x_1|, & \text{otherwise} 
+        \end{cases}
+        \]
+Then $\{f>0\}= V^n$ which is nonmeasurable, because on one hand, $V^n + \Q^n= \R^n$ forces $\ext{V^n}>0$; on the other, $V^n + (\Q \cap [0, 1])^n$ is a bounded set containing infinitely many copies of $V^n$, which makes it impossible to have $|V^n|>0$.  
+
+For every $t \in \R$, the preimage $f^{-1}(t)$ consists at most two hyperplanes of the form $\{x\} \times  \R^{n-1}$. So it is covered by countably many sets of the form $\{x\} \times [-j, j]^{n-1}$, $j \in \N$. Here $|\{x\} \times [-j, j]^{n-1}|=0$ because this set is contained in a box of dimensions $(\ep, 2j,\ldots, 2j)$ whose volume can be arbitrarily small. In conclusion, $|f^{-1}(t)|=0$ for every $t$. Thus $f$ is measurable.] \\
+
+
+% HW 15
+\begin{hwsol}
+Suppose that $f: \R \to \R$ is measurable, and $g: \R \to \R$ is continuously differentiable with $g'>0$ everywhere. Prove that $f \circ g$ is measurable. \\
+
+\pf By the Mean Value Theorem, $g$ is strictly increasing; therefore, it has an inverse $h= g^{-1}$. By the Inverse Function Theorem, the inverse function $h$ is also continuously differentiable. 
+
+Given $a \in \R$, consider the set $A= \{ x \colon f(g(x))> a \}$. It can be written as $\{x \colon g(x) \in B \}$, where $B= \{f>a\}$ is measurable; that is, $A= h(B)$. By Problem~\ref{hw:9}, the image of a measurable set under a continuously differentiable function is measurable. Therefore, $A$ is measurable. \qed \\
+\end{hwsol}
+
+
+% HW 16
+\begin{hwsol} \hfill
+\begin{enumerate}[(a)]
+\item Suppose $f\colon \mathbb R^n\to\mathbb R$ is a continuous function such that $f^2$ is measurable. Prove that $f$ is measurable.
+\item Prove that the statement in (a) is false if $f$ is not assumed continuous. \\
+\end{enumerate}
+
+\pf
+\begin{enumerate}[(a)]
+\item Since $f$ is continuous, it is measurable. 
+\item Let $n=1$, let $V$ be a Vitali set, and define $f(x) = 1$ when $x \in V$ and $f(x)= -1$ when $x \notin V$. Then $f^2 \equiv 1$ is measurable, being continuous. But $\{f>0\}= V$ is not a measurable set, so $f$ is not measurable.
+\end{enumerate} \qed \\
+\end{hwsol}
+
+
+%%%%%%%%%%%%%%%%
+
+
+% HW 17 
+\begin{hwsol}
+Suppose that $f: E \to \R$ is a measurable function, where $E \subset \R^n$ is measurable. 
+\begin{enumerate}[(a)]
+\item Prove that there exists a Borel set $H \subset E$ such that the restriction $f_{|H}$ is Borel measurable and $|E \setminus H|=0$. 
+\item If, in addition, $E$ is a Borel set, prove that there exists a Borel measurable function $g: E \to \R$ such that $f=g$ a.e.. [\emph{Hint: For part (a), take a countable union of closed sets obtained from Lusin's Theorem.}]
+\end{enumerate}
+\end{hwsol}
+
+
+% HW 18 
+\begin{hwsol}
+Suppose $\phi\colon [0, \infty )\to [0, \infty)$ is a function such that $\phi(t) \to 0$ as $t \to \infty$. Consider a sequence of measurable functions $\{f_k\}$, $f_k: \R^n \to \R$, such that $|f_k(x)| \leq \phi(|x|)$ for every $k$, and $f_k \to f$ a.e.. Prove that the conclusion of Egorov's Theorem holds in this situation; that is, for every $\ep>0$, there exists a closed set $E(\ep) \subset \R^n$ such that $|\R^n \setminus E(\ep)| < \ep$ and $f_k \to f$ uniformly on $E(\ep)$. [\emph{Hint: Follow the proof of Egorov's theorem.}]
+\end{hwsol}
+
+
+% HW 19
+\begin{hwsol}
+Suppose that $f\colon \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. 
+\end{hwsol}
+
+
+% HW 20
+\begin{hwsol}
+Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:19} would not be true.   
+\end{hwsol}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

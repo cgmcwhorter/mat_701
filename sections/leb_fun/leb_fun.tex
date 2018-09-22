@@ -1,0 +1,350 @@
+% !TEX root = ../../mat701_notes.tex
+\newpage
+\section{Measurable Functions}
+% Missing Friday Day
+
+% images 1,2,3 desktop
+
+
+
+
+
+
+%%%%%%%
+
+
+
+
+	\begin{table}{h}
+	\begin{tabular}{|c|c|c|c|} \hline
+	\diagbox{is}{(*)} & Open & Borel & Measurable \\ \hline
+	Open & Continuous & --- & --- \\ \hline
+	Borel & Borel measurable & Borel measurable & --- \\ \hline
+	Measurable & Measurable & Measurable & ? \\ \hline
+	\end{tabular}
+	\end{table}
+
+% Where (*) is ``preimage of\dots''. 
+
+
+When can we say that $f \circ g$ is measurable? What data about $f$ and $g$ would ensure this? 
+We know that if $f$ is measurable and $g$ is continuous does not work from previous discussion. One possibility ensuring this would be $f$ is continuous and $g$ is measurable as $(f \circ g)^{-1}(U)= g^{-1}(f^{-1}(U))$, as $U$ is open $f^{-1}(U)$ is open and $g^{-1}$ of open is measurable (assuming $g$ takes values in $\R$ and $f$ is continuous on some open set containing the range of $g$). More generally, this will hold if $f$ is Borel measurable on some Borel set containing the range of $g$ and $g$ measurable and real-valued. 
+
+
+\begin{ex}
+If $f$ is measurable (and $\R$-valued) then $f^2$ is measurable, $f^2= \phi \circ f$, where $\phi(t)=t^2$. Similarly, $|f|$ is measurable since $|f|= \phi \circ f$, where $\phi(t)=|t|$. Also, $\sgn(f) = \begin{cases} 1, & f=0 \\ 0, & f=0 \\ -1, & f<0 \end{cases}$ is measurable since sign is Borel measurable (simple to see by checking preimages). So is floor(x), where floor is supremum of integers which are at most x. As is ceilin(x), defined mutatis mutandis. [They are both monotone,]
+
+%Provide graphs
+\end{ex}
+
+
+\begin{thm}
+If $f,g$ are measurable, then $f \pm g$, $fg$, and $f/g$ ($g \neq 0$ a.e.) are measurable.
+\end{thm}
+
+\pf $\{f+g>a\}= \bigcup_{b+c>a, b,c \in \Q} \left[ \{f>b\} \cap \{g>c\} \right]$ hence measurable set (countable union of measurable sets). Just need to prove equality. $\supset$ is obvious. Need only prove $\subset$. Suppose $f(x)+g(x)>a$. Let $\ep= f(x)+g(x)-a$. Use density of rationals to find $b \in \Q$ such that $f(x)- \ep/2<b<f(x)$ and $c \in \Q$ such that $g(x) - \ep/2<c<g(x)$. But then $b+c>f(x)+g(x)0\ep=a$. 
+
+Now $fg= \dfrac{1}{4} \left[ (f+g)^2 - (f-g)^2 \right]$ is then measurable. For quotient only need reciprocal. We know $\frac{1}{g}$ is $\phi \circ g$, where $\phi(t)=\frac{1}{t}$, which is continuous on $\R \setminus \{0\}$. Now $g$ is nonzero almost everywhere, $\phi$ contains range of $g$ (ignoring set where range is $g=0$, since we can ignore for measurability). \qed \\
+
+
+% f^g= e^{g\log f}$, so long as $f$ positive. Then measurability of this simple. 
+
+Another way could combine is max of functions. Better to generalize to countable. So countable sup/inf of measurable functions is measurable.
+
+\begin{thm}
+The above statement, including infinite values. 
+\end{thm}
+
+\pf IF $f_k: E \to \overline{R}$ is measurable for all $k \in \N$, then $\sup_k f_k$ and $\inf_k$ are measurable. So $g(x)= \sup_{k \in \N} f_k(x)$ is measurable. Same for inf. 
+
+
+	\[
+	\begin{split}
+	\{g>a\}&= \bigcup_{k \in \N} \{f_k>a\} \\
+	\{g \geq a\}& \\
+	\{g<a\}& \\
+	\{g \leq a\}& \\
+	\end{split}
+	\]
+First case done. Other follow similarly. HAND WAVE! For inf
+	\[
+	\{ \inf_k f_k<a\}= \bigcup_{k \in \N} \{f_k<a\}.
+	\]
+\qed \\
+
+
+
+
+
+\begin{thm}
+Suppose $f_k: E \to \overline{R}$ are measurable, then
+%	\[
+%	\begin{split}
+%	\limsup_{k \to \infty} f_k&:= \inf_{m \in \N} \sup_{k \geq m} f_k \\
+%	\liminf_{k \to \infty} f_k:= \sup_{m \in \N} \inf_{\k \geq m } f_k
+%	\end{split}
+%	\]
+are measurable. 
+\end{thm}
+
+\pf Follows immediately from preceding result. [lim$=$ limsup$=$liminf when it exists.] \qed \\
+
+
+
+
+
+
+
+
+
+Approximation: Given measurable $f$, find `simple' functions $f_k$ such that $f_k \to f$ pointwise. Here by simple we mean finite range. 
+
+\begin{dfn}[Simple]
+$g$ is simple if its range is finite subset of $\R$. [Need measurable?]
+\end{dfn}
+
+
+Need this to build notion of integration. 
+
+\begin{thm}
+For all measurable functions, there exists $f_k$ such that $f_k \to f$ pointwise. If $f \geq 0$, we can take $f_1 \leq f_2 \leq \cdots$.
+\end{thm}
+
+\pf $2^{-k} floor(2^k f)$. (floor to $\dfrac{integer}{2^k}$). This converges monotonically since increasing $k$ shortens the rounding distance, and then not as much difference so this converges to $f$ uniformly. Range not finite but countable. So just need to distribute the values among many functions. 
+	\[
+	f_k(x)=
+	\begin{cases}
+	\dfrac{j-1}{2^k}, & \dfrac{j-1}{2^k} \leq f(x) < \dfrac{j}{2^k} \\
+	k, & f(x) \geq k
+	\end{cases}
+	\]
+$f_k$ simple and $f_k \to f$. Now $f_k= \min(k,\max(-k,2^{-k}floor(2^kf)))$. $f \geq 0$, then $f_1 \leq f_2 \leq \cdots$. 
+\qed \\
+
+
+
+% Give some examples with plots, usually not continuous. 
+
+
+
+
+
+\begin{dfn}
+$f: E \to \R$ is continuous at $a \in E$ if for all $\ep>0$, there exists $\delta>0$ such that if $x \in E$ and $|x-a|<\delta$, then $|f(x)-f(a)|<\ep$.
+\end{dfn}
+
+Why better than normal definition with limit? Because $a$ can be a limit point not not defined there. Take $f(x)=1/x^2$, rather like allowing $f(0)=\infty$. 
+
+
+Semincontinuity means rather than bounding difference from above below, means one of inequality $-\ep<f(x)-f(a)<\ep$ holds. 
+
+
+
+
+\begin{dfn}[Upper Semicontinuous (usc)]
+$f: E \to \overline{\R}$ is upper semicontinuous at $a \in E$ if for all $y>f(a)$, there exists $\delta>0$ such that if $|x-a|<\delta$, then $f(x)<y$. 
+\end{dfn}
+
+% red horizontal line, y, passing through line coming from solid point, below open circle then horizontal line down left, value a below holes.
+
+% If a horzitaonl line above a point on graph, its above its neightborhood.
+
+% Now same image with roles of lines switches and horizontal line passing through the middle. 
+
+\begin{dfn}[Lower Semicontinuous (lsc)]
+$f: E \to \overline{\R}$ is upper semicontinuous at $a \in E$ if for all $y>f(a)$, there exists $\delta>0$ such that if $|x-a|<\delta$, then $f(x)>y$. 
+\end{dfn}
+
+\begin{ex}
+	\[
+	f(x)=
+	\begin{cases}
+	\dfrac{1}{x^2}, & x \neq 0 \\
+	\infty, & x=0
+	\end{cases}
+	\]
+% give graph 
+This is usc (automatically because of the $\infty$ value, why?) and lsc. 
+\end{ex}
+
+Both types of these functions are measurable. 
+
+
+
+Remark: lsc -> measurable
+usc-> measurable
+
+\pf if $f$ usc on measurable $E$, then $\{f>a\}$ is open in $E$. So $\{f>a\}=E \cap U$. Hence $\{f>a\}$ is measurable.
+
+For USC, use $\{f<a\}$.
+
+
+% line, hole, point above it, USC. `USC kicking a field goal.' 
+
+% Book: f usc/lsc/cts relative to E means f|_E is usc/lsc/cnt on E. Illstrate difference between ??
+
+% Ex: f=\chi_\Q. Not continuous anywhere (at any point). But restricting to rationals is continuous. So book says relative to \Q. 
+
+
+
+BV function
+
+Given $f: [a,b] \to \R$, define $V(f; a,b)=\sup_p \sum_{i=1}^n |f(x_i)-f(x_{i-1})|$ sup over all partitions $P:a=x_0<x_1<\cdots<x_n=b$. $V(x^2; -1,1)=2$ (P=\{-1,0,1\} gives the maximum value. ) 
+
+% Give plot.
+
+\begin{dfn}
+$f$ is BV on $[a,b]$ if $V(f; a,b)<\infty$
+\end{dfn}
+
+Interesting not called finite variation. 
+
+
+Something which is not BV is 
+	\[
+	f(x)=
+	\begin{cases}
+	\sin(1/x), & x \in (0,1] \\
+	0, & x=0
+	\end{cases}
+	\]
+% give plot
+% Choose partition where only +/- 1. So valuation at least +2+2+2+.... So clearly not BV. 
+
+
+% Property: if $f$ is monotone, $V(f;a,b)= |f(a)-f(b)|$ (telescopes).
+%2. V MONOTONE AND ADDITIVE WRT intervals: if $[a,b] \subset [c,d]$, then $V(f;a,b) \leq V(f; c,d)$. 
+% if a \leq b \leq c, then V(f;a,c)= V(f; a,b) + V(f; b,c).  proof same as for riemann integral.
+
+\begin{thm}
+If $f$ is continuous on $[a,b]$ and differentiable on $(a,b)$ and $\int_a^b |f'| \; dx$ (riemann integral), then $V(f;a,b)= \int_a^b |f'| \; dx$.
+\end{thm}
+
+C.f. examples above. 
+
+
+\pf Mean Value Theorem. 
+	\[
+	\sum_i |f(x_i) - f(x_{i-1})| = \sum_i |f'(\xi_i)| (x_i-x_{i-1})
+	\]
+$x_{i-1}< \xi_i < x_i$. the above converges to integral. \qed \\
+
+3. Subadditive wrt $f$:
+$V(f+g; a,b) \leq V(f; a,b) + V(g; a,b)$. 
+
+\pf Triangle inequality.
+	\[
+	[f(x_i) + g(x_i)] - (f(x_{i-1}) + g(x_{i-1})) |
+	\]
+then use triangle splits into two and done. 
+
+Why not exactly like integral, i.e. strict inequality. Take nonconstant function $f$ and then $g= -f$. Note $f+g$ identically zero. 
+
+
+
+
+Sum of monotone functions are bounded variation. 
+
+
+
+\begin{thm}[BV Decomposition]
+If $f$ is BV on $[a,b]$, then there exists increasing $g$, $h$ on $[a,b]$ such that $f= g-h$. 
+\end{thm}
+
+\pf Let $g(x)= V(f; a,x)$, increasing (mononticity wrt interval). This forces $h(x):= g(x) - f(x)$. Why is $h(x) \leq h(y)$ for $x \leq y$? $V(f;a,x) - f(x) \leq V(f; a,y) - f(y)$. Why? $f(y)-f(x) \leq V(f; a,y) - V(f; a,x)= V(f;x,y)$, clearly this right side is $ \geq |f(x)-f(y)|$. \qed \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Now near end of Ch. 4
+
+
+% Reminder: unf conv: \sup|f_k -f| \to 0
+
+% Ex: f_k(x)=x^2$ on $[0,1]$ f(x)=0 for all x. 
+% here E(\ep)= [0,1-\ep] works. 
+% sup_{E(\ep)} |f_k-f|= (1-\ep)^k \to 0
+% |E|<\infty is important. Give picture with moving e^{-x^2}, aka moving mound. Converges to 0 but not uniformly. Only have uniform convergce on (-\infty,a]. 
+% Need f defined on \R otherwise uniform makes no sense, i.e. no infty in domain. Take horizontal lines at y=n, i.e. f_k=k. Then makes no sense. 
+
+
+\begin{thm}[Egorov's Theorem]
+Suppose $\{f_k\}$ is a collection of measurable functions, $f_k: E \to \R$, $|E|<\infty$, and $f_k \to f$ a.e., where $f: E \to \R$. Then for all $\ep>0$, there exists a closed set $E(\ep) \subset E$ such that $f_k \to f$ uniformly on $E(\ep)$ and $|E \setminus E(\ep)|<\ep$. 
+\end{thm}
+
+\pf We need to find a set on which $\{f_k\}$ converges uniformly. It suffices to find, for each $j \in \N$, $E_j \subset E$ such that $|E \setminus E_j|< \ep/2^j$, and $\sup_{E_j} |f-f_k| \leq 1/j$ for sufficiently large $k$. Indeed, letting $E(\ep):= \bigcap_j E_j$, then $f_k \to f$ uniformly on $E(\ep)$, and $|E \setminus E(\ep)| \leq \sum_j \ep/2^j<\ep$. 
+
+To find $E_j$, consider the set $G_m:=\{ x \colon |f_k(x)-f(x)| <1/j \text{ for all } k \geq m\}$. Since $|f_k-f| \to 0$ a.e., $\bigcup_m G_m$ is almost $E$, i.e. $\ms{\bigcup G_m}= |E|$. By continuity of measure for nested unions, $|G_m| \to |E|$. Therefore, there exists $m$ such that $|E \setminus G_m|< \ep/2^j$. Defining $E_j:= G_m$ completes the proof. \qed \\
+
+
+% `Closed' comes for free: if we find any measurable E(\ep), then it will have a closed subset of almost the same measure. 
+
+% Common tool is introducing sets such as the G_m's. See this in topology by using nested sequences of compact sets and concluding about intersections. 
+
+% where is measure of finite? the |E\setminus G_m| < \ep/2^j., do not want to subtract infinities. 
+
+
+
+\begin{thm}[Lusin's Theorem]
+Let $E$ be a measurable set. A function $f: E \to \R$ is measurable if and only if for all $\ep>0$, there exists a closed set $E(\ep) \subset E$ such that $f\big|_{E(\ep)}$ is continuous, and $|E\setminus E(\ep)|<\ep$.
+\end{thm}
+
+\pf Suppose that $f$ is a simple function, i.e. $f= \sum_{k=1}^n a_k \chi_{E_k}$, where $E_1,\ldots,E_n$ are disjoint measurable sets. Choose a closed subset $E_k' \subset E_k$ such that $|E_k \setminus E_k'| < \ep/n$. Then $E(\ep):= \bigcup_{k=1}^n E_k'$ so that $|E\setminus E(\ep)|<\ep$. It only remains to check that $f\big|_{E(\ep)}$ is continuous, but this is immediate as the preimage of any set is closed.  
+
+% Cross shape, each labeled E_1...E_4. Then small dotted around inside labeled E_k'
+
+Now suppose only that $|E|<\infty$. There is a collection of simple functions $\{f_k\}$ such that $f_k \to f$ pointwise. Choose some $E(\ep/2^k)$ for $f_k$ as in the case above. By Egorov's Theorem, $f_k \to f$ uniformly on a set $E(\ep)$. Now $f$ is continuous on $E(\ep) \cap \left(\bigcap_k E_k(\ep/2^k)\right)$, which has compliment of measure at most $\ep+ \sum_k \ep/2^k=2\ep$. 
+
+% Picture of nested shells. 
+
+Now suppose that $|E|=\infty$. Write $E= \bigcup \left[ E \cap \{ |j| \leq |x| \leq j+1\}\right]$. In each shell, we have $E_j(\ep/2^j)$, closed set such that $f\big|_{E_j(\ep/2^j)}$ is continuous. Note that $f$ continuous on $\bigcup_j E_j(\ep/2^j)$. \qed \\
+
+
+
+
+The converse direction of Lusin's theorem is simple since $f\big|_{E(1/j)}$ is continuous, then we have $f$ Borel on $\bigcup E(1/j)$ simply because $\{x \in \bigcup E(1/j) \colon f>a \}= \bigcup \{x \in E(1/j) \colon f>a\}$, countable union of Borel sets. and the rest has measure 0. 
+
+
+
+
+
+
+% Ex:  This does not imply $f$ is continuous - does not have to be anywehre, take $f= \chi_\Q$. Let E(\ep)= \Q^C, then f\big|_{E(\ep)} is continuous \equiv 0.
+
+% Ex:  if f= \chi_C, where C is the cantor set. Take E(\ep)= \R \setminus C
+
+% Ex: f= \chi_F, F fat cantor set. If $\ep<|F|$, we must keep some $x \in F$. then must remove $\{x \colon |x-x_0|<\delta\} \setminus F, which has positive measure. 
+
+
+
+
+
+
+
+

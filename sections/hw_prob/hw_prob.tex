@@ -1,0 +1,156 @@
+% !TEX root = ../../mat701_notes.tex
+\newpage
+\section{Homework Problems}
+
+% HW 1
+\begin{hw} \label{hw:1}
+Given an arbitrary set $A \subset \R$ and a number $c>0$, let $B = \{ ca \colon a \in A \}$. Prove that $\ext{B} = c \ext{A}$. \\
+\end{hw}
+
+
+% HW 2
+\begin{hw} \label{hw:2}
+Suppose that a set $A \subset \R$ is measurable. Prove that for every $c>0$ the set $B = \{ ca \colon a \in A \}$ is also measurable. \\
+\end{hw}
+
+
+% HW 3
+\begin{hw} \label{hw:3}
+Given a sequence of continuous functions $f_k: \R \to \R$, let $B$ be the set of all points $x \in \R$ such that the sequence $\{ f_k(x) \}$ is bounded. Prove that $B$ is a measurable set. [\emph{Hint: try to construct $B$ from the sets $\{x \colon |f_k(x)| \leq M\}$ by using countable unions and intersections.}] \\
+\end{hw}
+
+
+% HW 4
+\begin{hw} \label{hw:4}
+Given a sequence of continuous functions $f_k \colon \R \to \R$, let $C$ be the set of all points $x \in \R$ such that $\ds \lim_{k \to \infty} f_k(x)= 0$. Prove that $C$ is a measurable set. \\
+\end{hw}
+
+
+% HW 5
+\begin{hw} \label{hw:5}
+Prove that the set
+        \[
+        A = \{ x \in \R \colon \exists \, k \in \N \text{ such that } |2^x-2^k| \leq 1 \}
+        \]
+is measurable and $|A|<\infty$. \\
+\end{hw}
+
+
+% HW 6
+\begin{hw} \label{hw:6}
+Prove that the set
+        \[
+        A = \{ x \in [0, 1] \colon \forall q \in \N \ \exists p \in \N \text{ such that } |x-p/q| \leq 1/q^2 \}
+        \]
+is measurable and $|A|=0$. \\
+\end{hw}
+
+
+% HW 7
+\begin{hw} \label{hw:7}
+Suppose $E$ and $Z$ are sets in $\mathbb R^n$ such that $E\cup Z$ is measurable and $|Z|=0$. Prove that $E$ is measurable. \\
+\end{hw}
+
+
+% HW 8
+\begin{hw} \label{hw:8}
+Given a continuous function $f \colon \R^n \to \R^n$, define $\mathcal{M}= \{ E \subset \R^n \colon f^{-1}(E) \text{ is Borel} \}$. 
+	\begin{enumerate}[(a)]
+	\item Prove that $\mathcal{M}$ is a $\sigma$-algebra.
+	\item Prove that if $E$ is Borel, then $f^{-1}(E)$ is Borel. [\emph{Hint: Use (a).}] \\
+	\end{enumerate}
+\end{hw}
+
+
+% HW 9
+\begin{hw} \label{hw:9}
+Suppose $f \colon \R \to \R$ is a function with a continuous derivative. Prove that for every measurable set $E$, the set $f(E)$ is also measurable. [\emph{Hint: although $f$ need not be Lipschitz, its restriction to any bounded interval is Lipschitz.}] \\
+\end{hw}
+
+
+% HW 10
+\begin{hw} \label{hw:10}
+Given a set $E \subset [0, \infty)$, define a function $f: [0, \infty) \to [0, \infty)$ by $f(x)= \ext{E\cap [0, x]}$. 
+	\begin{enumerate}[(a)]
+	\item Prove that $f$ is Lipschitz continuous.
+	\item Prove that for every number $b$ with $0<b<|E|_e$ there exists a set $F \subset E$ such that $|F|_e=b$. \\
+	\end{enumerate}
+\end{hw}
+
+
+% HW 11
+\begin{hw} \label{hw:11}
+Show that there exists a nested sequence of sets $E_1 \supset E_2 \supset \cdots$ such that 
+$\ext{E_1}< \infty$ and $\bigcap_{k=1}^\infty E_k= \emptyset$ but $\ds\lim_{k \to \infty } \ext{E_k}> 0$; that is, outer measure is not continuous under nested intersections. [\emph{Hint: Use the translates of the Vitali set.}] \\
+\end{hw}
+
+
+% HW 12
+\begin{hw} \label{hw:12}
+Show that for the standard middle-third Cantor set $C \subset [0, 1]$, the difference set $C-C$ contains a neighborhood of $0$. [\emph{Hint: $C$ is the intersection of nested sets $C_n$ where $C_0=[0, 1]$  and $C_{n+1}= \frac13C_n \cup (\frac13 C_n+\frac23)$. Find $C_n-C_n$ using induction.}] \\
+
+\noindent\emph{Remark: This shows that having $|E|>0$ is not necessary for $E-E$ to contain a neighborhood of $0$.} \\
+\end{hw}
+
+
+% HW 13
+\begin{hw} \label{hw:13}
+Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
+\end{hw}
+
+
+% HW 14
+\begin{hw} \label{hw:14}
+Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:13} would not be true. \\
+\end{hw}
+
+
+% HW 15
+\begin{hw} \label{hw:15}
+Suppose that $f: \R \to \R$ is measurable, and $g: \R \to \R$ is continuously differentiable with $g'>0$ everywhere. Prove that $f \circ g$ is measurable. \\
+\end{hw}
+
+
+% HW 16
+\begin{hw} \label{hw:16} \hfill
+\begin{enumerate}[(a)]
+\item Suppose $f\colon \mathbb R^n\to\mathbb R$ is a continuous function such that $f^2$ is measurable. Prove that $f$ is measurable.
+\item Prove that the statement in (a) is false if $f$ is not assumed continuous. \\
+\end{enumerate}
+\end{hw}
+
+
+% HW 17 
+\begin{hw} \label{hw:17}
+Suppose that $f: E \to \R$ is a measurable function, where $E \subset \R^n$ is measurable. 
+\begin{enumerate}[(a)]
+\item Prove that there exists a Borel set $H \subset E$ such that the restriction $f_{|H}$ is Borel measurable and $|E \setminus H|=0$. 
+\item If, in addition, $E$ is a Borel set, prove that there exists a Borel measurable function $g: E \to \R$ such that $f=g$ a.e.. [\emph{Hint: For part (a), take a countable union of closed sets obtained from Lusin's Theorem.}] \\
+\end{enumerate}
+\end{hw}
+
+
+% HW 18 
+\begin{hw} \label{hw:18}
+Suppose $\phi: [0, \infty )\to [0, \infty)$ is a function such that $\phi(t) \to 0$ as $t \to \infty$. Consider a sequence of measurable functions $\{f_k\}$, $f_k: \R^n \to \R$, such that $|f_k(x)| \leq \phi(|x|)$ for every $k$, and $f_k \to f$ a.e.. Prove that the conclusion of Egorov's Theorem holds in this situation; that is, for every $\ep>0$, there exists a closed set $E(\ep) \subset \R^n$ such that $|\R^n \setminus E(\ep)| < \ep$ and $f_k \to f$ uniformly on $E(\ep)$. [\emph{Hint: Follow the proof of Egorov's theorem.}] \\
+\end{hw}
+
+
+% HW 19
+\begin{hw} \label{hw:19}
+Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
+\end{hw}
+
+
+% HW 20
+\begin{hw} \label{hw:20}
+Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:19} would not be true. \\
+\end{hw}
+
+
+
+
+
+
+
+

@@ -24,11 +24,6 @@
 
 % Commands
 \newcommand{\xqed}{\hfill \lower-0.3ex\hbox{$\triangleleft$}}
-\newcounter{problem}
-\newcommand{\prob}{
-	\stepcounter{problem}%
-	\noindent\textbf{Problem \theproblem: }
-}
 \newcommand{\ep}{\epsilon}
 \newcommand{\ov}[1]{\overline{#1}}
 \newcommand*{\defeq}{\stackrel{\text{def}}{=}}
@@ -37,7 +32,8 @@
 \newcommand{\ext}[1]{\left|#1\right|_e}
 \newcommand{\sm}{\setminus}
 \newcommand{\ms}[1]{\left|#1\right|}
-
+\newcommand{\ds}{\displaystyle}
+\newcommand{\ma}[1]{\stackrel{#1}{\longrightarrow}}
 
 
 
@@ -60,6 +56,10 @@
 	\path[shade,draw,use Hobby shortcut,closed=true]
 		(-3+#1,3+#2) .. (-5+#1,1+#2) .. (-1+#1,-2+#2) .. (0+#1,-5+#2) .. (3+#1,-3+#2) .. (5+#1,1+#2) .. (3+#1,3+#2) .. (0+#1,5+#2) .. (-3+#1,3+#2);
 }
+\newcommand{\blobthreealt}[2]{%
+	\path[dotted,draw,use Hobby shortcut,closed=true]
+		(-3+#1,3+#2) .. (-5+#1,1+#2) .. (-1+#1,-2+#2) .. (0+#1,-5+#2) .. (3+#1,-3+#2) .. (5+#1,1+#2) .. (3+#1,3+#2) .. (0+#1,5+#2) .. (-3+#1,3+#2);
+}
 \newcommand{\blobfour}[2]{%
 \path[shade,draw,use Hobby shortcut,closed=true]
 	(3+#1,3+#2) .. (1+#1,3+#2) .. (-1+#1,2+#2) .. (-3+#1,1+#2) .. (-1+#1,0+#2) .. (-3+#1,-1+#2) .. (-5+#1,-3+#2) .. (-3+#1,-3+#2) .. (-1+#1,-2+#2) .. (1+#1,-1+#2) .. (2+#1,0+#2) .. (3+#1,3+#2);
@@ -76,6 +76,7 @@
 \path[shade,draw,use Hobby shortcut,closed=true]
 	(-3+#1,3+#2) .. (-4+#1,1+#2) .. (-3+#1,0+#2) .. (-4+#1,-1+#2) .. (-5+#1,-2+#2) .. (-6+#1,-3+#2) .. (-5+#1,-4+#2) .. (-4+#1,-4+#2) .. (0+#1,-3+#2) .. (1+#1,-2+#2) .. (3+#1,-1+#2) .. (5+#1,0+#2) .. (4+#1,1+#2) .. (3+#1,2+#2) .. (2+#1,1+#2) .. (1+#1,1+#2) .. (0+#1,2+#2) .. (-1+#1,3+#2) .. (-2+#1,3+#2) .. (-3+#1,3+#2);
 }
+
 
 
 
@@ -111,6 +112,11 @@
 \newtheorem{nex}{Non-Example}[section]
 \newtheorem*{dfn}{Definition}
 \newtheorem*{conject}{Conjecture}
+\newtheorem{hw}{Problem}
+\newtheorem{hwsol}{Solution Problem}
+\newtheorem{quiz}{Quiz}
+\newtheorem{quizsol}{Solution Quiz}
+
 
 %\theoemstyle{remark}
 \newtheorem*{rem}{Remark}
