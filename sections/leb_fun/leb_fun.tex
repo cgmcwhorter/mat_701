@@ -344,6 +344,134 @@ The converse direction of Lusin's theorem is simple since $f\big|_{E(1/j)}$ is c
 
 
 
+% 09/24
+
+% Quiz: Suppose $f_k: [0,1] \to \R$ are simple functions which converge uniformly to $f$. Is $f$ a simple function? 
+
+% False: Take $f$ to be $y=x$ on $[0,1]$. Take step approximations to $f$. This converges uniformly but $f$ is not simple. 
+
+
+% Section 4.4
+
+\subsection{Convergence in Measure}
+
+Recall $\limsup E_k:= \bigcap_{m=1}^\infty \bigcup_{k=m}^\infty E_k= \{ x \colon x \in E_k, \text{ infinitely many }k\}$. We will not need $\liminf$ quite as regularly as $\limsup$.
+
+
+% HW 1: If $\sum_k |E_k|<\infty$, then $|\limsup E_k|=0$. 
+
+\begin{dfn}[Convergence in Measure]
+Let $\{f_k\}$ be a collection of measurable functions, $f_k: E \to \R$. We say $f_k$ converges to $f$ in measure if for all $\ep>0$, $|\{ |f-f_k|>\ep\}| \to 0$. We denote this by $f_k \ma{m} f$. 
+\end{dfn}
+
+
+If we expand this definition out more, we have the following: $f_k \ma{m} f$ if for $\ep>0$ and for all $\ep_2>0$, there exists $N$ such that $|\{ |f-f_k|>\ep\}|<\ep_2$ for all $k \geq N$. If this is possible, one may as well replace the double epsilon with a single epsilon for a more concise version. So the definition could be taken as follows: $f_k \ma{m} f$ if for all $\ep>0$, there exists $N$ such that $|\{ |f_k-f|>\ep\}|<\ep$ for all $k \geq N$. 
+
+
+\begin{ex}
+$f_k(x)= \dfrac{1}{kx} \ma{m} 0$ on $\R$.
+
+% Give plot of function. Horizontal lines at $\pm \ep$. 
+	\[
+	\begin{tikzpicture}[scale=1.5,every node/.style={scale=0.5}]
+	\begin{axis}[
+%	grid=both,
+	axis lines=middle,
+%	ticklabel style={fill=blue!5!white},
+%	xmin= -7, xmax=7,
+%	ymin= -6.5, ymax=6.5,
+%	xtick={-6,-4,-2,0,2,4,6},
+%	ytick={-6,-4,-2,0,2,4,6},
+%	minor tick = {-5,-3,...,5},
+	xlabel=\(x\),ylabel=\(\;y\)
+	]
+
+	\addplot[thick, domain= -6:-0.1,samples=100] {1/x};
+	\addplot[thick, domain= 0.1:6,samples=100] {1/x};
+
+	\end{axis}
+	\end{tikzpicture}
+	\]
+We know that $\{ |f_k|>\ep\}= \{ |x|< \frac{1}{k \ep}\}$. This set has measure $2/(k\ep$, which tends to zero as $k$ tends to infinity. \xqed
+\end{ex}
+
+
+\begin{ex}
+$f_k(x) = \frac{x}{k} \not\ma{m} 0$ on $\R$. $\{ |f_k|>\ep\}= \{ \dfrac{|x|}{k}>\ep\} = \{ |x|> k\ep\}$, which has infinite measure. \xqed
+\end{ex}
+
+
+\begin{ex}
+Convergence in measure does not imply pointwise convergence. Let $f_k= \chi_{I_k}$, where $I_k$ are intervals.
+
+[0,1] measure 1
+[0,1/2], [1/2,1] measure 1/2
+[0,1/3], [1/3,2/3], [2/3,1] measure 1/3
+
+For all $\ep>0$, $\{ |f_k|>\ep\} < | I_k| \to 0$. 
+
+So the sequence converges to 0 in measure. However, it clearly does not converge to 0 in measure.
+
+There are infinitely many times point part of the interval. That is for all $x \in (0,1)$, there are infinitely many $k$ such that $x \in I_k$ so that $f_k(x) \not\to 0$. This can be expressed as saying $\limsup I_k= [0,1]$. 
+\end{ex}
+
+
+\begin{thm}
+If $|E|<\infty$, then convergence a.e. implies convergence in measure.
+\end{thm}
+
+\pf Given $\ep>0$, Egorov's Theorem gives $E(\ep)$ such that $|E \setminus E(\ep)|<\ep$, and $f_k \to f$ uniformly on $E(\ep)$. Then there exists $N$ such that $|f_k-f|<\ep$ on $E(\ep)$ for all $k \geq N$. But then $|\{ |f_k-f|>\ep\}|<\ep$, which implies convergence in measure. \qed \\
+
+
+\begin{thm}
+If $f_k \ma{m} f$, then there is a subsequence $\{f_{k_j}\}$ converging to $f$ a.e.. 
+\end{thm}
+
+\pf Choose $\ep=1/2^j$. Find $N_j$ such that $|\{ |f_k-f|>1/2^j\}|<1/2^j$ for all $k \geq N$ (can make $N_{j+1}>N_j$). We have $\{f_{N_j}\}$. We claim that $f_{N_j} \to f$ a.e.. Let $E_j= \{ |f_{N_j}-f|>1/2^j\}$. Since $|E_j|<1/2^j$, we know $\sum |E_j|<\infty$. But then by HW 1, we know $|\limsup E_j|=0$. For all $x \notin \limsup E_j$, we have $x \in E_j$ only finitely many times. Then for sufficiently large $j$, $x \notin E_j$, say $x \notin E_j$ for $j \geq j_0$. But then $|f_{N_j}(x) - f(x)|<1/2^j \to 0$. \qed \\
+
+
+\begin{rem}
+``Triangle Inequality'' (quasi). Convergence in measure is not like convergence in metric space, though it is tempting to think of it in this way. We do have a replacement for a parallel triangle inequality. If $\{ |f-g|>\ep/2\}|<\ep/2$, and $|\{|g-h|>\ep/2\}|<\ep/2$, then $|\{ |f-h|>\ep\}|<\ep$. The proof is routine: $|f-h| \leq |f-g| + |g-h|$, so $|f-h|>\ep$ then one of the right side must be at least $\ep/2$. Then $\{|f-h|>\ep\} \subset \{|f-g|>\ep/2\} \cup \{|g-h|>\ep/2\}$. Their measures being at most $\ep/2$, the result then follows. 
+\end{rem}
+
+
+\begin{dfn}[Cauchy in Measure]
+A collection of measurable functions $\{f_k\}$ is said to be Cauchy in measure if for all $\ep>0$, there exists $N$ such that $|\{ |f_j-f_k|>\ep\}|<\ep$ for all $k,j \geq N$. 
+\end{dfn}
+
+
+As it turns out, this is equivalent to convergence in measure.
+
+
+\begin{thm}
+Cauchy in measure is equivalent to convergence in measure. 
+\end{thm}
+
+\pfsk $\leftarrow$ is immediate by ``triangle inequality'' measure remark. Now the other direction. There are three standard steps that apply in these types of arguments. The strategy being the important piece here. Step 1. Enough to obtain a convergent subsequence: $f_1,f_2,f_3,\ldots$ cauchy sequence of functions with convergent subsequence. Use triangle inequality to show must converge to limit of conv subsequence. Conclude $f_k \to f$. Notice this holds for any type of convergence in any space. Step 2: Every Cauchy sequence has a ``geometric'' subsequence. Meaning $|\{ |f_{k_j} - f_{k_{j+1}}|>1/2^j\}|<1/2^j$. This is true for any metric space and any convergence. Use $\ep=1/2^j$, and get $k_j$. Step 3. Geometric trick implies convergent: given $\ep>0$, let $m$ be such that $1/2^{m-1}<\ep$. Let $\mathcal{A}= \bigcup_{j \geq m} \{ |f_{k_j} - f_{k_{j+1}}|>1/2^j\}$. Note $|\mathcal{A}|< \sum_{j=m}^\infty 1/2^j = 1/2^{m-1}<\ep$. On $E \setminus A$, we have $|f_{k_j} - f_{k_{j+1}}| \leq 1/2^j$ for all $j \geq m$. But this implies uniform convergence on the set $E \setminus A$. But then difference everywhere at most $\ep$ on $E \setminus A$ for sufficiently large $j$. Therefore, $|\{ |f_{k_j} - f|>\ep\}| \leq |A|<\ep$. \qed \\ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

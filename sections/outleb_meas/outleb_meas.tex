@@ -30,7 +30,7 @@ In defining a `size' for sets, it makes sense to begin with a simple shape like 
 	\centering
 	\begin{scaletikzpicturetowidth}{0.3\textwidth}
 	\begin{tikzpicture}[thick,scale=\tikzscale]
-	\blobfive{0}{0}
+	\blobfour{0}{0}
 	\pabox{-4.5}{-3}{3}{5}
 	\pabox{-6.5}{-3.5}{2.5}{3.5}
 	\pabox{-2}{2.5}{2}{5}
@@ -94,7 +94,7 @@ $\ext{[a,b]}= b-a$.
 For an interval $I$, $\ext{I}= \nu(I)$.
 \end{prop}
 
-\pf As $I$ serves as an open covering for itself, we know that $\ext{I} \leq \nu(I)$. It remains to show that $\nu(I) \leq \ext{I}$. Suppose $\{I_k\}_k$ is a countable open covering of $I$, and let $\ep>0$. Every interval $I$ is contained in the interior of a slightly larger interval $I'$, i.e. $I \subseteq \inter(I')$, where $\nu(I')  - \nu(I)<\ep$. Let $I_k'$ denote an interval containing $I_k$ in its interior with $\ni(I_k') \leq (1+\ep)\nu(I_k)$. We know that $I \subset \bigcup_k \inter(I_k')$. Now $I$ is compact so that Heine Borel implies that there is an integer $N$ such that $I \subset \bigcup_{k=1}^N I_k'$. We know $\nu(I) \leq \sum_{k=1}^N \nu(I_k')$. But then
+\pf As $I$ serves as an open covering for itself, we know that $\ext{I} \leq \nu(I)$. It remains to show that $\nu(I) \leq \ext{I}$. Suppose $\{I_k\}_k$ is a countable open covering of $I$, and let $\ep>0$. Every interval $I$ is contained in the interior of a slightly larger interval $I'$, i.e. $I \subseteq \interior(I')$, where $\nu(I')  - \nu(I)<\ep$. Let $I_k'$ denote an interval containing $I_k$ in its interior with $\ni(I_k') \leq (1+\ep)\nu(I_k)$. We know that $I \subset \bigcup_k \interior(I_k')$. Now $I$ is compact so that Heine Borel implies that there is an integer $N$ such that $I \subset \bigcup_{k=1}^N I_k'$. We know $\nu(I) \leq \sum_{k=1}^N \nu(I_k')$. But then
 	\[
 	\nu(I) \leq (1+\ep) \sum_{k=1}^N \nu(I_k) \leq (1+\ep) \sum_{k=1}^\infty \nu(I_k).
 	\]
@@ -111,7 +111,7 @@ It then follows that $\nu(I) \leq \ext{I}$, completing the proof. \qed \\
 	\pbox{-7}{1}{-5}{3}
 	
 	\pbox{1}{0.5}{2}{4}
-	\pbox{0.5}{2}{4}{3}
+	\pbox{0.5}{2}{4}{3.2}
 	\pbox{3.5}{0.5}{4.5}{3}
 	\pbox{2.5}{0.25}{5.5}{0.75}
 	
@@ -180,8 +180,8 @@ Note in general we do not have $\ext{\bigcup E_k}= \sum \ext{E}$ even if the $E_
 	\centering
 	\begin{scaletikzpicturetowidth}{0.5\textwidth}
 	\begin{tikzpicture}[thick,scale=\tikzscale]
-	\blobfour{-3}{3}
-	\blobseven{7}{-1}
+	\blobthree{-3}{3}
+	\blobsix{7}{-1}
 	\pabox{-6}{0.5}{7}{3.5}
 	\pabox{-8.5}{-1.5}{4.5}{3.5}
 	\pabox{-3}{4.5}{2}{3.7}
@@ -197,7 +197,7 @@ Note in general we do not have $\ext{\bigcup E_k}= \sum \ext{E}$ even if the $E_
 	\end{scaletikzpicturetowidth} \hspace{2cm}
 	\begin{scaletikzpicturetowidth}{0.3\textwidth}
 	\begin{tikzpicture}[thick,scale=\tikzscale]
-	\blobsix{0}{0}
+	\blobfive{0}{0}
 	\draw (-5,4) -- (-2,0) -- (2,0);
 	\draw (-5,-4) -- (-2,0);
 	\filldraw[black] (2.5,0) circle (2pt);
@@ -223,7 +223,7 @@ There are many connections between Topology and Measure Theory, especially in th
 For all $E \subset \R^n$ and $\ep>0$, there exists an open set $G$ such that $E \subset G$ and $|G|_e \leq |E|_e + \ep$.
 \end{thm}
 
-\pf Every interval $I$ is contained in the interior of a slightly larger interval $I'$, i.e. $I \subseteq \inter(I')$, where $\nu(I')  - \nu(I)<\ep$. Choose intervals $I_k$ such that $E \subset \bigcup_{k=1}^\infty I_k$ and $\sum_k \nu(I_k) \leq |E|_e + \ep/2$. Now find $I_k'$ such that $I_k \subset \inter (I_k')$ and $\nu(I_k') < \nu(I_k) + \ep/2^{k+1}$. Let $G= \bigcup_k \inter(I_k')$. By construction, $G$ is an open set containing $E$. To complete proof, observe
+\pf Every interval $I$ is contained in the interior of a slightly larger interval $I'$, i.e. $I \subseteq \interior(I')$, where $\nu(I')  - \nu(I)<\ep$. Choose intervals $I_k$ such that $E \subset \bigcup_{k=1}^\infty I_k$ and $\sum_k \nu(I_k) \leq |E|_e + \ep/2$. Now find $I_k'$ such that $I_k \subset \interior(I_k')$ and $\nu(I_k') < \nu(I_k) + \ep/2^{k+1}$. Let $G= \bigcup_k \interior(I_k')$. By construction, $G$ is an open set containing $E$. To complete proof, observe
 	\[
 	\ext{G} \leq \sum_{k=1}^\infty \nu(I_k') \leq \sum_{k=1}^\infty \nu(I_k) + \ep \sum_{k=1}^\infty \dfrac{1}{2^{k+1}} \leq \ext{E} + \ep.
 	\] \qed \\
@@ -308,10 +308,10 @@ Therefore, $\bigcup_k E_k$ is measurable. The fact that $\left|\bigcup_k E_k\rig
 	\centering
 	\begin{scaletikzpicturetowidth}{0.35\textwidth}
 	\begin{tikzpicture}[thick,scale=\tikzscale]
-	\blobthreealt{0}{0}
+	\blobtwoalt{0}{0}
 	\node at (4,3) {$G$};
 	\begin{scope}[scale=0.90]
-	\blobthree{0}{0}
+	\blobtwo{0}{0}
 	\end{scope}
 	\node at (0.5,0.5) {$E$};
 	\end{tikzpicture}
@@ -344,7 +344,7 @@ Every open set in $\R^n$ is a countable union of non-overlapping intervals.
 	\centering
 	\begin{scaletikzpicturetowidth}{0.3\textwidth}
 	\begin{tikzpicture}[thick,scale=\tikzscale]
-	\blobone{0}{0}
+	\blobonedown{0}{0}
 	\foreach \x in {-5,...,1}
 	\foreach \y in {-1,...,1}
 	\draw (\x,\y-0.5) -- (\x,\y+0.5) -- (\x+1,\y+0.5) -- (\x+1,\y-0.5) -- (\x,\y-0.5);
@@ -371,61 +371,34 @@ Therefore, $\ext{A} + \ext{B} \leq \ext{A \cup B}$, as desired. \qed \\
 % Reference exercise number above. This is inserted after `<dist(A,B).'
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \begin{thm} \label{thm:closedmeas}
 Every closed set $A \subset \R^n$ is measurable. 
 \end{thm}
 
-\pf Given $\ep>0$, we can choose $G \supset A$ such that $\ext{G}<\ext{A}+\ep$. Now $G \sm A$ is open. By Lemma~\ref{lem:tiling}, we can write $G\sm A=\bigcup_{k=1}^\infty I_k$, where the $I_k$ are non-overlapping open intervals. We want to show that $\sum \nu(I_k)<\ep$, which will imply that $\ext{G \sm A}<\ep$. It suffices to show that $\sum_{k=1}^N \nu(I_k)<\ep$ for all $N$. Let $K= \bigcup_{k=1}^N I_k$, which is compact and disjoint from $A$. But $A$ is closed so that $\dist(K,A)>0$. But then 
+\pf Given $\ep>0$, we can choose $G \supset A$ such that $\ext{G}<\ext{A}+\ep$. Now $G \sm A$ is open. By Lemma~\ref{lem:tiling}, we can write $G\sm A=\bigcup_{k=1}^\infty I_k$, where $\{I_k\}$ is a collection of non-overlapping open intervals. We want to show that $\sum \nu(I_k)<\ep$, which will imply that $\ext{G \sm A}<\ep$. It suffices to show that $\sum_{k=1}^N \nu(I_k)<\ep$ for all $N$. Define $K= \bigcup_{k=1}^N I_k$. Since $K$ is the finite union of compact sets in $\R^n$, $K$ is compact. Furthermore, $K$ is disjoint from $A$. As the set $A$ is closed and $K$ is compact, it must be that $\dist(K,A)>0$. It then follows from Lemma~\ref{lem:omaddjs} that
 	\[
 	\ext{K \cup A}=\ext{K}+\ext{A}= \sum \nu(I_k) + \ext{A} \leq \ext{G} < \ext{A} + \ep.
 	\] \qed \\
 
 
-As it turns out, the measurability of a set is equivalent to the measurability of its complement. This turns out to be useful in circumstances where one set is `nicer' than the other. 
+As it turns out, the measurability of a set is equivalent to the measurability of its complement. This is useful in circumstances where one set is easier to handle than the other.
 
 
-\begin{thm}
-If $E$ is measurable, then $E^C$ is measurable.
+\begin{thm} \label{thm:complementmeas}
+$E$ is measurable if and only if $E^C$ is measurable.
 \end{thm}
 
-\pf Suppose that $E$ is measurable. For $k \in \N$, choose an open set $G_k$ such that $E \subset G_k$ and $\ext{G_k \sm E}<1/k$. Now as $G_k$ is open, $G_k^C$ is closed, and hence measurable by Theorem~\ref{thm:closedmeas}. Let $G:= \bigcup_k G_K^C$. Being the countable union of measurable sets, $G$ is measurable, and $G \subset E^C$. Write $E^C= G \cup Z$, where $Z= E^C \sm G$. Then $Z \subset E^C \sm G_k^C= G_k \sm E$, and therefore, $\ext{Z}< 1/k$ for all $k$. Hence, $\ext{Z}=0$, and so $Z$ is measurable. But then $E^C$ is the union of measurable sets, and is thus measurable. \qed \\
+\pf Suppose that $E$ is measurable. For $k \in \N$, choose an open set $G_k$ such that $E \subset G_k$ and $\ext{G_k \sm E}<1/k$. Now as $G_k$ is open, $G_k^C$ is closed, and hence measurable by Theorem~\ref{thm:closedmeas}. Let $G:= \bigcup_k G_K^C$. Being the countable union of measurable sets, $G$ is measurable, and $G \subset E^C$. Write $E^C= G \cup Z$, where $Z= E^C \sm G$. Then $Z \subset E^C \sm G_k^C= G_k \sm E$, and therefore, $\ext{Z}< 1/k$ for all $k$. Hence, $\ext{Z}=0$, and so $Z$ is measurable. But then $E^C$ is the union of measurable sets, and is thus measurable. Finally, taking $E$ to be $E^C$ and rerunning the argument mutatis mutandis proves that if $E^C$ is measurable, then $E$ is measurable. \qed \\
 
-	\begin{figure}[htbp]
-	\centering
-	\begin{tikzpicture}[thick]
-	\draw (0,0) circle (1.5);
-	\pbox{-1}{-1}{1}{1}
-	\node at (0,0) {$F_k$};
-	\node at (1.2,0) {$A$};
-	\end{tikzpicture}
-	\end{figure}
 
-While we have previously approximated sets by open sets containing them, we can do the same internally with closed sets and obtain the same notion of measurable, as the following proposition shows.
+\begin{cor}
+If $E_1, E_2$ are measurable, then $E_1 \sm E_2$ is measurable.
+\end{cor}
+
+\pf We know that $E_1 \sm E_2= E_1 \cap E_2^C$. But $E_2^C$ is measurable by Theorem~\ref{thm:complementmeas}. Therefore, $E_1 \sm E_2$ is measurable, being the intersection of measurable sets. \qed \\
+
+
+Our definition is measurable is essentially that a set $E$ is measurable if it can be `approximated well' by open sets containing it. This is an exterior notion of measure. We can also define measurability instead by saying a set $E$ is measurable if it can be `approximated well' internally by closed sets, as the following proposition shows. 
 
 
 \begin{prop} \label{prop:nearclosedmeas}
@@ -435,18 +408,17 @@ A set $E \subset \R^n$ is measurable if and only if given $\ep>0$, there exists 
 \pf $E$ is measurable if and only if $E^C$ is measurable, i.e. if and only if given $\ep>0$, there exists an open set $G$ with $E^C \subset G$ and $\ext{G \sm E^C}<\ep$. But such an open set $G$ exists, noting that $G \sm E^C=E \sm F$, if and only if $G^C$ is closed, $F \subset E$, and $\ext{E \sm F}<\ep$. \qed \\
 
 
-
-
-
 % Picture blob G surrpoudngin box A. 
 % If A \subset G, then G^C \subset A^C and G^C closed. 
 % |A^C \sm G^C|_e = |G \sm A|_e < \ep
 
 
+The previous theorems and propositions have shown that the complements of measurable sets are measurable, and countable unions and intersections of measurable sets are measurable. Since we shall make use of them in the future, note that if $\{E_k\}$ is a collection of measurable sets, then so are $\limsup$ and $\liminf$:
+	\[
+	\limsup E_k= \bigcap_{j=1}^\infty \bigcup_{k=j}^\infty \quad\text{and}\quad \liminf E_k= \bigcup_{j=1}^\infty \bigcap_{k=j}^\infty E_k,
+	\]
+though we shall not prove this. Now all of these previous theorems and propositions essentially follow because we are working in the context of a $\sigma$-algebra. 
 
-
-
-The previous theorems and propositions have shown that the complements of measurable sets are measurable, and countable unions and intersections of measurable sets are measurable. This is a special case of the more general notion of $\sigma$-algebras. 
 
 \begin{dfn}[$\sigma$-algebra]
 A nonempty collection of sets $\Sigma$ is called a $\sigma$-algebra if it satisfies
@@ -457,11 +429,7 @@ A nonempty collection of sets $\Sigma$ is called a $\sigma$-algebra if it satisf
 \end{dfn}
 
 
-Note that any collection of sets closed under countable unions is closed under countable intersections as $\left[\bigcap_k U_k \right]^C= \bigcup_k U_k^C$. The empty set and entire space are necessarily measurable sets. Generally, they are elements of any $\sigma$-algebra. Furthermore, if $\{E_k\}$ is a collection of measurable sets, then so are $\limsup$ and $\liminf$,
-	\[
-	\limsup E_k= \bigcap_{j=1}^\infty \bigcup_{k=j}^\infty \quad\text{and}\quad \liminf E_k= \bigcup_{j=1}^\infty \bigcap_{k=j}^\infty E_k.
-	\]
-We shall work with two special $\sigma$-algebras in particular.
+Note that any collection of sets closed under countable unions is closed under countable intersections as $\left[\bigcap_k U_k \right]^C= \bigcup_k U_k^C$. The empty set and entire space are necessarily measurable sets. Generally, they are elements of any $\sigma$-algebra. We shall be particularly interested in two specific $\sigma$-algebras:
 
 
 \begin{dfn}[Borel $\sigma$-algebra]
@@ -473,76 +441,120 @@ The Borel $\sigma$-algebra is the smallest $\sigma$-algebra containing all open 
 The Lebesgue $\sigma$-algebra is the $\sigma$-algebra containing all measurable sets. 
 \end{dfn}
 
+
 Note that the Borel $\sigma$-algebra is \emph{strictly} contained in the Lebesgue $\sigma$-algebra---though this is not simple to see. 
 
 
-
-
-
-
-
-
-
-
-% Missing Lecture
-
-   \includegraphics[width=2in]{rep1.png} 
-
-
-Recall that if $E$ is measurable, then there exists $G$ open such that $\ext{G\setminus E}<\ep$. Also $F$ closed, $F \subset E$, $\ext{E\setminus F}<\ep$> 
-
-Quiz: SUppose $A \subset \R$ is measurable set. Claim for all $\ep>0$, there is a compact set $K \subset A$ such that $\ext{A \setminus K}<\ep$. 
-
-$\R$ is measurable, $K$ interval. $|\R \setminus k|=\infty$ for all compact sets. 
-
-
-
-
+% ------------------------
+%  Properties of Measurable Sets
+% ------------------------
 \subsection{Properties of Measurable Sets}
 
-Recall $|E| \defeq \ext{E}$ when $E$ is measurable. 
 
-\begin{thm}[Countable Additivity]
-If $\{E_\alpha\}$ are measurable and disjoint, then $\left|\bigcup_{n=1}^\infty E_k \right| = \sum_{k=1}^\infty |E_k|$. 
+Our goal in this section is to examine measurable sets more closely. We begin by recalling that $|E|= \ext{E}$ whenever $E$ is measurable, and $\ext{\bigcup_k E_k} \leq \sum_k \ext{E_k}$, i.e. countable subadditivity.  
+	\begin{figure}[htbp]
+	\centering
+	\begin{scaletikzpicturetowidth}{0.35\textwidth}
+	\begin{tikzpicture}[thick,scale=\tikzscale]
+	\draw[fill=lightgray] (0,0) ellipse (3.5 and 1.5);
+	\node at (2.8,1.4) {$G$};
+	\draw[fill=white] (-2,-1) -- (-1,1) -- (2,1) -- (1,-1) -- (-2,-1);
+	\node at (0,0) {$E$};
+	\end{tikzpicture}
+	\end{scaletikzpicturetowidth}
+	\end{figure}
+
+
+\begin{thm}[Countable Subadditivity]
+If $\{E_k\}$ is a collection of disjoint, measurable sets, then $\ds\ms{\bigcup_{n=1}^\infty E_k}= \sum_{k=1}^\infty |E_k|$. 
 \end{thm}
 
-
-Recall we have subadditivity $\left| \bigcup E_k \right| \leq \sum |E_k|$.
-
-\pf Suffices to show $\sum |E_k| \leq |E|$, where $E= \bigcup_k E_k$. Suffices to show $\sum_{k=1}^N |E_k| \leq |E|$ for all $N$. We have $\ext{A \cup B}= \ext{A} + \ext{B}$ if $\dist(A,B)>0$ (true for disjoint compact sets). 
-
-
-   \includegraphics[width=2in]{rep2.png} 
-
-
-
-First assume each $E_\alpha$ is bounded. Choose compact (closed and bounded) subset $A_\alpha \subset E_k$ such that $\ext{E_\alpha \setminus A_\alpha} < \ep/2^k$. So 
+\pf It is immediate that $\ms{\bigcup_{n=1}^\infty E_k} \leq \sum_{k=1}^\infty |E_k|$, so that we need show $\sum_{k=1}^\infty |E_k| \leq \ms{\bigcup_{n=1}^\infty E_k}$. Let $E:= \bigcup_k E_k$. It suffices to show $\sum_{k=1}^N |E_k| \leq |E|$ for all $N$. If $\dist(A,B)>0$, we know that $\ext{A \cup B}= \ext{A} + \ext{B}$. In particular, this holds if $A,B$ are disjoint compact sets. 
+	\begin{figure}[htbp]
+	\centering
+	\begin{scaletikzpicturetowidth}{0.35\textwidth}
+	\begin{tikzpicture}[thick,scale=\tikzscale]
+	\bloboneleft{3.5}{0}
+	\bloboneright{-3.5}{0}
+	\node at (-5,-1) {$E_1$};
+	\node at (3.5,1) {$E_2$};
+	\pbox{-5}{-5}{-2}{-2}
+	\node at (-3.5,-3.5) {$A_1$};
+	\pbox{2}{2}{5}{5}
+	\node at (3.5,3.5) {$A_2$};
+	\end{tikzpicture}
+	\end{scaletikzpicturetowidth}
+	\end{figure}
+First, assume that each $E_k$ is bounded. For each $k \in \N$, choose a closed subset $A_k \subset E_k$ such that $\ext{E_k \sm A_k}<\ep/2^k$. Since $A_k \subset E_k$ and $E_k$ is bounded, $A_k$ is a closed, bounded set. Therefore, $A_k$ is compact. We also have
 	\[
-	\left| \bigcup_{k=1}^N A_k \right| = \sum_{k=1}^N |A_\alpha| \geq \sum_{k=1}^N |E_\alpha| - \ep 
+	\left| \bigcup_{k=1}^N A_k \right| = \sum_{k=1}^N |A_k| \geq \sum_{k=1}^N |E_k| - \ep.
 	\]
-Since $\bigcup_{k=1}^N A_\alpha \subset E$, we get $|E| \geq \sum_{k=1}^N |E_\alpha| - \ep$.
+But as $\bigcup_{k=1}^N A_k \subset E$, we have $|E| \geq \sum_{k=1}^N |E_k| - \ep$. Letting $\ep \to 0$ yields the desired inequality. This completes the proof in the case where each $E_k$ is bounded. 
+	\begin{figure}[htbp]
+	\centering
+	\begin{scaletikzpicturetowidth}{0.35\textwidth}
+	\begin{tikzpicture}[thick,scale=\tikzscale]
+	\blobseven{0}{0}
+	\pbox{-1}{-1}{1}{1}
+	\pbox{-3}{-3}{3}{3}
+	\pbox{-5}{-5}{5}{5}
+	\end{tikzpicture}
+	\end{scaletikzpicturetowidth}
+	\end{figure}
+
+Now suppose that some $E_k$ may be unbounded. Let $I_j:= [-j,j]^n$ for $j>0$ and $Q_0:=\emptyset$. Define further $Q_j:= I_j \sm I_{j-1}$ for $n>0$. Consider the sets $E_{k,j}:= E_k \cap Q_j$ for $j,k=1,2,\ldots$. Each of these sets are disjoint, bounded, and measurable. It is also routine to verify that
 	\[
-	|A_1 \cup A_2 \cup A_3| = |A_1 \cup A_2| + |A_3| = |A_1| + |A_2 \setminus A_3| + \cdots 
+	\begin{split}
+	E_k&= \bigcup_j E_{k,j}= \bigcup_j \left(E_k \cap Q_j \right) \\
+	E&= \bigcup_k E_k= \bigcup_{k,j} E_{k,j}
+	\end{split}
 	\]
+But then by the case above, we have
+	\[
+	\ms{E}=\ms{\bigcup_k E_k}= \ms{\bigcup_{k,j} E_{k,j}} = \sum_{k,j} |E_{k,j}| = \sum_k \sum _j |E_{k,j}|= \sum_k |E_k|. 
+	\] \qed \\
 
 
-% second desktop image
+\begin{cor}
+If $\{I_k\}$ is a sequence of nonoverlapping intervals, then $\ms{\bigcup_k I_k}= \sum_k |I_k|$. 
+\end{cor}
+
+\pf It is immediate that $\ms{\bigcup_k I_k} \leq \sum |I_k|$. We need prove the opposite inequality. As the $I_k$ are disjoint, we know $\ms{\bigcup_k I_k} \geq \ms{\bigcup_k \interior{I_k}}= \sum_k |\interior I_k|= \sum |I_k|$. But then $\ms{\bigcup_k I_k}= \sum_k |I_k|$. \qed \\
 
 
+\begin{cor}
+Suppose $E_1$ and $E_2$ are measurable, $E_2 \subset E_!$, and $|E_2|<\infty$. Then $|E_1 \sm E_2|= |E_1| - |E_2|$. 
+\end{cor}
+
+\pf We know $E_1= E_2 \cup (E_1 \sm E_2)$ and $|E_1|= |E_2| + |E_1 \sm E_2|$. The result then follows as $|E_2|<\infty$. \qed \\
 
 
+We end this section with an interaction between the Lebesgue measure and monotone sequences of sets.
 
 
+\begin{prop} \hfill
+\begin{enumerate}[(i)]
+\item If $E_1 \subset E_2 \subset \cdots$ are measurable, then $\ds|\bigcup_k E_k|= \lim_{k \to \infty} |E_k|$; that is, if $E_k \nearrow E$, then $\ds\lim_{k \to \infty} |E_k|=|E|$.
+\item If $E_1 \supset E_2 \supset \cdots$ are measurable, $|E_k|<\infty$ for some $k$, then $\ds|\bigcap_{k=1}^\infty E_k|= \lim_{k \to \infty} |E_k|$; that is, if $E_k \searrow E$ and $|E_k|<\infty$ for some $k$, then $\ds\lim_{k \to \infty} |E_k|=|E|$. 
+\end{enumerate}
+\end{prop}
+
+\pf \hfill
+\begin{enumerate}[(i)]
+\item
+
+we want a disjoint union. Let $E= \cup E_k$. Let $F_1= E_1$, $F_2= E_2 \sm E_1$, $F_3= E_3 \sm E_2$. So $|E|= \sum_{k=1}^\infty |F_k|= \lim_{n \to \infty} \sum_{k=1}^\infty |F_k|= \lim_{n \to \infty} |\cup_{k=1}^n F_k|= \lim_{n \to \infty} |E_n|$.
+
+\item
+
+Consider $F_k=E_1 \sm E_n$. $F_1 \subset F_2 \subset \cdots$, $|E_1 \sm \cap E_n|= |\cup F_k|= \lim_{k \to \infty} |F_k|= \lim_{k \to \infty} (|E_1| - |E_k|)$, $|E_1|- |\cap E_k|= |E_1| - \lim_{k \to \infty} |E_k|$. So $|\cap E_k|= \lim_{k \to \infty} |E_k|$. 
+
+\end{enumerate} \qed \\
 
 
-
-
-
-
-
-
-
-% Friday Class
+% ------------------------
+%  Characterization of Measurable Sets
+% ------------------------
  \subsection{Characterization of Measurable Sets}
  
  By definition, $A$ is measurable if and only if for all $\ep>0$, there exists an open set $G \supset A$ such that $\ext{G \sm A}<\ep$. But this makes use of the underlying topology. Can we avoid this? After all, all this `open set-ness' is about continuity. Continuity is not even a requirement for integration, which is an end goal of ours. So we would like a description of measurability which avoids Topology entirely. Ironically, we shall first need more Topology.
@@ -612,7 +624,9 @@ as desired. \qed \\
 
 
 
-
+% ------------------------
+%  Continuous & Lipschitz
+% ------------------------
 \subsection{Continuous \& Lipschitz Transformations}
 
 If $E \subset \R^n$ is measurable, and $f: \R^n \to \R^n$ is continuous, is $f(E)$ always measurable? The answer to this is no. We shall see this shortly. 
@@ -703,7 +717,7 @@ Since $f$ sends compact sets to compact sets, $f$ preserves `$F_\sigma$-ness.' W
 
 
 % 09/12/2018
-
+% Nonmeasurable set
 
 Recall Cantor set maps to fat cantor set. 
 
@@ -742,14 +756,14 @@ If $E \subset \R$ and $|E|>0$, then there exists an interval $I$ such that $|E \
 
 
 \begin{lem} \label{lem:subzero}
-If $E \subset \R$ and $|E|>0$, then $E \setminus E$ contains a neighborhood of 0. 
+If $E \subset \R$ and $|E|>0$, then $E \sm E$ contains a neighborhood of 0. 
 \end{lem}
 
 % Note that $V - V$ does not contain rational numbers except 0. So $V$ does not have a measurable subset of positive measure. 
 
 % Note for result to be true, if move set bit, then still positive measure?
 
-\pf We claim there exists $\delta>0$ such that if $|x|<\delta$, then $E \cap (E+x) \neq \emptyset$. $x \in E \setminus E$ if and only if $E+x$ intersects $E$. $X= a-b$ if and only if $h+x=a$, where $a,b \in E$. Let $I$ be an interval, $|E \cap I|> \frac{2}{3} |I|$. Let $\delta= \frac{1}{3} |I|$. If $|x|<\delta$.
+\pf We claim there exists $\delta>0$ such that if $|x|<\delta$, then $E \cap (E+x) \neq \emptyset$. $x \in E \sm E$ if and only if $E+x$ intersects $E$. $X= a-b$ if and only if $h+x=a$, where $a,b \in E$. Let $I$ be an interval, $|E \cap I|> \frac{2}{3} |I|$. Let $\delta= \frac{1}{3} |I|$. If $|x|<\delta$.
 	\[
 	|I \cup (I+\delta)| \leq \frac{4}{3} |I|. 
 	\]

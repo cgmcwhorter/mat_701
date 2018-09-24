@@ -15,7 +15,6 @@
 
 
 % Math Operators
-\DeclareMathOperator{\inter}{int}
 \DeclareMathOperator{\interior}{Int}
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\diam}{diam}
@@ -44,40 +43,51 @@
 \newcommand{\pabox}[4]{\draw  (#1,#2) -- (#1+#4,#2) -- (#1+#4,#2+#3) -- (#1,#2+#3) -- (#1,#2);}
 \newcommand{\pashadebox}[4]{\draw[fill=gray!15] (#1,#2) -- (#1+#4,#2) -- (#1+#4,#2+#3) -- (#1,#2+#3) -- (#1,#2);}
 \newcommand{\cir}[3]{\draw (#1,#2) circle (#3);}
-\newcommand{\blobone}[2]{%
+
+\newcommand{\bloboneright}[2]{%
+	\path[shade,draw,use Hobby shortcut,closed=true]
+		(2+#1,-2+#2) .. (4+#1,2+#2) .. (-3+#1,0+#2) .. (3+#1,-4+#2);
+}
+\newcommand{\bloboneup}[2]{%
+	\path[shade,draw,use Hobby shortcut,closed=true]
+		(2+#1,2+#2) .. (-2+#1,4+#2) .. (0+#1,-3+#2) .. (4+#1,3+#2);
+}
+\newcommand{\bloboneleft}[2]{%
+	\path[shade,draw,use Hobby shortcut,closed=true]
+		(-2+#1,2+#2) .. (-4+#1,-2+#2) .. (3+#1,0+#2) .. (-3+#1,4+#2);
+}
+\newcommand{\blobonedown}[2]{%
 	\path[shade,draw,use Hobby shortcut,closed=true]
 		(-2+#1,-2+#2) .. (2+#1,-4+#2) .. (0+#1,3+#2) .. (-4+#1,-3+#2);
 }
 \newcommand{\blobtwo}[2]{%
 	\path[shade,draw,use Hobby shortcut,closed=true]
-		(-2+#1,2+#2) .. (2+#1,4+#2) .. (0+#1,-3+#2) .. (-4+#1,3+#2);
-}
-\newcommand{\blobthree}[2]{%
-	\path[shade,draw,use Hobby shortcut,closed=true]
 		(-3+#1,3+#2) .. (-5+#1,1+#2) .. (-1+#1,-2+#2) .. (0+#1,-5+#2) .. (3+#1,-3+#2) .. (5+#1,1+#2) .. (3+#1,3+#2) .. (0+#1,5+#2) .. (-3+#1,3+#2);
 }
-\newcommand{\blobthreealt}[2]{%
+\newcommand{\blobtwoalt}[2]{%
 	\path[dotted,draw,use Hobby shortcut,closed=true]
 		(-3+#1,3+#2) .. (-5+#1,1+#2) .. (-1+#1,-2+#2) .. (0+#1,-5+#2) .. (3+#1,-3+#2) .. (5+#1,1+#2) .. (3+#1,3+#2) .. (0+#1,5+#2) .. (-3+#1,3+#2);
 }
-\newcommand{\blobfour}[2]{%
+\newcommand{\blobthree}[2]{%
 \path[shade,draw,use Hobby shortcut,closed=true]
 	(3+#1,3+#2) .. (1+#1,3+#2) .. (-1+#1,2+#2) .. (-3+#1,1+#2) .. (-1+#1,0+#2) .. (-3+#1,-1+#2) .. (-5+#1,-3+#2) .. (-3+#1,-3+#2) .. (-1+#1,-2+#2) .. (1+#1,-1+#2) .. (2+#1,0+#2) .. (3+#1,3+#2);
 }
-\newcommand{\blobfive}[2]{%
+\newcommand{\blobfour}[2]{%
 \path[shade,draw,use Hobby shortcut,closed=true]
 	(3+#1,3+#2) .. (1+#1,4+#2) .. (0+#1,4+#2) .. (-1+#1,3+#2) .. (-3+#1,1+#2) .. (-3+#1,0+#2) .. (-4+#1,-1+#2) .. (-5+#1,-3+#2) .. (-3+#1,-3+#2) .. (-1+#1,-3+#2) .. (0+#1,-3+#2) .. (1+#1,-2+#2) .. (2+#1,-1+#2) .. (3+#1,-1+#2) .. (4+#1,0+#2) .. (4+#1,1+#2) .. (3+#1,3+#2);
 }
-\newcommand{\blobsix}[2]{%
+\newcommand{\blobfive}[2]{%
 \path[shade,draw,use Hobby shortcut,closed=true]
 	(-4+#1,0+#2) .. (-3+#1,1+#2) .. (-2+#1,3+#2) .. (-1+#1,2+#2) .. (0+#1,2+#2) .. (1+#1,2+#2) .. (2+#1,3+#2) .. (3+#1,1+#2) .. (4+#1,0+#2) .. (3+#1,-1+#2) .. (2+#1,-3+#2) .. (1+#1,-2+#2) .. (0+#1,-2+#2) .. (-1+#1,-2+#2) .. (-2+#1,-3+#2) .. (-3+#1,-1+#2) .. (-4+#1,0+#2);
 }
-\newcommand{\blobseven}[2]{%
+\newcommand{\blobsix}[2]{%
 \path[shade,draw,use Hobby shortcut,closed=true]
 	(-3+#1,3+#2) .. (-4+#1,1+#2) .. (-3+#1,0+#2) .. (-4+#1,-1+#2) .. (-5+#1,-2+#2) .. (-6+#1,-3+#2) .. (-5+#1,-4+#2) .. (-4+#1,-4+#2) .. (0+#1,-3+#2) .. (1+#1,-2+#2) .. (3+#1,-1+#2) .. (5+#1,0+#2) .. (4+#1,1+#2) .. (3+#1,2+#2) .. (2+#1,1+#2) .. (1+#1,1+#2) .. (0+#1,2+#2) .. (-1+#1,3+#2) .. (-2+#1,3+#2) .. (-3+#1,3+#2);
 }
-
-
+\newcommand{\blobseven}[2]{%
+\path[shade,draw,use Hobby shortcut,closed=true]
+	(-5+#1,5+#2) .. (-3+#1,4+#2) .. (-1+#1,2+#2) .. (0+#1,2+#2) .. (1+#1,-1+#2) .. (3+#1,-3+#2) .. (4+#1,-5+#2) .. (5+#1,-4.5+#2) .. (7+#1,-5+#2) .. (4+#1,-5.5+#2) .. (3+#1,-5+#2) .. (0+#1,-2+#2) .. (-2+#1,2+#2) .. (-5+#1,3+#2);
+}
 
 
 
