@@ -455,6 +455,99 @@ Cauchy in measure is equivalent to convergence in measure.
 
 
 
+% Section 5.1
+
+% QUIZ
+% Define $f_l: [0,\infty) \to \R$ by $f_k(x)= e^{-kx}$. We claim $f_k \ma{m} 0$ as $k \to \infty$. 
+% True: Yes, find $x_0 = \log(1/\ep)/k$. Can also find areas etc etc. 
+
+Two approaches to $\int_E f$, $f \geq 0$ on $E$.
+
+First, $\int_E f= \sup \{ \int_E g \colon g \text{ simple } g \leq f\}$, $g = \sum_{k=1}^m a_k \chi_{E_k}$, where $E_k$ are disjoint, measurable sets. Here $\int_E g = \sum a_k |E_k|$.
+
+Second, $\int_E = |R(f,E)|$, where $R(f,E)= \{ (x,y) \in \R^{n+1} \colon x \in E, 0 \leq y \leq f(x)\}$. 
+
+First approach is common in many texts, we shall take the second. 
+
+So $\int_E f$ exists if and only if $R(f,E)$ is measurable. 
+
+
+% plot, curve line, shaded underneath to x-axis, horizontal shaded x-axis part labeled E and shaded region labeled R(f,E).
+
+Some advantages of the second approach are monotonicity and countable additivity over $E$: so $0 \leq f \leq g$ and $\int_E f$, $\int_E g$ exists, then $\int_E f \leq \int_E g$ because $R(f,E) < R(g,E)$. 
+
+
+Also  if $E= \bigcup_{k \in \N} E_k$, disjoint measurable sets, and $\int_{E_k} f$ exists, then $\int_E f$ exists and $\int_E f= \sum_{k \in \N} \int_{E_k} f$ because $R(f,E)= \bigcup R(f,E_k)$, the union taken over the disjoint, measurable sets. Can show in other definition but takes work due to $\sup$, whereas here we get it immediately. But we have the issue of existence and measurability. 
+
+The following main theorem. 
+
+
+\begin{thm}
+If $fL E \to [0,\infty]$ is measurable, then $\int_E f$ exists (possibility $\infty$). 
+\end{thm}
+
+
+
+Idea of proof is from 4.1, $f= \lim f_k$, $f_1 \leq f_2 \leq \cdots$ are simple. So we will show $R(f_,E)$ are measurable and take their union. Need Lemma 1, $R(f_k,E)$ is measurable. Lemma 2 $\Gamma(f,E)$, which needs to be defined (simply the graph $\{(x,f(x) \colon x \in E\}$) has measure 0. This is boundary top of graph of shaded area of graph, we care because $\bigcup R(f_k,E)$ need not generally cover $R(f,E)$. It will surely cover $R(f,E) \setminus \Gamma(f,E)$, then $y<f(x)$, so there exists $k$ such that $y<f_k(x)$ so that $(x,y) \in R(f_k,E)$. 
+
+
+
+
+Both lemmas rely on 
+
+\begin{lem}
+If $E \subseteq \R^n$ is measurable, then $E_A:= E \times [a,b]$ is measurable in $\R^{n+1}$ with measure $|E_a|= |E| \cdot a$, noting that $0 \cdot \infty=0$ in measure theory. 
+\end{lem}
+
+\pf If $E$ is an interval, follows by volume formula. If $E$ is general, then tile it by intervals, half open (so intervals disjoint). 
+
+If $E$ is $G_\delta$ of finite measure, write $E= \bigcap G_k$, $G_1 \supset \cdots$ are open. 
+	\[
+	E_a = \bigcap_k (G_k \times [0,a]) \text{ so } |E_a|= \lim |G_k \times [0,a]|= a \lim |G_k| = a \cdot |E|.
+	\]
+What about general set? $|E|<\infty$, $E= H \setminus Z$, $M$ is $G_\delta$, $|M|=|E|$, $|H_a|=|H| \cdot a = |E| \cdot a$. So $|E_a| \leq |E| \cdot a$. 
+
+
+Also for all $\ep>0$, there exists closed $F \subset E$ (hence $G_\delta$), $|F|>|E|-\ep$. 
+	\[
+	|F_a|= a |F|> a|E|- a\ep
+	\]
+So $E_a$ contains $F_a$ closed of measure $>|E_a|_e - a\ep$. Hence $E_a$ is measurable. $|E_a|= a|E|$. 
+
+Still assumes $a<\infty$, otherwise $a=k$ and let $k \to \infty$ \qed? \\
+
+
+
+
+
+\begin{lem} \label{lem:1}
+$R(f_k,E)= \bigcup_j (E_j \times [0,a_j])$, $E_j$ disjoint measurable sets, where $f_k = \sum_j a_j \chi_{E_j}$. 
+\end{lem}
+
+
+
+Note that this shows that if $f$ takes countably many values, $f=a_k$ on $E_k$, then $\int_E f = \sum a_k |E_k|$. 
+
+
+
+
+\begin{lem} \label{lem:2}
+$|\Gamma(f,E)|=0$. Let $g= 2^{-j} floor(2^jf)$, then $g \leq f \leq g+ 2^{-j}$. Then $R(g,E) \subset R(f,E) \subset $. ???? Then $\Gamma(f,E) \subset R(g+2^{-j}, E) \setminus R(g-2^{-j},E)$. This right side has measure at most $2\cdot 2^{-j} |E| \to 0$, hence $|\Gamma(f,E)|=0$. 
+\end{lem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
