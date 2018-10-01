@@ -540,6 +540,124 @@ $|\Gamma(f,E)|=0$. Let $g= 2^{-j} floor(2^jf)$, then $g \leq f \leq g+ 2^{-j}$. 
 
 
 
+% Missing Lecture
+% Friday 09/28
+
+
+
+
+
+
+
+
+
+
+% Last Time: $f \geq 0$ measurable: $\int_E f= |R(f,E)|$ or $\int_E f= \sup \{ \sum a_k |E_k| \colon \sum a_k \chi_{E_k} \leq f\}$. 
+
+
+% Quiz: Suppose $f: [0,\infty) \to [0,\infty)$ is measurable. Claim $\int_{[0,\infty)} e^{-x/k} f(x) \; dx \to \int_{[0,\infty)} f(x) \; dx$ as $k \to \infty$. 
+
+% True: $x/k \searrow 0$, $e^{-x/k} \nearrow 1$, $e^{-x/k} \geq 0$, converges increasing then Monotone Convergence Theorem.
+
+We have not yet proved $\int_E cf = c \int_E f$, where $c \geq 0$ and $f \geq 0$.
+
+\begin{prop}
+\[ \int_E cf = c \int_E f \]
+\end{prop}
+
+\pf This is true for simple functions: $\int c (\sum a_k \chi_{E_k})= \int \sum c a_k \chi_{E_k} = \sum c a_k |E_k| = c \sum a_k |E_k| = c \int \sum a_k \chi_{E_k}$. Then for general functions use the Monotone Convergence Theorem. For general $f \geq 0$, take simple $f_k \geq 0$, $f_k \nearrow f$, then $c f_k \nearrow cf$, by MCT $\int cf= \lim cf_k = c \lim \int f_k = c \int f$. \qed \\
+
+
+What if the convergence is not $f_k \nearrow f$? 
+
+\begin{ex}
+$\chi_{[k,\infty)} \to 0$ pointwise. But $\int \chi_{[k,\infty)}$ are all infinite and certainly do not converge to $0$. Note that $\chi_{[k,\infty)} \searrow 0$. 
+\end{ex}
+
+
+\begin{ex}
+$k \chi_{(0,1/k)}$. But $\int k \chi_{(0,1/k)} =1 \not\to 0$. 
+
+% Give shaded rectangle height k and width 1/k.
+\end{ex}
+
+
+\begin{ex}
+$\frac{1}{k} \chi_{[0,k]} \to 0$ uniformly but $\int \frac{1}{k} \chi_{[0,k]}= 1 \to 0$. 
+
+% Give similar image as above. 
+\end{ex}
+
+
+What is the similarity of these three examples? The functions vanish but their integrals do not???? The general principle is that the area under the graph can disappear or `escape' to infinity but does not appear from nowhere.......... A precise statement is Fatou's Lemma. As a reminder,
+
+
+\begin{dfn}[limsup,liminf]
+Given a sequence $\{f_k\}$,
+	\[
+	\begin{split}
+	\limsup_{k \to \infty} f_k = \lim_{n \to \infty} \sup_{k \geq n} f_k
+	\liminf_{k \to \infty} f_k = \lim_{n \to \infty} \int_{k \geq n} f_k.
+	\end{split}
+	\]
+\end{dfn}
+
+
+\begin{ex}
+\begin{enumerate}[(i)]
+\item $\lim f_k(x)$ exists if and only if $\limsup f_k(x)= \liminf f_k(x)$. 
+\item The Piano Key Sequence (press one key going left to right): $\chi_{[0,1]}$, then $\chi_{[0,1/2]}, \chi_{[1/2,1]}$, then $\chi_{[0,1/3]}, \chi_{[1/3,2/3]}, \chi_{[2/3,1]}$. [Go in pascal triangle order]
+	\[
+	\begin{split}
+	\limsup f_k&= \chi_{[0,1]} \\
+	\liminf f_k&= 0
+	\end{split}
+	\]
+\end{enumerate}
+\end{ex}
+
+
+\begin{rem}
+Relation to sequences to sets $\{E_k\}$: $\limsup E_k= \bigcap_{m=1}^\infty \bigcup_{k \geq m} E_k$, $\liminf E_k= \bigcup_{m=1}^\infty \bigcap_{k \geq m} E_k$. $\limsup \chi_{E_k}= \chi_{\limsup E_k}$ and same for liminf. and sup like union and inf like intersection. 
+\end{rem}
+
+
+\begin{lem}[Fatou]
+$f_k \geq 0$ measurable.
+\[ \int_E \liminf f_k \leq \liminf \int_E f_k \]
+\end{lem}
+
+\pf Let $g_m= \inf_{k \geq m} f_k$. Then $g_m \nearrow \liminf f_k$. By MCT, $\int g_m \to \int \liminf f_k$. But $f_k \geq g_k$ so that $\int f_k \geq \int g_k$, hence $\liminf \int f_k \geq \lim \int g_k$. [ Rem: if $a_k \geq b_k$ for all $k$, then $\liminf a_k \geq \liminf b_k$, $\limsup a_k \geq \limsup b_k$.] \qed \\
+
+
+\begin{thm}[Lebesgue Dominated Convergence (DCT)]
+Suppose $f_k \geq 0$ are measurable and there is $\phi \geq 0$ measurable such that $f_k \geq \phi$ ($\phi$ dominates) and $\int_E \phi< \infty$. If $f_k$ converges to $f$ a.e., then $\int_E f_k \to \int_E f$. 
+\end{thm}
+
+\pf Fatou's Lemma gives $\int f \leq \liminf \int f_k$. Also, $\phi - f_k \geq 0$. Then Fatou's Lemma applies again: $\int \phi - f \leq \liminf \int (\phi - f_k)$. Which is $\int f \geq \limsup \int f_k$. Then $\int \phi - \int f \leq \liminf (\int \phi - \int f_k)$ cancel constant $-\int f \leq \liminf (-\int f_k)$ then $\int f \geq \limsup f_k$. Comparing very first and last equations, we have $\int f= \lim_{k \to \infty} \int f_k$. \qed \\
+
+
+
+
+
+\begin{ex}
+$\frac{1}{k} \chi_{[0,k]} \to 0$ uniformly. 
+
+% Give plot: lots of rectangles growing to right, overlay them. plot with $1/x$.
+
+Try to cover with one function get something like $1/x$. This is not good enough for DCT since $\int \frac{!}{x}= \infty$. If $f_k \leq \frac{1}{x^2}$ on $[1,\infty)$, this exmaples does not work. `Best' you can do is $\frac{1}{k^2} \chi_{[0,k]} \to 0= \int \lim f_k$. 
+\end{ex}
+
+
+\begin{ex}
+$\lim \int_{[1,\infty)} \dfrac{\sin^{2k} x}{x^2} \; dx$. Now $\dfrac{\sin^{2k} x}{x^2} \to 0$ a.e. and is at most $\frac{1}{x^2}$ in absolute value, so must be 0. Now if $\lim \int_{[0,\infty)} \dfrac{\sin^{2k} x}{x^2} \; dx$, $\dfrac{\sin^{2k} x}{x^2} \leq \dfrac{\sin^2 x}{x^2}$ and $\int_{[0,1]} \dfrac{\sin^2 x}{x^2} \leq \int_{[0,1]} 1 \leq 1$. so $\int_{[0,\infty)} \dfrac{\sin^2 x}{x^2}< \infty$.
+\end{ex}
+
+
+
+
+
+
 
 
 
