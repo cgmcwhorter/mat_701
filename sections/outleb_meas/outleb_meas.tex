@@ -594,42 +594,13 @@ But then $\ext{A} = |H|= |H \cap E| + |H\sm E| \geq \ext{A \cap E} + \ext{A \sm 
 
 Now suppose that $E$ satisfies the condition that $\ext{A \cap E}+\ext{A\sm E}=\ext{A}$ for all $A \subseteq \R^n$. Let $A$ be a $G_\delta$ set such that $E \subset A$ and $\ext{E}=|A|$. Then on the left side of the equation, we have $\ext{E}+\ext{A\sm E}= |A|=\ext{E}$. Hence, $\ext{A \sm E}=0$, so $E$ is $G_\delta$ minus a measure zero set. Notice that we have subtracted $\ext{E}$; hence, we need consider the case where $\ext{E}=\infty$.
 
-
-
-
-
-Assume that $\ext{E}=\infty$. We know that $E= \bigcup_{j=1}^\infty E_j$, where $E_j:= E \cap [-j,j]^n$. 
-
-
-
-
-So it suffices to prove that $E_j$ has the property $\ext{A \cap E_j}+\ext{A\sm E_j}=\ext{A}$ for all $A \subseteq \R^n$ and $j \in \N$. 
-
-
-[Since $E_j$ is measurable, the countable union of the $E_j$ is measurable.] 
-
-
-Certainly by subadditivity, $\ext{A} \leq  \ext{A \cap E_j} + \ext{A \cap E_j^C}$. It remains to show $\ext{A} \geq  \ext{A \cap E_j} + \ext{A \cap E_j^C}$. 
-
-
-
-
-We have $\ext{A \cap E_j} + \ext{A \cap E_j^C}=\ext{A}$. By construction, $E_j$ has finite measure so that by the work above, $E_j$ satisfies the property $\ext{A}= \ext{A \cap E} + \ext{A \cap E^C}$. 
-
-
-
-
-We know also that $Q_j:= [-j,j]^n$ satisfies this property, so $\ext{A \cap E}= \ext{A \cap E \cap Q}+ \ext{A \cap E \cap Q^C}$. 
-
-
-Similarly, we have $\ext{A \cap E^C}= \ext{A \cap E^C \cap Q}+ \ext{A \cap E^C \cap Q^C}$. 
-
-
-
-
-Combing these gives
+Assume that $\ext{E}=\infty$. We know that $E= \bigcup_{j=1}^\infty E_j$, where $E_j:= E \cap [-j,j]^n$. So it suffices to prove that $E_j$ has the property $\ext{A \cap E_j}+\ext{A\sm E_j}=\ext{A}$ for all $A \subseteq \R^n$ and $j \in \N$. [Since each $E_j$ is measurable and the countable union of the $E_j$ is measurable, $E$ would then be measurable.] Certainly by subadditivity, $\ext{A} \leq  \ext{A \cap E_j} + \ext{A \cap E_j^C}$. It remains to show $\ext{A} \geq  \ext{A \cap E_j} + \ext{A \cap E_j^C}$. By assumption for all $A \subset \R^n$, $\ext{A \cap E}+\ext{A\sm E}=\ext{A}$. We know also that $Q_j:= [-j,j]^n$ and $Q_j^C$ satisfy this property, so $\ext{A \cap E}= \ext{(A \cap E) \cap Q}+ \ext{(A \cap E) \cap Q^C}$. Similarly, we have $\ext{A \cap E^C}= \ext{(A \cap E^C) \cap Q}+ \ext{(A \cap E^C) \cap Q^C}$. Combing these gives
 	\[
-	\ext{A}= \ext{A \cap E \cap Q} + \ext{A \cap E \cap Q^C} + \ext{A \cap E^C \cap Q}+ \ext{A \cap E^C \cap Q^C} \geq \ext{A \cap E_j} + \ext{A \cap E_j^C},
+	\begin{split}
+	\ext{A}&= \ext{A \cap (E \cap Q_j)} + \ext{A \cap (E \cap Q_j^C)} + \ext{A \cap (E^C \cap Q_j)}+ \ext{A \cap (E^C \cap Q_j^C)} \\
+	&= \ext{A \cap E_j} + \ext{A \cap E \cap Q^C} + \ext{A \cap E^C \cap Q}+ \ext{A \cap E_j^C} \\ 
+	&\geq \ext{A \cap E_j} + \ext{A \cap E_j^C},
+	\end{split}
 	\]
 as desired. \qed \\
 
@@ -639,18 +610,12 @@ Note that in Theorem~\ref{thm:cara}, there is no mention of openness or closed-n
 
 % blob A. E blob cutting through left side. shade two regions in intersection and setminus. Must add to A. Note 
 
-%Note that always have $\ext{A \cap E}+\ext{A\sm E} \geq \ext{A}$ by subadditivity. 
 
 
 
 
 
 
-% 09/10/2018
-
-% Quiz: What if we require this for measurable $A$ only? That is, what if A only splits measurable sets into the inequality. Answer is yes. This is found via the proof of Caratheodory THeorem. TO be specific, let quiz problem ineq be star. So if E satisfies * for all measurable sets A, then it satisfies star for all sets A. 
-
-% pf: Given arb A, let K \supset A be G_\delta set, |K|_e = |A|_e. Did not change right hand side, left hand inequality side could only go up. We know star holds for K, so star holds for A. 
 
 
 
