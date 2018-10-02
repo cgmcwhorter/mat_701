@@ -465,7 +465,7 @@ Our goal in this section is to examine measurable sets more closely. We begin by
 	\end{figure}
 
 
-\begin{thm}[Countable Subadditivity]
+\begin{thm}[Countable Subadditivity] \label{thm:countsubad}
 If $\{E_k\}$ is a collection of disjoint, measurable sets, then $\ds\ms{\bigcup_{n=1}^\infty E_k}= \sum_{k=1}^\infty |E_k|$. 
 \end{thm}
 
@@ -523,7 +523,7 @@ If $\{I_k\}$ is a sequence of nonoverlapping intervals, then $\ms{\bigcup_k I_k}
 
 
 \begin{cor}
-Suppose $E_1$ and $E_2$ are measurable, $E_2 \subset E_!$, and $|E_2|<\infty$. Then $|E_1 \sm E_2|= |E_1| - |E_2|$. 
+Suppose $E_1$ and $E_2$ are measurable, $E_2 \subset E_1$, and $|E_2|<\infty$. Then $|E_1 \sm E_2|= |E_1| - |E_2|$. 
 \end{cor}
 
 \pf We know $E_1= E_2 \cup (E_1 \sm E_2)$ and $|E_1|= |E_2| + |E_1 \sm E_2|$. The result then follows as $|E_2|<\infty$. \qed \\
@@ -532,7 +532,7 @@ Suppose $E_1$ and $E_2$ are measurable, $E_2 \subset E_!$, and $|E_2|<\infty$. T
 We end this section with an interaction between the Lebesgue measure and monotone sequences of sets.
 
 
-\begin{prop} \hfill
+\begin{prop} \hfill \label{prop:incdecsubad}
 \begin{enumerate}[(i)]
 \item If $E_1 \subset E_2 \subset \cdots$ are measurable, then $\ds|\bigcup_k E_k|= \lim_{k \to \infty} |E_k|$; that is, if $E_k \nearrow E$, then $\ds\lim_{k \to \infty} |E_k|=|E|$.
 \item If $E_1 \supset E_2 \supset \cdots$ are measurable, $|E_k|<\infty$ for some $k$, then $\ds|\bigcap_{k=1}^\infty E_k|= \lim_{k \to \infty} |E_k|$; that is, if $E_k \searrow E$ and $|E_k|<\infty$ for some $k$, then $\ds\lim_{k \to \infty} |E_k|=|E|$. 
@@ -541,15 +541,20 @@ We end this section with an interaction between the Lebesgue measure and monoton
 
 \pf \hfill
 \begin{enumerate}[(i)]
-\item
+\item Let $E= \cup E_k$. If $|E_k|=\infty$ for some $k$, then $\ds\lim_{k \to \infty} |E_k|$ and $|E|$ are infinite, and the result follows. Assume then that $|E_k|<\infty$ for all $k$. We want to create a disjoint union. We shall express $E$ as $E= E_1 \cup (E_2 \sm E_1) \cup (E_3 \sm E_2) \cup \cdots \cup (E_k \sm E_{k-1}) \cup \cdots$. Define $F_k:= E_k \sm E_{k-1}$. Observe the sets $F_k$ are measurable and pairwise disjoint. Then by Theorem~\ref{thm:countsubad},
+	\[
+	|E|= \sum_{k=1}^\infty |F_k|= \lim_{n \to \infty} \sum_{k=1}^\infty |F_k|= \lim_{n \to \infty} \ms{\bigcup_{k=1}^n F_k}= \lim_{n \to \infty} |E_n|.
+	\]
 
-we want a disjoint union. Let $E= \cup E_k$. Let $F_1= E_1$, $F_2= E_2 \sm E_1$, $F_3= E_3 \sm E_2$. So $|E|= \sum_{k=1}^\infty |F_k|= \lim_{n \to \infty} \sum_{k=1}^\infty |F_k|= \lim_{n \to \infty} |\cup_{k=1}^n F_k|= \lim_{n \to \infty} |E_n|$.
-
-\item
-
-Consider $F_k=E_1 \sm E_n$. $F_1 \subset F_2 \subset \cdots$, $|E_1 \sm \cap E_n|= |\cup F_k|= \lim_{k \to \infty} |F_k|= \lim_{k \to \infty} (|E_1| - |E_k|)$, $|E_1|- |\cap E_k|= |E_1| - \lim_{k \to \infty} |E_k|$. So $|\cap E_k|= \lim_{k \to \infty} |E_k|$. 
-
+\item Let $E= \cap E_k$. Since considering tails of a sequence are sufficient, we may assume without loss of generality that $|E_1|<\infty$. We again want to create disjoint, measurable sets. Define $F_k:= E_k \sm E_{k+1}$. Observe that the sets $F_k$ are measurable, pairwise disjoint, and that $E_1= E \cup \bigcup F_k$. Then by Theorem~\ref{thm:countsubad},
+	\[
+	|E_1|= |E| + \ms{\bigcup F_k}= |E|+ \sum_{k=1}^\infty F_k= |E| + \sum_{k=1}^\infty \big( |E_k| - |E_{k-1}| \big)= |E| + |E_1| - \lim_{k \to \infty} |E_k|.
+	\]
+But as $|E_1|<\infty$, we must then have $|E|= \ds \lim_{k \to \infty} |E_k|$. 
 \end{enumerate} \qed \\
+
+
+Note that the requirement that $|E_k|<\infty$ for some $k$ in the second part of Proposition~\ref{prop:incdecsubad} is necessary. For example, take $E_k= \R^2 \sm C_k$, where $C_k$ is the circle centered at the origin with radius $k$. Then $|E_k|=\infty$ for all $k$, and $E_k \searrow \emptyset$. However, $\ds \lim_{k \to \infty} |E_k|=\infty$, while $|\emptyset|=0$. 
 
 
 % ------------------------
@@ -557,37 +562,27 @@ Consider $F_k=E_1 \sm E_n$. $F_1 \subset F_2 \subset \cdots$, $|E_1 \sm \cap E_n
 % ------------------------
  \subsection{Characterization of Measurable Sets}
  
- By definition, $A$ is measurable if and only if for all $\ep>0$, there exists an open set $G \supset A$ such that $\ext{G \sm A}<\ep$. But this makes use of the underlying topology. Can we avoid this? After all, all this `open set-ness' is about continuity. Continuity is not even a requirement for integration, which is an end goal of ours. So we would like a description of measurability which avoids Topology entirely. Ironically, we shall first need more Topology.
+ By definition, $A$ is measurable if and only if for all $\ep>0$, there exists an open set $G \supset A$ such that $\ext{G \sm A}<\ep$. But this makes use of the underlying topology. Can we avoid this? After all, this `open set-ness' is about continuity. Continuity is not even a requirement for integration, which is an end goal of ours. So we would like a description of measurability which avoids Topology entirely. Ironically, we shall first need more Topology.
  
- Recall that $G_\delta$ is a set which is the countable intersection of open sets, $F_\sigma$ is the countable union of closed sets, $G_{\delta,\sigma}$ are the countable intersection of closed sets.\footnote{Generally, $G$ denotes open, $F$ denotes closed, $\delta$ is for countable intersections, and $\sigma$ is for countable unions.} One can even continue this to absurdity, i.e. $G_{\delta\sigma\delta\sigma}$. Furthermore, these are all subclasses of the Borel $\sigma$-algebra. But are all Borel created by these procedures, i.e. formed by countable union or intersections of open or closed sets? It turns out that this is not the case. Though it is difficult to construct a set which is not a Borel set. 
+ Recall that $G_\delta$ is a set which is the countable intersection of open sets, $F_\sigma$ is the countable union of closed sets, $G_{\delta,\sigma}$ are the countable intersection of closed sets.\footnote{Generally, $G$ denotes open, $F$ denotes closed, $\delta$ is for countable intersections, and $\sigma$ is for countable unions.} One can even continue this to absurdity, i.e. $G_{\delta\sigma\delta\sigma}$. Furthermore, these are all subclasses of the Borel $\sigma$-algebra. One may wonder if all Borel created by these procedures, i.e. formed by countable union or intersections of open or closed sets? This turns out to not be the case, though it is difficult to construct a set in this fashion which is not a Borel set. However, it is the case that measurable sets are `close' to Borel sets, in the sense they differ by a set of measure zero, as the next results shows.
+ 
  
  \begin{thm} \label{thm:borelplusmeasure}
- $E$ is measurable if and only if $E= H \sm Z$ if and only if $E= F \cup Z$. 
+ $E$ is measurable if and only if $E= H \sm Z$ if and only if $E= F \cup Z$, where $H$ is of type $G_\delta$, $F$ is of type $F_\sigma$, and $|Z|=0$.
  \end{thm}
 
-\pf For all $k$, there exists an open set $G_k \supset E$ such that $|G_k\sm E| \subset 1/k$. Then $H= \bigcap_k G_k$ works ($Z=H \sm E$ has measure zero). 
+\pf It is sufficient to prove that each of the statements is equivalent to the measurability of $E$. If $E$ can be represented as $H \sm Z$ or $F \cup Z$, then $E$ is measurable, as $H$, $F$, and $Z$ are measurable. Now assume that $E$ is measurable. For each $k$, choose an open set $G_k$ such that $E \subset G_k$ and $|G_k \sm E|<1/k$. Define $H:= \cap G_k$. Clearly, $H$ is of type $G_\delta$, $E \subset H$, and $H \sm E \subset G_k \sm E$ for each $k$. But then defining $Z= H \sm E$, we see that $|Z|=0$, as desired. Furthermore, if $E$ is measurable, then so too is $E^C$. Now using the previous work, write $E^C= (\cap G_k ) \sm Z$, where the $G_k$ are open sets and $|Z|=0$. But then taking complements yields $E= (\cup G_k^C) \cup Z$. But as the sets $G_k$ are open, the sets $G_k^C$ are closed, implying $F:=\cup G_k^C$ is of type $F_\sigma$. \qed \\
 
-
-
-% 2<->3
-Simply take complements
-
-2 or 3->1 Because Borel sets are measurable, measure 0 implies measurable. 
-
-
-
-
-Theorem~\ref{thm:borelplusmeasure} essentially states that measurable sets are the Borel sets `plus or minus' the measure zero sets. 
-
-% Think of $H$ as $G_\delta$, $|Z|=0$ and $F$ as $F_\sigma$, $|Z|=0$
-
-% Still using Borel so still havent quite avoided topology. 
 
 \begin{rem}
-This is different (in fact stronger) than $E \subset H$, $H$ is a $G_\delta$ set with the same outer measure, i.e. $\ext{H}=\ext{E}$. 
+This is different (in fact stronger) than $E \subset H$, where $H$ is a $G_\delta$ set with the same outer measure, i.e. $\ext{H}=\ext{E}$. 
 \end{rem}
 
-\begin{thm}[Carath\'eodory]
+
+\noindent Theorem~\ref{thm:borelplusmeasure} essentially states that measurable sets are the Borel sets `plus or minus' the measure zero sets. Note that we are still making Borel sets, which invoke Topology, so we still have not met our goal. However, we are now set up to prove Carath\'eodory's Theorem, which we can use to meet our goal. 
+
+
+\begin{thm}[Carath\'eodory] \label{thm:cara}
 $E$ is measurable if and only if for all $A \subset \R^n$, $\ext{A \cap E}+\ext{A\sm E}=\ext{A}$.
 \end{thm}
 
@@ -595,17 +590,52 @@ $E$ is measurable if and only if for all $A \subset \R^n$, $\ext{A \cap E}+\ext{
 	\[
 	|A|_e=|H|= |H \cap E| + |H \sm E|.
 	\]
-But then $\ext{A} = |H|= |H \cap E| + |H\sm E| \geq \ext{A \cap E} + \ext{A \sm E}$. By subadditivity, this must be an equality. 
+But then $\ext{A} = |H|= |H \cap E| + |H\sm E| \geq \ext{A \cap E} + \ext{A \sm E}$. By subadditivity, we obtain $\ext{A} \leq \ext{A \cap E} + \ext{A \sm E}$. Therefore, $\ext{A}= \ext{A \cap E} + \ext{A \sm E}$.
 
-Now suppose that all $A \subset \R^n$, $\ext{A \cap E}+\ext{A\sm E}=\ext{A}$. Let $A$ be a $G_\delta$ set such that $E \subset A$ and $\ext{E}=|A|$. Then on the left side of the equation, we have $\ext{E}+\ext{A\sm E}= |A|=\ext{E}$. Hence, $\ext{A \sm E}=0$, so $E$ is $G_\delta$ minus a measure zero set. Here we have subtracted $\ext{E}$. But what if this is not finite? 
+Now suppose that $E$ satisfies the condition that $\ext{A \cap E}+\ext{A\sm E}=\ext{A}$ for all $A \subseteq \R^n$. Let $A$ be a $G_\delta$ set such that $E \subset A$ and $\ext{E}=|A|$. Then on the left side of the equation, we have $\ext{E}+\ext{A\sm E}= |A|=\ext{E}$. Hence, $\ext{A \sm E}=0$, so $E$ is $G_\delta$ minus a measure zero set. Notice that we have subtracted $\ext{E}$; hence, we need consider the case where $\ext{E}=\infty$.
 
-But how to deal with sets of infinite measure? We know that $E= \bigcup_{j=1}^\infty E_j$ and $E_j= E \cap [-j,j]^n$. So it suffices to prove that $E_j$ has the property $\ext{A \cap E_j}+\ext{A\sm E_j}=\ext{A}$. [Since $E_j$ is measurable, then so are the countable union of the $E_j$.] We need to show that for all $A \subset \R^n$, we have $\ext{A \cap E_j} + \ext{A \cap E_j^C}=\ext{A}$. We know that $E$ satisfies this property so that $\ext{A}= \ext{A \cap E} + \ext{A \cap E^C}$. We know also that $Q_j:= [-j,j]^n$ satisfies this property, so $\ext{A \cap E}= \ext{A \cap E \cap Q}+ \ext{A \cap E \cap Q^C}$. Similarly, we have $\ext{A \cap E^C}= \ext{A \cap E^C \cap Q}+ \ext{A \cap E^C \cap Q^C}$. Combing these gives
+
+
+
+
+Assume that $\ext{E}=\infty$. We know that $E= \bigcup_{j=1}^\infty E_j$, where $E_j:= E \cap [-j,j]^n$. 
+
+
+
+
+So it suffices to prove that $E_j$ has the property $\ext{A \cap E_j}+\ext{A\sm E_j}=\ext{A}$ for all $A \subseteq \R^n$ and $j \in \N$. 
+
+
+[Since $E_j$ is measurable, the countable union of the $E_j$ is measurable.] 
+
+
+Certainly by subadditivity, $\ext{A} \leq  \ext{A \cap E_j} + \ext{A \cap E_j^C}$. It remains to show $\ext{A} \geq  \ext{A \cap E_j} + \ext{A \cap E_j^C}$. 
+
+
+
+
+We have $\ext{A \cap E_j} + \ext{A \cap E_j^C}=\ext{A}$. By construction, $E_j$ has finite measure so that by the work above, $E_j$ satisfies the property $\ext{A}= \ext{A \cap E} + \ext{A \cap E^C}$. 
+
+
+
+
+We know also that $Q_j:= [-j,j]^n$ satisfies this property, so $\ext{A \cap E}= \ext{A \cap E \cap Q}+ \ext{A \cap E \cap Q^C}$. 
+
+
+Similarly, we have $\ext{A \cap E^C}= \ext{A \cap E^C \cap Q}+ \ext{A \cap E^C \cap Q^C}$. 
+
+
+
+
+Combing these gives
 	\[
 	\ext{A}= \ext{A \cap E \cap Q} + \ext{A \cap E \cap Q^C} + \ext{A \cap E^C \cap Q}+ \ext{A \cap E^C \cap Q^C} \geq \ext{A \cap E_j} + \ext{A \cap E_j^C},
 	\]
 as desired. \qed \\
 
-% No reference in theorem to open/closed. Could even use as def of measurable. describes measurability by how set intersects with other sets. When defined abstractly, this is taken to be the definition of measure.
+
+Note that in Theorem~\ref{thm:cara}, there is no mention of openness or closed-ness. We can then take this as our definition of measurability, i.e. define measurable sets to be the sets which slit every set (independent of measurability) into pieces which are additive with respect to the outer measure. This is the one of the standard approaches when defining measures abstractly. Thus, we have completed our goal of finding a way to avoid invoking the underlying topology. 
+
 
 % blob A. E blob cutting through left side. shade two regions in intersection and setminus. Must add to A. Note 
 
