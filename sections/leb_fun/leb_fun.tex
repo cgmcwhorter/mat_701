@@ -851,6 +851,142 @@ $\lim \int_{[1,\infty)} \dfrac{\sin^{2k} x}{x^2} \; dx$. Now $\dfrac{\sin^{2k} x
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% Not all, however, need such advanced techniques. 
+
+% $\int_0^\infty \dfrac{\sin x}{x} \; dx$
+% \int_1^\infty \sin(x^2) \; dx; u=x^2 \; du=2x \; dx
+
+% Want to define integral genreally, 
+
+Suppose that $f: E \to \ov{\R}$ is measurable. Define functions $f^+= \max(f,0)$ and $f^-=\max(-f,0)$. These are both nonnegative functions with $f^+ - f^-=f$ and $f^+ + f^-= |f|$. 
+
+
+\begin{dfn}[Integrable Function]
+Suppose $f: E \to \ov{\R}$ is a measurable function, not necessarily nonnegative. We define $\int_E f$ to be
+	\[
+	\int_E f:= \int_E f^+ - \int_E f^-,
+	\]
+provided at least one of the integrals on the right is finite. We say that $f$ is integrable on $E$ if $\int_E f$ is finite, and we write $f \in L^1(E)$, 
+\end{dfn}
+
+
+\begin{rem}
+Note that $\int f$ is finite if and only if $\int f^+$ and $\int f^-$ are finite if and only if $\int |f|$ is finite. Therefore, all Lebesgue integrable functions with finite integral are automatically absolutely integrable. This means there are integrals which are (Improper) Riemann integrable which are not Lebesgue integrable. Take Example~\ref{}, $\int_{[0,\infty)} \dfrac{\sin x}{x} \; dx$ does not exist as a Lebesgue integrable, i.e. $\dfrac{\sin x}{x} \notin L^1(0,\infty)$, while it is Riemann integrable on $(0,\infty)$. 
+\end{rem}
+
+
+We next examine a few properties of this integral. Not surprisingly, many of these properties resemble those of their primordial Riemann integral. 
+
+\begin{itemize}
+\item Triangle Inequality: $\left| \int_E f \right| \leq \int_E |f|$ as $\left| \int f^+ - \int f^- \right| \leq \int f^+ + \int f^-$.
+
+\item Additivity of Domain: If $\{E_k\}_{k=1}^N$ is a collection of disjoint, measurable sets, then $\int_{\cup E_k} f = \sum_{k=1}^m \int_{E_k} f$ as $\int f^+$, $\inf f^-$ split using the properties of the integral for nonnegative functions. 
+
+However, care is needed even in the countable additivity case. Consider $\int_0^\infty \sin x$, defining the $E_k$ to be as below:
+
+% Give picture. Alternate E_k the positive negative parts of sin x.
+
+We know that $\int_{E_k} f= 0$ for all $k$ but that $\int_{\cup E_k} f$ does not exist. 
+\end{itemize}
+
+
+\begin{lem}
+Suppose that $\int_E f$ exists. Let $E= \bigcup_{k=1}^\infty E_k$ be a union of disjoint, measurable sets. Then $\int_{E_k} f$ exists for all $k$, and 
+	\[
+	\int_E f= \sum_{k=1}^\infty \int_{E_k} f
+	\]
+\end{lem}
+
+\pf By countable additivity for integrals of nonnegative functions, we know that $\int_E f^+= \sum_k \int_{E_k} f^+$ and $\int_E f^-= \sum_k \int_{E_k} f^-$. Now observe
+	\[
+	\int_E f = \sum_k \left( \int_{E_k} f^+ - \int_{E_k} f^- \right).
+	\]
+Since $\int_E f$ exists, at least one of $\int_E f^+$, $\int_E f^-$ is finite. 
+
+% Go through cases and explain why sum exists. 
+
+\qed \\
+
+
+
+
+Additivity over $f$:
+
+Suppose we have $\int_E (f+g)= \int_E f + \int_E g$, assuming that both integrals on the right are finite. Let $h:= f+g$. There are eight possibilities for the signs of $(f,g,h)$. This splits $E$ into eight different parts. On each part, write a between $f,g,h$ as addition of nonnegative functions, e.g. $f \geq 0$, $g<0$, $h<0$, then $f+g=h$ becomes $f+(-h)=(-g)$, all nonnegative here. Then
+	\[
+	\int f + \int (-h) = \int (-g)
+	\]
+Note that we are making use of the fact that the functions are finite a.e.. 
+
+
+
+Remark: if $f \in L^1(E)$, then $|f|<\infty$ a.e., since $\int |f|<\infty$. 
+
+
+
+
+Convergence: 
+
+There is little to say about convergence since everything follows from convergence of nonnegative functions. 
+
+
+For example, how does MCT apply? The answer is that it does not really apply. We need an integrable `baseline', $\phi \in L^1(E)$, i.e. a function to play the role of the $x$-axis. 
+
+MCT for nonnegative functions: 
+
+% Picture: Volume of `piles', have small growing arcs along a x-axis.
+% Picture: Same idea except have \phi curvy line. Then there are f's with almost same shape growing closer to it. Could also go from below, have these labeled g's. 
+
+If $\phi \leq f_1 \leq f_2 \leq \cdots$ or $\phi \geq f_1 \geq f_2 \geq \cdots$, then $\int f_k \to \int \lim f_k$. 
+
+\pf Use MCT for $f_k - \phi$ or $\phi - f_k$, nonnegative, increasing. Then $\int (f_k - \phi) \to \int (f-\phi)$; hence, $\int f_k \to \int f$. \qed \\
+
+
+
+However, there is one useful result here:
+
+\begin{thm}[Dominated Convergence Theorem]
+If $f_k \to f$ a.e. on $E$, and are measurable, and there exists $\phi \in L^1(E)$ such that $|f_k| \leq \phi$ for all $k$, then
+	\[
+	\int_E f_k \longrightarrow \int_E f.
+	\]
+\end{thm}
+
+% Note these integrals are finite 
+
+\pf Since $0 \leq \underbrace{f_k+\phi}_{\geq 0} \leq 2 \phi$, DCT for nonnegative functions applies. $\int (f_k+\phi) \to \int (f+\phi)$. \qed \\
+
+
+\begin{ex}
+Consider $\sum_{k=1}^\infty B_k \sin(kx)$ on the interval $(0,\pi)$. Assume that $C:=\sum |B_k|<\infty$. What do we need to assume about $B_k$ to obtain
+	\[
+	\int_{(0,\pi)} f(x) = \sum_k \int_{(0,\pi)} B_k \sin(kx)?
+	\] 
+Observe that $C$ is a domination function. $f_k(x) = \sum_{j=1}^k B_j \sin(jx)$ satisfies $|f_k| \leq \phi$. Also, $f_k \to f$ pointwise. 
+
+% Similarly, we can use $B_k = \dfrac{1}{2} \int_{(0,\pi)} f(x) \sin(kx) \; dx$, a straightforward computation gives 
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
