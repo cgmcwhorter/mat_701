@@ -659,13 +659,72 @@ $\cup_k R(f_k,E) \subset R(f,E) \subset \left[ \cup_k R(f_k,E) \right] \cup \Gam
 
 % Give curve with rectangles fit, Riemann integral 
 
-Lemma: 
+Lemma: $|\Gamma(f,E)|=0$ for all measurable $f$.
+
+\pf Write $E= \cup E_m$, $|E_m|<\infty$
+
+Suffices $|\Gamma(f,E_m)|=0$ for all $|\ep>0$. Let $\cA_k=\{ x \in E_m \colon \ep k \leq f(x)< \ep(k+1)\}$, $k=0,1,2,\ldots$. Then $\Gamma(f,E_m) \subset \cup_k \cA_k + [\ep_k,\ep(k+1)]$, then $|\Gamma(f,E_m)| \leq \sum_k |\cA_k| \ep = \ep |E_m|$, then $|\Gamma(f,E_m)|=0$. 
 
 
 
+\begin{thm}[Monotone Convergence Theorem]
+If $f_k \geq 0$ are measurable on $E$ and $f_1 \leq f_2 \leq \cdots$, then $\int_E \lim f_k = \lim \int_E f_k$.
+\end{thm}
+
+\pf $f= \lim f_k$, then $R(f,E)= [\cup R(f_k,E)] \cup \Gamma(f,E)$ and $\cup R(f_k,E)$ are nested. So $|R(f,E)|= \lim |R(f_k,E)|$ by continuity of measure. \qed \\
+
+
+\begin{ex}
+$\Q=\{q_1,q_2,\ldots\}$. Let $f_k= \chi_{\{q_1,\ldots,q_k\}}$. Then $f_k \nearrow f= \chi_\Q$. Monotone convergence theorem fails for Riemann integral, so $\int_{\chi_\Q}= \lim \int f_k=0$. 
+\end{ex}
 
 
 
+\begin{thm}
+The two definitions of $\int_E f$ agree:
+	\[
+	\int_E f= \sup\{ \sum a_k |E_k| \colon g \leq f, g= \sum a_k \chi_{E_k}\}
+	\]
+\end{thm}
+
+\pf Note $\sum a_k |E_k|= \int_E g$ by measure of product. Since $f \geq g$, we get $\int f \geq \int g$ so $\geq$ holds. Reverse: pick $g_k \nearrow f$ pointwise. Then $\int g_k \to \int f$ so $\sup \int g_k \geq \int f$. \qed \\
+
+
+
+\begin{ex}
+$f_1 \geq f_2 \geq \cdots$. Counterexample $f_k= \chi_{[k,\infty)}$. $\lim \int f_k= \infty$ but $\int \lim f_k=0$. Similarly $\inf\{ \int g \colon g \geq f, g \text{ simple}\} \neq \int f$ in general. if $g \geq f$ then $g>0$ but being simple $g \geq c>0$ then $\int g= \infty$. 
+\end{ex}
+
+
+Chebshev's Inequality: Suppose $f$ is nonnegative measurable on $E$. For all $\alpha>0$ $|\{ x \in E \colon f(x)>\alpha \}| \leq \frac{1}{\alpha} \int_E f$.
+
+\pf Let $A=\{f>\alpha\}$. Then $f \geq \alpha \chi_A \to \int f \geq \int \alpha \chi_A= \alpha |A| \to |A| \leq \frac{1}{\alpha} \int f$.
+
+
+\begin{ex}
+$f(x)= \dfrac{1}{\sqrt{x}}$ on $[0,1)$. Let $c= \int_{(0,1)} f \to$ Chevyshev $|\{f>\alpha\}| \leq \dfrac{c}{\alpha}$. In fact, $\{f>\alpha\}= (0,1/\alpha^2) \to$ measure is $1/\alpha^2$, if $\alpha \geq 1$. 
+\end{ex}
+
+
+
+Additivity over functions: $\int_E (f+g)= \int_E f + \int_E g$, $f,g \geq 0$ measurable. 
+
+\pf Use simple fucntions, $f_k \nearrow f$, $g_k \nearrow g$. So it suffices to prove that $\int (f_k+g_k)= \int f_k + \int g_k$. $f_k= \sum a_j \chi_{E_j}$, $g_k = \sum b_k \chi_{F_k}$. Let $H= E_i \cap F_j$ note $\cup E_i= \cup F_i = E$. Then $f_k= \sum_{i,j} a_i \chi_{H_{i,j}}$, $g_k= \sum b_j \chi_{H_{ij}}$. Then $f_k+g_k= \sum (a_i+b_j) \chi_{H_{ij}}$ then $\int (f_k+g_k) = \sum (a_i+b_j) |H_{ij}|= \sum a_i |H_{ij}| + \sum b_j |H_{ij}|$. 
+
+Countable subadditivity:
+
+$\int \sum_{k=1}^\infty f_k = \sum_k \int_E f_k$, $f_k \geq 0$ measurable.
+
+True for $\sum_{k=1}^N$ then $N \to \infty$ using MCT
+
+
+\begin{ex}
+Let $\Q \cap [0,1]= \{q_1,\ldots\}$
+
+$f_k= \dfrac{1}{\sqrt{|x-q_k|}}$ $\int_{[0,1]} f \leq c < \infty$
+
+$f= \sum_{k=1}^\infty \dfrac{1}{k^2} \; \dfrac{1}{\sqrt{|x-q_k|}} \ma{\lim_{x \to q} f(x)=\infty \text{ for all } q \in \Q} \int f \leq c \sum \dfrac{1}{k^2}< \infty$ so $|\{f>\alpha\}| \leq \dfrac{1}{\alpha}\, C'$, what does this say about $\Q$?
+\end{ex}
 
 
 

@@ -57,13 +57,14 @@ decoration={snake,
   	sorting  = nyt,       	% sorts by (name, year, title)
   	style  = alphabetic 	% citations look like [Har77]
 ]{biblatex}
-%\addbibresource{rings_mods.bib}
+\addbibresource{701_bib.bib}
 
 \usepackage[all]{xy}
 \hypersetup{
 	colorlinks = true,
+	citecolor = blue,
   	linkcolor  = blue,
-  	urlcolor   = cyan
+  	urlcolor   = blue
 }
 \PassOptionsToPackage{hyphens}{url}
 
@@ -123,9 +124,8 @@ decoration={snake,
 \input{sections/hw_prob/hw_prob.tex}
 \input{sections/hw_sol/hw_sol.tex}
 
-
-
-
+\newpage
+\printbibliography[heading=bibintoc]
 
 
 

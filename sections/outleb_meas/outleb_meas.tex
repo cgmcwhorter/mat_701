@@ -1,6 +1,7 @@
 % !TEX root = ../../mat701_notes.tex
 \newpage
 \section{Outer Measure \& Lebesgue Measure}
+\subsection{Exterior Measure}
 
 We want to assign a notion of `size' to sets. We denote this `size' by $\nu$. Let $\R^n= \{(x_1,\ldots,x_n) \colon x_i \in \R\}$ denote ordinary Euclidean space. By an `interval' in $\R^n$, we mean a set $\{ (a_1,b_1) \times (a_2,b_2) \times \cdots \times (a_n,b_n) \colon a_i,b_i \in \R^n, a_i<b_i\}$. By a closed interval in $\R^n$, we mean a set $\{ [a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_n,b_n] \colon a_i,b_i \in \R^n, a_i<b_i\}$. We will often say `box', which will always mean an open or closed interval in $\R^n$. 
 	\[
@@ -265,11 +266,17 @@ If $K \subset \R^n$ is compact, then $\ext{K}= \inf \left\{ \sum_k \nu(I_k) \col
 as desired. \qed \\
 
 
+
+% ------------------------
+%  A Nonmeasurable Set
+% ------------------------
+\subsection{The Lebesgue Measure}
+
 We now can define our notion of measurability with our notions of exterior measure firmly in place. 
 
 
 \begin{dfn}[Measurable]
-A set $E \subset \R^n$ is measurable if for all $\ep>0$, there exists an open set $G$ such that $G \supset E$ and $\ext{G \sm E} < \ep$.
+A set $E \subset \R^n$ is (Lebesgue) measurable if for all $\ep>0$, there exists an open set $G$ such that $G \supset E$ and $\ext{G \sm E} < \ep$.
 \end{dfn}
 
 
@@ -445,6 +452,7 @@ The Lebesgue $\sigma$-algebra is the $\sigma$-algebra containing all measurable 
 Note that the Borel $\sigma$-algebra is \emph{strictly} contained in the Lebesgue $\sigma$-algebra---though this is not simple to see. 
 
 
+
 % ------------------------
 %  Properties of Measurable Sets
 % ------------------------
@@ -557,6 +565,7 @@ But as $|E_1|<\infty$, we must then have $|E|= \ds \lim_{k \to \infty} |E_k|$.
 Note that the requirement that $|E_k|<\infty$ for some $k$ in the second part of Proposition~\ref{prop:incdecsubad} is necessary. For example, take $E_k= \R^2 \sm C_k$, where $C_k$ is the circle centered at the origin with radius $k$. Then $|E_k|=\infty$ for all $k$, and $E_k \searrow \emptyset$. However, $\ds \lim_{k \to \infty} |E_k|=\infty$, while $|\emptyset|=0$. 
 
 
+
 % ------------------------
 %  Characterization of Measurable Sets
 % ------------------------
@@ -608,15 +617,7 @@ as desired. \qed \\
 Note that in Theorem~\ref{thm:cara}, there is no mention of openness or closed-ness. We can then take this as our definition of measurability, i.e. define measurable sets to be the sets which slit every set (independent of measurability) into pieces which are additive with respect to the outer measure. This is the one of the standard approaches when defining measures abstractly. Thus, we have completed our goal of finding a way to avoid invoking the underlying topology. 
 
 
-% blob A. E blob cutting through left side. shade two regions in intersection and setminus. Must add to A. Note 
-
-
-
-
-
-
-
-
+% blob A. E blob cutting through left side. shade two regions in intersection and setminus. Must add to A. 
 
 
 % ------------------------
@@ -624,129 +625,241 @@ Note that in Theorem~\ref{thm:cara}, there is no mention of openness or closed-n
 % ------------------------
 \subsection{Continuous \& Lipschitz Transformations}
 
-If $E \subset \R^n$ is measurable, and $f: \R^n \to \R^n$ is continuous, is $f(E)$ always measurable? The answer to this is no. We shall see this shortly. 
+Here we shall investigate the interaction between continuous functions and measurability. We begin with an important question: if $E \subset \R^n$ is measurable and $f: \R^n \to \R^n$ is continuous, is $f(E)$ always measurable? The general answer is no, but there are special cases where this does hold. For example, measures of sets are invariant under rotations of $\R^n$---though we will not prove this, see \cite[p.~36]{wheedon}. This also shows that the exterior measure (hence also the Lebesgue measure) is invariant under the choice of an orthogonal basis for $\R^n$. However, what other functions or transformations preserve measures? We first show that continuity alone will never be enough. 
 
 
 \begin{lem} \label{lem:rcontfun}
 There is a continuous function $f: \R \to \R$ and a set $E$ with $|E|=0$, such that $|f(E)|>0$.
 \end{lem}
 
-\pfsk 
+\pfsk We construct a `fat Cantor' set by following the same procedure as in the Cantor set, but instead removing the middle fourths of each interval. At each stage, $2^j$ intervals of length $4^{-j}$ are removed. Denote the ordinary Cantor set by $K$ and the fat Cantor set by $L$. We construct a continuous function $f: [0,1] \to [0,1]$ such that $f(K)=L$. 
+	\[
+        \begin{tikzpicture}[decoration=Cantor set,line width=1mm]
+        \draw node at (1.6,0.5) {$K$};
+        \draw (0,0) -- (3,0);
+        \draw decorate{ (0,-.5) -- (3,-.5) };
+        \draw decorate{ decorate{ (0,-1) -- (3,-1) }};
+        \draw decorate{ decorate{ decorate{ (0,-1.5) -- (3,-1.5) }}};
+        \draw decorate{ decorate{ decorate{ decorate{ (0,-2) -- (3,-2) }}}};
+        \end{tikzpicture} \hspace{1cm}
+        \begin{tikzpicture}[decoration=Cantor set,line width=1mm]
+        \node at (2,0.5) {$L$};
+        \draw (0,0) -- (4,0);
+        \draw decorate{ (0,-.5) -- (4,-.5) };
+        \draw decorate{ decorate{ (0,-1) -- (4,-1) }};
+        \draw decorate{ decorate{ decorate{ (0,-1.5) -- (4,-1.5) }}};
+        \draw decorate{ decorate{ decorate{ decorate{ (0,-2) -- (4,-2) }}}};
+        \end{tikzpicture}
+        \]
+Map $K_j$, the $j$th step in the construction of $K$, onto $L_j$ in a piecewise linear fashion, i.e. stretch each interval in $K_j$ to the corresponding interval in $L_j$. Clearly, $f_j$ is continuous and $\sup |f_j - f_{j+1}| \leq 2^{-j}$. But then $f_j \to f$ uniformly so that $f$ is continuous and $f(K)=L$. We can extend $f$ to $\R$ by translation, i.e. define $f(x)$ for $x \notin [0,1]$ via $f(x)=f(a)$, where $a= x+n$ and $n \in \Z$ is an integer such that $x+n \in [0,1]$. Finally, recall that the ordinary Cantor set has measure 0, as was shown in Example~\ref{ex:cantor}, and it is routine to verify that $|L|>0$. \qed \\
 
-% Cantor set vs Fat Cantor set, removing only 1/4: 1/4 removed, 1/16 removed each (so 1/8th total), 1/64 removed so 1/16 removed. each stage remove 2^j intervals of side 4^{-j}.
 
-% Cont map $f: [0,1] \to [0,1] such that $f(K)=L$.
+Before answer the question poised at the beginning of this section, we need two quick results, assuming the existence of a nonmeasurable set, which we shall prove in the next section.
 
-% K = \cap K_j regular cantor set
-% L = \cap L_j fat cantor set.
 
-% Map K_j onto L_j in a piecewise linear way. $f_j$ is continuous and sup |f_j - f_{j+1}| \leq 2^{-j}. from the translation/stretch/shrink definition
+\begin{lem} \label{lem:trans}
+Let $E$ be a measurable subset of $\R^1$ with $|E|>0$. Then the set of differences $\{d \colon d=x-y, x \in E, y \in E\}$ contains an interval centered at the origin. 
+\end{lem}
 
-% conclude f_j \to f uniformly. But then f continuous and f(K)=L. Now L has positive measure. 
+\pf See \cite[p.~46]{wheedon}. \qed \\
 
 
 \begin{lem} \label{lem:unmeassubset}
-If $|A|>0$, then there exists $B \subset A$ such that $B$ is not measurable. 
+Any set in $\R^1$ with positive outer measure contains a nonmeasurable set.
 \end{lem}
 
+\pf Suppose $|A$ is a set with $\ext{A}>0$. Let $E$ be the nonmeasurable Vitali set. For $q \in \Q$, let $E_q$ denote the translation of $E$ by $q$, i.e. $E_q= \{ e+q \colon e \in E\}$. The sets $E_q$ are disjoint, and $\cup E_r= \R$. But then it must be that $A= \cup (A \cap E_q)$. By Lemma~\ref{lem:trans}, if $A \cap E_q$ is measurable then $|A \cap E_q|=0$. But as $\ext{A}>0$, there must be some $q \in \Q$ such that $A \cap E_q$ is not measurable. \qed \\
 
 
+We now sketch the idea why it need not be the case that $f(E)$ is measurable even when $E$ is measurable. Choose $f$ and $E$ as in Lemma~\ref{lem:rcontfun}. By Lemma~\ref{lem:unmeassubset}, there exists a non-measurable subset of $f(E)$, say $W$. Let $V:= f^{-1}(W) \cap E$. Observe that $f(V)=W$, and that $V$ is measurable (being a subset of measure zero). Therefore, the image of a measurable set under a continuous function need not be measurable, as claimed. The next obvious question is, if continuity is not sufficient to force the image of measurable sets to be measurable, is there a stronger condition that will? We recall a definition. 
 
-We now can show that it is not necessarily that if $E \subset \R^n$ is measurable, and $f: \R^n \to \R^n$ is continuous, that $f(E)$ always measurable. To see this, choose $f$ and $E$ as in Lemma~\ref{lem:rcontfun}. By Lemma~\ref{lem:unmeassubset}, there exists a non-measurable subset of $f(E)$, say $W$. Let $V:= f^{-1}(W) \cap E$. Observe that $f(V)=W$, and that $V$ is measurable (being a subset of measure zero). 
 
 \begin{dfn}[Lipschitz]
 We say that $f$ is Lipschitz if there exists $L$ such that $|f(x)-f(y)| \leq L|x-y|$ for all $x$, $y$ in the domain of $f$. 
 \end{dfn}
 
-That is, Lipschitz functions are the special case of uniformly continuous functions where we can always choose $\delta=\ep/L$. Therefore, if $f$ is Lipschitz then it is uniformly continuous, and hence also continuous. However, not all uniformly continuous functions are Lipschitz. 
+Lipschitz functions are the special case of uniformly continuous functions where we can always choose $\delta=\ep/L$. Therefore, if $f$ is Lipschitz then $f$ is uniformly continuous, and hence also continuous. However, not all uniformly continuous functions are Lipschitz, and certainly not all continuous functions are Lipschitz. The Lipschitz condition can be thought of as the boundedness of secant lines for a given function. Hence functions which are differentiable with bounded derivative on an interval are Lipschitz. 
 
-% Plot f(x)= x^(1/3). 
+\begin{ex}
+The function $f(x)= x^{1/3}$ is Lipschitz on any interval not containing the origin as a limit point since $f'(x)= \dfrac{1}{3 \sqrt[3]{x^2}}$ is bounded on such intervals. Indeed, if $I$ is an interval containing the origin and $x \in I$, then 
+	\[
+	\dfrac{f(x)-f(0)}{x-0}= \dfrac{\sqrt[3]{x}}{x}= \dfrac{1}{\sqrt[3]{x^2}}.
+	\]
+Taking $x$ `close' to 0 shows that the slopes of secant lines to $f(x)$ are unbounded. One can use the same process to verify this for any set containing 0 as a limit point. \xqed
+\end{ex}
 
-The Lipschitz condition can be thought of as the boundedness of secant lines for a given function. 
+% Plot f(x)= x^(1/3)?
 
-Lipschitz maps preserve sets of measure zero.
+\begin{ex}
+The function $f: [0,1] \to [0,1]$ given by $f(x)=\sqrt{x}$ is uniformly continuous on $[0,1]$, being a continuous function on a compact interval. However, $f$ is not Lipschitz continuous. If $f$ were Lipschitz with constant $L$, then we would have $|\sqrt{x}-\sqrt{y}| \leq L|x-y|$ for all $x,y \in [0,1]$. Choose $x=0$ and $y= \dfrac{1}{4k^2}$. We have $x,y \in [0,1]$ but 
+	\[
+	|\sqrt{x}-\sqrt{y}|= \dfrac{1}{2K} > \dfrac{1}{4K} = K|x-y|.
+	\] \xqed 
+\end{ex}
+
+
+Unlike general continuous functions or the function in Lemma~\ref{lem:rcontfun}, Lipschitz maps preserve sets of measure zero.
+
 
 \begin{thm} \label{thm:lipmeaszero}
 If $f: \R^n \to \R^m$ is Lipschitz and $|E|=0$, then $|f(E)|=0$. 
 \end{thm}
 
-\pf For every $\ep>0$, there exists a countable cover of $E$ by intervals $\{I_k\}$ so that $\sum |I_k| < \ep$. 
+\pf Recall that $\ext{E}= \inf \{ \sum \nu(I_k) \colon \bigcup I_k \supset E, \text{ and }I_k \text{ cubes}\}$. Since $|E|=0$, for every $\ep>0$, there exists a countable cover of $E$ by intervals $\{I_k\}$ such that $\sum |I_k| < \ep$. Choose this covering to consist of dyadic cubes. By Lipschitz continuity, $f(I_k)$ is contained in an interval of width at most $L w_k$, where $L$ is the Lipschitz constant of $f$ and $w_k$ is the maximum width of the cube. Then $|f(I_k)| \leq L^d |I_k|$. Therefore, we have 
+	\[
+	|f(E)| \leq L^d \sum |I_k| < L^d \ep.
+	\]
+The result then follows. \qed \\
 
 
-% I_k horizontal line, box around annulus, label annulus f(I_k)
-% I_k has small volume but the interval needed to cover f(I_k) may not be.
-% Works for cubes, which is sufficient to consider, by triling open sets
-
-$\ext{E}= \inf \{ \sum \nu(I_k) \colon \bigcup I_k \supset E, \text{ and }I_k \text{ cubes}\}$.
-
-Tile interior of $I_k'$ by dyadic cubes. 
-
-So we have covering with cubes with $\sum \nu(I_k)<\ep$. $|f(I_k)| \leq C |I_k|$ by geometry. Note that $C$ depends on $L$ and $n$. Now cube has diameter at most $L \cdot a \sqrt{n}$. A cube of side length $2L a \sqrt{n}$ covers it. 
-
-% Picture rectangle I_k, with dotted box around it I_k', and small boxes covering it.
-
-But then $|f(E)| \leq C \sum |I_k| \leq C\ep$. Therefore, $|f(E)|=0$. \qed \\
+\noindent Furthermore, Lipschitz functions preserve measurability, though not necessarily the value of the measure. 
 
 
-\begin{thm}
+\begin{thm} \label{thm:lippreserve}
 If $E$ is measurable and $f$ is Lipschitz, then $f(E)$ is measurable.
 \end{thm}
 
-\pf Since $E$ is measurable, write $E= H \cup Z$, where $H$ is $F_\sigma$ and $|Z|=0$. Now $F_\sigma$ sets are the countable union of closed sets, which is equivalent to the countable union of compact sets. 
-
-% Curve line, draw box in box over cover
-
-%F \cap [-j,j]^n compact. 
-
-Since $f$ sends compact sets to compact sets, $f$ preserves `$F_\sigma$-ness.' We know by Theorem~\ref{thm:lipmeaszero} that if $|E|=0$, then $f(E)=0$. But then $f(E)= f(H) \cup f(Z)$, a union of $F_\sigma$ set and a set of measure zero. \qed \\
-
-
-% Common trick, writing union of growing sets. Idea is if whole thing not Liptschitz, maybe pieces are.
-
-
-% Insert blerb about stretching measure zero set to positive measure set.
-
+\pf Since $E$ is measurable, write $E= H \cup Z$, where $H$ is $F_\sigma$ and $|Z|=0$. Now $F_\sigma$ sets are the countable union of closed sets, which is equivalent to the countable union of compact sets since any union of closed sets can be written as a countable union of compact sets, i.e. $F= \cup (F \cap [-j,j]^n)$. Now $f$ is Lipschitz, hence continuous, so that $f$ sends compacts sets to compact sets. Then it must be that $f$ preserves `$F_\sigma$-ness.' We know by Theorem~\ref{thm:lipmeaszero}, if $|E|=0$ then $f(E)=0$. But then $f(E)= f(H) \cup f(Z)$, a union of $F_\sigma$ set and a set of measure zero, hence measurable. \qed \\
+	\begin{figure}[htbp]
+	\centering
+	\begin{scaletikzpicturetowidth}{0.35\textwidth}
+	\begin{tikzpicture}[thick,scale=\tikzscale]
+	\blobseven{0}{0}
+	\pbox{-1}{-1}{1}{1}
+	\pbox{-3}{-3}{3}{3}
+	\pbox{-5}{-5}{5}{5}
+	\end{tikzpicture}
+	\end{scaletikzpicturetowidth}
+	\end{figure}
 
 
+The proof of Theorem~\ref{thm:lippreserve} involves a common trick: although a whole function may not be Lipschitz, `pieces' of it may be, and these could be brought together to finish a result. This invoked the same underlying idea as in the proof of Theorem~\ref{thm:countsubad}. Though Theorem~\ref{thm:lippreserve} showed that Lipschitz functions preserve measurability, they do not generally preserve the measure. So while we cannot know that the measure of $f(E)$ is, we know that $f(E)$ is indeed measurable. We finish by commenting that in the special case of Lipschitz functions which are linear maps of $\R^n$, we can actually compute the measure of the resulting image.
+
+
+\begin{thm}
+Let $T$ be a linear transformation of $\R^n$, and let $E$ be a measurable set. Then $|T(E)|= \delta |E|$, where $\delta= |\det T|$. 
+\end{thm}
+
+\pf Let $\delta= |\det T|$. It is routine to verify that $|T(I)|= \delta |I|$ for any interval $I$. Now let $E \subseteq \R^n$ be a measurable subset, and $\ep>0$. Choose intervals $\{I_k\}$ covering $E$ with $\sum |I_k| < \ext{E}+\ep$. Then
+	\[
+	\ext{T(E)} \leq \sum |T(I_k)|= \delta \sum |I_k| < \delta(\ext{E}+\ep).
+	\]
+But then $\ext{T(E)} \leq \delta \ext{E}$. 
+
+It remains to show that $\delta \ext{E} \leq \ext{T(E)}$. Choose an open set $G \supset E$ with $|G \sm E|<\ep$. Write $G$ as a union of nonoverlapping intervals $\{I_k'\}$. By the work above, we may assume that $\delta>0$. Since $T(I_k)$ are also nonoverlapping intervals, 
+	\[
+	|T(G)|= \sum |T(I_k)| = \delta \sum |I_k| = \delta |G|.
+	\]
+But as $E \subset G$, we have $\delta |E| \leq \delta |G|= |T(G)|$. Moreover,
+	\[
+	|T(G)| \leq |T(E)| + |T(G \sm E)| \leq |T(E)| + \delta \ep.
+	\]
+Combining inequalities yields $\delta |E| \leq |T(E)| + \delta \ep$, so that $\delta |E| \leq |T(E)|$. \qed \\
 
 
 
-% 09/12/2018
-% Nonmeasurable set
+% ------------------------
+%  A Nonmeasurable Set
+% ------------------------
+\subsection{A Nonmeasurable Set}
 
-Recall Cantor set maps to fat cantor set. 
 
-% show factor construction then fat cantor with arrows leading over
+Notice that `all' the sets we have encountered thus far were measurable. Indeed, most sets you `meet on the street' will be measurable. Nonmeasurable sets are true pathologies, which do not even exist depending on your logical axioms. 
 
-% we cut out \ep_1, 2\ep_2, 4 \ep_4,...
-% \sum_{k=1}^\infty 2^{k-1} \ep_k = \frac{1}{2}, or anything in [0,1) want sum \frac{1}{2^{k+1}}, so \ep_k = \dfrac{1}{4^k} works. |f_k-f_{k+1}| \leq 2^{-k}, |f_k^{-1} - f_{k+1}^{-1} \leq 2^{-k} so f homeomorphism. So whrn W subset F is nonmeasurable, V=f^{-1}(W) is measurable but not borel. If V was Borel, then W=(f^{-1})^{-1}(V) would be too, noting hw preimage of borel is borel.
+
+Recall the example from Lemma~\ref{lem:rcontfun}. We constructed a fat Cantor set, $L$. Note that removing fourths was not the only possible choice in the construction of $L$. Suppose at each stage we cut out lengths $\ep_1$, $\ep_2$, $\ldots$, $\ep_n$, $\ldots$. We want
+	\[
+	\sum_{k=1}^\infty 2^{k-1} \ep_k = \frac{1}{2},
+	\]
+or any other number in $[0,1)$ so that our final set $L$ has positive measure. Clearly, choosing $\ep_k= \dfrac{1}{4^k}$ works. Furthermore, 
+	\[
+	|f_k-f_{k+1}| \leq 2^{-k}, |f_k^{-1} - f_{k+1}^{-1} \leq 2^{-k}
+	\]
+so that $f$ is a homeomorphism. 
+	\[
+        \begin{tikzpicture}[decoration=Cantor set,line width=1mm]
+        \draw node at (1.6,0.5) {$K$};
+        \draw (0,0) -- (3,0);
+        \draw decorate{ (0,-.5) -- (3,-.5) };
+        \draw decorate{ decorate{ (0,-1) -- (3,-1) }};
+        \draw decorate{ decorate{ decorate{ (0,-1.5) -- (3,-1.5) }}};
+        \draw decorate{ decorate{ decorate{ decorate{ (0,-2) -- (3,-2) }}}};
+        \end{tikzpicture} \hspace{1cm}
+        \begin{tikzpicture}[decoration=Cantor set,line width=1mm]
+        \node at (2,0.5) {$L$};
+        \draw (0,0) -- (4,0);
+        \draw decorate{ (0,-.5) -- (4,-.5) };
+        \draw decorate{ decorate{ (0,-1) -- (4,-1) }};
+        \draw decorate{ decorate{ decorate{ (0,-1.5) -- (4,-1.5) }}};
+        \draw decorate{ decorate{ decorate{ decorate{ (0,-2) -- (4,-2) }}}};
+        \end{tikzpicture}
+        \]
+
+
+Now when $W \subset F$ is nonmeasurable, $V=f^{-1}(W)$ is measurable but not Borel. If $V$ were Borel, then $W= (f^{-1})^{-1}(V)$ would also be Borel, hence measurable, as the preimage of Borel sets are Borel, c.f. Problem~\ref{hw:8}. However, it need not be the case that the continuous image of a Borel set is measurable. 
+
 
 \begin{thm}
 The continuous image of a Borel set is measurable. 
 \end{thm}
 
+\noindent Though we shall not prove this here, this was shown by Lusin and his student Souslin in 1916, after reading a paper of Lebesgue and noting many errors including asserting that projections of Borel sets were Borel. Souslin's construction is a bit detailed, though not long, and we shall not pursue it here. 
 
 
-Not true that continuous map of Borel is Borel. 
+As mentioned previously, non-measurable sets are rare in practice, though they certainly do exist. To this day, no explicit examples of non-measurable sets exist. Indeed, their very existence hinges on the Axiom of Choice. \\
 
 
-No explicit examples of non-measurable sets exist. 
+\noindent \textbf{Axiom of Choice:} For all collections of nonempty sets $\{E_\alpha\}$, one can choose an element from each $E_\alpha$, i.e. there exists a function $f: \mathcal{A} \to \bigcup E_\alpha$ such that $f(\alpha) \in E_\alpha$ for all $\alpha$. Said differently, $\prod_{\alpha \in \mathcal{A}} E_\alpha \neq \emptyset$. \\
 
 
-Axiom of Choice: For all collections of nonempty sets $\{E_\alpha\}$, one can choose an element from each $E_\alpha$, i.e. there exists a function $f: \mathcal{A} \to \bigcup E_\alpha$ such that $f(\alpha) \in E_\alpha$ for all $\alpha$. Said differently, $\prod_{\alpha \in \mathcal{A}} E_\alpha \neq \emptyset$. 
+The Axiom of Choice was once a point of great contention among mathematicians at the turn of the century as many counterintuitive results follow from its assumption. However generally today, the axiom is assumed without grudge. We shall assume it here. With this final ingredient, we can construct a nonmeasurable set. 
+
+
+\begin{thm}[Vitali Set]
+There exists a nonmeasurable set. 
+\end{thm}
+
+\pf Define an equivalence relation on $\R$ via $x \sim y$ if $x-y \in \Q$. Let $\{E_\alpha\}_{\alpha \in \mathcal{A}}$ be the set of equivalence classes. It is clear that the equivalence classes can be expressed $E_x:= \{ x+q \colon q \in \Q\}$. Furthermore, $E_x$ and $E_y$ are either identical or disjoint. There is one equivalence class consisting of all rational numbers, while the other equivalence classes consist entirely of irrational numbers, i.e. an irrational number translated by all possible rational numbers. Moreover since we can choose a representative of each equivalence class and all other elements of the class are the set of rational translates of this representative, each equivalence class is countable. However, the set of equivalence classes must be uncountable since their union is $\R$ and each class is countable. 
+
+Consider the sets $\{ \cA_\alpha \}_{\alpha}$, where $\cA_\alpha:=E_\alpha \cap [0,1]$. By the Axiom of Choice, we can choose an element from each set $A_\alpha$. Let $V \subset [0,1]$ be the set of all the chosen elements. We claim that $V$ is nonmeasurable. Now given two distinct points $x,y \in V$, we kow that $x-y \notin \Q$, for otherwise they would come from the same equivalence class and we have chosen unique elements from each set. Therefore, every pair of points from $V$ differ by an irrational number. Now $\R=V+\Q=\{ v+q \colon v \in V, q \in \Q\}$, so that $\cup_{q \in \Q} (V+q)= \R$. If $\ext{V}-0$, then so too is $\ext{V+q}=0$. This would then imply that $\ext{\R}=0$, a contradiction. Therefore, $\ext{V}>0$. Now observe $\cup_{q \in (\Q \cap [0,1])} (V+q) \subset [0,2]$. Now as the sets $V+q$ are distinct, if $V$ were measurable, so too would $V+q$ be measurable, and we would have $|[0,2]| \geq \sum_{q \in (\Q \cap [0,1])} |V+q|= \infty$, a contradiction. \qed \\
+
+
+Notice that the sets $V+q$, if they were measurable, would necessarily have positive measure by the proof above. The proof then shows, in some sense, that these sets are so intertwined that one can fit infinitely many of them in an interval without having their measure go to zero. 
 
 
 
-Vitali Set: A nonmeasurable subset of $[0,1]$. Equivalence relation $x \sim y$ if $x-y \in \Q$. Let $\{E_\alpha\}_{\alpha \in \mathcal{A}}$ be equivalence classes. Each $E_\alpha$ is countable. Index set $\mathcal{A}$ is uncountable. By AC, we can prove one element from each $E_\alpha \cap [0,1]$. This gives a set $V \subset [0,1]$. We claim that $V$ is nonmeasurable. Indeed, $V+\Q=\R$, in that $A \pm B =\{ a \pm b \colon a \in A, b \in B\}$. Meaning, $\bigcup_{q \in \Q} (V+q)=\R$. But then $\ext{V}>0$ (otherwise, we get $\ext{\R}=0$). But $\bigcup_{q \in \Q \cap [0,1]} \subset [0,2]$. So we have a disjoint union of countably many translated copies of $V$. If $V$ were measurable, we would obtain $|[0,2]| \geq \sum_{q \in \Q \cap [0,1]} |V+q|= \infty$. 
 
-%So intertwined, can fit infinitely many of them in an interval, without having their measurable go to zero. In a sense, $C+ (\Q \cap [0,1]) \subset [0,2]$. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Now we have stated that nonmeasurable sets are rare in practice. The next result shows that they are not, in principle, so rare. In fact, every measurable subset of $\R$ with positive measure contains a nonmeasurable set. 
+
+
+
+
+
+
 
 
 \begin{lem} \label{lem:density}
 If $E \subset \R$ and $|E|>0$, then there exists an interval $I$ such that $|E \cap I|> (1-\ep) |I|$. 
 \end{lem}
 
-\pf There exists an open set $G$ such that $G \supset E$ and $|G|< \frac{|E|}{1-\ep}$. Now $G= \cup (a_k,b_k)$, disjoint and union contains set $E$. So $|E|= \sum_k |E \cap (a_k,b_k)$ and $|G|= \sum_k |(a_k,b_k)|$. If for all $k$, $| E \cap (a_k,b_k)| \leq (1- \ep)(b_k-a_k)$, then $\sum_k$ yields $|E| \leq (1-\ep)|G|$, contradiction. 
+\pf There exists an open set $G$ such that $G \supset E$ and $|G|< \dfrac{|E|}{1-\ep}$. Express $G$ as the union of disjoint, open intervals, i.e. $G= \cup (a_k,b_k)$. Then clearly $E \subset  \cup (a_k,b_k)$ so that $|E|= \sum_k |E \cap (a_k,b_k)|$. We know that $|G|= \sum_k |(a_k,b_k)|$. 
+
+
+
+If for all $k$, $| E \cap (a_k,b_k)| \leq (1- \ep)(b_k-a_k)$, then $\sum_k$ yields $|E| \leq (1-\ep)|G|$, contradiction. 
 
 
 
