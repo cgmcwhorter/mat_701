@@ -845,21 +845,17 @@ Notice that the sets $V+q$, if they were measurable, would necessarily have posi
 Now we have stated that nonmeasurable sets are rare in practice. The next result shows that they are not, in principle, so rare. In fact, every measurable subset of $\R$ with positive measure contains a nonmeasurable set. 
 
 
-
-
-
-
-
-
 \begin{lem} \label{lem:density}
 If $E \subset \R$ and $|E|>0$, then there exists an interval $I$ such that $|E \cap I|> (1-\ep) |I|$. 
 \end{lem}
 
-\pf There exists an open set $G$ such that $G \supset E$ and $|G|< \dfrac{|E|}{1-\ep}$. Express $G$ as the union of disjoint, open intervals, i.e. $G= \cup (a_k,b_k)$. Then clearly $E \subset  \cup (a_k,b_k)$ so that $|E|= \sum_k |E \cap (a_k,b_k)|$. We know that $|G|= \sum_k |(a_k,b_k)|$. 
+\pf There exists an open set $G$ such that $G \supset E$ and $|G|< (1-\ep) |E|$. Express $G$ as the union of disjoint, open intervals, i.e. $G= \cup (a_k,b_k)$. For each $k$, let $E_k:= E \cap (a_k,b_k)$, and note that each $E_k$ are measurable and $E \subset  \cup E_k$. Therefore, we have $|E|= \sum_k |E_k|$ and $|G|= \sum_k |(a_k,b_k)|$. If for each $k$, $|E_k| \leq (1-\ep)(b_k-a_k)$, then we have 
+	\[
+	|E|= \sum |E_k| \leq \sum (1-\ep)(b_k-a_k)= (1-\ep) \sum (b_k-a_k)= (1-\ep) |G|,
+	\]
+a contradiction. Therefore, there is some $k_0$ such that $(1-\ep)(b_k-a_k)<E_k=|E \cap I|$. Defining $I:=(a_k,b_k)$ completes the proof. \qed \\
 
 
-
-If for all $k$, $| E \cap (a_k,b_k)| \leq (1- \ep)(b_k-a_k)$, then $\sum_k$ yields $|E| \leq (1-\ep)|G|$, contradiction. 
 
 
 
