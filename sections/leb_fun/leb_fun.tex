@@ -983,6 +983,46 @@ Observe that $C$ is a domination function. $f_k(x) = \sum_{j=1}^k B_j \sin(jx)$ 
 
 
 
+% Last time: $\int_E (f+g) = \int_E f + \int_E g; f,g measurable and \int_E f and \int_E g finite
+
+Shorter proof: let $h= f+g$:
+$h^+ - h^-= f^+ - f^- + g^+ - g^-$
+$h^+ + f^- + g^-= f^+ + g^+ + h^-$
+Integrate, apply additivitivty for nonnegative.
+$\int h^+ + \int f^- + \int g^-= \int f^+ + \int g^+ + \int h^-$
+all integrals finite then 
+$\int h^+ - \int h^- = \int f^+ - \int f^- + \int g^+ - \int g^-$. 
+
+
+
+DCT: Works for continuous parameters.
+
+If we have $f_t$ ($t$ real) and $|f_t| \leq \phi$, $\phi \in L^1(E)$ and $f_t$ measurable and $f_t \to f$ a.e. as $t \to t_0$. Then $\lim_{t \to t_0} \int_E f_t= \int f$. 
+
+\pf Sequential characterization of limits: Take any sequence $t_k \to t_0$ and apply DCT to $f_{t_k}$. Get $\int f_{t_k} \to \int f$. \qed \\
+
+
+\begin{ex}
+Suppose $|E|<\infty$, $f \in L^1(E)$, $f>0$ on $E$.
+a) $|int_E f^p \to |E|$ as $p \to 0^+$
+b) if also $\log f \in l^1(E)$, then $\int_E \dfrac{f^p-1}{p} \to \int_E \log f$ as $p \to 0^+$.
+
+
+apf) $f^p \to 1$ as $p \to 0^+$. Need dominating function. Consider only $0<p \leq 1$. Then $f^p \leq f$? if $f \geq 1$ but notice $f^p \leq 1$ if $0<f<1$. So $f^p \leq \max(f,1) \leq f+1$. This is simpler than the less mysterious max. So $f+1 \in L^1(E)$ dominating function. Hence, $\int_E f^p \to \int_E 1= |E|$. 
+
+bpf) derivative of $p \mapsto e^{p \log f}$ at $p=0$ which is $\log f$. $\dfrac{f^p-1}{p} \to \log f$. Slope of secant 
+
+% Plot axes e^x but label f^p, given secant from (0,f(0)) to (p,f(p))
+
+Slope inc: $\dfrac{f^p-1}{p} \leq \dfrac{f^1-1}{1}= f-1$
+
+$f \leq 1$: $\left\| \dfrac{f^p-1}{p} \right| \leq |\log f|$.
+
+% Same plot but e^{-x}$.
+\end{ex}
+
+
+
 
 
 
