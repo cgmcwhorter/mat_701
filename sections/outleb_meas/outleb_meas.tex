@@ -827,33 +827,42 @@ Consider the sets $\{ \cA_\alpha \}_{\alpha}$, where $\cA_\alpha:=E_\alpha \cap 
 Notice that the sets $V+q$, if they were measurable, would necessarily have positive measure by the proof above. The proof then shows, in some sense, that these sets are so intertwined that one can fit infinitely many of them in an interval without having their measure go to zero. 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Now we have stated that nonmeasurable sets are rare in practice. The next result shows that they are not, in principle, so rare. In fact, every measurable subset of $\R$ with positive measure contains a nonmeasurable set. 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Proof below seems very fishy, and just plain wrong.
 
 \begin{lem} \label{lem:density}
 If $E \subset \R$ and $|E|>0$, then there exists an interval $I$ such that $|E \cap I|> (1-\ep) |I|$. 
 \end{lem}
 
-\pf There exists an open set $G$ such that $G \supset E$ and $|G|< (1-\ep) |E|$. Express $G$ as the union of disjoint, open intervals, i.e. $G= \cup (a_k,b_k)$. For each $k$, let $E_k:= E \cap (a_k,b_k)$, and note that each $E_k$ are measurable and $E \subset  \cup E_k$. Therefore, we have $|E|= \sum_k |E_k|$ and $|G|= \sum_k |(a_k,b_k)|$. If for each $k$, $|E_k| \leq (1-\ep)(b_k-a_k)$, then we have 
+\pf There exists an open set $G$ such that $G \supset E$ and $|G|< (1+\ep) |E|$. Express $G$ as the union of disjoint, open intervals, i.e. $G= \cup (a_k,b_k)$. For each $k$, let $E_k:= E \cap (a_k,b_k)$, and note that each $E_k$ are measurable and $E \subset  \cup E_k$. Therefore, we have $|E|= \sum_k |E_k|$ and $|G|= \sum_k |(a_k,b_k)|$. If it were the case that for each $k$, $(1+\ep)|E_k| \leq b_k-a_k$, then we would have 
 	\[
-	|E|= \sum |E_k| \leq \sum (1-\ep)(b_k-a_k)= (1-\ep) \sum (b_k-a_k)= (1-\ep) |G|,
+	(1+\ep)|E|= (1+\ep)\sum |E_k|= \sum (1+\ep)|E_k| \leq \sum (b_k-a_k)= \sum |(a_k,b_k)|= |G|, 
 	\]
-a contradiction. Therefore, there is some $k_0$ such that $(1-\ep)(b_k-a_k)<E_k=|E \cap I|$. Defining $I:=(a_k,b_k)$ completes the proof. \qed \\
+a contradiction. Therefore, there is some $k_0$ such that $b_{k_0} - a_{k_0} < (1+\ep) |E_k|= |E \cap (a_k,b_k)|$. Defining $I:= (a_{k_0},b_{k_0})$ completes the proof. \qed \\
+
+
 
 
 
