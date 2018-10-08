@@ -36,7 +36,7 @@ Let $E \subseteq \R^n$ and $\overline{\R}$ denote the extended real line. We say
 \end{dfn}
 
 
-Note that we define $\{ f=\infty\}:= \bigcap_{k \in \Z} \{ f>k \}$ and $\{ f= -\infty\}:= \bigcap_{k \in \Z} \{ -f>k\}$. The reason for this choice of definition is that the sets $\{f > a\}$ describe the distribution for the values of $f$. In some sense, the `smoother' $f$ is, the smaller the variety of such sets one obtains from $f$. For example, when $f$ is continuous, the sets $\{f>a\}$ are open sets. 
+Note that we define $\{ f=\infty\}:= \bigcap_{k \in \Z} \{ f>k \}$ and $\{ f= -\infty\}:= \bigcap_{k \in \Z} \{ -f>k\}$. The reason for this choice of definition is that the sets $\{f > a\}$ describe the distribution for the values of $f$. In some sense, the `smoother' $f$ is, the smaller the variety of such sets one obtains from $f$. For example, when $f$ is continuous, the sets $\{f>a\}$ are open sets since $f^{-1}((a,\infty))$ is an open set. 
 
 
 Furthermore, the measurability of a set should be linked in some way with the potential measurability of the functions on it and vice versa. If the set $E$ is `wild', less functions should be measurable on it. In fact, the measurability of $E$ is equivalent to that of the set $\{ f= -\infty\}$ since
@@ -47,6 +47,31 @@ showing that if $f$ is measurable, then $E$ is measurable if and only if $\{ f= 
 
 
 Note that one could define Borel measurability similarly: $f: E \to \ov{\R}$ is Borel measurable, if for all $a \in \R$, the set $\{ f>a\}$ is Borel. Thus, every Borel function is also measurable. We can of course define measurability of functions more generally: if $M$ is a $\sigma$-algebra on $\R^n$, $f$ is $M$-measurable if $\{f>a\} \in M$ for all $a \in \R$. For us, $M$ will normally be the Lebesgue $\sigma$-algebra. Though what we do is in $\R^n$ with the Lebesgue $\sigma$-algebra, much of what we do holds, or has parallel results, in other spaces and $\sigma$-algebras. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1035,6 +1060,25 @@ Slope inc: $\dfrac{f^p-1}{p} \leq \dfrac{f^1-1}{1}= f-1$
 $f \leq 1$: $\left\| \dfrac{f^p-1}{p} \right| \leq |\log f|$.
 
 % Same plot but e^{-x}$.
+
+
+% Continued in next class:
+If $f<0$ is measurable and $f \in L^1(E)$, then
+	\[
+	\int_E \dfrac{f^p-1}{p} \to \int_E \log f \text{ as } p \to 0^+.
+	\]
+We need integrability to make this possible. 
+
+
+MCT applies: 
+if $\phi \in L^1$ is a `baseline' and $\phi \geq f_1 \geq f_2 \geq \cdots$ or 
+$\phi \leq f_1 \leq f_2 \leq \cdots$, then $\int \lim f_k = \lim \int f_k$. 
+
+For all $p_k \searrow 0$, we want to show $f_k= \dfrac{f^{p_k} - 1}{p_k}$ is a decreasing sequence, $f_1 \geq f_2 \geq f_3 \geq \cdots$. The reason why is because of the shape of these things. 
+
+% Give same $f^p$ graph. Secant line graph. 
+
+Now taking $p_k$ which is smaller, so $p_{k+1}$ is to left so the slope of the secant line is less because it is a convex function. The conclusion is the same for the decreasing version because this is also convex. `Baseline' is then $f-1$. 
 \end{ex}
 
 
@@ -1044,6 +1088,96 @@ $f \leq 1$: $\left\| \dfrac{f^p-1}{p} \right| \leq |\log f|$.
 
 
 
+
+% Monday 10/08/2018
+% Section 5.4 - 5.5
+\subsection{Relation between the Lebesgue and Riemann-Stieltjes Integrals}
+
+
+Recall most important HW (5.1\#1): if $f \geq 0$ measurable, then $f \in L^1$ if and only if $\sum_{j= -\infty}^\infty 2^j |\{ f>2^j\}| < \infty$.  Let $\omega_f= |\{ x \in E \colon f(x)>\alpha\}|$. Notice this is just notation for something we have already discussed at length. With this notation, we can say that
+	\[
+	f \in L^1(E) \Longleftrightarrow \sum_{j= -\infty}^\infty 2^j \omega_{|f|}(2^j)< \infty,
+	\]
+where $f$ is measurable but not necessarily nonnegative. What is the significance of the `2' here? The proof of the exercise only makes use of the fact that multiplication by 2 preserves the inequality: $g= 2^j \chi_{\{2^j<f<2^{j+1}\}}$ and then $g \leq f \leq 2g$. This is like the Cauchy Condensation Test. However, this works for any real number $\lambda>1$. This allows us to then characterize the above as 
+	\[
+	\begin{split}
+	f \in L^1(E) &\Longleftrightarrow \sum_{j= -\infty}^\infty 2^j \omega_{|f|}(2^j)< \infty \\
+	&\Longleftrightarrow \sum_{j= -\infty}^\infty \lambda^j \omega_{|f|}(\lambda^j)< \infty 
+	\end{split}
+	\]
+for any $\lambda>1$. The generalization of this is as follows:
+
+\begin{dfn}[$L^p$]
+ $f: E \to \ov{\R}$ belongs to $L^p(E)$ if $\int |f|^p<\infty$, where $0<p<\infty$. 
+\end{dfn}
+
+
+By the discussion above (or \#1 of HW 5.1), we know that $f \in L^p$ if and only if $\sum \lambda^j |\{ |f|^p>\lambda^j \}|<\infty$, i.e. $\sum \lambda^j |\{ |f|> \lambda^{j/p} \}|<\infty$. If we choose $\lambda= 2^p$, then
+	\[
+	f^p \in L^p \Longleftrightarrow \sum_{j= -\infty}^\infty 2^{pj} |\{ f>2^j \}| < \infty. 
+	\]
+
+% Notice larger p, makes life easier/harder for convergence based on power and when positive or negative. and other similar observations. 
+
+
+\begin{thm}
+If $|E|<\infty$ and $f: (a,b]$ is measurable, where $a,b \in \R$, then 
+	\[
+	\int_E f = \int_a^b \alpha d(-\omega_f(\alpha)).
+	\]
+\end{thm}
+
+\pf Consider $\mathcal{P}$: $a=x_0<x_1<\cdots<x_n=b$. Let $E_i= \{x_{i-1}< f \leq x_i \}$. Note $E_i$ is a partition of $E$.
+	\[
+	\sum_i x_{i-1} \chi_{E_i} \leq f \leq \sum_i x_i\chi_{E_i}.
+	\]
+But then 
+	\[
+	\sum_{i=1}^n x_{i-1} |E_i| \leq \int_E f \leq \sum_{i=1}n x_i |E_i| (*)
+	\]
+Here 
+	\[
+	|E_i|= -(\underbrace{\omega(x_i)}_{f>x_i} - \underbrace{\omega(x_{i-1})}_{f>x_{i-1}}
+	\]
+But then the left sum is $L(\alpha,P,-\omega)$ and the right one is $U(\alpha,P,-\omega)$. The sup of $L$ and inf of $U$ both go to $\int_a^b \alpha d(-\omega)$. Thus, $\int_E f = \int_a^b f \; d(-\omega)$. \qed \\
+
+
+% Remind of definition of Riemann Stieltjes integral. Put at beginning? Notice that difference of \alpha function is a measure of (x_{i-1},x_i]. So we see the connection. 
+
+
+
+
+
+
+
+\subsection{Relation between the Lebesgue and Riemann Integral}
+
+We want to compare $\int_{[a,b]} f$ and $R\!\!\int_a^b f$, where $a,b \in \R$ and $f$ is bounded. Following shows we have generalized.
+
+
+\begin{thm}
+If $R\!\!\int_a^b f$ exists, then $\int_{[a,b]} f$ exists and they are equal.
+\end{thm}
+
+\pf 
+Riemann then Leb: If $R$ integral exists, then there exists sequence of partitions $\{P_k\}$ such that $U(f,P_k)$ and $L(f,P_k)$ converge to $\int_a^b f$. Arrange $P_1 \subset P_2 \subset P_3 \subset \cdots$. Let $g_k, h_k$ be step functions for these partitions. $g_k \leq f \leq h_k$ and $L(f,P_k)= \int g_k$, $U(f,P_k)= \int h_k$. 
+
+% Give plot of small curve with g_k, h_k upper/lower rectangles. Shade colors. 
+
+By MCT, $g_1 \leq g_2 \leq \cdots$ and $h_1 \geq h_2 \geq \cdots$. Then $\int g_k \to \int g$, where $g= \lim g_k$ and $\int h_k \to \int h$, where $h= \lim h_k$. So $\int g = \int h = R\!\!\int_a^b f$ since $U$ and $L$ converge to $\int_a^b f$. But we know that $g \leq f \leq h$. This means that we must have equality a.e.. But this completes the proof. \qed \\
+
+
+
+
+
+
+The following characterization of Riemann integrals.
+
+\begin{thm}
+Riemann integral exists if and only if $|\mathcal{D}|=0$, where $\mathcal{D}$ is the set of discontinuities of $f$. 
+\end{thm}
+
+\pf See text. 
 
 
 
