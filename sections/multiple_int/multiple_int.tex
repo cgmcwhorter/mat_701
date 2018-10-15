@@ -1,0 +1,109 @@
+% !TEX root = ../../mat701_notes.tex
+\newpage
+\section{Repeated Integration}
+\subsection{Fubini's Theorem}
+
+
+Given $f(x,y)= \dfrac{1}{\sqrt{xy}}$ on $[0,1] \times [0,1]$, we already have a concept of $\int_{[0,1] \times [0,1]} f$. But how does this relate to the integral
+	\[
+	\int_0^1 \left( \int_0^1 \dfrac{1}{\sqrt{xy}} \; dy \right) \; dx?
+	\]
+We have the same issues with double series: $\sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij}$.
+
+
+\begin{ex}
+Consider the infinite matrix with 1s on the main diagonal and $-1$ on the superdiagonal and zeros elsewhere. The sum of each row is 0 and the sum of column is 0 except the first and we obtain
+	\[
+	\begin{split}
+	\sum_{i=1}^\infty \left( \sum_{j=1}^\infty a_{ij} \right)&= 0 \\
+	\sum_{j=1}^\infty \left( \sum_{i=1}^\infty a_{ij} \right)&= 1
+	\end{split}
+	\]
+This is the same issues with integrals. For example, take $f=1,-1,0$ and consider
+	\[
+	\begin{split}
+	\int_0^\infty \left( \int_0^\infty f(x,y) \; dx \right) \; dy&= 0 \\
+	\int_0^\infty \left( \int_0^\infty f(x,y) \; dy \right) \; dx&= 0
+	\end{split}
+	\]
+Note that $f \notin L^1([0,\infty) \times[0,\infty))$. 
+\end{ex}
+
+
+% Give some extra background on Fubini.
+
+
+\begin{thm}[Fubini's Theorem]
+Let $I_1 \subseteq \R^n$, $I_2 \subseteq \R^m$ be intervals and $I= I_1 \times I_2$. Suppose that $f \in L^1(I)$. Then:
+	\begin{enumerate}[(i)]
+	\item For almost every $x \in I_1$, the `slice' function $y \mapsto f(x,y)$ is integrable on $I_2$.
+	\item The `once-integrated' function $x \mapsto \int_{I_2} f(x,y) \; dy$ is integrable on $I_1$, and its value is $\int_I f$. 
+	\end{enumerate}
+\end{thm}
+
+
+
+
+
+
+Why do we say for almost every $x$? A slice is defined on a set of measure zero. For the matrix example, one could choose a column and insert in a zero entry insert a nonmeasurable function or $\infty$. While the function becomes difficult, its integral is unchanged since its values were changed on a set of measure zero. 
+
+
+Recall that $\int_I f= \int_{\R^{n \times m}} f \cdot \chi_I$, etc.. So we can reduce the proof to $I_1= \R^n$, $I_2= \R^m$, and $I= \R^{n+m}$ by replacing $f$ with $f \chi_I$. Let $\mathcal{F}:= \{ f \in L^1( \R^{n+m}) \colon \text{Fubini holds for } f \}$. We prove that $\mathcal{F}=L^1$. 
+
+Properties of $\mathcal{F}$:
+        \begin{itemize}
+        \item $\mathcal{F}$ is a vector space: $f,g \in \mathcal{F}$, then $\alpha f + \beta g \in \mathcal{F}$.
+        \item $\mathcal{F}$ is closed under monotone limits: if $f_k \in \mathcal{F}$ and $f_k \nearrow f$ or $f_k \searrow f$, where $f \in L^1(\R^{n \times m})$, then $f \in \mathcal{F}$.
+        \item Squeeze Property: if $g \leq f \leq h$, where $g,h \in F$ and $g=h$ a.e., then $f \in \mathcal{F}$
+        \item $\chi_I \in F$ for any closed bounded interval $I$. 
+        \end{itemize}
+
+
+
+
+
+To see why the second point holds: 
+
+Proof 2 $f_k \nearrow f$ supplies for every $x \in I_1$, $x$-slice of $f_k \nearrow$ $x$-slice of $f$. For each $k$, there is $Z_k \subset I_1$ with $|Z_k|=0$ such that the $x$-slice of $f_k$ is integrable for $x \notin Z_k$. Let $Z= \cup_k Z_k$, then $|Z|=0$. So MCT, $\int f_k(x,y) \; dy \nearrow \int f(x,y) \; dy$ (though this may be infinite) for $x \notin Z$. Again by MCT, $\int (\int f_k) \; dx \nearrow \int (\int f dy) \; dx$. Then finally, we have $\int_I f_k \to \int_{I_1} f$ by MCT, noting the last integral is finite. But then $\int (\int f dy) \; dx$ is finite since they are equal. But then Fubini's Theorem holds for $f$ as well. 
+
+We now prove the second. For almost all $x$, the slice of $g$ and $h$ are both integrable, and since the slice of $f$ is between, it is also integrable. 
+
+
+(Proof of 3???) Once integrated functions for $g, f, h$ satisfy $\int g \; dy \leq \int f \; dy \leq \int h \; dy$ for almost all $x$. Integrate with respect to $x$
+	\[
+	\left( \int g \; dy \right),
+	\]
+but then 
+	\[
+	\left( \int g \; dy \right) \; dx \leq \left( \int f \; dy \right) \; dx  \leq \left( \int h \; dy \right) \; dx 
+	\]
+But the left/right integrals are equal to $\int_I g$ and $\int_I h$, respectively. But these are equal since $g=h$ a.e.. Therefore, $\left( \int f \; dy \right) \; dx= \int_I f$.
+
+
+Proof of 4: Slice function of $\chi_I$ is either $\equiv 0$ or $\chi_{I_2}$, so $\int \chi_I= |I_2| \chi_{I_1}$. Then $\int \chi_I \;dy \; dx= |I_2| |I_1|= |I|= \int \chi_I$. \qed \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
