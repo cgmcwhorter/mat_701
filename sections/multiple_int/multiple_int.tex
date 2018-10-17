@@ -86,6 +86,73 @@ Proof of 4: Slice function of $\chi_I$ is either $\equiv 0$ or $\chi_{I_2}$, so 
 
 
 
+% Fubini: f \in L^1(I_1 \times I_2)
+% Tonelli: f \geq 0, measurable on I_1 \times I_2
+
+
+Proof of Fubini:
+
+We establish $\mathcal{F}= L^1$. We show this for $G_\delta$ sets and sets of measure 0, which will be enough. 
+
+a. First, we show that $X_I \in \mathcal{F}$ for any closed bounded interval. This does not necessary worked for closed. Indeed, open sets are union of closed sets. 
+
+% Picture: dotted square, the solid squares inside getting closer and closer to full square.
+
+Consider the sequence of characteristic functions on the boxes in the figure, say $\chi_{I_k} \nearrow \chi_I$. Now for a set which is not open or closed, squeeze this between an open set containing and a closed set inside it.
+
+b. Now $\chi_G \in \mathcal{F}$ if $G$ is open and $|G|<\infty$. Tile $G$ by half-open cubes $Q_j$, $\chi_G= \sum \chi_{Q_j}$. Monotone limit of partials sums of 1 and 2 bullets above. 
+
+c. $\chi_{H} \in \mathcal{F}$ if $H$ is a $G_\delta$ set with $|H|<\infty$. Indeed, there exists $G$ open, $H \subset G$, and $|G|<|H|+\infty$ so if $H= \cap_{k=1}^\infty G_k$, $G_k$, with $H= (G \cap G_1) \cap (G\cap G_1 \cap G_2) \cap (G \cap G_1 \cap G_2 \cap G_3) \cap \cdots$ so it is a nested intersection of open sets of finite measure. Then use second bullet above. 
+
+d. Now $\chi_Z \in \mathcal{F}$ if $|Z|=0$. There exists a $G_\delta$ set $H$ such that $Z \subset H$ and $|H|=0$. Now $0 \leq \chi_Z \leq \chi_H$ and $\chi_H=0$ a.e., then by squeeze (bullet 3) have the conclusion. 
+
+e. We now show $\chi_X \in \mathcal{F}$ if $|E|<\infty$, any set of finite measure. Write $E= H \sm Z$. $H$ is $G_\delta$, $|Z|=0$. Then $\chi_E= \chi_H \sm \chi_Z$ and use linearity. 
+
+f. integrable simple functions $\in \mathcal{F}$. Then nonnegative integrable in $\mathcal{F}$. Then integrable in $\mathcal{F}$ since $f= f^+ - f^-$. \qed \\
+
+
+
+
+
+To use Fubini, we need $f \in L^1$. A lot of times, this is what we are trying to show! Fubini cannot be used to prove $f \in L^1(I_1 \times I_2)$. Take $f(x,y)= \dfrac{1}{\sqrt{xy}}$ on $I:=[0,1] \times [0,1]$. Cannot say $\int_I f = \int_0^1( \int_0^1 \dfrac{1}{\sqrt{xy}} \; dx)\;dy$ but need $f$ integrable, which is what you are trying to show. For these purposes, we use Tunelli's Theorem.
+
+\begin{thm}
+Same as Fubini Theorem, $f \geq 0$, measurable. Suppose $f \geq 0$, measurable on $I_1 \times I_2$. Then 
+
+a): FOr a.e. $x \in I_1$, the slice function $y \mapsto f(x,y)$ is measurable on $I_2$.
+b): the once-integrated function $x \mapsto \int_{I_2} f(x,y) \; dy$ is measurable on $I_1$ andits integral is $\int_I f$ (could be $\infty$). 
+\end{thm}
+
+
+In the example above, $\int_0^1 \dfrac{1}{\sqrt{xy}} \; dy= \dfrac{2}{\sqrt{x}}$ is measurable and $\int_0^1 \dfrac{2}{\sqrt{x}} \; dx = 4$ so $\int_I \dfrac{1}{\sqrt{xy}}= 4$. 
+
+\pf Let $f_k= \min(f,k) \chi_{[-k,k]^n}$ integrable and $f_k \nearrow f$. Then Fubini applies. Spelled out. $\int_{I_1 \times I_2} f_k = \int_{I_1} \left( \int_{I_2} f_k(x,y) \; dy \right) \; dx$. The inner integral converegs a.e. y to $\int_{I_2} f(x,y) \; dy$ by MCT. THen left MCT $\int_I f$. And then MCT for outer integral. done. \qed \\
+
+
+Application: 
+
+Let $fL E \to [0,\infty]$ be measurable. $\omega_f(y)= |\{x \in E \colon f(x)>y\}|$. Then $\int_E f = \int_0^\infty \omega_f(y) \; dy$. 
+
+\pf Recall $R(f,E)= \{(x,y) \in \R^{n+1} \colon x \in E, 0 \leq y \leq f(x)\}$. $\Gamma(f,E)= \{(x,y) \in \R^{n+1} \colon y=f(x)\}$. Now $|\Gamma|-0$, $g= \chi_{R \sm \Gamma}$ so $g(x,y)=1$ if $0 \leq y<f(x)$, 0 otherwise. $\int(\int g(x,y) \; dy)\;dx= \int(\int g(x,y) \; dx) \; dy)$. and $\int f(x) \chi_E \; dx = \int \omega_f(y) \; dy$ so $\int_E f= \int_0^\infty \omega_f(y) \; dy$. This last integral is even Riemann integrable since it is monotone. 
+
+
+
+Generalizations: $f$ measurable, $\int_E |f|^p= p \int_0^\infty y^{p-1} \omega_{|f|}(y) \; dy$. $p>0$.
+
+We know $\int_E |f|^p= \int_0^\infty \omega_{|f|^p}(y) \; dy$. Let $y=z^p$. Then this is $p \int_0^\infty z^{p-1} \omega_{|f|^p}(z^p) dz= p \int_0^\infty z^{p-1} \omega_{|f|}(z)\;dz$ and $\{ |f|^p>z^p\}= \{|f|>z\}$. \qed \\
+
+
+
+
+Ex: $f(x,y)=\dfrac{\sin xy}{(x^2+y^2)^{3/2}} \in L^1(E)$. $E= \{(x,y) \colon x,y>0\}$. 
+
+Idea: estimate aboev by nonnegative function $g$ and prove $g \in L^1(E)$ by Tonelli. i.e. $|f| \geq g$. $|f| \geq \dfrac{1}{(x^2+y^2)^{3/2}}$ for sure but problems around origin but good at infinity. Have $|f| \leq \dfrac{xy}{(x^2+y^2)^{3/2}}$ good near 0. So use min of the two functions. Better: Use first when $x^2+y^2 \leq 1$: $g_1=\dfrac{1}{(x^2+y^2)^{3/2}} \chi_{\{x^2+y^2 \geq 1\}}$ and $\omega_{g_1}(\alpha)= \pi/(4\alpha^{2/3}) - \pi/4$ if $\alpha<1$ and 0 otherwise. Note that $1/r^3 \cdot \chi_{r \geq 1}$ and $\alpha<1$ $1/r^3\alpha$ and $r= 1/\alpha^{1/3}$ and $1/4$ if circle roots $1/\alpha^{1/3}$. 
+
+
+
+
+
+
 
 
 
