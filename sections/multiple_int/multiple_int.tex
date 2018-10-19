@@ -146,7 +146,74 @@ We know $\int_E |f|^p= \int_0^\infty \omega_{|f|^p}(y) \; dy$. Let $y=z^p$. Then
 
 Ex: $f(x,y)=\dfrac{\sin xy}{(x^2+y^2)^{3/2}} \in L^1(E)$. $E= \{(x,y) \colon x,y>0\}$. 
 
-Idea: estimate aboev by nonnegative function $g$ and prove $g \in L^1(E)$ by Tonelli. i.e. $|f| \geq g$. $|f| \geq \dfrac{1}{(x^2+y^2)^{3/2}}$ for sure but problems around origin but good at infinity. Have $|f| \leq \dfrac{xy}{(x^2+y^2)^{3/2}}$ good near 0. So use min of the two functions. Better: Use first when $x^2+y^2 \leq 1$: $g_1=\dfrac{1}{(x^2+y^2)^{3/2}} \chi_{\{x^2+y^2 \geq 1\}}$ and $\omega_{g_1}(\alpha)= \pi/(4\alpha^{2/3}) - \pi/4$ if $\alpha<1$ and 0 otherwise. Note that $1/r^3 \cdot \chi_{r \geq 1}$ and $\alpha<1$ $1/r^3\alpha$ and $r= 1/\alpha^{1/3}$ and $1/4$ if circle roots $1/\alpha^{1/3}$. 
+Idea: estimate above by nonnegative function $g$ and prove $g \in L^1(E)$ by Tonelli. i.e. $|f| \geq g$. $|f| \geq \dfrac{1}{(x^2+y^2)^{3/2}}$ for sure but problems around origin but good at infinity. Have $|f| \leq \dfrac{xy}{(x^2+y^2)^{3/2}}$ good near 0. So use min of the two functions. Better: Use first when $x^2+y^2 \leq 1$: $g_1=\dfrac{1}{(x^2+y^2)^{3/2}} \chi_{\{x^2+y^2 \geq 1\}}$ and $\omega_{g_1}(\alpha)= \pi/(4\alpha^{2/3}) - \pi/4$ if $\alpha<1$ and 0 otherwise. Note that $1/r^3 \cdot \chi_{r \geq 1}$ and $\alpha<1$ $1/r^3\alpha$ and $r= 1/\alpha^{1/3}$ and $1/4$ if circle roots $1/\alpha^{1/3}$. 
+
+
+
+%%%%%%%
+% Friday
+
+Silicing a subset of $\R^{n+m}$. Given a measurable set $E \subset \R^{n+m}$, consider $E_x= \{ y \in \R^m \colon (x,y) \in E \}$. 
+
+% Blob with an x-slice and axes
+
+\begin{itemize}
+\item $E_x$ is measurable for almost all $x$.
+\item If $|E|<\infty$, then $|E_x|<\infty$ for almost every $x$.
+\item If $|E|=0$, then $|E_x|=0$ for almost every $x$. 
+\end{itemize}
+
+All these things follow easily from applying Tonelli to $\chi_E$ since almost every slice function is measurable. Slice fo $\chi_E$ is $\chi_{E_x}$ and $\int_{\R^{n+m}} \chi_E< \infty$ then $\int_{\R^n} |E_x| \; dx <\infty$.
+
+
+\begin{ex} % Measurability in \R^{n+m}$ is important.
+Assuming the Continuum Hypothesis, there exists $E \subset [0,1]^2$ such that every vertical slice $E_x$ is countable and every horizontal slice $E_y$ is co-countable, i.e. $[0,1] \sm$ countable set. Using TOnelli
+	\[
+	\int( \int \chi_E \; dy ) \; dx = 0
+	\]
+since evert vertical slice is countable. The other way
+	\[
+	\int (\int \chi_E \; dx ) \; dy = 1
+	\]
+This means $E$ is not measurable in $\R^2$ (otherwise these would be equal). Then let $E= \{ (x,y) \colon y \prec x \}$.
+\end{ex}
+
+
+
+
+Products:
+If $E_1 \subset \R^n$, $E_2 \subset \R^m$, are measurable, then $E_1 \times E_2$ is measurable in $\R^{n+m}$ and $|E_1 \times E_2|= |E_1| \, |E_2|$, taking $0 \cdot \infty= 0$. Assume $E_1 \times E_2$ is measurable, then
+	\[
+	|E_1 \times E_2|= \int (\int \chi_{E_1 \times E_2}(x,y) \; dy) \; dx= \int |E_2| \; \chi_{E_1}(x) \; dx.
+	\]
+It remains to prove that $E_1 \times E_2$ is measurable. It suffices to prove if when $|E_1|<\infty$ and $|E_2|<\infty$. In the general case, $E_1= \cup_{k=1}^\infty E_{1,k}$ and $E_2= \cup_{k=1}^\infty E_{2,k}$, then $E_1 \times E_2= \cup_{j,k} E_{1,k} \times E_{2,j}$. 
+
+There exists $G_1 \supset E_1$, $G_2 \supset E_2$ such that $|G_1 \sm E_1|<\ep$, $|G_2 \sm E_2|<\ep$. Now $G_1 \times G_2$ is open and $E_1 \times E_2 \subset G_1 \times G_2$. Now $(G_1 \times G_2) \sm (E_1 \times E_2) \subset [(G_1 \sm E_1) \times G_2] \cup [G_1 \times (G_2 \sm E_2)]$. Both $G_1 \sm E_1$ and $G_2 \sm E_2$ have measure at most $\ep$. Now $G_1, G_2$ by cumes $I_k, Q_j$ with summed measure at most $\ep$. Then $|I_k \times Q_j|= |I_k||Q_j|$ so $|(G_1 \sm E_1) \times G_2| < \sum_{k,j} |I_k| |Q_j| < \ep |G_2|$. Then just choose $\ep$ sufficiently small. 
+
+
+
+
+Convolution: $(f*g)(x)= \int_{\R^n} f(x-t)g(t) \;dt$, where $f,g$ are defined on $\R^n$ are measurable.  Now $f*g=g*f$ by change of variable $s=x-t$ so $\int f(x-t)g(t) \; dt = \int f(s) g(x-s) \; ds$, where $s,t \in \R^n$. In the general case, $h= h^+ - h^-$. 
+
+Claim $\int h(x-t) \; dt = \int h(t) \; dt$. Proof: if $h \geq 0$, then are measures of sets $\{(t,y) \colon 0 \leq y \leq h(x-t)\}$ and $\{ (t,y) \colon 0 \leq y \leq h(t) \}$. THe first is obtained from the other by reflection $t \mapsto -t$ and translation (add $x$). These do not change measure or measurability. 
+
+
+\begin{thm}
+If $f,g \in L^1(\R^n)$, then $f*g \in L^1(\R^n)$ and $\int |f*g| \leq \int |f| \int |g|$.
+\end{thm}
+
+\pf We know $|f*g| \leq |f| * |g|$ by the triangle inequality. We can work with $|f|$ and $|g|$ so assume $f,g \geq 0$. $\int (\int f(x-t) g(t) \; dt) \; dx$ by tonelli this is $\int (\int f(x-t) g(t) \; dx ) \; dt = \int g(t) (\int f(x-t) \; dx \; )dt$ where the inner integral is just $\int f$ by translation. But then this final integral is $\int f \cdot \int g$. 
+
+But why $f(x-t)g(t)$ measurable on $\R^{2n}$? (need this for tonelli). Observe $f(x)$ and $g(t)$ are measurable on $\R^{2n}$ since the preimages of $>$ something is just $\{(x,t) \colon f>a\}= \{x \colon f(x)>a\} \times \R$ since it does not depend on $t$. Then this is measurable. Use the linear transformation $\phi: (x,t) \to (x-t,x+t)$ intvertible inverse linear, hence lipschitz. Use then HW 3.5: composition $f \circ \phi$ is measurable, $\phi^{-1}$ Lipschitz. Hence $f(x-t)$ is measurable on $\R^{2n}$. 
+
+
+
+
+
+
+
+
+
 
 
 
