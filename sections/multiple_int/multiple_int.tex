@@ -198,6 +198,16 @@ Convolution: $(f*g)(x)= \int_{\R^n} f(x-t)g(t) \;dt$, where $f,g$ are defined on
 Claim $\int h(x-t) \; dt = \int h(t) \; dt$. Proof: if $h \geq 0$, then are measures of sets $\{(t,y) \colon 0 \leq y \leq h(x-t)\}$ and $\{ (t,y) \colon 0 \leq y \leq h(t) \}$. THe first is obtained from the other by reflection $t \mapsto -t$ and translation (add $x$). These do not change measure or measurability. 
 
 
+\begin{ex}
+Ex: Convolution: Argument of $\chi_{[a,b]} *\cdot \chi_{[c,d]}$ is only nonzero on $\{x \colon a \leq x-t \leq b, c \leq t \leq d\}$ so $\{x \colon x-b \leq t \leq x-a, c \leq t \leq d\}$. so on $\max(x-b,c) \leq t \leq \min(x-a,d)$. 
+	\[
+	\chi_{[a,b]} * \chi_{[c,d]}= \int_\R \chi_{[a,b]}(x-t) \chi_{[c,d]}(t) \; dt =  (\min(x-a,d) - \max(x-b,c))^+
+	\]
+So $\chi_{[-1,1]} * \chi_{[-1,1]}= (\min(x+1,1) - \max(x-1,-1))^+=$....grossly complicated (or just wrong). So better way $|([-b,-a] + x) \cap [c,d]|$ so $|([-1,1]+x) \cap [-1,1]|$.Then get 
+% Graph, triangle with height 2 at x=0, at x-axis at -2,2, and 0 elsewhere, is the plot. 
+\end{ex}
+
+
 \begin{thm}
 If $f,g \in L^1(\R^n)$, then $f*g \in L^1(\R^n)$ and $\int |f*g| \leq \int |f| \int |g|$.
 \end{thm}
@@ -210,15 +220,65 @@ But why $f(x-t)g(t)$ measurable on $\R^{2n}$? (need this for tonelli). Observe $
 
 
 
+%%%%%%%%%%%%
+
+If $f,g$ are probability density functions of $X$ and $Y$, then $f*g$ is the PDF of $X+Y$, assuming $X,Y$ are independent. 
 
 
 
 
 
+\subsection{Marcinkiewitz Integrals}
+
+In Analysis, one often has $f*g$, where one of the functions is not in $L^1$. These are so called ``singular integrals.'' The simplest example is the Hilbert transform
+	\[
+	\int_\R \dfrac{f(x-t)}{t} \; dt
+	\]
+
+% Look this up and give better description.
+
+Let $K$ be a compact set in $\R^n$, and $\delta(y):= \dist(y,k)= \min\{|x-y| \colon x \in K\}$. 
+
+% Picture?
+
+
+\begin{thm}
+If $B \supset K$ is a bounded open set, then for all $\lambda > 0$. 
+	\[
+	\int \dfrac{\delta(y)^\lambda}{|x-y|^{n+\lambda}} \; dy < \infty
+	\]
+for a.e. $x \in K$.
+\end{thm}
+
+\pf It suffices to show $\int_K \mu_\lambda(x) \; dx < \infty$.
+	\[
+	\int_K \mu_\lambda(x) \; dx = \int_K \int_{B \sm K} \dfrac{\delta(y)^\lambda}{|x-y|^{n+\lambda}} \; dy \; dx = \int_{B \sm K} \int_K \dfrac{\delta(y)^\lambda}{|x-y|^{n+\lambda}} \; dx \; dy.
+	\]
+But now observe $|x-y| \geq \delta(y)$. But then 
+	\[
+	\int_{B \sm K} \int_K \dfrac{\delta(y)^\lambda}{|x-y|^{n+\lambda}} \; dx \; dy \leq \int_{B \sm K} \left( \int_{|x-y| \geq \delta(y)} \dfrac{\delta(y)^\lambda}{|x-y|^{n+\lambda}} \right) \; dy \leq \int_{B \sm K} C \; dx = C |B \sm K|< \infty.
+	\]
+Using $\int_{|x-y| \geq \delta} \dfrac{1}{|x-y|^{n+\lambda}} \; dx \leq \dfrac{C}{\delta^\lambda}$. To prove this:
+
+Recall $\int |f|^p= p \int_0^\infty \alpha^{p-1} |\{|f|>\alpha\}| \; d \alpha= *$. Use $P= n + \lambda$, $f=\dfraC{1}{|x-y|}$.
+	\[
+	| \{ |x-y| \geq \delta \colon \dfrac{1}{|x-y|}>\alpha\}| = |B(y,1/\alpha) \sm B(y,\delta)|= C((1/\alpha)^n - \delta^n)^+
+	\]
+which is $=0$ if $\alpha>1/\delta$. For *, note
+	\[
+	*= (n+\lambda)^{1/\delta} \alpha^{n+\lambda-1} C (1/\alpha^n - \delta^n) \; d\alpha \leq C' \int_0^{1/\delta^n} \alpha^{\lambda-1} \; d \alpha = C'' \dfrac{1}{\delta^\lambda}
+	\]
 
 
 
 
+
+$B$ is needed as the integral is $\sim \dfrac{1}{|y|^n}$ as $y \to \infty$. We could have integrate over $B \sm K$ since $\delta \equiv 0$ on $K$. Also, the $\delta$ is important for convergence. The almost always is also unavoidable: take $K=\{0\}$ in $\R$. Then $\delta(y)= |y|$. Then $\int_B \dfrac{|y|^\lambda}{|x-y|^{n+\lambda}} \; dy$ so at $x=0$, we get $\int_B \dfrac{1}{|y|^n}= \infty$. Generally, $\mu_\lambda(x)= \infty$ if $x$ is an isolated point of $K$. If $x$ is an interior point fo $K$, $\mu_\lambda(x)< \infty$ as $\delta=0$ in a neighborhood of $x$.
+
+
+
+
+Question: in last part of proof, can we let $\lambda=0$? Specifically, is it true that $\int_{B \sm K} \dfrac{1}{|x-y|^n} \; dy< \infty$ for a.e. $x \in K$? Counterexample? $K$ is fat Cantor set?
 
 
 
