@@ -260,7 +260,7 @@ But now observe $|x-y| \geq \delta(y)$. But then
 	\]
 Using $\int_{|x-y| \geq \delta} \dfrac{1}{|x-y|^{n+\lambda}} \; dx \leq \dfrac{C}{\delta^\lambda}$. To prove this:
 
-Recall $\int |f|^p= p \int_0^\infty \alpha^{p-1} |\{|f|>\alpha\}| \; d \alpha= *$. Use $P= n + \lambda$, $f=\dfraC{1}{|x-y|}$.
+Recall $\int |f|^p= p \int_0^\infty \alpha^{p-1} |\{|f|>\alpha\}| \; d \alpha= *$. Use $P= n + \lambda$, $f=\dfrac{1}{|x-y|}$.
 	\[
 	| \{ |x-y| \geq \delta \colon \dfrac{1}{|x-y|}>\alpha\}| = |B(y,1/\alpha) \sm B(y,\delta)|= C((1/\alpha)^n - \delta^n)^+
 	\]
@@ -281,6 +281,95 @@ $B$ is needed as the integral is $\sim \dfrac{1}{|y|^n}$ as $y \to \infty$. We c
 Question: in last part of proof, can we let $\lambda=0$? Specifically, is it true that $\int_{B \sm K} \dfrac{1}{|x-y|^n} \; dy< \infty$ for a.e. $x \in K$? Counterexample? $K$ is fat Cantor set?
 
 
+
+
+%%%%%%%%%%%%%%%%%
+
+
+
+8.1 $L^p$ Classes, Revisited
+
+Want to build a theory of complete spaces based on integration. 
+
+
+% Noncomplete: d(f,g)= (R) \int_0^1 |f-g| not complete. Take sequence convergeing to dirichlet. 
+
+% F_1,\ldots,F_n,\ldots such that \bigcap_{k=1}^\infty F_k=F, Fat Cantor set. \chi_{F_k} Riemann integrable but \chi_F is not, \int |\chi_{F_k}- \chi_{F_j}|< \ep for k,j \geq M, lim \chi_F DNE wrt metric d.
+
+First, measurability of functions $f: E \to \C$ (or $E \to \R$). Then $f=(f_1,\ldots,f_m)$ is measurable by definition if and only if $f_1,\ldots,f_m$ are measurable. Equivalently, $\{a_j<f_j<b_j\}= f^{-1}(\prod_{j=1}^m (a_j,b_j))$ are measurable for all $j$, $a_j,b_j \in \R$. Equivalently, every countable union of open boxes $U$ $f^{-1}(U)$ is measurable. 
+
+
+Definition of $L^p(E)$: All measurable functions $f: E \to \C$ such that $\int_E |f|^p< \infty$. Here $0<p< \infty$, and if $f=g$ a.e., we consider them the same element of $L^p(E)$. 
+
+Strictly speaking, $L^p=$ equivalence classes $[f]=$ all $g$ such that $g=f$ a.e.. 
+
+Operations $c \cdot f$ ($c \in \C$) is also in $L^p(E)$. $c[f]=[cf]$. $f+g$ is in $L^p$ too:
+	\[
+	|f+g|^p \leq (|f|+|g|)^p \leq [2 \max(|f|,|g|)]^p = 2^p \max(|f|^p,|g|^p) \leq 2^p(|f|^p+|g|^p)
+	\]
+which is integrable. So $L^p$ is a vector space. 
+
+
+\begin{dfn}[Essential Supremum]
+$\esup f= \inf\{ \mu \colon f \leq \mu\}$ a.e. 
+\end{dfn}
+
+
+Some may call this essentially bounded. 
+
+
+\begin{ex}
+$\esup \chi_\Q=0$
+$\esup \chi_F=1$, where $F$ fat cantor set. 
+\end{ex}
+
+
+$L^\infty(E)= \{meas f: E \to \C \colon \esup |f|<\infty\}$ (there exists $M \in \R$ such that $|f| \leq M$ a.e.). 
+
+$\dfrac{1}{|x|}, x \in \R$ and $\infty$ $x=0$. Is this in $L^\infty$? This is finite a.e. but it is not bounded. 
+
+\begin{ex}
+$\dfrac{1}{\sqrt{x}}$ on $E=(0,1)$ is in $L^p$ if $\int_{(0,1)} \left(\dfrac{1}{\sqrt{x}}\right)^p<\infty$ But $\int_{(0,1)} \dfrac{1}{x^{p/2}}< \infty$ if and only if $p/2<1$ if and only $p<2$.
+
+b) $\dfrac{1}{\sqrt{x}}$ on $E=[1,\infty)$ is in $L^p$ if and only if $\int_{[1,\infty)} \dfrac{1}{x^{p/2}} \; dx$ if and only if $p>2$ and $\infty$. ($p \in [2,\infty]$). 
+\end{ex}
+
+
+Why do we need $L^p$? Ranked from nicest to ugliest: 1) $L^2$, 2) $L^p$ $1<p<\infty$, $p \neq 2$,3) $L^1$, 4) $L^\infty$, $L^p$, $0<p<1$. 
+
+
+Relations between $L^p$ spaces:
+
+A) if $|E|<\infty$, and $f \in L^{p_1}$ then $f \in L^{p_2}$ for all $p_2<p_1$: $\{p \colon f \in L^p\}$ is an interval starting from 0.
+b) if $f \in L^{p_1}$ and $f \in L^{p_2}$, then $f \in L^p$ for all $p_1<p<p_2$: $\{p \colon f\in L^p\}$ is an interval.
+
+
+Proof is based on $\int |f|^p= \underbrace{\inf |f|^p}_{|f| \leq 1} + \underbrace{\int |f|^p}_{|f|>1}$, the first decreases as $p$ increases and the second increass as $p$ increases.
+
+So for b we have
+	\[
+	\int_{|f| \leq 1} |f|^p \leq \int_{|f| \leq 1} |f|^{p_1} < \infty
+	\]
+	\[
+	\int_{|f|>1} |f|^p \leq \int_{|f|>1} |f|^{p_2} < \infty
+	\]
+Proving $f \in L^p$ except $p_2=\infty$ is a special case. let $M= \esup |f|$ 
+	\[
+	\int_{|f|>1} \leq \int_{|f|>1} M^p \leq M^p |\{|f|>1\}| \leq M^p |\{|f|^{p_1}>1\}| \leq M^p \int |f|^{p_1} < \infty
+	\]
+
+
+Proof of A) $\int_{|f| \leq 1} |f|^p \leq \int_E 1 \leq |E|<\infty$ and for $\int_{|f|>1}$ use inequality as before. 
+
+
+
+
+Are there any functions which are in none? $f \equiv 1$ on $\R$, $f \notin L^p$ for all $p$ except $p=\infty$. For none, use $f \equiv x$ on $\R$. Find an example of such on $(0,1)$ too. 
+
+
+
+
+Fact: if $|E|<\infty$, $\esup_E |f|= \lim_{p \to \infty} \left( \int_E |f|^p\right)^{1/p}$. Notation: $\|f\|_{p,E}= \begin{cases} \left( \int_E |f|^p\right)^{1/p}, & 0<p<\infty \\ \esup_E |f|, 0<p<1 \end{cases}$. 
 
 
 
