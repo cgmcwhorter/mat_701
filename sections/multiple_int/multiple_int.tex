@@ -373,6 +373,99 @@ Fact: if $|E|<\infty$, $\esup_E |f|= \lim_{p \to \infty} \left( \int_E |f|^p\rig
 
 
 
+%%%%%%%%%%%%%
+% 8.2
+\subsection{H\"older and Minkowski Inequalities}
+
+
+H\"older's inequality is about products and Minkowski is about sums. Recall $\|f\|_{p,E}= \left( \int_e |f|^p \right)^{1/p}$, $\|f\|_{\infty,E}= \esup_E |f|$. 
+
+
+\begin{thm}[Minkowski's Inequality]
+If $1 \leq p \leq \infty$, then $\|f+g\|_p \leq \|f\|_p + \|g\|_p$. 
+\end{thm}
+
+\pf Proof for $1<p<\infty$. $\int |f+g|^p= \int |f+g|^{p-1} |f+g| \leq \int |f| \cdot |f+g|^{p-1} + \int |g| \, |f+g|^{p-1}$. Using H\"older's inequality, we have $\leq \|f\|_p \left( \int (|f+g|^{p-1})^{p'} \right)^{1/p'} + \|g\|_p \left( \int (|f+g|^{p-1})^{p'}\right)^{1/p'} \leq (\|f\|_p + \|g\|_p) \left( \int |f+g|^p \right)^{1-1/p}$. Cancel (divide both by rt), then $\left( \int |f+g|^p \right)^{1/p} \leq \|f\|_p + \|g\|_p$. \qed \\
+
+
+For infinite series: if $\sum_k \|f_k\|_p < \infty$, then $\sum f_k \in L^p$ and $\| \sum f_k \|_p \leq \sum \|f_k\|_p$ for $1 \leq p \leq \infty$. 
+
+\pf Minkowski then $\| \sum_{k=1}^N |f_k|\|_p \leq \sum_k \|f_k\|_p$ then MCT allows $N \to \infty$ here. So $\sum |f_k| \in L^p$. Hence, $\sum f_k \in L^p$.
+
+
+
+
+Axioms of a norm: 
+$\|f\| \geq 0$, $\|f\|=0$ if and only if $f=0$: Positivitiy
+$\|\lambda f\|= |\lambda| \, \|f\|$ for $\lambda \in \C$ or $\R$ homogeneity
+$\|f+g\| \leq \|f\|+\|g\|$ subadditivity (triangle inequality)
+
+So $\|f\|_p$ is a norm when $1 \leq p \leq \infty$ (and not if $0<p<1$). 
+
+For $p=1$ and $p= \infty$, this is easy: $p=1$: $\int |f+g| \leq \int (|f|+|g|)= \int |f|+ \int |g|$. For $p=\infty$, $|f| \leq M$ a.e. $|g| \leq N$ a.e., then $|f+g| \leq M+N$ a.e.. For $1<p<\infty$, we need H\"older's inequality. 
+
+
+Given $p \in [1,\infty]$, let $p' = \dfrac{p}{p-1}$; so $\frac{1}{p} + \frac{1}{p'}=1$, the conjugate exponent, where $p' \in [1,\infty]$. Clearly, 1 and $\infty$ are conjugate. Other pairs are $(1.1,11)$, $(1.5,3)$, and one self conjugate $(2,2)$. 
+
+% Number line pairing them together
+
+\begin{thm}[H\"older's Inequality]
+$\int |fg| \leq \|f\|_p \|g\|_p$ for $1 \leq p \leq \infty$. 
+\end{thm}
+
+\pf Three steps: 
+1. Pointwise (algebraic) inequality: $a,b \geq 0$, then $ab \leq a^p/p + b^{p'}/p'$: Young's Inequality. Key to it $x^{p-1}$ and $x^{p'-1}$ are inverses. $p'-1 = \frac{1}{p-1}$. 
+2. Apply 1 to $|f|$ and $|g|$: $\int |fg| \leq 1/p \int |f|^p + 1/p' \int |g|^p$. 
+3. Optimize using homogeneity. let $t>0$ then $\int |fg|= \int |tf \cdot 1/t g| \leq t^p/p \int |f|^p + 1/(p' t^{p'}) \int |g|^{p'}$. Differentiate wrt $t$. $t^{p-1} \int |f|^p- t^{-p'-1} \int |g|^{p'} = 0$ then $t^{p+p'}= (\int |g|^{p'})/(\int |f|^p)$, plut in this $t$ to the above. 
+
+Alternatively, replace $f$ by $t/\|f\|_p$ and $g$ by $g/\|g\|_{p'}$, i.e. normalize them. 
+
+
+
+
+
+
+Special cases: $p=1$: $\int |fg| \leq \esup |g| \cdot \int |f|$, easy.
+
+$p=2$: $\int |fg| \leq \sqrt{\int |f|^2 \int |g|^2}$, Cauchy-Schwartz
+
+Notice outer exponents must always add to 1. 
+
+
+\begin{ex}
+Give $f \in L^6([1,\infty])$. Want to estimate
+	\[
+	\int_1^\infty \dfrac{f(x)^2}{x} \; dx = \int f(x)^2 \cdot \dfrac{1}{x} \; dx  \leq \left(\int_1^\infty (f^2)^3 \right)^{1/3} \left( \int_1^\infty \dfrac{1}{x^{3/2}} \right)^{2/3}= \left(\left(\int_1^\infty f^6 \right)^{1/6} \right)^2 \cdot 2= 2^{2/3} \|f\|_6^2
+	\]
+Think what power do you need so that you can use the given information? So $P=3, p'= 3/2$. That is the idea of the example. 
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
