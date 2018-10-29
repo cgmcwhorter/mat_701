@@ -90,6 +90,27 @@ Suppose that $f,g \in L^\infty(\R^n)$. Is it the case that $fg \in L^\infty(\R^n
 Alternatively, $f,g \in L^\infty(\R^n)$ implies that $f,g$ are bounded almost everywhere. Suppose $|f| \leq M$ and $|g| \leq N$ for almost all $x \in \R^n$. But then $|fg| \leq MN$ for almost all $x \in \R^n$. Therefore, $fg \in L^\infty(\R^n)$. Note that it is not generally true that if $f,g \in L^p$, for some $p<\infty$, that $fg \in L^p$. For example, $\frac{1}{x^r} \in L^p((0,1))$ if and only if $pr<1$ if and only if $p<1/r$. Then generally, $(1/x^r)^2$ is not in the same $L^p$. \qed \\
 
 
+%% Quiz 19 warmup
+%\begin{quizsol}
+%What are the possible $p$ such that for $f \in L^p([0,1])$, we have $\int_0^1 \dfrac{|f(x)|}{\sqrt{x}} \; dx < \infty$? 
+%\end{quizsol}
+%
+%\pf Take product $f$ and $\dfrac{1}{\sqrt{x}}$. We need power $p'<2$ for $1/\sqrt{x}$ but then by conjugate powers we need $p>2$. This uses H\"older's Inequality. \qed \\
+
+
+% Quiz 19
+\begin{quizsol}
+Suppose that $f,g: \R \to \C$ are measurable functions such that $|f|^4$ and $|g|^{4/3}$ are integrable. Prove or disprove: $fg$ is integrable.
+\end{quizsol}
+
+\pf We know $\int |fg| \leq \|f\|_4 \|g\|_{4/3}$ and $\dfrac{1}{4} + \dfrac{3}{4} = 1$. This fails if $f,g$ are not measurable. Take $g=1$ and $f$ a $(-1)^n$ type of deal on a nonmeasurable set. \qed \\
+
+
+
+
+
+
+
 
 
 
