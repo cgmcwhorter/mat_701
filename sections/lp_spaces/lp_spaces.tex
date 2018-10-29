@@ -1,0 +1,326 @@
+% !TEX root = ../../mat701_notes.tex
+\newpage
+\section{$L^p$ Spaces}
+\subsection{Introduction}
+
+Recall that a metric spaces is called complete if every Cauchy sequence converges. While most metric spaces are not complete, every metric space can be embedded into a complete space; that is, given a metric space $X$, there exists a space $\widetilde{X}$ such that there is an injection $\iota: X \hookrightarrow \widetilde{X}$. The space $\widetilde{X}$ can be taken to be the set of equivalence classes of Cauchy sequences in $X$. Then $X$ naturally embeds into $\tilde{X}$ as the constant sequences. In fact using this construction, $X$ is a dense subset of $\widetilde{X}$. 
+
+
+\begin{ex} \hfill
+\begin{enumerate}[(i)]
+\item The metric spaces $\R^n$ and $\C^n$ are complete metric spaces. This essentially follows from the Bolzano-Weierstrass Theorem. 
+\item The space $C[a,b]$ of continuous real-valued functions on $[a,b]$ is a Banach space, and hence is complete.
+\item $\Q$ is not a complete metric space. For example, it is routine to verify the sequence $\{x_n\}$, where $x_0=1$ and $x_{n+1}= \dfrac{x_n^2+2}{2x_n}$, is Cauchy and that (using the Monotone Convergence Theorem) $\lim_{x \to \infty} x_n= \sqrt{2} \notin \Q$. 
+\item The space of continuous functions on $[0,1]$ with metric $d(f,g)= \int_0^1 |f-g| \; dx$ is not complete. [Here the integral should be taken as the Riemann integral.] To see this, take any sequence of functions converging to the Dirichlet function. More concretely, it is routine to verify that the sequence of functions $\{f_n\}$, where
+	\[
+	f_n(x):= 
+	\begin{cases}
+	1, &  x=0 \\
+	1-nx, & 0<x< \dfrac{1}{n} \\
+	0, & \dfrac{1}{n} \leq x
+	\end{cases}
+	\]
+is Cauchy. However, $\lim_{n \to \infty} f_n(x)$ is the zero function $[0,1]$ except at $x=0$, where the function is 1, which is not continuous. One can extend this example by considering the space of Riemann integrable functions on $[0,1]$ with the same metric $d$. Consider the sequence of compact sets $\{F_k\}$ used in constructing the Fat Cantor Set $F$, c.f. Lemma~\ref{lem:rcontfun}. We know that $\chi_{F_k}$ is Riemann integrable for all $k$ and that $\int |\chi_{F_k} - \chi_{F_j}|<\ep$ for all $k,j \geq N$, where $N$ is taken sufficiently large. However, the function $\chi_F$ is not Riemann integrable. Therefore, $\lim \chi_{F_k}$ does not exist with respect to the given metric $d$. 
+\end{enumerate}
+\end{ex} \xqed 
+
+
+In any introductory course in Functional Analysis, a great deal of time is spent analyzing Banach spaces, which are a type of topological vector space.\footnote{To be precise, a Banach space is a complete normed vector space.} These play roles in Analysis and the rest of Pure Mathematics, Statistics, Probability, Physics, Finance, Engineering, etc.. We want to build a theory of complete spaces based on integration. The spaces we will build, the ``Lebesgue spaces'' $L^p$, in doing so will serve as important examples in Functional Analysis. 
+
+
+
+% ------------------------
+%  L^p spaces
+% ------------------------
+\subsection{Definition of $L^p$ and Examples}
+
+Suppose that $E \subseteq \C^n$ or $E \subseteq \R^n$ and let $f: E \to \C$ or $f: E \to \R$. Then $f=(f_1,\ldots,f_n)$ is measurable if and only if each of the functions $f_1,\ldots,f_n$ are measurable. Equivalently, the sets $\{ a_j < f_j < b_j \} = f^{-1}(\prod_{j=1}^m (a_j,b_j))$ are measurable for all $j$ and $a_j,b_j \in \R$ if and only if for every countable union of open boxes $U$, $f^{-1}(U)$ is measurable. 
+
+
+\begin{dfn}[$L^p, 0<p<\infty$]
+Let $E \subseteq \R^n$ be measurable, and $0<p<\infty$. Then we define 
+	\[
+	L^p(E):= \left\{ f \colon \int_E |f|^p < \infty \right\}
+	\]
+\end{dfn}
+
+
+Again, we allow $f$ to be complex-valued. In this case, if we write $f= f_1 + if_2$ for measurable real-valued functions $f_1,f_2$, we have $|f|^2= f_1^2 + f_2^2$. But then $|f_1|,|f_2| \leq |f| \leq |f_1| + |f_2|$. It follows then that $f \in L^p(E)$ if and only if $f_1,f_2 \in L^p(E)$. We write
+	\[
+	\nm{f}{p,E}:= \left( \int_E |f|^p \right)^{1/p}, \quad 0<p<\infty.
+	\]
+Therefore, $L^p(E)$ is the set of equivalence classes of measurable functions $f$ for which $\nm{f}{p,E}<\infty$. Finally, whenever the set $E$ is clear from context, we will write $L^p$ instead of $L^p(E)$ and $\nm{f}{p}$ instead of $\nm{f}{p,E}$. This this notation, we have $L^1=L$. 
+
+
+\begin{rem}
+Strictly speaking, $L^p$ is a set of equivalence classes of functions $f$ such that $\int_E |f|^p< \infty$; that is, we say two functions $f,g$ define the same equivalence class in $L^p(E)$ if and only if $f=g$ a.e. on $E$. 
+\end{rem}
+
+
+For $c \in \R$ or $c \in |C$ and $f \in L^p(E)$, it is clear that $c \cdot f \in L^p(E)$; that is, $c[f]= [cf]$. Furthermore, if $f,g \in L^p(E)$, then 
+	\[
+	|f+g|^p \leq (|f|+|g|)^p \leq [2 \max(|f|,|g|)]^p = 2^p \max(|f|^p,|g|^p) \leq 2^p(|f|^p+|g|^p)
+	\]
+so that $f+g \in L^p(E)$. This shows that $L^p$ is an $\R$, respectively $\C$, vector space. To define $L^p(E)$ in the case where $p=\infty$, we will first need a definition.
+
+
+\begin{dfn}[Essential Supremum]
+Let $f$ be a real or complex valued function on a measurable set $E$ of positive measure. Then we define $\essup{E} f$ as follows: if $|\{ x \in E \colon f(x)>\alpha\}|>0$ for all real $\alpha$, then we define $\essup{E} f= \infty$ and otherwise define $\essup{E} f:= \inf\{ \alpha \colon |\{x \in E \colon f(x)>\alpha\}|=0 \}$. 
+\end{dfn}
+
+
+The essential supremum is the generalization of the maximums to measurable functions; the difference being the fact that values of a function on sets os measure zero do not affect the essential supremum. As such, we say that $f$ is essentially bounded (or simply bounded) if $\essup{E} |f|<\infty$. 
+
+
+\begin{ex} \hfill
+\begin{enumerate}[(i)]
+\item Take $E=\R$ and consider $f= \chi_\Q$. Then $\essup{\R} f=0$ since $|\Q|=0$ and $f \equiv 0$ on $\R \sm \Q$. 
+\item Take  $E:= [0,1]$, where $F$ is the fat Cantor set, c.f. Lemma~\ref{lem:rcontfun}, and $f= \chi_F$. Then $\essup{E} \chi_F=1$ by similar reasoning to (i). 
+\item Let $E= \R$ and define
+	\[
+	f(x)=
+	\begin{cases}
+	-10, & x=-1 \\
+	10, & x=1 \\
+	\pi, & \text{otherwise}
+	\end{cases}
+	\]
+Then $\essup{E} f= \pi$. Notice that the largest value that $f$ takes is 10 but it takes this value on a set of measure zero.
+\item Let $E=\R$ and define
+	\[
+	f(x)= 
+	\begin{cases}
+	x^3+x+1, & x \in \Q \\
+	\arctan x, & x \in \R\sm\Q
+	\end{cases}
+	\]
+As in (i), since $|\Q|=0$, we have $\essup{E}= \frac{\pi}{2}$. 
+\end{enumerate}
+\end{ex} \xqed
+
+
+\begin{dfn}[$L^\infty(E)$]
+Let $E \subseteq \R^n$ be a measurable set of positive measure. Then we define
+	\[
+	L^\infty(E)= \{ \text{meas } f: E \to \C \colon \essup{E} |f| < \infty \}
+	\]
+\end{dfn}
+
+First, note we write $\nm{f}{\infty}= \nm{f}{\infty,E}= \essup{E} |f|$. The fact that $f \in L^\infty(E)$ is equivalent to the fact that there exists $M \in \R$ such that $|f| \leq M$ a.e.. Thus, $L^\infty(E)$ is the set of functions which are essentially bounded on $E$. 
+
+
+\begin{ex} \hfill
+\begin{enumerate}[(i)]
+\item Let $E=\R$ and consider the function $f= \dfrac{1}{|x|}$. The function $f$ is a.e. finite on $E$ but it is not bounded so that $f \notin L^\infty$. 
+
+\item Consider the function $f(x)= \dfrac{1}{\sqrt{x}}$ on the set $E=(0,1)$. Then $f \in L^p$ if
+	\[
+	\int_{(0,1)} \left( \dfrac{1}{\sqrt{x}} \right)^p < \infty.
+	\]
+But this occurs if and only if $p/2<1$. Therefore, $f \in L^p$ if and only if $p<2$. 
+
+\item Let $E= [1,\infty)$ and define $f= \dfrac{1}{\sqrt{x}}$. Then $f \in L^p$ if and only if
+	\[
+	\int_{[1,\infty)} \dfrac{1}{x^{p/2}} \; dx.
+	\]
+But this happens if and only if $p>2$ or $p= \infty$. Therefore, $f \in L^p$ if and only if $p \in [2,\infty]$. 
+\end{enumerate}
+\end{ex} \xqed
+
+
+
+% ------------------------
+%  Relation between L^p
+% ------------------------
+\subsection{Relations between $L^p$ spaces}
+
+Not all the $L^p$ spaces are `created equally'---there are `nicer' and `uglier' $L^p$ spaces. Ranked, the $L^p$ spaces are as follows:
+	\begin{enumerate}
+	\item[1.] (Nicest) $L^2$
+	\item[2.] $L^p$, $1<p<\infty$, $p \neq 2$
+	\item[3.] $L^1$
+	\item[4.] $L^\infty$
+	\item[5.] (Worst) $L^p$, $0<p<1$. 
+	\end{enumerate}
+
+
+The easiest relationship is between $L^\infty$ and $L^p$ for $p<\infty$.
+
+
+\begin{prop}
+If $|E|<\infty$, then $\nm{f}{\infty}= \ds\lim_{p \to \infty} \nm{f}{p}$. 
+\end{prop}
+
+\pf Let $M= \nm{f}{\infty}$. If $M' < M$, then the set $A= \{ x \in E \colon |f(x)|>M'\|$ must have positive measure. Furthermore,
+	\[
+	\nm{f}{p} \geq \left( \int_a |f|^p \right)^{1/p} \geq M' |A|^{1/p}.
+	\]
+However, $|A|^{1/p} \to 1$ as $p \to \infty$. This proves that $\liminf_{p \to \infty} \nm{f}{p} \geq M'$. Therefore, $\liminf_{p \to \infty} \nm{f}{p} \geq M$. But we also have
+	\[
+	\nm{f}{p} \leq \left( \int_E M^p \right)^{!/p}= M |E|^{1/p}.
+	\]
+Therefore, $\limsup_{p \to \infty} \nm{f}{p} \leq M$. \qed \\
+
+
+
+
+
+
+
+
+A) if $|E|<\infty$, and $f \in L^{p_1}$ then $f \in L^{p_2}$ for all $p_2<p_1$: $\{p \colon f \in L^p\}$ is an interval starting from 0.
+b) if $f \in L^{p_1}$ and $f \in L^{p_2}$, then $f \in L^p$ for all $p_1<p<p_2$: $\{p \colon f\in L^p\}$ is an interval.
+
+
+Proof is based on $\int |f|^p= \underbrace{\inf |f|^p}_{|f| \leq 1} + \underbrace{\int |f|^p}_{|f|>1}$, the first decreases as $p$ increases and the second increass as $p$ increases.
+
+So for b we have
+	\[
+	\int_{|f| \leq 1} |f|^p \leq \int_{|f| \leq 1} |f|^{p_1} < \infty
+	\]
+	\[
+	\int_{|f|>1} |f|^p \leq \int_{|f|>1} |f|^{p_2} < \infty
+	\]
+Proving $f \in L^p$ except $p_2=\infty$ is a special case. let $M= \essup |f|$ 
+	\[
+	\int_{|f|>1} \leq \int_{|f|>1} M^p \leq M^p |\{|f|>1\}| \leq M^p |\{|f|^{p_1}>1\}| \leq M^p \int |f|^{p_1} < \infty
+	\]
+
+
+Proof of A) $\int_{|f| \leq 1} |f|^p \leq \int_E 1 \leq |E|<\infty$ and for $\int_{|f|>1}$ use inequality as before. 
+
+
+
+
+Are there any functions which are in none? $f \equiv 1$ on $\R$, $f \notin L^p$ for all $p$ except $p=\infty$. For none, use $f \equiv x$ on $\R$. Find an example of such on $(0,1)$ too. 
+
+
+
+
+Fact: if $|E|<\infty$, $\essup{E} |f|= \lim_{p \to \infty} \left( \int_E |f|^p\right)^{1/p}$. Notation: $\|f\|_{p,E}= \begin{cases} \left( \int_E |f|^p\right)^{1/p}, & 0<p<\infty \\ \essup{E} |f|, 0<p<1 \end{cases}$. 
+
+
+
+% ------------------------
+%  Holder and Minkowski
+% ------------------------
+\subsection{H\"older and Minkowski Inequalities}
+
+
+H\"older's inequality is about products and Minkowski is about sums. Recall $\|f\|_{p,E}= \left( \int_e |f|^p \right)^{1/p}$, $\|f\|_{\infty,E}= \essup{E} |f|$. 
+
+
+\begin{thm}[Minkowski's Inequality]
+If $1 \leq p \leq \infty$, then $\|f+g\|_p \leq \|f\|_p + \|g\|_p$. 
+\end{thm}
+
+\pf Proof for $1<p<\infty$. $\int |f+g|^p= \int |f+g|^{p-1} |f+g| \leq \int |f| \cdot |f+g|^{p-1} + \int |g| \, |f+g|^{p-1}$. Using H\"older's inequality, we have $\leq \|f\|_p \left( \int (|f+g|^{p-1})^{p'} \right)^{1/p'} + \|g\|_p \left( \int (|f+g|^{p-1})^{p'}\right)^{1/p'} \leq (\|f\|_p + \|g\|_p) \left( \int |f+g|^p \right)^{1-1/p}$. Cancel (divide both by rt), then $\left( \int |f+g|^p \right)^{1/p} \leq \|f\|_p + \|g\|_p$. \qed \\
+
+
+For infinite series: if $\sum_k \|f_k\|_p < \infty$, then $\sum f_k \in L^p$ and $\| \sum f_k \|_p \leq \sum \|f_k\|_p$ for $1 \leq p \leq \infty$. 
+
+\pf Minkowski then $\| \sum_{k=1}^N |f_k|\|_p \leq \sum_k \|f_k\|_p$ then MCT allows $N \to \infty$ here. So $\sum |f_k| \in L^p$. Hence, $\sum f_k \in L^p$.
+
+
+
+
+Axioms of a norm: 
+$\|f\| \geq 0$, $\|f\|=0$ if and only if $f=0$: Positivitiy
+$\|\lambda f\|= |\lambda| \, \|f\|$ for $\lambda \in \C$ or $\R$ homogeneity
+$\|f+g\| \leq \|f\|+\|g\|$ subadditivity (triangle inequality)
+
+So $\|f\|_p$ is a norm when $1 \leq p \leq \infty$ (and not if $0<p<1$). 
+
+For $p=1$ and $p= \infty$, this is easy: $p=1$: $\int |f+g| \leq \int (|f|+|g|)= \int |f|+ \int |g|$. For $p=\infty$, $|f| \leq M$ a.e. $|g| \leq N$ a.e., then $|f+g| \leq M+N$ a.e.. For $1<p<\infty$, we need H\"older's inequality. 
+
+
+Given $p \in [1,\infty]$, let $p' = \dfrac{p}{p-1}$; so $\frac{1}{p} + \frac{1}{p'}=1$, the conjugate exponent, where $p' \in [1,\infty]$. Clearly, 1 and $\infty$ are conjugate. Other pairs are $(1.1,11)$, $(1.5,3)$, and one self conjugate $(2,2)$. 
+
+% Number line pairing them together
+
+\begin{thm}[H\"older's Inequality]
+$\int |fg| \leq \|f\|_p \|g\|_p$ for $1 \leq p \leq \infty$. 
+\end{thm}
+
+\pf Three steps: 
+1. Pointwise (algebraic) inequality: $a,b \geq 0$, then $ab \leq a^p/p + b^{p'}/p'$: Young's Inequality. Key to it $x^{p-1}$ and $x^{p'-1}$ are inverses. $p'-1 = \frac{1}{p-1}$. 
+2. Apply 1 to $|f|$ and $|g|$: $\int |fg| \leq 1/p \int |f|^p + 1/p' \int |g|^p$. 
+3. Optimize using homogeneity. let $t>0$ then $\int |fg|= \int |tf \cdot 1/t g| \leq t^p/p \int |f|^p + 1/(p' t^{p'}) \int |g|^{p'}$. Differentiate wrt $t$. $t^{p-1} \int |f|^p- t^{-p'-1} \int |g|^{p'} = 0$ then $t^{p+p'}= (\int |g|^{p'})/(\int |f|^p)$, plut in this $t$ to the above. 
+
+Alternatively, replace $f$ by $t/\|f\|_p$ and $g$ by $g/\|g\|_{p'}$, i.e. normalize them. 
+
+
+
+
+
+
+Special cases: $p=1$: $\int |fg| \leq \essup |g| \cdot \int |f|$, easy.
+
+$p=2$: $\int |fg| \leq \sqrt{\int |f|^2 \int |g|^2}$, Cauchy-Schwartz
+
+Notice outer exponents must always add to 1. 
+
+
+\begin{ex}
+Give $f \in L^6([1,\infty])$. Want to estimate
+	\[
+	\int_1^\infty \dfrac{f(x)^2}{x} \; dx = \int f(x)^2 \cdot \dfrac{1}{x} \; dx  \leq \left(\int_1^\infty (f^2)^3 \right)^{1/3} \left( \int_1^\infty \dfrac{1}{x^{3/2}} \right)^{2/3}= \left(\left(\int_1^\infty f^6 \right)^{1/6} \right)^2 \cdot 2= 2^{2/3} \|f\|_6^2
+	\]
+Think what power do you need so that you can use the given information? So $P=3, p'= 3/2$. That is the idea of the example. 
+\end{ex}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+
+Remark on holder and conjugate exponents:
+a) if for all $f \in L^p$, $g \in L^q$, $\int_\R |fg| \leq C \|f\|_p \|g\|_q$ for some $C$, then $p^{-1}+q^{-1}=1$. Why? Rescale: put $f(\lambda x)$ and $g(\lambda x)$ there. $\int_\R f(\lambda x) g(\lambda x) \; dx = \dfrac{1}{\lambda} \int_\R fg$. Similarly, $(\int_\R |f(\lambda x)|^p \; dx)^{1/p}= (\dfrac{1}{\lambda})^{1/p} \|f\|_p$. Conclusions: $\dfrac{1}{\lambda} \int |fg| \leq C (1/\lambda)^{1/p+1/q} \|f\|_p \|g\|_q$. This cannot hold for all $\lambda>0$ unless $1/p+1/q=1$. 
+
+b) useful special case: when $g \equiv 1$. $\int_E |f \cdot 1| \leq (\int_E \|f\|^p)^{1/p} \cdot (\int_E 1^{p'})^{1/p'}$. But then $\int_E |f| \leq |E|^{1/p'} \|f\|_p$. Of course, vacuous if $|E|=\infty$.
+
+Application: suppose $f: \R \to \R$ has continuous $f'$ and $f' \in L^p$, where $1< p \leq \infty$. Then there exists $C$ such that $|f(a)-f(b)| \leq C |a-b|^{1/p'}$. This is H\"older continuity of order $1/p'$. Lipschitz continuity arises when $p=\infty$ so that $p'=1$. 
+
+	\[
+	| f(a) - f(b)| \leq \int_a^b |f'(x)| \; dx \leq (b-a)^{1/p'} \|f'\|_p.
+	\]
+\qed \\
+
+
+Theorem: Dual form of $L^p$ norm: 
+If $f$ is real valued and measurable, then $\|f\|_p = \sup \{ \int fg \colon \|g\|_{p'}, g \text{ real} \}= \sup \{ \dfrac{\int fg}{\|g\|_{p'}} \colon g \in L^{p'}, g \text{ real}\}$. 
+
+\pf $\geq$ from H\"older. To prove $\leq$. $\|f\|_p=0$ is trivial. if $p=1$, let $g = \dfrac{|f|}{f}$ for $\neq 0$ and 0 otherwose. Then $\|g\|_\infty = 1$ and $\int fg = \int_p |f| + \int |f| = \|f_1\}$. If $p=\infty$, choose $A$ such that $0<|A|<\infty$ and for which $|f|>\|f\|_\infty - \ep$. Then let $g = \chi_A \dfrac{|f|}{f}$ and compute $(\int fg)/ \|g\|_1= (\int_A |f|)/|A|> (\|f\|_\infty - \ep)|A|/|A|> \|f\|_\infty - \ep$. If $1<p<\infty$. If $\|f\|_p < \infty$, let $g= |f|^p/f$. so $fg= |f|^p$ and $|g|^{p'}= |f|^{(p-1)p'}= |f|^p$ since $p'= p/(p-1)$. Then $(\int fg) / \|g\|_{p'}= (\int |f|^p)/ (\int |f|^p)^{1/p'}= (\int |f|^p)^{1-1/p'}= (\int |f|^p)^{1/p}$. So we can create for finite $p$ a function for which equality holds in Holders. In case $\|f\|_p= \infty$, use MCT $f_k = \text{sign }f \cdot \min(|f|,k) \chi_{[-k,k]^n}$. But then $|f_k| \nearrow |f|$. The complete proof of this is left as an exercise. \qed \\
+
+
+
+
+% ------------------------
+%  l^p
+% ------------------------
+\subsection{Sequence Classes $\ell^p$}
+
+$\ell^p= \{$ sequences $\{a_k\}$ such that $\|a\|_p<\infty\}$. $\|a\|_p=$ $(\sum_k |a_k|^p)^{1/p}$ and $\sup |a_k|$ if $p=\infty$. Claim: $\|a\|_p \leq \|a\|_q$ if $p \geq q$.  
+
+\pf We can rescale so that $\|a\|_1$. THen $|a_k| \leq 1$ for all $k$. Hence, $\sum |a_k|^p \leq \sum |a_k|^q \leq 1$. So $\|a\|_q \leq 1$. If $p<\infty$. The case $p=\infty$ is easy. \qed \\
+
+A sequence $\{a_k\}$ can be represented by $f= \sum_{k=1}^\infty a_k \chi_{[k,k+1)}$. Then $\|f\|_p= \|a\|_p$ as $\int |f|^p= \sum_{k=1}^\infty \int_k^{k+1} |f|^p = \sum |a_k|^p$. Given sequence $a,b$, can apply Holder/mink to corresponding functions and get 
+$\sum |a_kb_k| \leq \|a\|_p \|b\|_{p'}$ Holder
+$\|a+b\|_p \leq \|a\|_p + \|b\|_p$ Mink
+
+Ex: $a_k=1/k$ is in $\ell^p \iff p>1$. More generally, $a_k= 1/k^r \in \ell^p \iff p>1/r$, where $r>0$.
+
+For geometric sequences, $a_k= 1/2^k \in \ell^p \iff $, well for all $p \in (0,\infty]$. 
+
+$a_k= 1/(k^r \log^{2r}(k+1)) \iff p \geq 1/r$. 
+
+
+
+
+
+
+
+
+
