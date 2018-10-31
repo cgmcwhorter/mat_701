@@ -317,6 +317,108 @@ For geometric sequences, $a_k= 1/2^k \in \ell^p \iff $, well for all $p \in (0,\
 $a_k= 1/(k^r \log^{2r}(k+1)) \iff p \geq 1/r$. 
 
 
+%%%%%%%%%%%%%%%%%%%%%%
+
+Norm: $\|x\| \geq 0$, $\|x\|=0$ iff $x=0$
+$\| \lambda x\|= |\lambda| \, \|x\|$
+$\|x+y\| \leq \|x\|+\|y\|$
+Normed vector space: $(V, \|\cdot\|)$. 
+
+$1 \leq p \leq \infty$
+$\ell^2$ norm$L^p$ 
+$L^p$ has norm $\|f\|_p= \left(\int |f|^p \right)^{1/p}$
+$\ell^p$ has norm $\left( \sum |a_k|^p \right)^{1/p}$
+
+$p=\infty$, special.
+
+
+Norms give metric which then have convergence, sequences, open sets, etc etc (all regular topology plus more, compact sets, close open convergence continuous functions, etc etc. So once have norm, do not need to define these terms as they come immediately from the metric immediately from the norm. 
+
+Now the main thing for today is the following: are these metric spaces complete?
+
+\begin{dfn}[Banach Space]
+A Banach Space is a complete normed linear space.
+\end{dfn}
+
+Complete means every Cauchy sequence converges. 
+
+
+
+Convergence in $L^p$: $f_k \to f$ means $\int |f_k-f|^p \to 0$ if $p<\infty$ or essential sup $|f_k-f| \to 0$ if $p= \infty$. 
+
+
+\begin{ex}
+Piano Keys: $\chi_{[0,1]} \to \chi_{[0,1/2]}, \chi_{[1/2,1]}  \to \cdots$. We know $f_k \to 0$ in $L^p$ for $1 \leq p < \infty$ but not for $L^\infty$. Why? $\|f_k-0\|_{L^p}= \left(\int |\chi_{I_k}|^p)^{1/p}= |I_k|^{1/p} \to 0$. and $\|f_k\|_\infty=1$ for all $k$. Note $f_k(x)$ do not converge for any $x$. 
+%
+Conversely, $k^{-1} \chi_{[0,k]} \to 0$ pointwise but not in $L^1$. $k \chi_{[0,1/k]} \to 0$ a.e. but not in $L^1$. The first converges in $L^p$ for $1<p \leq \infty$ while the second does not converge in any $L^p$ for $1 \leq p \leq \infty$. 
+
+\end{ex}
+
+So convergence pointwise and convergence in $L^p$ are not related for all $p$.
+
+
+\begin{lem}
+If $f_k \to f$ in $L^p$, then $f_k \ma{m} f$ (convergence in measure). 
+\end{lem}
+
+\pf $1 \leq p <\infty$: $|\{|f_k-f|>\ep\}|= |\{|f_k-f|^p>\ep^p\}| \leq 1/\ep^p \int |f_k-f|^p$ by Chebyshev and right integral $\to 0$ as $k \to \infty$. $p=\infty$: $f_k \to f$ in measure means $f_k \to f$ uniformly on $E\sm Z$, $|Z|=0$ hence in measure. \qed \\
+
+
+The converse false as previous example they converged in measure.
+
+
+\begin{thm} 
+$L^p$ and $\ell^p$, $1 \leq p \leq \infty$ are Banach spaces.
+\end{thm}
+
+\pf Only completeness remains. $p=\infty$: $\{f_k\}$ is Cauchy iff there exists $Z$ with $|Z|=0$ such that for all $\ep>0$, there exists $N$ such that $\sup_{Z^C| |f_k-f_j|<\ep$ for all $k,j \geq N$. So for all $x \in Z^C$, $\{f_k(x)\}$ is Cauchy, hence there exists limit $f(x)= \lim_{k \to \infty} f_k(x)$. Let $j \to \infty$ in $\sup_{Z^C| |f_k-f_j|<\ep$, get $|f_k(x)-f(x)|= \lim_{j \to \infty} |f_k(x)-f_j(x)| \leq \ep$ for all $x \in Z^C$. This means $\|f_k-f\|_\infty \leq \ep$ so $f_k \to f$ in $L^\infty$. 
+
+$1 \leq p<\infty$: Suppose $\{f_k\}$ is Cauchy in $L^p$. Then $\{f_k\}$ is Cauchy in measure. $|\{ |f_k-f_j|>\ep\}| \to 0$ as $k,j \to \infty$. By Lemma, From 4.4, we have there exists $f$ such that $f_k \ma{m} f$. there exists subsequence $f_{k_j} \to f$ a.e. for a fixed $i$.
+	\[
+	f_{k_i} - f_{k_j} \ma{a.e.} f_{k_i} - f \quad j \to \infty
+	\]
+By Fatou's Lemma: 
+	\[
+	\int |f_{k_i}-f|^p \leq \liminf_{j \to \infty} \int |f_{k_i} - f_{k_j}|^p
+	\]
+By cauchy. Conclude $\int |f_{k_i} - f|^p \leq \ep$ for sufficiently large $i$. So $f_{k_i} \to f$ in $L^p$. Hence $f_k \to f$. General fact: Cauchy sequence with convergent subsequence converges. \qed \\
+
+Proof that $\ell^p$ is complete: we ahve $T: \epp^p \to L^p([1,\infty))$ $Ta= \sum a_k \chi_{[k,k+1)}$ if $\{a^{(i)}\}$ is Cauchy in $\epp^p$, then $\{Ta^{(i)}\}$ is Cauchy in $L^p$. $Ta^{(i)} \to f \in L^p$. Note: $f$ is of the form $\sum b_k \chi_{[k,k+1)}$ a.e. because $Ta^{(i_j)} \ma{a.e.] f$. Then $a^{(i)} \to b$ in $\ell^p$ \qed \\
+
+
+Prove separability: separable if has countable dense subset. 
+
+\begin{thm}
+$L^p$, $\ell^p$ are separable if $p<\infty$ not if $p=\infty$.
+
+In $L^p(\R^n)$: $\{ \sum_{fin} (a_k+ib_k) \chi_{Q_k}: a_k,b_k \in \Q, Q_k \text{ dyadic cube}\}$. is dense in $L^p$.
+
+In $L^p(E)$, just restrict to $E$ (for $p<\infty$.
+
+In $\ell^p$ $\{(a_1,a_2,\ldots,a_m,0,0,\ldots)$ then real an imag. parts rational, $m \in \N$ is dense for $p<\infty$. 
+
+
+$p=\infty$ Find coountably many elements $f_\alpha$ such that $\|f_\alpha-f_\beta\|_\infty=1$ for all $\alpha \neq \beta$ in $L^\infty(\R^n)$: $\chi_{[0,a]^n}$ $a>0$ in $\ell^\infty$ all $\{0,1\}$ sequences. $L^\infty(E)$ in $L^\infty(E)$: $|E|>0$ consider $\phi(a)= |E \cap [-a,a]^n|$, $a>0$ is continuous. 
+	\[
+	\phi(b)-\phi(a) \leq |[-b,b]^n \sm [-a,a]^n| = (lb)^n - (la)^n \to 0
+	\] 
+as $b \to a$. $\phi(0)=0$. $\phi(a) \to |E|$ as $a \to \infty$. So IVT has all values in between 0 and $infinity $|E|>0$, so uncountably many values. and $\|\chi_{E \cap [-a,a]^n} - \chi_{E \cap [-b,b]^n}\|_\infty =1$ if $\phi(a) \neq \phi(b)$. 
+\end{thm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
