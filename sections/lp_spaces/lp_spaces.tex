@@ -142,9 +142,7 @@ Not all the $L^p$ spaces are `created equally'---there are `nicer' and `uglier' 
 	\item[4.] $L^\infty$
 	\item[5.] (Worst) $L^p$, $0<p<1$. 
 	\end{enumerate}
-
-
-The easiest relationship is between $L^\infty$ and $L^p$ for $p<\infty$.
+The reasoning for placing $L^2$ first is essentially because it is probably the most familiar to the  reader. The reasoning for this ordering will make itself apparent in this section. The simplest relationship is between $L^\infty$ and $L^p$ for $p<\infty$.
 
 
 \begin{prop}
@@ -162,42 +160,42 @@ However, $|A|^{1/p} \to 1$ as $p \to \infty$. This proves that $\liminf_{p \to \
 Therefore, $\limsup_{p \to \infty} \nm{f}{p} \leq M$. \qed \\
 
 
+Note that the requirement that $|E|<\infty$ is necessary: the constant function $f(x)=c$, $c \neq 0$, is in $L^\infty$ but is not in $L^p$ for any $0<p<\infty$. Now we show that the $L^p$ spaces are nested, and in a sense, form an interval. 
 
 
+\begin{prop} \hfill
+If $|E|<\infty$, and $f \in L^{p_2}$ then $f \in L^{p_1}$ for all $0<p_1<p_2$. Furthermore, if $f \in L^{p_1}$ and $f \in L^{p_2}$, then $f \in L^p$ for all $p_1<p<p_2$. That is, $\{p \colon f \in L^p\}$ is an interval starting from 0.
+\end{prop}
 
-
-
-
-A) if $|E|<\infty$, and $f \in L^{p_1}$ then $f \in L^{p_2}$ for all $p_2<p_1$: $\{p \colon f \in L^p\}$ is an interval starting from 0.
-b) if $f \in L^{p_1}$ and $f \in L^{p_2}$, then $f \in L^p$ for all $p_1<p<p_2$: $\{p \colon f\in L^p\}$ is an interval.
-
-
-Proof is based on $\int |f|^p= \underbrace{\inf |f|^p}_{|f| \leq 1} + \underbrace{\int |f|^p}_{|f|>1}$, the first decreases as $p$ increases and the second increass as $p$ increases.
-
-So for b we have
+\pf Let $f \in L^{p_2}$. Write $E= E_1 \cup E_2$, where $E_1:=\{ x \colon |f| \leq 1\}$ and $E_2:= \{ x \colon |f|>1\}$. Then we have
 	\[
-	\int_{|f| \leq 1} |f|^p \leq \int_{|f| \leq 1} |f|^{p_1} < \infty
+	\int_E |f|^p = \int_{E_1} |f|^p + \int_{E_2} |f|^p, \quad 0<p<\infty. 
 	\]
+Now we have $\int_{E_1} |f|^p \leq |E_1|$. The integral $\int_{E_2} |f|^p$ is an increasing function in $p$. As $f \in L^{p_2}$ and $p_1<\infty$, then $f \in L^{p_1}$. If $p_2= \infty$, then $f$ is a bounded function on a set of finite measure so that $f \in L^{p_1}$. For the second statement, suppose that $p_2<\infty$. We have
 	\[
-	\int_{|f|>1} |f|^p \leq \int_{|f|>1} |f|^{p_2} < \infty
+	\begin{split}
+	\int_{E_1}& |f|^p \leq \int_{E_1} |f|^{p_1} < \infty \\
+	\int_{E_2}& |f|^p \leq \int_{E_2} |f|^{p_2} < \infty
+	\end{split}
 	\]
-Proving $f \in L^p$ except $p_2=\infty$ is a special case. let $M= \essup |f|$ 
+The result then follows. Now suppose that $p_2= \infty$, and let $M:= \essup{E} |f|$. Proving $f \in L^p$ except $p_2=\infty$ is a special case. let $M= \essup |f|$. The integral $\int_{E_1} |f|^p=0$. It suffices to show the integral $\int_{E_2} |f|^p$ is finite. We have
 	\[
-	\int_{|f|>1} \leq \int_{|f|>1} M^p \leq M^p |\{|f|>1\}| \leq M^p |\{|f|^{p_1}>1\}| \leq M^p \int |f|^{p_1} < \infty
+	\int_{E_2} |f|^p \leq \int_{E_2} M^p \leq M^p |E_2| \leq M^p |\{ |f|^{p_2}>1\}| \leq M^p \int_{|f|^{p_1}>1} |f|^{p_1} < \infty 
+	\] \qed \\
+
+
+Again, the requirement that $|E|<\infty$ is necessary. For example, $f(x)= x^{-1/p_1} \in L^{p_2}([1,\infty))$ for $p_1<p_2$ but $f(x) \notin L^{p_1}([1,\infty))$. Moreover, any nonzero constant is in $L^\infty$ but not in $L^{p_1}(E)$ if $|E|=\infty$ and $p_1<\infty$. A function may belong to $L^{p_1}$ for $p_1<p_2$ and not belong to $L^{p_2}$. For example, if $p_2<\infty$ then $f(x)= x^{-1/p_2} \in L^{p_1}((0,1))$, where $p_1<p_2$, but $f(x) \notin L^{p_2}((0,1))$. Furthermore, $f(x)= -\log x \in L^{p_1}((0,1))$ for $p_1<\infty$ but $f(x) \notin L^\infty((0,1))$. For any set $|E|$ (even with infinite measure), if $f \in L^{p_1}(E)$, then $f \in L^{p_2}(E)$, where $p_1<p_2$. Finally, there are functions which are not in $L^p$ for any $p$. For example, if $f \equiv 1$ on $\R$, then $f \notin L^p$ for all $p$ except for $p= \infty$. If $f(x)=x$ on $\R$, then $f \notin L^p$ for all $p \in (0,\infty]$. One can find examples on finite intervals also. As a final remark for this section, if $|E|< \infty$, we have
+	\[
+	\essup{E} |f|= \lim_{p \to \infty} \left( \int_E |f|^p \right)^{1/p}
 	\]
-
-
-Proof of A) $\int_{|f| \leq 1} |f|^p \leq \int_E 1 \leq |E|<\infty$ and for $\int_{|f|>1}$ use inequality as before. 
-
-
-
-
-Are there any functions which are in none? $f \equiv 1$ on $\R$, $f \notin L^p$ for all $p$ except $p=\infty$. For none, use $f \equiv x$ on $\R$. Find an example of such on $(0,1)$ too. 
-
-
-
-
-Fact: if $|E|<\infty$, $\essup{E} |f|= \lim_{p \to \infty} \left( \int_E |f|^p\right)^{1/p}$. Notation: $\|f\|_{p,E}= \begin{cases} \left( \int_E |f|^p\right)^{1/p}, & 0<p<\infty \\ \essup{E} |f|, 0<p<1 \end{cases}$. 
+We are then able to write 
+	\[
+	\|f\|_{p,E}=
+	\begin{cases} 
+	\ds\left( \int_E |f|^p\right)^{1/p} \!\!\!\!, & 0<p<\infty \\ 
+	\essup{E} |f|, & 0<p<1 
+	\end{cases}
+	\]
 
 
 
@@ -206,8 +204,61 @@ Fact: if $|E|<\infty$, $\essup{E} |f|= \lim_{p \to \infty} \left( \int_E |f|^p\r
 % ------------------------
 \subsection{H\"older and Minkowski Inequalities}
 
+In this section, we prove two important and powerful inequalities: H\"older's and Minkowski's Inequality. H\"older's inequality is about controlling products while Minkowski is about controlling sums. These are among the most useful tools in Analysis. We begin with a more basic inequality. 
 
-H\"older's inequality is about products and Minkowski is about sums. Recall $\|f\|_{p,E}= \left( \int_e |f|^p \right)^{1/p}$, $\|f\|_{\infty,E}= \essup{E} |f|$. 
+\begin{thm}[Young's Inequality]
+Let $y= \phi(x)$ be continuous, real-valued, and strictly increasing for $x \geq 0$ with $\phi(0)=0$. If $x= \psi(y)$ is the inverse of $\phi$, then for $a,b>0$,
+	\[
+	ab \leq \int_0^a \phi(x) \; dx + \int_0^b \psi(y) \; dy.
+	\]
+with equality holds if and only if $b= \phi(a)$. 
+\end{thm}
+
+\pf The proof becomes immediate if we interpret each term as an area, and that the graph of $\phi$ may also serve as the graph of $\psi$ by interchange of the $x$ and $y$ axes. Equality holds if and only if $(a,b)$ lies on the graph of $\phi$. 
+	\[
+	\begin{tikzpicture}[scale=1.5,every node/.style={scale=1}]
+	\node at (3.5,2.2) {$y=\phi(x)$}; 
+	\node at (3.6, -0.2) {$x$};
+	\node at (-0.2, 3.1) {$y$};
+	\node at (2,-0.2) {$a$};
+	\node at (-0.2,2) {$b$};
+
+	\draw[thin,-latex] (-0.5,0) -- (3.5,0);
+	\draw[thin,-latex] (0,-0.5) -- (0,3);
+	\draw[thick,domain= 0:3,smooth,variable=\x] plot ({\x},{1.5^\x-1});
+	\draw[thick, domain= 0:2,smooth,variable=\x] plot ({2},{\x});
+	\draw[thick,domain= 0:2.70951,smooth,variable=\x] plot ({\x},{2});
+	\end{tikzpicture}
+	\] \qed \\
+
+
+Now taking $\phi(x)= x^\alpha$ for $\alpha>0$, the $\psi(y)= y^{1/\alpha}$, and Young's Inequality is 
+	\[
+	ab \leq \dfrac{a^{1+\alpha}}{1+\alpha} + \dfrac{b^{1+1/\alpha}}{1+1/\alpha},
+	\]
+Setting $p= \alpha+1$ and $p'= 1+1/\alpha$, we have
+	\[
+	ab \leq \dfrac{a^p}{p} + \dfrac{b^{p'}}{p'}, 
+	\]
+where $a,b \geq 0$, $1<p<\infty$, and $\dfrac{1}{p} + \dfrac{1}{p'} = 1$.
+
+
+\begin{dfn}[Conjugate Exponents]
+Numbers $p,p'>0$ with $1/p+1/p'=1$ are called conjugate exponents. We make the convention that $1/\infty=0$ here.
+\end{dfn}
+
+
+With this terminology, the numbers 1 and $\infty$ are conjugate. Other examples are the pairs $\{1.1,11\}$, $\{1.5,3\}$, and $\{2,2\}$, which is the only number which is self-conjugate. 
+
+
+
+
+
+
+
+
+
+
 
 
 \begin{thm}[Minkowski's Inequality]
@@ -234,65 +285,142 @@ So $\|f\|_p$ is a norm when $1 \leq p \leq \infty$ (and not if $0<p<1$).
 For $p=1$ and $p= \infty$, this is easy: $p=1$: $\int |f+g| \leq \int (|f|+|g|)= \int |f|+ \int |g|$. For $p=\infty$, $|f| \leq M$ a.e. $|g| \leq N$ a.e., then $|f+g| \leq M+N$ a.e.. For $1<p<\infty$, we need H\"older's inequality. 
 
 
-Given $p \in [1,\infty]$, let $p' = \dfrac{p}{p-1}$; so $\frac{1}{p} + \frac{1}{p'}=1$, the conjugate exponent, where $p' \in [1,\infty]$. Clearly, 1 and $\infty$ are conjugate. Other pairs are $(1.1,11)$, $(1.5,3)$, and one self conjugate $(2,2)$. 
 
-% Number line pairing them together
+
+
+
 
 \begin{thm}[H\"older's Inequality]
-$\int |fg| \leq \|f\|_p \|g\|_p$ for $1 \leq p \leq \infty$. 
+If $1 \leq p \leq \infty$ and $1/p+1/p'=1$, then $\|fg\|_1 \leq \|f\|_p \|g\|_p$, i.e.
+	\[
+	\begin{split}
+	\int_E |fg| &\leq \left( \int_E |f|^p \right)^{1/p} \left( \int_E |g|^{p'} \right)^{1/p'}, \quad 1 < p < \infty \\
+	\int_E |fg| &\leq (\essup{E} |f| ) \int_E |g|. 
+	\end{split}
+	\]
 \end{thm}
 
-\pf Three steps: 
-1. Pointwise (algebraic) inequality: $a,b \geq 0$, then $ab \leq a^p/p + b^{p'}/p'$: Young's Inequality. Key to it $x^{p-1}$ and $x^{p'-1}$ are inverses. $p'-1 = \frac{1}{p-1}$. 
-2. Apply 1 to $|f|$ and $|g|$: $\int |fg| \leq 1/p \int |f|^p + 1/p' \int |g|^p$. 
-3. Optimize using homogeneity. let $t>0$ then $\int |fg|= \int |tf \cdot 1/t g| \leq t^p/p \int |f|^p + 1/(p' t^{p'}) \int |g|^{p'}$. Differentiate wrt $t$. $t^{p-1} \int |f|^p- t^{-p'-1} \int |g|^{p'} = 0$ then $t^{p+p'}= (\int |g|^{p'})/(\int |f|^p)$, plut in this $t$ to the above. 
+\pf The last inequality is the case when $p= \infty$, and is routine. Suppose then that $1<p<\infty$. If $\|f\|_p= \|g\|_{p'}=1$, then
+	\[
+	\int_E |fg| \leq \int_E \left( \dfrac{|f|^p}{p} + \dfrac{|g|^{p'}}{p'} \right)= \dfrac{\|f\|_p^p}{p} + \dfrac{\|g\|^{p'}_{p'}}{p'}= \dfrac{1}{p} + \dfrac{1}{p'}= 1 = \|f\|_p \, \|g\|_{p'}.
+	\]
+If $\|f\|_p$ or $\|g\|_{p'}$ is zero, then $fg$ is zero a.e. in $E$ and the result follows. We may then assume that neither $\|f\|_p$ nor $\|g\|_{p'}$ is zero. Setting 
+	\[
+	\widetilde{f}= \dfrac{f}{\|f\|_p} \quad \text{ and } \quad \widetilde{g}= \dfrac{g}{\|g\|_{p'}}
+	\]
+we have $\|\widetilde{f}\|_p=\|\widetilde{g}\|_{p'}=1$. But then in this case, the result follows by the work above. \qed \\
 
-Alternatively, replace $f$ by $t/\|f\|_p$ and $g$ by $g/\|g\|_{p'}$, i.e. normalize them. 
 
+Notice outer exponents must always add to 1 in H\"older's Inequality. The case where $p=2$ is a classical result:
 
-
-
-
-
-Special cases: $p=1$: $\int |fg| \leq \essup |g| \cdot \int |f|$, easy.
-
-$p=2$: $\int |fg| \leq \sqrt{\int |f|^2 \int |g|^2}$, Cauchy-Schwartz
-
-Notice outer exponents must always add to 1. 
+\begin{cor}[Cauchy-Schwarz Inequality]
+	\[ \int_E |fg| \leq \left( \int_E |f|^2 \right)^{1/2} \left( \int_E |g|^2 \right)^{1/2} \]
+\end{cor}
 
 
 \begin{ex}
-Give $f \in L^6([1,\infty])$. Want to estimate
+Suppose $f \in L^6([1,\infty])$. Want to estimate the integral $\ds \int_1^\infty \dfrac{f(x)^2}{x} \; dx$. Writing 
 	\[
-	\int_1^\infty \dfrac{f(x)^2}{x} \; dx = \int f(x)^2 \cdot \dfrac{1}{x} \; dx  \leq \left(\int_1^\infty (f^2)^3 \right)^{1/3} \left( \int_1^\infty \dfrac{1}{x^{3/2}} \right)^{2/3}= \left(\left(\int_1^\infty f^6 \right)^{1/6} \right)^2 \cdot 2= 2^{2/3} \|f\|_6^2
+	\int_1^\infty \dfrac{f(x)^2}{x} \; dx= \int_!^\infty f(x)^2 \cdot \dfrac{1}{x} \; dx
 	\]
-Think what power do you need so that you can use the given information? So $P=3, p'= 3/2$. That is the idea of the example. 
-\end{ex}
+We want to find a power $p'$ such that the integral $1/x^{p'}$ converges. However, we still want to make use of the given information. We have $f^2$ and $f \in L^6$. Writing $f^6=(f^2)^3$, we see that $p'= 3/2$ will work. So we have
+	\[
+	\begin{split}
+	\int_1^\infty \dfrac{f(x)^2}{x} \; dx= \int f(x)^2 \cdot \dfrac{1}{x} \; dx  &\leq \left( \int_1^\infty (f^2)^3 \right)^{1/3} \left( \int_1^\infty \dfrac{1}{x^{3/2}} \right)^{2/3} \\
+	&= \left( \left( \int_1^\infty f^6 \right)^{1/6} \right)^2 \cdot 2^{2/3} \\
+	&= 2^{2/3} \|f\|_6^2
+	\end{split}
+	\]
+\end{ex} \xqed
 
 
+Suppose that $f \in L^p$ and $g \in L^q$, we have $\ds\int_\R |fg| \leq C \|f\|_p \|g\|_q$ for some $C$, then $p^{-1} + q^{-1}= 1$. Why? Rescaling to $f(\lambda x)$ and $g(\lambda x)$, we have
+	\[
+	\int_\R f(\lambda x) g(\lambda x) \; dx = \dfrac{1}{\lambda} \int_\R fg.
+	\]
+Similarly, 
+	\[
+	\left(\int_\R |f(\lambda x)|^p \right)^{1/p}= \left(\dfrac{1}{\lambda}\right)^{1/p} \, \|f\|_p.
+	\]
+But then we have
+	\[
+	\dfrac{1}{\lambda} \int |fg| \leq C \left( \dfrac{1}{\lambda} \right)^{1/p+1/q} \, \|f\|_p \|g\|_q.
+	\]
+This does not hold for all $\lambda>0$ unless $p^{-1} + q^{-1}= 1$. Note also the special case in H\"older's Inequality when $g \equiv 1$:
+	\[
+	\int_E |f \cdot 1| \leq \left( \int_E \|f\|^p \right)^{1/p} \left( \int_E 1^{p'} \right)^{1/p'}.
+	\]
+ But then 
+ 	\[
+	\int_E |f| \leq |E|^{1/p'} \|f\|_p.
+	\]
+ This is vacuous if $|E|= \infty$. 
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%
-
-Remark on holder and conjugate exponents:
-a) if for all $f \in L^p$, $g \in L^q$, $\int_\R |fg| \leq C \|f\|_p \|g\|_q$ for some $C$, then $p^{-1}+q^{-1}=1$. Why? Rescale: put $f(\lambda x)$ and $g(\lambda x)$ there. $\int_\R f(\lambda x) g(\lambda x) \; dx = \dfrac{1}{\lambda} \int_\R fg$. Similarly, $(\int_\R |f(\lambda x)|^p \; dx)^{1/p}= (\dfrac{1}{\lambda})^{1/p} \|f\|_p$. Conclusions: $\dfrac{1}{\lambda} \int |fg| \leq C (1/\lambda)^{1/p+1/q} \|f\|_p \|g\|_q$. This cannot hold for all $\lambda>0$ unless $1/p+1/q=1$. 
-
-b) useful special case: when $g \equiv 1$. $\int_E |f \cdot 1| \leq (\int_E \|f\|^p)^{1/p} \cdot (\int_E 1^{p'})^{1/p'}$. But then $\int_E |f| \leq |E|^{1/p'} \|f\|_p$. Of course, vacuous if $|E|=\infty$.
-
-Application: suppose $f: \R \to \R$ has continuous $f'$ and $f' \in L^p$, where $1< p \leq \infty$. Then there exists $C$ such that $|f(a)-f(b)| \leq C |a-b|^{1/p'}$. This is H\"older continuity of order $1/p'$. Lipschitz continuity arises when $p=\infty$ so that $p'=1$. 
-
+\begin{ex}
+Suppose $f: \R \to \R$ is $C^1$ and $f' \in L^p$, where $1< p \leq \infty$. Using H\"older's Inequality with $1/p'$, there exists $C$ such that $|f(a)-f(b)| \leq C |a-b|^{1/p'}$. We then have
 	\[
 	| f(a) - f(b)| \leq \int_a^b |f'(x)| \; dx \leq (b-a)^{1/p'} \|f'\|_p.
 	\]
+Notice that Lipschitz continuity arises in H\"older's Inequality in the case where $p=\infty$, so that $p'=1$. 
+\end{ex} \xqed 
+
+
+There is a sort of converse to H\"older's Inequality which gives a dual form of the $L^p$ norm.
+
+
+\begin{thm}
+Let $1 \leq p \leq \infty$ and $1/p+1/p'=1$. If $f$ is real valued and measurable on $E$, then 
+	\[
+	\|f\|_p = \sup \left\{ \int fg \colon \|g\|_{p'}, g \text{ real} \right\}= \sup \left\{ \dfrac{\int fg}{\|g\|_{p'}} \colon g \in L^{p'}, g \text{ real} \right\}.
+	\]
+\end{thm}
+
+\pf The fact that the left side is larger than the right follows from H\"older's Inequality. It remains to prove the reverse inequality. If $\|f\|_p=0$, then $f \equiv 0$ a.e. on $E$, and the result follows. If $0<\|f\|_p<\infty$, by dividing by $\|f\|_p$, we may assume that $\|f\|_p=1$. One routinely verifies that $\|g\|_{p'}= 1$ and $\ds \int_E fg= 1$, which completes this case. 
+
+Now suppose that $\|f\|_p= \infty$. 
+
+
+% p130
+
+
+choose $A$ such that $0<|A|<\infty$ and for which $|f|>\|f\|_\infty - \ep$. Then let $g = \chi_A \dfrac{|f|}{f}$ and compute $(\int fg)/ \|g\|_1= (\int_A |f|)/|A|> (\|f\|_\infty - \ep)|A|/|A|> \|f\|_\infty - \ep$. If $1<p<\infty$. If $\|f\|_p < \infty$, let $g= |f|^p/f$. so $fg= |f|^p$ and $|g|^{p'}= |f|^{(p-1)p'}= |f|^p$ since $p'= p/(p-1)$. Then $(\int fg) / \|g\|_{p'}= (\int |f|^p)/ (\int |f|^p)^{1/p'}= (\int |f|^p)^{1-1/p'}= (\int |f|^p)^{1/p}$. So we can create for finite $p$ a function for which equality holds in Holders. In case $\|f\|_p= \infty$, use MCT $f_k = \text{sign }f \cdot \min(|f|,k) \chi_{[-k,k]^n}$. But then $|f_k| \nearrow |f|$. The complete proof of this is left as an exercise. 
+
+
+
 \qed \\
 
 
-Theorem: Dual form of $L^p$ norm: 
-If $f$ is real valued and measurable, then $\|f\|_p = \sup \{ \int fg \colon \|g\|_{p'}, g \text{ real} \}= \sup \{ \dfrac{\int fg}{\|g\|_{p'}} \colon g \in L^{p'}, g \text{ real}\}$. 
 
-\pf $\geq$ from H\"older. To prove $\leq$. $\|f\|_p=0$ is trivial. if $p=1$, let $g = \dfrac{|f|}{f}$ for $\neq 0$ and 0 otherwose. Then $\|g\|_\infty = 1$ and $\int fg = \int_p |f| + \int |f| = \|f_1\}$. If $p=\infty$, choose $A$ such that $0<|A|<\infty$ and for which $|f|>\|f\|_\infty - \ep$. Then let $g = \chi_A \dfrac{|f|}{f}$ and compute $(\int fg)/ \|g\|_1= (\int_A |f|)/|A|> (\|f\|_\infty - \ep)|A|/|A|> \|f\|_\infty - \ep$. If $1<p<\infty$. If $\|f\|_p < \infty$, let $g= |f|^p/f$. so $fg= |f|^p$ and $|g|^{p'}= |f|^{(p-1)p'}= |f|^p$ since $p'= p/(p-1)$. Then $(\int fg) / \|g\|_{p'}= (\int |f|^p)/ (\int |f|^p)^{1/p'}= (\int |f|^p)^{1-1/p'}= (\int |f|^p)^{1/p}$. So we can create for finite $p$ a function for which equality holds in Holders. In case $\|f\|_p= \infty$, use MCT $f_k = \text{sign }f \cdot \min(|f|,k) \chi_{[-k,k]^n}$. But then $|f_k| \nearrow |f|$. The complete proof of this is left as an exercise. \qed \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -348,7 +476,7 @@ Convergence in $L^p$: $f_k \to f$ means $\int |f_k-f|^p \to 0$ if $p<\infty$ or 
 
 
 \begin{ex}
-Piano Keys: $\chi_{[0,1]} \to \chi_{[0,1/2]}, \chi_{[1/2,1]}  \to \cdots$. We know $f_k \to 0$ in $L^p$ for $1 \leq p < \infty$ but not for $L^\infty$. Why? $\|f_k-0\|_{L^p}= \left(\int |\chi_{I_k}|^p)^{1/p}= |I_k|^{1/p} \to 0$. and $\|f_k\|_\infty=1$ for all $k$. Note $f_k(x)$ do not converge for any $x$. 
+%Piano Keys: $\chi_{[0,1]} \to \chi_{[0,1/2]}, \chi_{[1/2,1]}  \to \cdots$. We know $f_k \to 0$ in $L^p$ for $1 \leq p < \infty$ but not for $L^\infty$. Why? $\|f_k-0\|_{L^p}= \left(\int |\chi_{I_k}|^p)^{1/p}= |I_k|^{1/p} \to 0$. and $\|f_k\|_\infty=1$ for all $k$. Note $f_k(x)$ do not converge for any $x$. 
 %
 Conversely, $k^{-1} \chi_{[0,k]} \to 0$ pointwise but not in $L^1$. $k \chi_{[0,1/k]} \to 0$ a.e. but not in $L^1$. The first converges in $L^p$ for $1<p \leq \infty$ while the second does not converge in any $L^p$ for $1 \leq p \leq \infty$. 
 
@@ -371,7 +499,7 @@ The converse false as previous example they converged in measure.
 $L^p$ and $\ell^p$, $1 \leq p \leq \infty$ are Banach spaces.
 \end{thm}
 
-\pf Only completeness remains. $p=\infty$: $\{f_k\}$ is Cauchy iff there exists $Z$ with $|Z|=0$ such that for all $\ep>0$, there exists $N$ such that $\sup_{Z^C| |f_k-f_j|<\ep$ for all $k,j \geq N$. So for all $x \in Z^C$, $\{f_k(x)\}$ is Cauchy, hence there exists limit $f(x)= \lim_{k \to \infty} f_k(x)$. Let $j \to \infty$ in $\sup_{Z^C| |f_k-f_j|<\ep$, get $|f_k(x)-f(x)|= \lim_{j \to \infty} |f_k(x)-f_j(x)| \leq \ep$ for all $x \in Z^C$. This means $\|f_k-f\|_\infty \leq \ep$ so $f_k \to f$ in $L^\infty$. 
+%\pf Only completeness remains. $p=\infty$: $\{f_k\}$ is Cauchy iff there exists $Z$ with $|Z|=0$ such that for all $\ep>0$, there exists $N$ such that $\sup_{Z^C| |f_k-f_j|<\ep$ for all $k,j \geq N$. So for all $x \in Z^C$, $\{f_k(x)\}$ is Cauchy, hence there exists limit $f(x)= \lim_{k \to \infty} f_k(x)$. Let $j \to \infty$ in $\sup_{Z^C| |f_k-f_j|<\ep$, get $|f_k(x)-f(x)|= \lim_{j \to \infty} |f_k(x)-f_j(x)| \leq \ep$ for all $x \in Z^C$. This means $\|f_k-f\|_\infty \leq \ep$ so $f_k \to f$ in $L^\infty$. 
 
 $1 \leq p<\infty$: Suppose $\{f_k\}$ is Cauchy in $L^p$. Then $\{f_k\}$ is Cauchy in measure. $|\{ |f_k-f_j|>\ep\}| \to 0$ as $k,j \to \infty$. By Lemma, From 4.4, we have there exists $f$ such that $f_k \ma{m} f$. there exists subsequence $f_{k_j} \to f$ a.e. for a fixed $i$.
 	\[
@@ -383,7 +511,7 @@ By Fatou's Lemma:
 	\]
 By cauchy. Conclude $\int |f_{k_i} - f|^p \leq \ep$ for sufficiently large $i$. So $f_{k_i} \to f$ in $L^p$. Hence $f_k \to f$. General fact: Cauchy sequence with convergent subsequence converges. \qed \\
 
-Proof that $\ell^p$ is complete: we ahve $T: \epp^p \to L^p([1,\infty))$ $Ta= \sum a_k \chi_{[k,k+1)}$ if $\{a^{(i)}\}$ is Cauchy in $\epp^p$, then $\{Ta^{(i)}\}$ is Cauchy in $L^p$. $Ta^{(i)} \to f \in L^p$. Note: $f$ is of the form $\sum b_k \chi_{[k,k+1)}$ a.e. because $Ta^{(i_j)} \ma{a.e.] f$. Then $a^{(i)} \to b$ in $\ell^p$ \qed \\
+%Proof that $\ell^p$ is complete: we ahve $T: \epp^p \to L^p([1,\infty))$ $Ta= \sum a_k \chi_{[k,k+1)}$ if $\{a^{(i)}\}$ is Cauchy in $\epp^p$, then $\{Ta^{(i)}\}$ is Cauchy in $L^p$. $Ta^{(i)} \to f \in L^p$. Note: $f$ is of the form $\sum b_k \chi_{[k,k+1)}$ a.e. because $Ta^{(i_j)} \ma{a.e.] f$. Then $a^{(i)} \to b$ in $\ell^p$ \qed \\
 
 
 Prove separability: separable if has countable dense subset. 
@@ -402,7 +530,7 @@ $p=\infty$ Find coountably many elements $f_\alpha$ such that $\|f_\alpha-f_\bet
 	\[
 	\phi(b)-\phi(a) \leq |[-b,b]^n \sm [-a,a]^n| = (lb)^n - (la)^n \to 0
 	\] 
-as $b \to a$. $\phi(0)=0$. $\phi(a) \to |E|$ as $a \to \infty$. So IVT has all values in between 0 and $infinity $|E|>0$, so uncountably many values. and $\|\chi_{E \cap [-a,a]^n} - \chi_{E \cap [-b,b]^n}\|_\infty =1$ if $\phi(a) \neq \phi(b)$. 
+%as $b \to a$. $\phi(0)=0$. $\phi(a) \to |E|$ as $a \to \infty$. So IVT has all values in between 0 and $infinity $|E|>0$, so uncountably many values. and $\|\chi_{E \cap [-a,a]^n} - \chi_{E \cap [-b,b]^n}\|_\infty =1$ if $\phi(a) \neq \phi(b)$. 
 \end{thm}
 
 
