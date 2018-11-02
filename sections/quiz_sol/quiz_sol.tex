@@ -114,8 +114,20 @@ Suppose that $0< p \leq \infty$ and that the sequence $\{a_k\}$ belongs to $\ell
 \pf $p<\infty$, $\sum |a_{k_j}|^p \leq \sum |a_k|^p$ and $p=\infty$, $a_k \leq M$ then $a_{k_j} \leq M$.
 
 
+% Quiz 21
+\begin{quizsol}
+For $k \in \N$, let $f_k= \sqrt{k} \chi_{[0,1/k]}$. Is it the case that $f_k \to 0$ in $L^2(\R)$?
+\end{quizsol}
 
-
+\pf This is not the case as 
+	\[
+	\| \sqrt{k} \chi_{[0,1/k]} \|_2= \left( \int k \chi_{[0,1/k]} \right)^{1/2}= 1.
+	\]
+However, this does converge for $p<2$ as
+	\[
+	\int_0^{1/k} k^{p/2}= k^{p/2-1} \to 0
+	\]
+if $p<2$. \qed \\
 
 
 

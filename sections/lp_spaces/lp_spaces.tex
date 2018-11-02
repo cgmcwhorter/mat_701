@@ -536,6 +536,97 @@ $p=\infty$ Find coountably many elements $f_\alpha$ such that $\|f_\alpha-f_\bet
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%
+
+An inner product on a vector space $V$: a function $\langle f,g \rangle \to \C$, $f,g \in V$. With $\langle g,f \rangle = \overline{\langle f,g \rangle}$ (conjugate symmetry). and $\langle \alpha f_1+\beta f_2, g \rangle = \alpha \langle f_1,g \rangle + \beta \langle f_2,g \rangle$ (linear in first, hence second, argument). $\langle f,f \rangle=0$ and $0$ if and only if $f=0$. 
+
+
+\begin{ex}
+$L^2(E)$ has $\langle f,g \rangle = \int_E f \overline{g}$. $\ell^2$ has $\langle a,b \rangle = \sum_k a_k \overline{b}_k$. These are finite by H\"older, $p=p'=2$. 
+\end{ex}
+
+
+General facts:
+$\|f\|= \sqrt{ \langle f,f \rangle}$ is a norm
+$|\langle f,g \rangle| \leq \|f\| \, \|g\|$. (abstract Cauchy-Schwarz)
+
+
+Hilbert space $=$ complete inner product space.
+
+$L^2$, $\ell^2$ are HIlbert spaces.
+
+Orthgonality: $f \perp g$ if $\langle f,g \rangle= 0$. 
+
+Pythagorean Theorem: if $f \perp g$, then $\|f \pm g\|^2 = \|f\|^2 + \|g\|^2$. Why? $\langle f+g, f+g \rangle= \langle f,f \rangle + \langle f,g \rangle + \langle g,f \rangle + \langle g,g \rangle= \|f\|^2 + \|g\|^2$. 
+
+More generally, if $f_1,\ldots,f_n$ are mutually orthogonal, then $\| \sum f_k \|^2= \sum \|f_k\|^2$. 
+
+
+Orthonormal system: $\{ \phi_k\}$ in Hilbert space such that
+	\[
+	\langle \phi_k, \phi_j \rangle=
+	\begin{cases}
+	0, & k \neq j \\
+	1, & k=j
+	\end{cases}
+	\]
+
+
+\begin{ex}
+In $\ell^2$, $\phi_1=(1,0,0,\ldots)$, $\phi_2= (0,1,0,\ldots)$, \dots in $L^2$
+\end{ex}
+
+
+\begin{ex}
+$\phi_k = e^{2\pi i kx}$ on $[0,1]$ ($k \in \N$ or $k \in \Z$). 
+\end{ex}
+
+
+Why is it nice to have orthogonal systems? If $\{ \phi_k \}$ is an ONS, then 
+	\[
+	\left\| \sum_{k=1}^n c_k \phi_k \right\|^2= \sum_{k=1}^n |c_k|^2. 
+	\]
+How do we let $n \to \infty$ here? If$c \in \ell^2$, i.e. $\sum_{k=1}^\infty |c_k|^2<\infty$. Then $\sum_1^\infty c_k \phi_k$ converges in $L^2$ and $\| \sum c_k \phi_k\|= \sum_{k=1}^\infty (c_k)^2$.
+
+\pf We need for all $\ep$ such that there exists
+	\[
+	\| \sum_{k=m}^n c_k \phi_k \| < \ep
+	\]
+wheneer $m,n, \geq N$. But
+	\[
+	\| \sum_{k=m}^n c_k \phi_k \| = \sqrt{\sum_{km}^n |k_k}^2
+	\]
+which is small as $\sum |c_k|^2< \infty$. 
+
+
+Also, let $s_n= \sum_1^n c_k \phi_k$, $s_n \to s= \sum^\infty c_k \phi_k$. $\|s_n\| - \|s_n-s\| \leq \|s\| \leq \|s_n\| + \|s_n-s\|$. On the right we have $\sqrt{\sum^n |c_k|^2}$ and a term tending to 0, same on the left. Then by Squeeze Theorem we have $\|s\|= \sqrt{\sum^\infty |c_k|^2}$. 
+
+
+Reverse engineering process from $f \in L^2$ to coefficients $c_k$. Fourier expansion. Note if $f= \sum c_k \phi_k$ then $c_k = \langle f, \phi_k \rangle$. 
+
+Why? $\langle f, \phi_j \rangle = \langle \sum c_k \phi_k, \phi_j \rangle = \sum c_k \langle \phi_k, \phi_j \rangle= c_j$. Why equality? For finite ONS, use linearity. For infinite, use continuity of $f \mapsto \langle f,g \rangle$, c.f. hw 8.4. or by previous result $\sum |c_k|^2= \|f\|^2< \infty$. 
+
+
+Linear span of a set $E$ $=$ set of all finite linear combinations of elements of $E$. 
+
+
+\begin{thm}
+Given $f \in L^2$ and $\{ \phi_k \}$ a ONS in $L^2$. TFAE
+
+1) $f= \sum c_k \phi_k$ (series converges in $L^2$)
+2) $f \in \overline{\text{span }\{\phi_k\}}$ (closure in $L^2$)
+\end{thm}
+
+1-> 2: if $f= \lim_{n \to \infty} \sum_1^n c_k \phi_k$, then $v_n = \sum^n c_k \phi_k$ is in the span since $v_n \to f$ in $L^2$, we have $f \in $ closure of the span. 
+
+2 -> 1: Let $c_k= \langle f, \phi_k \rangle$ and $s_n= \sum^n c_k \phi_k$. Want to show that $s_n \to f$. Let $M$ be the span of $\{\phi_1,\ldots,\phi_n\}$. $(s_n-f) \perp $ span $(\phi_1,\ldots,\phi_n)$. because $\langle s_n -f, \phi_k \rangle= c_k-c_k=0$. Then use Pythagorean Theorem: for any $g$ in the span of $\phi_1,\ldots,\phi_n$, $\|f-g\| \geq \|f-s_n\|$. Now $\|f-g\|^2= \|f-s_n\|^2 + \|s_n-g\|^2$. Since $f$ is in the closure of the span up to $\phi_n$ the distance between $f$ and the span tends to 0. So once $n$ sufficiently large, close to 0. \qed \\
+
+
+\begin{cor}
+Since $f-s_n \perp \phi_1,\ldots,\phi_n\}$, $\|f\|^2= \sum^n \|c_k|^2 + \|f-s_n\|^2$.  
+\end{cor}
+
+This has two consequences: Bessel Inequality: $\sum^\infty |c_k|^2 \leq \|f\|^2$. Parseval's Identity: $\sum |c_k| = \|f\|^2$ if and only if $s_n \to f$. 
 
 
 
