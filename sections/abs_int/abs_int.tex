@@ -1,0 +1,162 @@
+% !TEX root = ../../mat701_notes.tex
+\newpage
+\section{Abstract Integration}
+\subsection{Measure Spaces}
+
+So far, we only have had Lebesgue measure on $\R^n$. But there are other measures: length of curves in $\R^2$, surface area on surfaces, probability on probability space $\Omega$ $P(\text{event})=$ measure of outcomes. 
+
+% Give weird closed curve
+% Give picture of torus
+% Give bulls eye in circle. 
+
+\begin{dfn}[Measure Space]
+A measure space is a triple, $(X,\Sigma,\mu)$, where $X$ is a set, $\Sigma$ is a $\sigma$-algebra on subsets of $X$, and $\mu: \Sigma \to [0,\infty]$ is a countably additive function on disjoint sets. 
+\end{dfn}
+
+
+\begin{rem}
+One often also requires $\mu(\emptyset)=0$. However, this does almost follow from our definition since $\mu \geq 0$ and if $\emptyset \neq A \subseteq X$, then 
+	\[
+	\mu(A)=\mu(A \cup \emptyset)= \mu(A) + \mu(\emptyset)
+	\]
+so that $\mu(\emptyset)=0$ unless $\mu(\emptyset)=\infty$.  
+\end{rem}
+
+\begin{ex} \hfill
+\begin{enumerate}[(i)]
+\item $(\R^n,\mathcal{L},\mu)$, $\mathcal{L}$ is the the set of Lebesgue measurable set. $\mu(E)=|E|$.
+
+\item $(X,2^X,\mu)$, $X$ is any set, $\mu(E)$ is the cardinality of the set. 
+\item Like (ii) but
+	\[
+	\mu(E)=
+	\begin{cases}
+	0, & E \text{ countable} \\
+	\infty, & E \text{ uncountable}
+	\end{cases}
+	\]
+
+\item $(\R^n,L,\mu_w)$, where
+	\[
+	\mu_w(E)= \int_E w
+	\]
+where $w \geq 0$ is measurable. One may say that $w$ is the `weight' or `density.'  % Gaussian curve
+\end{enumerate}
+\end{ex}
+
+
+\begin{nex}
+like (ii) above but
+	\[
+	\mu(E)=
+	\begin{cases}
+	0, & |E|<\infty \\
+	\infty, & |E| \text{ infinite}
+	\end{cases}
+	\]
+this is \emph{not} a measure space since it is not countably additive. 
+\end{nex}
+
+
+\begin{dfn}[Additive Set Function (ASF)]
+We say a function $\phi: \Sigma \to \R$, where $\Sigma$ is a $\sigma$-algebra, is countably additive. 
+\end{dfn}
+
+
+The difference between $\phi$ and a measure is that it can be negative and it cannot be infinite. This is also called a \emph{finite signed measure}. 
+
+
+\begin{ex}
+$\phi(E)= \int_E f$, where $f \in L^1$. 
+\end{ex}
+
+An advantage of ASF can pass to complement: $\phi(E^C)= \phi(X) - \phi(E)$ and get results for $\cap$ from $\cup$.
+
+
+\begin{thm}
+ASF is continuous on monotone sequences of sets, i.e. $E_1 \subset E_2 \subset \cdots$ then $\phi(\cup E_k)= \lim \phi(E_k)$ or $E_1 \supset E_2 \supset \cdots$ then $\phi(\cap E_k)= \lim \phi(E_k)$
+\end{thm}
+
+\pf The second follows from the first by taking complements. Now
+	\[
+	\bigcup_{k=1}^\infty E_k= E_1 \cup (E_2 \sm E_1) \cup (E_3 \sm E_2 \sm E_1) \cup \cdots
+	\]
+disjoint union so
+	\[
+	\phi(\cup E_k) = \phi(E_1) + (\phi(E_2) - \phi(E_1)) + \cdots
+	\]
+which telescopes so we have $\lim_{k \to \infty} \phi(E_k)$. \qed \\
+
+
+For measures $\mu$. the first works but in the second statement above, we require $\mu(E_1)< \infty$.
+
+
+\begin{thm}[`Fatou's Lemma']
+if $\phi \geq 0$ is an ASF (i.e. finite measure), then $\phi(\liminf E_k) \leq \liminf \phi(E_k)$. Hence by considering $E^C_k$, $\phi(\limsup E_k) \geq \limsup \phi(E_k)$. 
+\end{thm}
+
+\pf Let $M_k= \bigcap_{j \geq k} E_j$, then $\liminf E_k= \bigcup_{k=1}^\infty H_k$.
+	\[
+	\phi \left( \bigcup H_k \right) = \lim_{k \to \infty} \phi(H_k)= \liminf_{k \to \infty} \phi(E_k),
+	\]
+using $H_k \subset E_k$, so $\phi(E_k) - \phi(H_k)= \phi(E_k \sm H_k) \geq 0$. 
+
+
+
+
+Jordan Decomposition for ASF 
+
+Every ASF is the difference of two nonnegative ASFs. 
+
+Application: Write ASF $\phi = \phi_1 - \phi_2$, both nonnegative. Conclude if $E= \limsup E_k= \liminf E_k$, then $\phi(E)= \lim \phi(E_k)$. 
+
+
+\begin{dfn}[Upper Variation]
+Given an ASF $\phi$, upper variation $\overline{V}(E)= \sup_{A \subset E} \phi(A)$. 
+\end{dfn}
+
+\begin{dfn}[Lower Variation]
+Given an ASF $\phi$, lower variation $\underline{V}(E)= - \inf_{A \subset E} \phi(A)$. 
+\end{dfn}
+
+\begin{dfn}[Total Variation]
+Given an ASF $\phi$, total variation: $V(E)= \overline{V}(E) + \underline{V}(E)$.
+\end{dfn}
+
+How does this relate to Jordan decomposition? Idea of proof is to show $\phi(E)= \overline{V})(E) - \underline{V}(E)$. 
+
+where (needs to be proved) $\overline{V}$, $\underline{V}$ are ASFs. Why this was
+	\[
+	\int_{A \subset E, A \in \Sigma} \phi(A) = \inf_{B \subset E, B \in \Sigma} (\phi(E) - \phi(B)) = \phi(E) - \sup_{B \subset E, B \in \Sigma} \phi(B) = \phi(E) - \overline{V}(E)
+	\]
+Take $A= E \sm B$. Hence, $\phi(E)= \overline{V}(E) - \underline{V}(E)$. 
+
+
+Clear total variation is ASF if the upper/lower are. So sketch proof that they are:
+
+1) Countable subadditivity. 
+$A \subset \cup E_k$, write as $A= (A \cap E_1) \cup (A \cap E_2 \sm E_1) \cup \cdots$. Get $A= \cup A_k$, $A_k \subset E_k$. $\phi(A_k) \leq \overline{V}(E_k)$ hence $\phi(A) \leq \sum \overline{V} (E_k)$. The upper follows the same.
+
+2) $V< \infty$, which is done by contradiction. 
+$\overline{V}(E) \geq \sum \overline{V}(E_k)$ just pick $A_k \subset E_k$, $\phi(A_k) \geq \overline{V}(E_k) - \ep/2^k$, use countable subadditivity of $\phi$. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
