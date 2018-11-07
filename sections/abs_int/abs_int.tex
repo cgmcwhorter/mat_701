@@ -143,8 +143,79 @@ $\overline{V}(E) \geq \sum \overline{V}(E_k)$ just pick $A_k \subset E_k$, $\phi
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%
 
 
+\subsection{Measurable Functions and Integrals}
+
+Repeat all previous work for abstract measure spaces. Recall $(X, \Sigma, \mu)$ is a measure space. 
+
+\begin{dfn}
+A function $f: X \to \overline{\R}$ is measurable if $\{f>a\} \in \Sigma$ for all $a \in \R$. 
+\end{dfn}
+
+Fur functions $f: X \to \R$, equivalent to $f^{-1}(\text{Borel}) \in \Sigma$. 
+
+\begin{ex}
+Let $X= \N$, $\Sigma = 2^X$, then all functors are measurable.
+\end{ex}
+
+Basic properties: $cf$, $f+g$, $\sup_k f_k$, $\inf_k f_k$, $\lim_k f_k$ are measurable. 
+
+$\sum_{\text{finite}} a_k \chi_{E_k}$, disjoint, $a_k$ unique is measurable if and only if $E_k \in \Sigma$. 
+
+Every nonnegative measurable function $f$ is the limit of $f_k$ (simple), $f_k \nearrow f$, $f_k = \min(k, 2^{-k} \text{ floor}(2^k f)$, second piece round down to $j/2^k$: $\{f_k = j/2^k\} = \{ j/2^k \leq f< (j+1)/2^k\}$ or $\emptyset$. 
+
+What does not \emph{not} generalize.
+
+``continuous'' then measurable. Continuity is not even defined on $X$.
+
+Lusin's Theorem does not apply.
+
+If $f$ is measurable and $f=g$ a.e. wrt $\mu$ then $g$ not necessarily measurable. (because subsets of measure zero no longer necessarily measurable). example: $(\R, \mathcal{B}, |\cdot|)$, Borel with Lebesgue measure. in Cantor set $C$, there is a non-Borel subset $A$. $\chi_A \equiv 0$ a.e. but $\chi_A$ is not measurable. 
+
+
+$X= \bigcup_{k=1}^\infty E_k$, $E_k$ has finite measure. Example: $\R$ with counting measure. ie $\infty$ on infinite sets and finite otherwise. 
+
+
+\begin{dfn}
+If $f \geq 0$ is measurable. $\int_E f \; d\mu = \sup\{ \sum_j a_j \mu(E_j) \}$ over simple functions $\sum a_j \chi_{E_j} \leq f \}$. 
+\end{dfn}
+
+Can choose $a_j = \inf_{E_j} f$, so $\int f \; d\mu= \sup_p L(f,P)$, where $P$ is partition of $E$ into $E_1, \ldots, E_m$, $L(f,P)= \sum_j \int_{E_j} f \mu(E_j)$. Choosing finer partition $P$, get larger $L(f,P)$. 
+
+
+\begin{dfn}
+If $f$ measurable and one of $\int_E f^+ \; d\mu$, $\int_E f^- \; d\mu$ is finite, define $\int_E f \; d\mu= \int_E f^+ \; d\mu - \int_E f^- \; d\mu$. if both finite, $f \in L^1(E,\mu)$. 
+\end{dfn}
+
+
+\begin{ex}
+$(\N,2^\N,\text{counting})$, $\int f \;d\mu= \sum_{k=1}^\infty f(k)$, if abs convergent. $L(f,P)= \sum_{k=1}^N f(k)$ So integrals are series! Notice integral finite iff abs convergent. 
+\end{ex}
+
+
+\begin{ex}
+$(\R, 2^\R, \delta_{x_0})$. $\delta_{x_0}$ the point mass at $x_0$, i.e. dirac delta 
+	\[
+	\delta_{x_0}= 
+	\begin{cases}
+	1, & x_0 \in A \\
+	0, & x_0 \notin A
+	\end{cases}
+	\]
+$\int_\R f \; d\delta_{x_0}= f(x_0)$ \pf Suppose $f$ nonnegative (otherwise, use $f^+$ and $-f^-$ and then combine later). Let $P=\{E_1,\ldots,E_m\}$ be a partition. One $E_j$ contains $x_0$, then $L(f,P)= \inf_{E_j} f \leq f(x_0)$. Hence, $\int f \leq f(x_0)$. Also, $P = \{ \{x_0\}, \R \sm \{x_0\} \}$ gives $L(f,P)= f(x_0)$. 
+\end{ex}
+
+
+We need another proof of MCT, since before used ``volume definition'' of $\int f$ and this does not generalize. 
+
+
+\begin{lem}
+if $E= A \cup B$, disjoint measurable, then $\int_E f= \int_A f + \int_B f$ for nonnegative measurable $f$. 
+\end{lem}
+
+\pf Any partition $P$ of $E$ can be refined, $(E_j$ replaced by $E_j \cap A$, $E_j \cap B$) so we get $P= P_A \cup P_B$. Then $L(f,P)= L(f_1,P_A) + L(f,P_B)$. Hence, $\int f \leq \int_A f + \int_B f$. But $P_A,P_B$ approx $\int_A f, \int_B f$ part them into $P$, conclude $\int_E f \geq \int_A f + \int_B f$. \qed \\
 
 
 
