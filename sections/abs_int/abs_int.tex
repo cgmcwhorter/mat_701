@@ -218,6 +218,127 @@ if $E= A \cup B$, disjoint measurable, then $\int_E f= \int_A f + \int_B f$ for 
 \pf Any partition $P$ of $E$ can be refined, $(E_j$ replaced by $E_j \cap A$, $E_j \cap B$) so we get $P= P_A \cup P_B$. Then $L(f,P)= L(f_1,P_A) + L(f,P_B)$. Hence, $\int f \leq \int_A f + \int_B f$. But $P_A,P_B$ approx $\int_A f, \int_B f$ part them into $P$, conclude $\int_E f \geq \int_A f + \int_B f$. \qed \\
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Continuing 10.2
+
+\begin{ex}
+$X= \R^2$, $\Sigma=$ Borel sets, $\mu(E)= | \{x \in \R \colon (x,0) \in E\}|$. $\int f \; d\mu= \int_\R f(x,0) \; dx$. Important example of integrating along a curve. 
+\end{ex}
+
+
+Our goal is now to prove the MCT (if $f_k \nearrow f$, $f_k \geq 0$ measurable, then $\int f_k \to \int f$). We will need some preparation. 
+
+Subadditivity over $f$: $\int (f+g) = \int f + \int g$, where $f,g \geq 0$ measurable. How do we prove this? For simple, easy: $f= \sum a_k \chi_{E_k}$, $g= \sum b_l \chi_{F_l}$, rewrite as $\sum_{k,l} a_k \chi_{E_k \cap F_l}$ and $\sum_{k,l} b_l \chi_{E_k \cap F_l}$. The first is integral $\sum a_k \mu(E_k \cap F_l)$ and second is integral $\sum b_l \mu(E_k \cap F_l)$. But then for the sum: $\sum (a_k+b_l) \chi_{E_k \cap F_l}$ converges to integral $\sum (a_k+b_l) \mu(E_k \cap F_l)$.
+
+
+\begin{lem}
+Suppose $f_k, g \geq 0$ are simple, $f_1 \leq f_2 \leq \cdots \lim f_k \geq g$. Then $\lim \int f_k \geq \int g$.
+\end{lem}
+
+\pf Partition set $E$ to make $g$ constant (on each piece) $g \equiv c$. Given $c' < c$. Let $A_k = \{f_k >c \}$. Then $A_1 \subset A_2 \subset \cdots$ and $\bigcup A_k = E$, so $\mu(A_k) \to \mu(E)$. But $\int_E f_k \geq \int_{A_k} f_k \geq c' \mu(A_k)$. So $\lim \int f_k \geq c' \mu(E)$. So $\lim \int f_k \geq c \mu(E)= \int g$. \qed \\
+
+
+\begin{lem}
+If $f_k \nearrow f$, $f_k$ simple nonnegative, then $\int f_k \to \int f$. 
+\end{lem}
+
+\pf For all simple $g \leq f$, we have $\lim \int f_k \geq \int g$ by the previous lemma. Take $\sup$ over $g$, get $\lim_l \int f_k \geq \int f$. But reverse is immediate since $f_k \nearrow f$ so $f_k \leq f$. \qed \\
+
+
+Proof of $\int (f+g) = \int f + \int g$.
+
+Take simple $f_k \nearrow f$, $g_k \nearrow g$. Pass to limit in $\int (f_k + g_k) = \int f_k + \int g_k$. \qed \\
+
+Then follows for general function by writing $f^+$ and $f^-$. 
+
+
+Monotone Convergence Theorem (Two forms):
+
+Sequence Form: if $f_k$ are nonnegative, measurable, and $f_k \nearrow f$, then $\int f_k \to \int f$.
+
+Series Form: If $g_k \geq 0$ measurable, then $\in \sum g_k = \sum \int g_k$.
+
+
+These are equivalent. [The duality of sequences and series in a sense.]
+
+\pf (Series Form since easier to prove) $\int g \geq \sum_{k=1}^\infty \int g_k$ by considering $g \geq \sum_{k=1}^N g_k$. $\int g \geq \sum_{k=1}^N \int g_k$. Need $\leq$. Introduce simple $g_{k,j} \nearrow g_k$ as $j \to \infty$.
+	\[
+	\begin{split}
+	g_{11} \quad g_{12} \quad g_{13} \quad \cdots \to g_1 \\
+	g_{21} \quad g_{22} \quad g_{23} \quad \cdots \to g_2 \\
+	g_{31} \quad g_{32} \quad g_{33} \quad \cdots \to g_3 \\
+	\end{split}
+	\]
+% Give box around upper left corner, then top to on second column, top three on third columnm, etc.
+
+We use an ``upper triangular sum''. $s_j = \sum_{k=1}^j g_{k,j}$ which converges monotonically to $g$, i.e. $s_j \nearrow g$. By second lemma above, $\int s_j \to \int g$. Also, $\sum_{k=1}^j g_k \geq s_j$, hence $\sum_1^\infty \int g_l \geq \int g$. \qed \\
+
+
+
+MCT implies Fatou which implies DCT.
+
+H\"older, Minkowski: $L^p(E,\mu)$ is a Banach space. 
+
+
+Now we move on to 10.3 
+
+
+Given a measure space $(X, \Sigma, \mu)$ and an ASF $\phi$, we say
+
+\begin{dfn}[Absolutely Continuous]
+$\phi$ is absolutely continuous with respect to $\mu$ if $\mu(A)=0$, then $\phi(A)=0$. 
+\end{dfn}
+
+
+\begin{dfn}[Singular]
+$\phi$ is singular with respect to $\mu$ if there exists $Z$ such that $\mu(Z)=0$ and $\phi(A)= 0$ for all $A \subset Z^C$. 
+\end{dfn}
+
+
+Equivanetly, for total variation $V$
+
+AC: $\mu(A)=0$ then $V(A)=0$
+
+S: $\mu(Z)=0$ and $V(Z^C)=0$.
+
+Main results: every ASF is the sum of AC and S. AC ASF has density $\phi(A)= \int_A \omega$.
+
+Examples:
+
+a) $\mu=$ Lebesgue measure on $\R$ and $\phi(A)= \int_A f$, $f \in L^1(\R)$. THis is AC
+
+b) same $\mu$, $\phi(A)$ is 1 if $x_0 \in A$ and $0$ if $x_0 \notin A= \delta_{x_0}$. 
+
+Singular: let $Z= \{x_0\}$ then $\mu(Z)=0$, $V(Z^C)=0$. 
+
+
+On $[0,1]$, fix $w \geq 0$ integrable. 
+fix $w \geq 0$, $w \in L$, $\mu_w(A) = \int_A w$.
+
+Is lebesuge measure on $[0,1]$ AC wrt $\mu_w$? No if $|\{w=0\}|>0$ 
+
+Yes if $w>0$ a.e.
+
+% Plot, axes, function w, along x-axis then linearly increasing for a bit. thick black lines, tick mark along x-axis where the linear function stops. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
