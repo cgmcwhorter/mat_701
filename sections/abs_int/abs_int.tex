@@ -324,6 +324,80 @@ Yes if $w>0$ a.e.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Goal: Every ASF is AC $+$ S: AC has `density' $f$, $\phi(A)= \int_A f$. 
+
+
+
+Remark: for any $E \subset \Sigma$, $(E, \Sigma'= \{F \in \Sigma \colon F \subset E\}, \mu \big|_{\Sigma''})$ is a measure space (subspace of $X$). 
+
+
+\begin{thm}
+(From $0-0$ to $\ep-\delta$ in AC) $\phi$ is AC if and only if for all $\ep>0$, there exists $\delta>0$ such that for all $A$ $\mu(A)<\delta$ then $|\phi(A)|<\ep$.
+\end{thm}
+
+\pf Recall $\phi= \ov{V} - \underline{V}$, so $|\phi(A)| \leq V(A)$. Suppose there exists $\ep>0$ for all $k$ there exists $A_k$ with $\mu(A_k)< 2^{-k}$ but $V(A_k) \geq \ep$. Let $A= \limsup A_k$. Then $\mu(A)=0$ (because $\sum \mu(A_k)< \infty$) but $V(A) \geq \limsup V(A_k) \geq \ep$. (flipped Fatou). This contradicts AC. \qed \\
+
+
+Ex: For infinite measures $\mu, \nu$, this is not true. For example, $\mu$ is the Lebesgue measure on $\R$ and $\nu(A) = \int_A x^2 \; dx$. $\nu$ is AC wrt $\mu$. If $\mu(A)=0$, then $\nu(A)=0$ but for all $\delta>0$, $\int_{[n,n+\delta]} x^2 \; dx \to \infty$ as $n \to \infty$. 
+
+
+Hahn decomposition: if $\phi$ is ASF, then there exists ``positive set'' $P$ such that $\phi \geq 0$ on subsets of $P$ and $\phi \leq 0$ on subsets of $P^C$.
+
+\pf $P$ should maximize $\phi$. Recall $\ov{V}(X)= \sup \{ \phi(A) \colon A \in \Sigma\}$ for all $k$. Choose $A_k$ with $\phi(A_k) > \ov{V}(X) - 2^{-k}$. Let $P= \liminf A_k$. Note $\underline{V}(A_k)= \ov{V}(A_k) - \phi(A_k)$. Fatou's lemma gives $\underline{V}(A) \leq \liminf \underline{V}(A_k)= 0$. Also, $P^C= \limsup A_K^C$. and $\ov{V}(A_K^C)= \ov{V}(X) - \ov{V}(A_k)< 1/2^k$. Hence, $\ov{V}(P^C)=0$ [$\sum \ov{V}(A_k^C)<\infty$] \qed \\
+
+
+Ex: if $\phi(A)= \int_A f$, then $P= \{ f \geq 0 \}$ or $P=\{ f>0 \}$. 
+
+Compare to Jordan decomposition: $\phi= \ov{V} - \underline{V}$. Hahn makes this more precise. $\ov{V}(A)= \phi(A \cap P)$, $-\underline{V}(A)= \phi(A \sm P)$ so $\underbrace{\phi(A \cap P)}_{\ov{V}} - \underbrace{(- \phi(A \sm P))}_{\underline{V}}$.
+
+
+\begin{lem}[Level Decomposition of ASF]
+Suppose $\mu(X)< \infty$, $\phi \geq 0$ an ASF, then for all $a>0$, there exists partition $X= Z \cup \bigcup_{k=1}^\infty E_k$, $\mu(Z)=0$
+	\[
+	a(k-1) \mu(A) \leq \phi(A) \leq a k \mu(A)
+	\]
+for all $A \subset E_k$
+	\[
+	a(k-1) \leq \dfrac{\phi}{\mu} \leq ak
+	\]
+on $E_k$
+\end{lem}
+
+
+Ex: if $\phi(A) = \int_A \dfrac{1}{\sqrt{x}} \; dx$ on $X=[0,1]$ $a=1$ $Z= \emptyset$, $E_1= \emptyset$
+
+% Give plot focused on Q1 part, E_2, E_3, E_4 moving from right to left. 
+
+\pf WLOF, $a=1$ (else consider $\phi/a$). Apply Hahn to $\phi - k \mu$ ($k \in \N$) get a set $P_k$, $\phi \geq k \mu$ on $P_k$ and $\phi \leq k \mu$ on $P_k^C$. Let $Q_k= \bigcup_{m \geq k} P_m$ note $\phi \geq k \mu$ on $Q_k$, $\phi \leq k \mu$ on $Q_k$. Let $Z= \bigcap_k Q_k$ on this set $\phi \geq k \mu$ so $\mu(Z)=0$. Let $E_1= Q_1^C$ then $\phi \leq \mu$ on $E_1$, for $k>1$, let $E_k = Q_{k-1} \sm Q_k$, then $(k-1) \mu \leq \phi k \mu$ as required. \qed \\
+
+
+
+\begin{thm}[Lebesgue Decomposition]
+Let $\phi$ be an ASF and $\mu$ a $\sigma$-finite measure. Then there exists a unique additive set function $\alpha,\sigma$ such that $\phi = \alpha + \sigma$, $\alpha$ is AC wrt $\mu$, $\sigma$ is S wrt $\mu$. Moreover, there exists $f \in L^1(X,\mu)$ such that $\alpha(A)= \int_A f$ and there exists $Z$ such that $\mu(Z)=0$ and $\sigma(A)= \phi(A \cap Z)$.
+\end{thm}
+
+\pf Uniqueness: $\alpha+\sigma= \alpha' + \sigma'$, then $\alpha-\alpha'= \sigma'-\sigma$ so then both sides AC and S by equality, hence 0. 
+
+
+
+Existence of $Z$: comes from definition of singular. ASF $\mu(Z)=0$ and $\phi=0$ on $Z^C$. So $\sigma(A)= \sigma(A \cap Z)$. But $\alpha(A \cap Z)=0$ because $\alpha$ is AC. Hence, $\sigma(A)= \phi(A \cap Z)$. 
+
+Hard parts existence of decomposition and existence of $f$. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
