@@ -4,22 +4,22 @@
 \subsection{Fubini's Theorem}
 
 
-Given $f(x,y)= \dfrac{1}{\sqrt{xy}}$ on $[0,1] \times [0,1]$, we already have a concept of $\int_{[0,1] \times [0,1]} f$. But how does this relate to the integral
+Given the function $f(x,y)= \dfrac{1}{\sqrt{xy}}$ on the interval $[0,1] \times [0,1]$, we already have a concept of $\ds\int_{[0,1] \times [0,1]} f$. But how does this integral relate to the integral
 	\[
 	\int_0^1 \left( \int_0^1 \dfrac{1}{\sqrt{xy}} \; dy \right) \; dx?
 	\]
-We have the same issues with double series: $\sum_{i=1}^\infty \sum_{j=1}^\infty a_{ij}$.
+One can ask the same questions and confront the same issues with infinite double summations, e.g. $\ds\sum_{i,j}^\infty a_{ij}$.
 
 
-\begin{ex}
-Consider the infinite matrix with 1s on the main diagonal and $-1$ on the superdiagonal and zeros elsewhere. The sum of each row is 0 and the sum of column is 0 except the first and we obtain
+\begin{ex} \label{ex:matrixex}
+Consider the infinite matrix with 1s on the main diagonal and $-1$ on the superdiagonal and zeros elsewhere. The sum of each row is 0 and, except for the first column,  the sum of column is 0. This implies
 	\[
 	\begin{split}
 	\sum_{i=1}^\infty \left( \sum_{j=1}^\infty a_{ij} \right)&= 0 \\
 	\sum_{j=1}^\infty \left( \sum_{i=1}^\infty a_{ij} \right)&= 1
 	\end{split}
 	\]
-This is the same issues with integrals. For example, take $f=1,-1,0$ and consider
+One can create a parallel example with integrals. For example, take $f=1,-1,0$ and consider
 	\[
 	\begin{split}
 	\int_0^\infty \left( \int_0^\infty f(x,y) \; dx \right) \; dy&= 0 \\
@@ -30,42 +30,73 @@ Note that $f \notin L^1([0,\infty) \times[0,\infty))$.
 \end{ex}
 
 
-% Give some extra background on Fubini.
+The goal of this section is to establish Fubini's Theorem, stated below, and its applications. This was proven by Guido Fubini in 1907. The theorem allows determines conditions under which it is possible to compute double integrals using iterated integrals. Consequently, this allows one to exchange the order of integration. In 1909, a student of Fubini named Leonida Tonelli established a similar theorem (Tonelli's Theorem) but applying to functions which are nonnegative instead of integrable. 
 
 
-\begin{thm}[Fubini's Theorem]
-Let $I_1 \subseteq \R^n$, $I_2 \subseteq \R^m$ be intervals and $I= I_1 \times I_2$. Suppose that $f \in L^1(I)$. Then:
+\begin{restatable}[Fubini's Theorem]{thm}{fubini} \label{thm:fubinithm}
+Let $I_1 \subseteq \R^n$, $I_2 \subseteq \R^m$ be intervals, and $I:= I_1 \times I_2$. Suppose that $f \in L^1(I)$. Then
 	\begin{enumerate}[(i)]
-	\item For almost every $x \in I_1$, the `slice' function $y \mapsto f(x,y)$ is integrable on $I_2$.
-	\item The `once-integrated' function $x \mapsto \int_{I_2} f(x,y) \; dy$ is integrable on $I_1$, and its value is $\int_I f$. 
+	\item for almost every $\mathbf{x} \in I_1$, the `slice' function $\mathbf{y} \mapsto f(\mathbf{x},\mathbf{y})$ is measurable and integrable on $I_2$.
+	\item the `once-integrated' function $\mathbf{x} \mapsto \int_{I_2} f(\mathbf{x},\mathbf{y}) \; d\mathbf{y}$ is measurable and integrable on $I_1$, and its value is $\int_I f$, i.e.
+		\[
+		\iint_I f(\mathbf{x},\mathbf{y}) \; d\mathbf{x} d\mathbf{y} = \int_{I_1} \left( \int_{I_2} f(\mathbf{x},\mathbf{y}) \; d\mathbf{y} \right) \; d\mathbf{x}.
+		\]
 	\end{enumerate}
-\end{thm}
+\end{restatable}
+
+
+The statement `for almost every $\mathbf{x}$' is required as a slice may have `issues' on some set of measure 0, which will not affect the integral. As a parallel issue, for example, consider the matrix in Example~\ref{ex:matrixex}. One could instead insert for some zero entry a nonmeasurable function or the value $\infty$. So while the `slice' function may be problematic, its integral is unchanged since its values were changed on a set of measure zero. Recall that 
+	\[
+	\int_I f= \int_{\R^{n \times m}} f \cdot \chi_I.
+	\]
+By replacing $f$ with $f \chi_I$, i.e. taking $f \equiv 0$ outside of $I$, we may reduce the proof of Fubini's Theorem to the case where  $I_1= \R^n$, $I_2= \R^m$, and $I= \R^{n+m}$. Let $\mathcal{F}:= \{ f \in L^1( \R^{n+m}) \colon \text{Fubini holds for } f \}$. To prove Fubini's Theorem, we prove that $\mathcal{F}=L^1$. First, observe the following properties of $\mathcal{F}$:
 
 
 
 
 
 
-Why do we say for almost every $x$? A slice is defined on a set of measure zero. For the matrix example, one could choose a column and insert in a zero entry insert a nonmeasurable function or $\infty$. While the function becomes difficult, its integral is unchanged since its values were changed on a set of measure zero. 
 
 
-Recall that $\int_I f= \int_{\R^{n \times m}} f \cdot \chi_I$, etc.. So we can reduce the proof to $I_1= \R^n$, $I_2= \R^m$, and $I= \R^{n+m}$ by replacing $f$ with $f \chi_I$. Let $\mathcal{F}:= \{ f \in L^1( \R^{n+m}) \colon \text{Fubini holds for } f \}$. We prove that $\mathcal{F}=L^1$. 
 
-Properties of $\mathcal{F}$:
-        \begin{itemize}
+
+
+
+
+% Finish below prop
+
+
+\begin{prop}
+Let $\mathcal{F}:= \{ f \in L^1( \R^{n+m}) \colon \text{Fubini holds for } f \}$. Then
+        \begin{enumerate}[(i)]
         \item $\mathcal{F}$ is a vector space: $f,g \in \mathcal{F}$, then $\alpha f + \beta g \in \mathcal{F}$.
         \item $\mathcal{F}$ is closed under monotone limits: if $f_k \in \mathcal{F}$ and $f_k \nearrow f$ or $f_k \searrow f$, where $f \in L^1(\R^{n \times m})$, then $f \in \mathcal{F}$.
-        \item Squeeze Property: if $g \leq f \leq h$, where $g,h \in F$ and $g=h$ a.e., then $f \in \mathcal{F}$
+        \item Squeeze Property: if $g \leq f \leq h$ and $g=h$ a.e., where $g,h \in F$, then $f \in \mathcal{F}$
         \item $\chi_I \in F$ for any closed bounded interval $I$. 
-        \end{itemize}
+        \end{enumerate}
+\end{prop}
+
+
+\pf \hfill
+\begin{enumerate}[(i)]
+\item This is immediate from the fact that if $f,g$ are measurable, then $f+g$ and $cf$ are measurable. Similarly, if $f,g \in L(E)$, then $f+g, cf \in L(E)$.
+
+\item By replacing $f_k$ with $-f_k$ for all $k$, we may assume without loss of generality that $f_k \nearrow f$. For each $k$, there is a set $Z_k \subseteq \R^n$ with measure zero such that the $\mathbf{x}$-slice function of $f_k$ is integrable for $\mathbf{x} \notin Z_k$. Let $Z= \cup_k Z_k$. Since $Z$ is a countable union of sets with measure zero, $Z$ has measure zero. If $\mathbf{x} \notin Z$, then the $\mathbf{x}$-slice function $f_k(\mathbf{x},\mathbf{y})$ is integrable for all $k$, and by the MCT applied to $\{f_k(\mathbf{x},\mathbf{y})\}$ as functions of $\mathbf{y}$, we have
+	\[
+	h_k(\mathbf{x}):= \int f_k(\mathbf{x},\mathbf{y}) \; d\mathbf{y} \nearrow \int f(\mathbf{x},\mathbf{y}) \; d\mathbf{y}=: h(\mathbf{x}).
+	\]
+By assumption, $h_k(\mathbf{x})$ is integrable as a function of $\mathbf{x}$, $f_k \in L(I)$, and $\ds\iint f_k(\mathbf{x},\mathbf{y}) \; d\mathbf{x} d\mathbf{y}= \int h_k(\mathbf{x}) \; d\mathbf{x}$. But then by the MCT,
+	\[
+	\iint f(\mathbf{x},\mathbf{y}) \; d\mathbf{x} d\mathbf{y} = \int h(\mathbf{x}) \; dx.
+	\]
+As $f \in L(I)$, we have $h \in L(I_1)$, implying that $h$ is finite almost everywhere. Therefore, Fubini's Theorem holds for $f$ also. 
+\end{enumerate}
 
 
 
 
 
-To see why the second point holds: 
 
-Proof 2 $f_k \nearrow f$ supplies for every $x \in I_1$, $x$-slice of $f_k \nearrow$ $x$-slice of $f$. For each $k$, there is $Z_k \subset I_1$ with $|Z_k|=0$ such that the $x$-slice of $f_k$ is integrable for $x \notin Z_k$. Let $Z= \cup_k Z_k$, then $|Z|=0$. So MCT, $\int f_k(x,y) \; dy \nearrow \int f(x,y) \; dy$ (though this may be infinite) for $x \notin Z$. Again by MCT, $\int (\int f_k) \; dx \nearrow \int (\int f dy) \; dx$. Then finally, we have $\int_I f_k \to \int_{I_1} f$ by MCT, noting the last integral is finite. But then $\int (\int f dy) \; dx$ is finite since they are equal. But then Fubini's Theorem holds for $f$ as well. 
 
 We now prove the second. For almost all $x$, the slice of $g$ and $h$ are both integrable, and since the slice of $f$ is between, it is also integrable. 
 
@@ -86,13 +117,33 @@ Proof of 4: Slice function of $\chi_I$ is either $\equiv 0$ or $\chi_{I_2}$, so 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % Fubini: f \in L^1(I_1 \times I_2)
 % Tonelli: f \geq 0, measurable on I_1 \times I_2
 
 
-Proof of Fubini:
+We are now in a position to prove Fubini's Theorem.
 
-We establish $\mathcal{F}= L^1$. We show this for $G_\delta$ sets and sets of measure 0, which will be enough. 
+\fubini*
+
+\pf We establish $\mathcal{F}= L^1$. We show this for $G_\delta$ sets and sets of measure 0, which will be enough. 
 
 a. First, we show that $X_I \in \mathcal{F}$ for any closed bounded interval. This does not necessary worked for closed. Indeed, open sets are union of closed sets. 
 
@@ -112,6 +163,25 @@ f. integrable simple functions $\in \mathcal{F}$. Then nonnegative integrable in
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+% ------------------------
+%  Tonelli's Theorem
+% ------------------------
+
+% Add from textbook.
+
+
+% Tonelli
 
 
 To use Fubini, we need $f \in L^1$. A lot of times, this is what we are trying to show! Fubini cannot be used to prove $f \in L^1(I_1 \times I_2)$. Take $f(x,y)= \dfrac{1}{\sqrt{xy}}$ on $I:=[0,1] \times [0,1]$. Cannot say $\int_I f = \int_0^1( \int_0^1 \dfrac{1}{\sqrt{xy}} \; dx)\;dy$ but need $f$ integrable, which is what you are trying to show. For these purposes, we use Tunelli's Theorem.
@@ -136,11 +206,30 @@ In the example above, $\int_0^1 \dfrac{1}{\sqrt{xy}} \; dy= \dfrac{2}{\sqrt{x}}$
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % ------------------------
 %  Applications
 % ------------------------
-
-Application: 
+\subsection{Applications of Fubini's Theorem}
 
 Let $fL E \to [0,\infty]$ be measurable. $\omega_f(y)= |\{x \in E \colon f(x)>y\}|$. Then $\int_E f = \int_0^\infty \omega_f(y) \; dy$. 
 
@@ -180,11 +269,11 @@ All these things follow easily from applying Tonelli to $\chi_E$ since almost ev
 \begin{ex} % Measurability in \R^{n+m}$ is important.
 Assuming the Continuum Hypothesis, there exists $E \subset [0,1]^2$ such that every vertical slice $E_x$ is countable and every horizontal slice $E_y$ is co-countable, i.e. $[0,1] \sm$ countable set. Using TOnelli
 	\[
-	\int( \int \chi_E \; dy ) \; dx = 0
+	\int \left( \int \chi_E \; dy \right) \; dx = 0
 	\]
 since evert vertical slice is countable. The other way
 	\[
-	\int (\int \chi_E \; dx ) \; dy = 1
+	\int \left( \int \chi_E \; dx \right) \; dy = 1
 	\]
 This means $E$ is not measurable in $\R^2$ (otherwise these would be equal). Then let $E= \{ (x,y) \colon y \prec x \}$.
 \end{ex}
@@ -239,7 +328,24 @@ If $f,g$ are probability density functions of $X$ and $Y$, then $f*g$ is the PDF
 
 
 
-\subsection{Marcinkiewitz Integrals}
+
+
+
+
+
+
+
+
+
+
+
+
+% Ch 9. 4, p157
+
+% ------------------------
+%  Marcinkiewicz
+% ------------------------
+\subsection{Marcinkiewicz Integrals}
 
 In Analysis, one often has $f*g$, where one of the functions is not in $L^1$. These are so called ``singular integrals.'' The simplest example is the Hilbert transform
 	\[
