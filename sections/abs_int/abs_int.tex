@@ -383,6 +383,9 @@ Ex: if $\phi(A) = \int_A \dfrac{1}{\sqrt{x}} \; dx$ on $X=[0,1]$ $a=1$ $Z= \empt
 
 
 
+
+% Check about finiteness for theorem? Needed? How to state?
+
 \begin{thm}[Lebesgue Decomposition]
 Let $\phi$ be an ASF and $\mu$ a $\sigma$-finite measure. Then there exists a unique additive set function $\alpha,\sigma$ such that $\phi = \alpha + \sigma$, $\alpha$ is AC wrt $\mu$, $\sigma$ is S wrt $\mu$. Moreover, there exists $f \in L^1(X,\mu)$ such that $\alpha(A)= \int_A f$ and there exists $Z$ such that $\mu(Z)=0$ and $\sigma(A)= \phi(A \cap Z)$.
 \end{thm}
@@ -398,10 +401,54 @@ Hard parts existence of decomposition and existence of $f$.
 
 
 
+%%%%%%%%%%%%%%
+
+Why do we care? Duality of functions spaces such as $L^p$. Dual space of $L^p$ is $\{ \psi : L^p \to \C \colon \psi \text{ linear cont. }\}$. $\psi$ induces ASF $\phi(E)= \psi(\chi_E)$, $\phi(E \cup F)= \psi(\chi_E + \chi_F)= \phi(E) + \phi(F)$ if disjoint. 
+
+
+Why need to be $\sigma$-finite?  ($X= \bigcup_{k \in \N} E_k$, $\mu(E_k)<\infty$)
+
+\begin{ex}
+Let $\mu$ be counting measure on $[0,1]$ (gives number of elements of set). $X=[0,1]$. $\phi(A)= |A|$ is an ASF. If $\phi= \alpha + \sigma$, then $\sigma(A)=0$ for all $A$ (because the only $Z$ with $\mu(Z)=0$ is $\emptyset$). Hence, $\phi(A)=  \int_A f \; d\mu$ for some $f \in L^1(\mu)$, which means $\sum_{x \in [0,1]} |f(x)|<\infty$. But then $f \equiv 0$ except on a countable set $C$. But then get $\phi([0,1] \sm C)= 0$, contradicting $\phi(A)=|A|$.
+\end{ex}
+
+
+\pf (LDT) Can reduce to $\phi \geq 0$. For general case $\phi$, $\phi = \ov{V} - \underline{V}$ so if $\ov{V} = \alpha_1 + \theta_1$, $\underline{V}= \alpha_2 + \theta_2$, then $\phi= (\alpha_1-\alpha_2) + (\theta_1-\theta_2)$.
+
+2) Reduce to $\mu(X)<\infty$. Else $X= \cup_{\text{disjoint}} E_k$, If $\phi_k(A)= \phi(A)$ for $A \subset E_k$ has LD, $\alpha_k+\theta_k$, then let $\alpha(A)= \sum \alpha_k(A \cap E_k)$, $\sigma(A)= \sum \sigma_k(A \cap E_k)$. 
+
+3) Main case: $\phi \geq 0$, $\mu(X)< \infty$. Use level decomposition with $a= 2^{-m}$. Obtain $X= Z^m \cup \bigcup_{k=1}^\infty E_k^m$, $\mu(Z^m)=0$ and $\phi(A)/\mu(A)$ is in $[(k-1)2^{-m}, k2^{-m}]$ for all $A \subset E_k^m$. Let $Z = \bigcup_{m=1}^\infty Z^m$, this will be our $Z$. Need $\phi(A \sm Z)= \int_A f \; d\mu$. Let $f_m = \sum_k (k-1) 2^{-m} \chi_{E_k^m}$. How close is $\int_A f_m$ to $\phi(A \sm Z)$?
+
+$\phi$ is AC wrt $\mu$ on each $E_k^m$, hence $\phi(A \cap E_k^m)= \phi((A \sm Z) \cap E_k^m)$, null subsets of $E^m$ are negligible. So $\phi(A) = \phi(A \cap Z) + \phi(A \sm Z) = \phi(A \cap Z) + \sum_k \phi(A \cap E_k^m)$. 
+
+
+$\phi(A \cap E_k^m) \geq (k-1) 2^{-m} \mu(A \cap E_k^m)= \int_{A \cap E_k} f_m$. $\phi(A \cap E_k^m) \leq k 2^{-m} \mu(A \cap E_k^m)= \int_{A \cap E_k^m} f_m + 2^{-m} \mu(A \cap E_k^m)$. Sum over $k$
+        \[
+        0 \leq \phi(A \sm Z) - \int_a f_m \; d\mu \leq 2^{-m} \mu(X)
+        \]
+Remains to show $f_m$ converge uniformly as $m \to \infty$ (then $\phi(A \sm Z)= \int_A f \; d\mu$ with $f= \lim f_m$). 
+
+
+Observe $E_k^m$ is covered by $E_j^{m+1}$ for $j= 2k-2$, $2k-1$, $2k$, $2k+1$ because
+	\[
+	\left[ \dfrac{k-1}{2^m}, \dfrac{k}{2^m} \right] \bigcap \left[ \dfrac{j-1}{2^{m+1}}, \dfrac{j}{2^{m+1}} \right]= \emptyset
+	\]
+unless $j$ is one of the values above. So if $f_m = (k-1) 2^{-m}$ then $f_{m+1}= j 2^{-m-1}$, where $2k-2 \leq j \leq 2k+1$. hence $|f_m- f_{m+1}| \leq 2^{-m}$. We get uniformly convergent of $\{f_m\}$. \qed \\
 
 
 
+Radon-Nikodym's Theorem:
 
+Every AC ASF $f$ wrt to $\sigma$-finite measure is of the form $\phi(A)= \int_A f \; d\mu$ for some $f \in L^1(\mu)$. 
+
+% Look up better statement.
+
+
+Lebesgue decomposition for measures: Let $\mu, \nu$ be $\sigma$-finite measures on $(X,\Sigma)$. Then there exists measurable $f \geq 0$ and a measure $\sigma$ such that $\sigma$ is singular with respect to $\mu$. $\nu(A)= \int_A f \; d\mu + \sigma(A)$.
+
+\pf Let $X= \bigcup E_j$, disjoint. $\nu(E_j)< \infty$. $\nu \big|_{E_j}$ is an ASF, so $\nu(A)= \int f_j \; d\mu + \sigma_j(A)$ for $A \subset E_j$, $f_j \in L^1(E_j, \mu)$. Note $f_j \geq 0$.
+
+Let $\sigma(A) = \sum_j \sigma(A \cap E_j)$ and $f= \sum f_j \chi_{E_j}$ (gluing). Hence $\nu(A)= \sum_j \nu(A \cap E_j)= \sum_j (\int_{A \cap E_j} f_j \; d\mu+ \sigma_j(A \cap E_j))= \int_A f \; d\mu + \sigma(A)$. \qed \\
 
 
 
