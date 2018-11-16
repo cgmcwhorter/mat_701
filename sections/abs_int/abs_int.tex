@@ -452,6 +452,61 @@ Let $\sigma(A) = \sum_j \sigma(A \cap E_j)$ and $f= \sum f_j \chi_{E_j}$ (gluing
 
 
 
+%%%%%%%%%%
+
+% 10.4
+
+\subsection{The Dual Space of $L^p$}
+
+% Remark on the Cantor measure from HW. 
+%K=[0,1], \mu_0 = Lebesuge |_{[0,1]} restricted measure to A is \mu|_A, \mu|_A(E)= \mu(A \cap E), K_1, \mu_1= 3/2 \cdot Lebesgue|_{K_1}, \mu_1(E)= 3/2 |E \cap K_1|
+%K_n 2^n intervals of length 3^{-n}. \mu_n(3/2)^n Lebesgue|_{K_n} each of 2^n intervals gets 2^{-n}, limit? get \mu such that \mu(C)=1 and \mu(\R\smC)=0. Note \mu_n(C)=0 for all N but \mu(C)=1, so a different kind of convergence is required. 
+% Ways to construct \mu:
+%1. weak convergence of measures \mu_n \ma{weak^*} \mu (702)
+%2. product measures: \{0,1\}^\infty= all binary sequences. \{0,1\} has \nu: \nu(\{0\})=1/2, \nu(\{1\})=1/2, \prod_{k=1}^\infty \nu on \prod_{k=1}^\infty \{0,1\} is the Cantor measure
+%3. Use outer measure: `hausdorff measure of dimension log 2/log 3, need ch 11
+%4. HW \mu= pushforward under certain f of lebesgue.
+
+
+\begin{dfn}
+Let $B$ a normed vector space over $\R$. Define
+	\[
+	\begin{split}
+	B^*&= \{ \text{ linear } \psi: B \to \R \colon \exists c \; |\psi(v)| \leq c \|v\| \forall v \in B \} \\
+	&= \{ \text{ bounded linear functionals} \}
+	\end{split}
+	\]
+is the dual space of $L^p$.
+\end{dfn}
+
+
+\begin{thm}
+Let $(X,\Sigma,\mu)$ be a $\sigma$-finite measure space, $1 \leq p < \infty$. Then there is a linear bijection between $L^p(X,\mu)^*$ and $L^{p'}(X,\mu)$ which preserves the norm. 
+\end{thm}
+
+Specifically, the bijection sends $g \in L^p$ to $\psi_g \in (L^p)^*$, $\psi_g(f)= \int_X fg \; d\mu$. 
+
+
+\begin{ex}
+$(X,\Sigma,\mu) = (\N, 2^\N, \text{counting})$, so $L^p(X,\mu)$ is $\ell^p$: every $\psi: \ell^p \to \R$ is $\psi(x)= \sum_{k=1}^\infty x_k y_k$ for some $y \in \ell^{p'}$. Note so for $\ell^\infty$. One can define $\psi(x)= \lim_{k \to \infty} x_k$ when exists, and extend to a bounded linear functional on $\ell^\infty$. Suppose we had $y \in \ell^1$ such that $\sum_1^\infty x_ky_k = \lim_{k \to \infty} x_k$ for all convergent sequences $x$. Problem is limit does not depend on any particular $x_k$. So can choose one and add one to it, etc. so we must have $y_k=0$. But this is true for all of them so that we must have $y=0$ but then if $x=1$ for all $k$ so sum is not equal to the limit, which is 1, a contradiction. 
+\end{ex}
+
+
+\pf If $g \in L^{p'}$, then $|\int fg| \leq \|f\|_p \|g\|_{p'}$, so $\psi_g$ is bounded: $|\psi_g(f)| \leq \|g\|_{p'} \|f\|_p$. So $\|\psi_g\| \leq \|g\|_{L^{p'}}$. This gives a linear map $L^{p'} \to (L^p)^*$. This map is injective: if $\int fg=0$ for all $f \in L^p$, then $g \equiv 0$ a.e., LTR. Surjectivity: $\sigma$-finite case can be reduced to $\mu(X)<\infty$ by $X= \cup_1^\infty E_j$, $E_1 \subset E_2 \subset E_3 \subset \cdots$. 
+
+% Sometimes useful to write as union finite sets, someitmes better to write as chian of increasing sets in measure, here this is the case.
+
+We get $g_j$ on $E_j$ from the finite case ($\mu(E_j)<\infty$). Glue them into one $g$ which gives $\psi(f)= \int_X fg$. Finite case: $\mu(X)< \infty$. Define an ASF $\phi(A)= \psi(\chi_A)$. It is AC wrt $\mu: \mu(A)=0$ measure $\chi_A=0$ a.e., so $\psi(\chi_A)=0$. By Radon-Nikodym, there exists $g \in L^1(X,\mu)$ such that $\phi(A)= \int_A g \; d\mu$ for all $A \subset X$. This means $\psi(\chi_A)= \int g \chi_A \;d\mu$. $\psi(f)= \int gf \; d\mu$ for all simple $f$. Once we know that $g \in L^p$, we can conclude the proof as follows: $\psi$ and $\psi g$ are continuous on $L^p$ and $\psi= \psi g$ on a dense subset (simple functions), hence $\psi = \psi g$. 
+
+case $p=1$, $p'=\infty$. Case $1<p<\infty$, $1<p'<\infty$ (textbook). for the first then, $\phi(A) = \psi(\chi_A) \leq \|\psi\| \cdot \|\chi_A\|_1 = \|\psi\| \mu(A)$. Hence, $\phi(A)/\mu(A) \leq \|\psi\|$. In the proof of Lebesgue decompostion, we will not have density $>\|\psi\|$ because of the inequality just shown. Thus $\|g\|_{p'} \leq \|\psi\|$. \qed \\
+
+
+
+
+
+
+
+
 
 
 
