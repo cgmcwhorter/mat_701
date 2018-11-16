@@ -254,6 +254,7 @@ With this terminology, the numbers 1 and $\infty$ are conjugate. Other examples 
 
 
 
+% All above done.
 
 
 
@@ -261,16 +262,17 @@ With this terminology, the numbers 1 and $\infty$ are conjugate. Other examples 
 
 
 
-\begin{thm}[Minkowski's Inequality]
-If $1 \leq p \leq \infty$, then $\|f+g\|_p \leq \|f\|_p + \|g\|_p$. 
-\end{thm}
-
-\pf Proof for $1<p<\infty$. $\int |f+g|^p= \int |f+g|^{p-1} |f+g| \leq \int |f| \cdot |f+g|^{p-1} + \int |g| \, |f+g|^{p-1}$. Using H\"older's inequality, we have $\leq \|f\|_p \left( \int (|f+g|^{p-1})^{p'} \right)^{1/p'} + \|g\|_p \left( \int (|f+g|^{p-1})^{p'}\right)^{1/p'} \leq (\|f\|_p + \|g\|_p) \left( \int |f+g|^p \right)^{1-1/p}$. Cancel (divide both by rt), then $\left( \int |f+g|^p \right)^{1/p} \leq \|f\|_p + \|g\|_p$. \qed \\
 
 
-For infinite series: if $\sum_k \|f_k\|_p < \infty$, then $\sum f_k \in L^p$ and $\| \sum f_k \|_p \leq \sum \|f_k\|_p$ for $1 \leq p \leq \infty$. 
 
-\pf Minkowski then $\| \sum_{k=1}^N |f_k|\|_p \leq \sum_k \|f_k\|_p$ then MCT allows $N \to \infty$ here. So $\sum |f_k| \in L^p$. Hence, $\sum f_k \in L^p$.
+
+
+% Find place for axioms and norms 
+
+
+
+
+
 
 
 
@@ -290,8 +292,13 @@ For $p=1$ and $p= \infty$, this is easy: $p=1$: $\int |f+g| \leq \int (|f|+|g|)=
 
 
 
-\begin{thm}[H\"older's Inequality]
-If $1 \leq p \leq \infty$ and $1/p+1/p'=1$, then $\|fg\|_1 \leq \|f\|_p \|g\|_p$, i.e.
+% All of Holder is complete 
+
+
+
+
+\begin{thm}[H\"older's Inequality] \label{thm:holder}
+If $1 \leq p \leq \infty$ and $1/p+1/p'=1$, then $\|fg\|_1 \leq \|f\|_p\, \|g\|_p$, i.e.
 	\[
 	\begin{split}
 	\int_E |fg| &\leq \left( \int_E |f|^p \right)^{1/p} \left( \int_E |g|^{p'} \right)^{1/p'}, \quad 1 < p < \infty \\
@@ -313,9 +320,12 @@ we have $\|\widetilde{f}\|_p=\|\widetilde{g}\|_{p'}=1$. But then in this case, t
 
 Notice outer exponents must always add to 1 in H\"older's Inequality. The case where $p=2$ is a classical result:
 
-\begin{cor}[Cauchy-Schwarz Inequality]
+
+\begin{cor}[Cauchy-Schwarz Inequality] \label{cor:cs}
 	\[ \int_E |fg| \leq \left( \int_E |f|^2 \right)^{1/2} \left( \int_E |g|^2 \right)^{1/2} \]
 \end{cor}
+
+\pf This follows immediately from H\"older's Inequality using the self conjugate exponents $p=p'=2$. \qed \\
 
 
 \begin{ex}
@@ -328,13 +338,54 @@ We want to find a power $p'$ such that the integral $1/x^{p'}$ converges. Howeve
 	\begin{split}
 	\int_1^\infty \dfrac{f(x)^2}{x} \; dx= \int f(x)^2 \cdot \dfrac{1}{x} \; dx  &\leq \left( \int_1^\infty (f^2)^3 \right)^{1/3} \left( \int_1^\infty \dfrac{1}{x^{3/2}} \right)^{2/3} \\
 	&= \left( \left( \int_1^\infty f^6 \right)^{1/6} \right)^2 \cdot 2^{2/3} \\
-	&= 2^{2/3} \|f\|_6^2
+	&= 2^{2/3} \|f\|_6^2.
 	\end{split}
+	\] \xqed
+\end{ex} 
+
+
+There is a sort of partial converse to H\"older's Inequality, which gives a dual form of the $L^p$ norm.
+
+
+\begin{thm}
+Let $f$ be real-valued and measurable on $E$, and $1 \leq p \leq \infty$ with conjugate exponent pair $p'$. Then
+	\[
+	\|f\|_p = \sup \int_E fg,
 	\]
-\end{ex} \xqed
+where the supremum is taken over all real-valued $g$ with $\|g\|_{p'} \leq 1$ and $\int_E fg$ exists; that is, 
+	\[
+	\|f\|_p = \sup \left\{ \int_E fg \colon \|g\|_{p'} \leq 1, g \text{ real} \right\}= \sup \left\{ \dfrac{\int_E fg}{\|g\|_{p'}} \colon g \in L^{p'}, g \text{ real} \right\}.
+	\]
+\end{thm}
 
+\pf The fact that the left side is larger than the right follows from H\"older's Inequality. It remains to prove the reverse inequality. If $\|f\|_p=0$, then $f \equiv 0$ a.e. on $E$ and the result follows. If $0<\|f\|_p<\infty$, by dividing by $\|f\|_p$, we may assume that $\|f\|_p=1$. One routinely verifies that $\|g\|_{p'}= 1$ and $\ds \int_E fg= 1$, which completes this case. 
 
-Suppose that $f \in L^p$ and $g \in L^q$, we have $\ds\int_\R |fg| \leq C \|f\|_p \|g\|_q$ for some $C$, then $p^{-1} + q^{-1}= 1$. Why? Rescaling to $f(\lambda x)$ and $g(\lambda x)$, we have
+Now suppose that $\|f\|_p= \infty$. Define $f_k$ on $E$ via
+	\[
+	f_k(\mathbf{x})=
+	\begin{cases}
+	\min(f(\mathbf{x}),k), & |\mathbf{x}| \leq k \\
+	0, & |\mathbf{x}| > k
+	\end{cases}
+	\]
+Now for all $k$, $f_k \in L^p$ and $\|f_k\|_p \to \|f\|_p= \infty$. By the work above, we have $\|f_k\|_p = \int_E f_k g_k$ for some $g_k \geq 0$ with $\|g_k\|_{p'}= 1$. But $f \geq f_k$ so that
+	\[
+	\int_E fg_k \geq \int_E f_k g_k \to \infty. 
+	\]
+But it then follows that
+	\[
+	\sup_{\|g\|_{p'}=1} \int_E fg = \infty = \|f\|_{p'}.
+	\]
+
+Now if $f$ is allowed to be nonnegative, apply the work above to $|f|$. Then there exists $g_k$ with $\|g_k\|_{p'}= 1$ with
+	\[
+	\|f\|_p = \lim \int_E |f| \, g_k = \lim \int_E f \tilde{g}_k,
+	\]
+where $\tilde{g}:= (\text{sgn} f) g_k$. But then as $\|\tilde{g}_k\|_{p'}= 1$, the result follows. The cases $p=1$ and $p= \infty$ are routine and left to the reader. \qed \\
+
+%Choose $A$ such that $0<|A|<\infty$ and for which $|f|>\|f\|_\infty - \ep$. Then let $g = \chi_A \dfrac{|f|}{f}$ and compute $(\int fg)/ \|g\|_1= (\int_A |f|)/|A|> (\|f\|_\infty - \ep)|A|/|A|> \|f\|_\infty - \ep$. If $1<p<\infty$. If $\|f\|_p < \infty$, let $g= |f|^p/f$. so $fg= |f|^p$ and $|g|^{p'}= |f|^{(p-1)p'}= |f|^p$ since $p'= p/(p-1)$. Then $(\int fg) / \|g\|_{p'}= (\int |f|^p)/ (\int |f|^p)^{1/p'}= (\int |f|^p)^{1-1/p'}= (\int |f|^p)^{1/p}$. So we can create for finite $p$ a function for which equality holds in Holders. In case $\|f\|_p= \infty$, use MCT $f_k = \text{sign }f \cdot \min(|f|,k) \chi_{[-k,k]^n}$. But then $|f_k| \nearrow |f|$. The complete proof of this is left as an exercise. 
+
+Furthermore, we have another sort of `reverse H\"older' result. Suppose that for $f \in L^p$ and $g \in L^q$, we have $\ds\int_\R |fg| \leq C \|f\|_p \|g\|_q$ for some $C$, then $p^{-1} + q^{-1}= 1$. To see this, rescaling to $f(\lambda x)$ and $g(\lambda x)$, we have
 	\[
 	\int_\R f(\lambda x) g(\lambda x) \; dx = \dfrac{1}{\lambda} \int_\R fg.
 	\]
@@ -346,9 +397,9 @@ But then we have
 	\[
 	\dfrac{1}{\lambda} \int |fg| \leq C \left( \dfrac{1}{\lambda} \right)^{1/p+1/q} \, \|f\|_p \|g\|_q.
 	\]
-This does not hold for all $\lambda>0$ unless $p^{-1} + q^{-1}= 1$. Note also the special case in H\"older's Inequality when $g \equiv 1$:
+However, this does not hold for all $\lambda>0$ unless $p^{-1} + q^{-1}= 1$. Note also the special case in H\"older's Inequality when $g \equiv 1$:
 	\[
-	\int_E |f \cdot 1| \leq \left( \int_E \|f\|^p \right)^{1/p} \left( \int_E 1^{p'} \right)^{1/p'}.
+	\int_E |f| = \int_E |f \cdot 1| \leq \left( \int_E \|f\|^p \right)^{1/p} \left( \int_E 1^{p'} \right)^{1/p'}.
 	\]
  But then 
  	\[
@@ -358,37 +409,138 @@ This does not hold for all $\lambda>0$ unless $p^{-1} + q^{-1}= 1$. Note also th
 
 
 \begin{ex}
-Suppose $f: \R \to \R$ is $C^1$ and $f' \in L^p$, where $1< p \leq \infty$. Using H\"older's Inequality with $1/p'$, there exists $C$ such that $|f(a)-f(b)| \leq C |a-b|^{1/p'}$. We then have
+Let $1 < p \leq \infty$. Suppose $f: \R \to \R$ is $C^1$ and $f' \in L^p$. Using H\"older's Inequality with $1/p'$, there exists $C$ such that $|f(a)-f(b)| \leq C |a-b|^{1/p'}$. We then have
 	\[
 	| f(a) - f(b)| \leq \int_a^b |f'(x)| \; dx \leq (b-a)^{1/p'} \|f'\|_p.
 	\]
-Notice that Lipschitz continuity arises in H\"older's Inequality in the case where $p=\infty$, so that $p'=1$. 
-\end{ex} \xqed 
+Notice that Lipschitz continuity arises in H\"older's Inequality in the case where $p=\infty$, so that $p'=1$. \xqed
+\end{ex}  
 
 
-There is a sort of converse to H\"older's Inequality which gives a dual form of the $L^p$ norm.
 
 
-\begin{thm}
-Let $1 \leq p \leq \infty$ and $1/p+1/p'=1$. If $f$ is real valued and measurable on $E$, then 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Minkowski complete
+
+
+
+\begin{thm}[Minkowski's Inequality] \label{thm:mink}
+If $1 \leq p \leq \infty$, then $\|f+g\|_p \leq \|f\|_p + \|g\|_p$, i.e.
 	\[
-	\|f\|_p = \sup \left\{ \int fg \colon \|g\|_{p'}, g \text{ real} \right\}= \sup \left\{ \dfrac{\int fg}{\|g\|_{p'}} \colon g \in L^{p'}, g \text{ real} \right\}.
+	\left( \int_E |f+g|^p \right)^{1/p} \leq \left( \int_E |f|^p \right)^{1/p} + \left( \int_E |g|^p \right)^{1/p}
 	\]
 \end{thm}
 
-\pf The fact that the left side is larger than the right follows from H\"older's Inequality. It remains to prove the reverse inequality. If $\|f\|_p=0$, then $f \equiv 0$ a.e. on $E$, and the result follows. If $0<\|f\|_p<\infty$, by dividing by $\|f\|_p$, we may assume that $\|f\|_p=1$. One routinely verifies that $\|g\|_{p'}= 1$ and $\ds \int_E fg= 1$, which completes this case. 
+\pf The proof in the case of $p=1$ is immediate from the triangle inequality: $|f+g| \leq |f|+|g|$. Now if $p= \infty$, we know that $|f| \leq \|f\|_\infty$, $|g| \leq \|g\|_\infty$ a.e. in $E$. But then $|f+g| \leq \|f\|_\infty + \|g\|_\infty$ a.e. in $E$. It then follows that $\|f+g\|_\infty \leq \|f\|_\infty + \|g\|_\infty$. For $1<p<\infty$, we have
+	\[
+	\begin{split}
+	\| f+g \|_p^p&= \int_E |f+g|^p \\
+	&= \int_E |f+g|^{p-1} \, |f+g| \\
+	&\leq \int_E |f+g|^{p-1} \, |f| + \int_E |f+g|^{p-1} \, |g|.
+	\end{split}
+	\]
+Then using H\"older's Inequality, Theorem~\ref{thm:holder}, to $|f+g|^{p-1}, |g|$, with exponents $p/(p-1), p$, respectively, we have
+	\[
+	\int_E |f+g|^{p-1} \, |g| \leq \|f+g\|_p^{p-1} \, \|g\|_p.
+	\]
+The same holds for the other integral mutatis mutandis. But then $\|f+g\|_p^p \leq \|f+g\|_p^{p-1} ( \|f\|_p + \|g\|_p)$. Dividing by $\|f+g\|_p^{p-1}$, the result then follows. [Note taht if $\|f+g\|_p=0$, the result is immediate, and if $\|f+g\|_p=\infty$, either $\|f\|_p=\infty$ or $\|g\|_p=\infty$, the result is also immediate.] \qed \\
 
-Now suppose that $\|f\|_p= \infty$. 
+
+\begin{rem}
+Minkowski's Inequality fails for $0<p<1$. For example, take $E=(0,1)$, and $f(x)= \chi_{(0,1/2)}$, $g(x)= \chi_{(1/2,1)}$. Then clearly $\|f+g\|_p=1$ while $\|f\|_p+\|g\|_p= 2^{-1/p} + 2^{-1/p}= 2^{1-1/p}<1$. 
+\end{rem}
 
 
-% p130
+Minkowski's Inequality also works for infinite sums as well.
 
 
-choose $A$ such that $0<|A|<\infty$ and for which $|f|>\|f\|_\infty - \ep$. Then let $g = \chi_A \dfrac{|f|}{f}$ and compute $(\int fg)/ \|g\|_1= (\int_A |f|)/|A|> (\|f\|_\infty - \ep)|A|/|A|> \|f\|_\infty - \ep$. If $1<p<\infty$. If $\|f\|_p < \infty$, let $g= |f|^p/f$. so $fg= |f|^p$ and $|g|^{p'}= |f|^{(p-1)p'}= |f|^p$ since $p'= p/(p-1)$. Then $(\int fg) / \|g\|_{p'}= (\int |f|^p)/ (\int |f|^p)^{1/p'}= (\int |f|^p)^{1-1/p'}= (\int |f|^p)^{1/p}$. So we can create for finite $p$ a function for which equality holds in Holders. In case $\|f\|_p= \infty$, use MCT $f_k = \text{sign }f \cdot \min(|f|,k) \chi_{[-k,k]^n}$. But then $|f_k| \nearrow |f|$. The complete proof of this is left as an exercise. 
+\begin{thm}
+If $1 \leq p \leq \infty$, then $\|a_k+b_k\|_p \leq \|a_k\|_p + \|b_k\|_p$; that is,
+	\[
+	\left( \sum_k |a_k+b_k|^p \right)^{1/p} \leq \left( \sum_k |a_k|^p \right)^{1/p} + \left( \sum_k |b_k|^p \right)^{1/p}
+	\]
+\end{thm}
 
 
 
-\qed \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Find place for stuff below.
+
+
+For infinite series: if $\sum_k \|f_k\|_p < \infty$, then $\sum f_k \in L^p$ and $\| \sum f_k \|_p \leq \sum \|f_k\|_p$ for $1 \leq p \leq \infty$. 
+
+\pf Minkowski then $\| \sum_{k=1}^N |f_k|\|_p \leq \sum_k \|f_k\|_p$ then MCT allows $N \to \infty$ here. So $\sum |f_k| \in L^p$. Hence, $\sum f_k \in L^p$.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -430,17 +582,55 @@ choose $A$ such that $0<|A|<\infty$ and for which $|f|>\|f\|_\infty - \ep$. Then
 % ------------------------
 \subsection{Sequence Classes $\ell^p$}
 
-$\ell^p= \{$ sequences $\{a_k\}$ such that $\|a\|_p<\infty\}$. $\|a\|_p=$ $(\sum_k |a_k|^p)^{1/p}$ and $\sup |a_k|$ if $p=\infty$. Claim: $\|a\|_p \leq \|a\|_q$ if $p \geq q$.  
+Sequence spaces are closely related to Functional Analysis, among many other areas of mathematics. Perhaps the most important of these spaces are the $\ell^p$ spaces, which are special cases of $L^p$ spaces for the counting measure on the natural numbers. These spaces are also important as they serve as classical examples of Banach spaces. 
+
+
+\begin{dfn}[$\ell^p$]
+If $\{a_k\}$ is a real (or complex sequence), for $0<p<\infty$, define
+	\[
+	\| a_k \|_p = \left( \sum_k |a_k|^p \right)^{1/p},
+	\]
+while for $p=\infty$, define $\|a\|_\infty= \sup_k |a_k|$. Then we define $\ell^p$ to be
+	\[
+	\ell^p:= \left\{ \{a_k\} \colon \|a_k\|_p< \infty \right\},
+	\]
+\end{dfn}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{prop}
+If $\{a_k\}$ is a real (or complex sequence), then $\|a_p\|_p \leq \|a\|_q$ if $p \geq q$. 
+\end{prop}
 
 \pf We can rescale so that $\|a\|_1$. THen $|a_k| \leq 1$ for all $k$. Hence, $\sum |a_k|^p \leq \sum |a_k|^q \leq 1$. So $\|a\|_q \leq 1$. If $p<\infty$. The case $p=\infty$ is easy. \qed \\
+
+
+
 
 A sequence $\{a_k\}$ can be represented by $f= \sum_{k=1}^\infty a_k \chi_{[k,k+1)}$. Then $\|f\|_p= \|a\|_p$ as $\int |f|^p= \sum_{k=1}^\infty \int_k^{k+1} |f|^p = \sum |a_k|^p$. Given sequence $a,b$, can apply Holder/mink to corresponding functions and get 
 $\sum |a_kb_k| \leq \|a\|_p \|b\|_{p'}$ Holder
 $\|a+b\|_p \leq \|a\|_p + \|b\|_p$ Mink
 
+
+
+
 Ex: $a_k=1/k$ is in $\ell^p \iff p>1$. More generally, $a_k= 1/k^r \in \ell^p \iff p>1/r$, where $r>0$.
 
+
 For geometric sequences, $a_k= 1/2^k \in \ell^p \iff $, well for all $p \in (0,\infty]$. 
+
 
 $a_k= 1/(k^r \log^{2r}(k+1)) \iff p \geq 1/r$. 
 
