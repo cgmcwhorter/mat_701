@@ -1,118 +1,183 @@
 % !TEX root = ../../mat701_notes.tex
 \newpage
 \section{Homework Problems}
+\vspace{0.5cm}
 
-% HW 1
+\cbf{Lebesgue Outer Measure}
+
+% HW 1 (3.1): Lebesgue Outer Measure
+% Problem 1
 \begin{hw} \label{hw:1}
-Given an arbitrary set $A \subset \R$ and a number $c>0$, let $B = \{ ca \colon a \in A \}$. Prove that $\ext{B} = c \ext{A}$. \\
+Prove that for every set $E \subset \R^n$ and every $\ep>0$, the Lebesgue outer measure $\ext{E}$ is equal to
+	\[
+	\inf \left\{ \sum \nu(I_k) \colon  E \subset \bigcup_{k=1}^\infty I_k, \text{ and } \diam I_k < \ep \forall k \right\}
+	\]
+[Note: This is the same infimum as in the definition of $\ext{E}$ but with the additional requirement $\diam I_k < \ep$ for all $k$.] \\
 \end{hw}
 
 
-% HW 2
+% HW 1 (3.1): Lebesgue Outer Measure
+% Problem 2
 \begin{hw} \label{hw:2}
-Suppose that a set $A \subset \R$ is measurable. Prove that for every $c>0$ the set $B = \{ ca \colon a \in A \}$ is also measurable. \\
+Suppose that the sets $E_k \subset \R^n$ are such that the series $\ds\sum_{k=1}^\infty |E_k|_e$ converges. Prove that the outer measure of the set
+	\[
+	\limsup E_k:= \bigcap_{m=1}^\infty \bigcup_{k=m}^\infty E_k
+	\]
+is zero. \\
 \end{hw}
 
 
-% HW 3
+
+\cbf{Measurable Sets}
+
+
+
+% HW 2 (3.2A): Measurable Sets
+% Problem 1
 \begin{hw} \label{hw:3}
+Given an arbitrary set $A \subset \R$ and a number $c>0$, let $B = \{ ca \colon a \in A \}$. Prove that $\ext{B}= c \ext{A}$. \\
+\end{hw}
+
+
+% HW 2 (3.2A): Measurable Sets
+% Problem 2
+\begin{hw} \label{hw:4}
+Suppose that a set $A\subset\mathbb R$ is measurable. Prove that for every $c>0$ the set $B = \{ca\colon a\in A\}$ is also measurable. \\
+\end{hw}
+
+
+% HW 3 (3.2B): Measurable Sets
+% Problem 1
+\begin{hw} \label{hw:5}
 Given a sequence of continuous functions $f_k: \R \to \R$, let $B$ be the set of all points $x \in \R$ such that the sequence $\{ f_k(x) \}$ is bounded. Prove that $B$ is a measurable set. [\emph{Hint: try to construct $B$ from the sets $\{x \colon |f_k(x)| \leq M\}$ by using countable unions and intersections.}] \\
 \end{hw}
 
 
-% HW 4
-\begin{hw} \label{hw:4}
+% HW 3 (3.2B): Measurable Sets
+% Problem 2
+\begin{hw} \label{hw:6}
 Given a sequence of continuous functions $f_k \colon \R \to \R$, let $C$ be the set of all points $x \in \R$ such that $\ds \lim_{k \to \infty} f_k(x)= 0$. Prove that $C$ is a measurable set. \\
 \end{hw}
 
 
-% HW 5
-\begin{hw} \label{hw:5}
+
+\cbf{Properties of the Lebesgue Measure}
+
+
+
+% HW 4 (3.3): Properties of Lebesgue Measure
+% Problem 1
+\begin{hw} \label{hw:7}
 Prove that the set
-        \[
-        A = \{ x \in \R \colon \exists \, k \in \N \text{ such that } |2^x-2^k| \leq 1 \}
-        \]
-is measurable and $|A|<\infty$. \\
+	\[
+	A= \{ x \in \R \colon \exists k \in \N \text{ such that } |2^x-2^k| \leq 1 \}
+	\]
+is measurable and $|A| < \infty$. \\
 \end{hw}
 
 
-% HW 6
-\begin{hw} \label{hw:6}
+% HW 4 (3.3): Properties of Lebesgue Measure
+% Problem 2
+\begin{hw} \label{hw:8}
 Prove that the set
-        \[
-        A = \{ x \in [0, 1] \colon \forall q \in \N \ \exists p \in \N \text{ such that } |x-p/q| \leq 1/q^2 \}
-        \]
+	\[
+	A = \{x\in [0, 1] \colon \forall q\in \mathbb N \ \exists p\in\mathbb N \text{ such that } |x-p/q|\le 1/q^2\}
+	\]
 is measurable and $|A|=0$. \\
 \end{hw}
 
 
-% HW 7
-\begin{hw} \label{hw:7}
-Suppose $E$ and $Z$ are sets in $\mathbb R^n$ such that $E\cup Z$ is measurable and $|Z|=0$. Prove that $E$ is measurable. \\
+% HW 5 (3.4): Properties of Lebesgue Measure
+% Problem 1
+\begin{hw} \label{hw:9}
+Suppose $E$ and $Z$ are sets in $\R^n$ such that $E \cup Z$ is measurable and $|Z|=0$. Prove that $E$ is measurable. \\
 \end{hw}
 
 
-% HW 8
-\begin{hw} \label{hw:8}
-Given a continuous function $f \colon \R^n \to \R^n$, define $\mathcal{M}= \{ E \subset \R^n \colon f^{-1}(E) \text{ is Borel} \}$. 
+% HW 5 (3.4): Properties of Lebesgue Measure
+% Problem 2
+\begin{hw} \label{hw:10}
+Given a continuous function $f:  \R^n \to \R^n$, define $\mathcal{M}= \{ E \subset \R^n \colon f^{-1}(E) \text{ is Borel} \}$. 
 	\begin{enumerate}[(a)]
 	\item Prove that $\mathcal{M}$ is a $\sigma$-algebra.
-	\item Prove that if $E$ is Borel, then $f^{-1}(E)$ is Borel. [\emph{Hint: Use (a).}] \\
+	\item Prove that if $E$ is Borel, then $f^{-1}(E)$ is Borel. [Hint: Use (a).] \\
 	\end{enumerate}
 \end{hw}
 
 
-% HW 9
-\begin{hw} \label{hw:9}
-Suppose $f \colon \R \to \R$ is a function with a continuous derivative. Prove that for every measurable set $E$, the set $f(E)$ is also measurable. [\emph{Hint: although $f$ need not be Lipschitz, its restriction to any bounded interval is Lipschitz.}] \\
+
+\cbf{Lipschitz Transformations}
+
+
+
+% HW 6 (3.5): Lipschitz Transformations
+% Problem 1
+\begin{hw} \label{hw:11}
+Suppose $f: \R \to \R$ is a function with a continuous derivative. Prove that for every measurable set $E$, the set $f(E)$ is also measurable. [Hint: Although $f$ need not be Lipschitz, its restriction to any bounded interval is.] \\
 \end{hw}
 
 
-% HW 10
-\begin{hw} \label{hw:10}
-Given a set $E \subset [0, \infty)$, define a function $f: [0, \infty) \to [0, \infty)$ by $f(x)= \ext{E\cap [0, x]}$. 
+% HW 6 (3.5): Lipschitz Transformations
+% Problem 2
+\begin{hw} \label{hw:12}
+Given a set $E \subset [0, \infty)$, define a function $f: [0, \infty) \to [0, \infty)$ by $f(x) = \ext{E \cap [0, x]}$. 
 	\begin{enumerate}[(a)]
 	\item Prove that $f$ is Lipschitz continuous.
-	\item Prove that for every number $b$ with $0<b<|E|_e$ there exists a set $F \subset E$ such that $|F|_e=b$. \\
+	\item Prove that for every number $b$ with $0<b<\ext{E}$ there exists a set $F \subset E$ such that $\ext{F}= b$. \\
 	\end{enumerate}
 \end{hw}
 
 
-% HW 11
-\begin{hw} \label{hw:11}
-Show that there exists a nested sequence of sets $E_1 \supset E_2 \supset \cdots$ such that 
-$\ext{E_1}< \infty$ and $\bigcap_{k=1}^\infty E_k= \emptyset$ but $\ds\lim_{k \to \infty } \ext{E_k}> 0$; that is, outer measure is not continuous under nested intersections. [\emph{Hint: Use the translates of the Vitali set.}] \\
-\end{hw}
+
+\cbf{Nonmeasurable Sets}
 
 
-% HW 12
-\begin{hw} \label{hw:12}
-Show that for the standard middle-third Cantor set $C \subset [0, 1]$, the difference set $C-C$ contains a neighborhood of $0$. [\emph{Hint: $C$ is the intersection of nested sets $C_n$ where $C_0=[0, 1]$  and $C_{n+1}= \frac13C_n \cup (\frac13 C_n+\frac23)$. Find $C_n-C_n$ using induction.}] \\
 
-\noindent\emph{Remark: This shows that having $|E|>0$ is not necessary for $E-E$ to contain a neighborhood of $0$.} \\
-\end{hw}
-
-
-% HW 13
+% HW 7 (3.6): Nonmeasurable Sets
+% Problem 1
 \begin{hw} \label{hw:13}
-Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
+Show that there exists a nested sequence of sets $E_1 \supset E_2 \supset \cdots$ such that $\ext{E_1} < \infty$ and $\bigcap_{k=1}^\infty E_k= \emptyset$ but $\ds\lim_{k \to \infty} \ext{E_k} > 0$. That is, the outer measure is not continuous under nested intersections. [Hint: Use the translates of the Vitali set.] \\
 \end{hw}
 
 
-% HW 14
+% HW 7 (3.6): Nonmeasurable Sets
+% Problem 2
 \begin{hw} \label{hw:14}
-Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:13} would not be true. \\
+Show that for the standard middle-third Cantor set $C \subset [0, 1]$, the difference set $C-C$ contains a neighborhood of $0$. [Hint: $C$ is the intersection of nested sets $C_n$, where $C_0=[0, 1]$  and $C_{n+1}=\frac{1}{3} C_n \cup ( \frac{1}{3} C_n + \frac{2}{3})$. Find $C_n - C_n$ using induction.] \\
+
+\noindent Remark: This shows that having $|E|>0$ is not necessary for $E - E$ to contain a neighborhood of $0$. \\
 \end{hw}
 
 
-% HW 15
+
+\cbf{Measurable Functions}
+
+
+
+% HW 8 (4.1A): Measurable Functions I
+% Problem 1
 \begin{hw} \label{hw:15}
-Suppose that $f: \R \to \R$ is measurable, and $g: \R \to \R$ is continuously differentiable with $g'>0$ everywhere. Prove that $f \circ g$ is measurable. \\
+Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable, and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
 \end{hw}
 
 
-% HW 16
-\begin{hw} \label{hw:16} \hfill
+% HW 8 (4.1A): Measurable Functions I
+% Problem 2
+\begin{hw} \label{hw:16}
+Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in the previous problem would not be true. \\
+\end{hw}
+
+
+% HW 9 (4.1B): Measurable Functions 2
+% Problem 1
+\begin{hw} \label{hw:17}
+Suppose that $f: \R \to \R$ is measurable, and $g: \R \to \R$ is continuously differentiable with $g' > 0$ everywhere. Prove that $f \circ g$ is measurable. \\
+\end{hw}
+
+
+% HW 9 (4.1B): Measurable Functions 2
+% Problem 2
+\begin{hw} \label{hw:18}
 \begin{enumerate}[(a)]
 \item Suppose $f\colon \mathbb R^n\to\mathbb R$ is a continuous function such that $f^2$ is measurable. Prove that $f$ is measurable.
 \item Prove that the statement in (a) is false if $f$ is not assumed continuous. \\
@@ -120,37 +185,494 @@ Suppose that $f: \R \to \R$ is measurable, and $g: \R \to \R$ is continuously di
 \end{hw}
 
 
-% HW 17 
-\begin{hw} \label{hw:17}
-Suppose that $f: E \to \R$ is a measurable function, where $E \subset \R^n$ is measurable. 
+
+\cbf{Semicontinuous Functions \& Bounded Variation}
+
+
+
+% HW 10 (4.2): Semicont Functions & 2.1 Bounded Variation
+% Problem 1
+\begin{hw} \label{hw:19} \hfill
 \begin{enumerate}[(a)]
-\item Prove that there exists a Borel set $H \subset E$ such that the restriction $f_{|H}$ is Borel measurable and $|E \setminus H|=0$. 
-\item If, in addition, $E$ is a Borel set, prove that there exists a Borel measurable function $g: E \to \R$ such that $f=g$ a.e.. [\emph{Hint: For part (a), take a countable union of closed sets obtained from Lusin's Theorem.}] \\
+\item Let $E \subset \R^n$ be a set. Consider a sequence of lsc functions $f_k: E \to \overline{\R}$ such that $f_1\leq f_2 \leq f_3 \leq \cdots$. Prove that $\lim_{k \to \infty} f_k$ is also an lsc function. [Note:Tthe limit here is understood in the sense of the extended real line $\overline{\R}$, so it is assured to exist by monotonicity.]
+\item Give an example that shows (a) fails with ``lsc'' replaced by ``usc.'' \\
 \end{enumerate}
 \end{hw}
 
 
-% HW 18 
-\begin{hw} \label{hw:18}
-Suppose $\phi: [0, \infty )\to [0, \infty)$ is a function such that $\phi(t) \to 0$ as $t \to \infty$. Consider a sequence of measurable functions $\{f_k\}$, $f_k: \R^n \to \R$, such that $|f_k(x)| \leq \phi(|x|)$ for every $k$, and $f_k \to f$ a.e.. Prove that the conclusion of Egorov's Theorem holds in this situation; that is, for every $\ep>0$, there exists a closed set $E(\ep) \subset \R^n$ such that $|\R^n \setminus E(\ep)| < \ep$ and $f_k \to f$ uniformly on $E(\ep)$. [\emph{Hint: Follow the proof of Egorov's theorem.}] \\
-\end{hw}
-
-
-% HW 19
-\begin{hw} \label{hw:19}
-Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
-\end{hw}
-
-
-% HW 20
+% HW 10 (4.2): Semicont Functions & 2.1 Bounded Variation
+% Problem 2
 \begin{hw} \label{hw:20}
-Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:19} would not be true. \\
+Fix $a>0$ and define $f: [0, 1] \to \R$ so that $f(1/k)=1/k^a$ for $k \in \N$, and $f(x)=0$ for all other $x$. Prove that $f$ is of bounded variation on $[0, 1]$ when $a>1$, and is not of bounded variation on $[0, 1]$ when $0 < a \leq 1$. \\
 \end{hw}
 
 
 
+\cbf{Egorov \& Lusin's Theorem}
 
 
 
+% HW 11 (4.3): Egorov & Lusin
+% Problem 1
+\begin{hw} \label{hw:21}
+Suppose that $f: E \to \R$ is a measurable function, where $E \subset \R^n$ is measurable. 
+	\begin{enumerate}[(a)]
+	\item Prove that there exists a Borel set $H \subset E$ such that the restriction $f\big|_H$ is Borel measurable and $|E \sm H|=0$. [Hint: Take a countable union of closed sets obtained from Lusin's theorem.] 
+	\item If, in addition, $E$ is a Borel set, prove that there exists a Borel measurable function $g: E \to \R$ such that $f=g$ a.e.. \\
+	\end{enumerate}
+\end{hw}
 
+
+% HW 11 (4.3): Egorov & Lusin's Theorem
+% Problem 2
+\begin{hw} \label{hw:22}
+Suppose $\phi \colon [0, \infty) \to [0,\infty)$ is a function such that $\phi(t) \to 0$ as $t \to \infty$. Consider a sequence of measurable functions $f_k: \R^n \to \R$ such that $|f_k(x)|\leq \phi(|x|)$ for every $k$, and $f_k \to f$ a.e.. Prove that the conclusion of Egorov's Theorem holds in this situation: that is, for every $\ep>0$ there exists a closed set $E(\ep) \subset \R^n$ such that $|\R^n \sm E(\ep)| < \ep$ and $f_k \to f$ uniformly on $E(\ep)$.  [Hint: Follow the proof of Egorov's Theorem.] \\
+\end{hw}
+
+
+
+\cbf{Convergence in Measure}
+
+
+
+% HW 12 (4.4): Convergence in Measure
+% Problem 1
+\begin{hw} \label{hw:23}
+Suppose that $f, g, f_k, g_k$ ($k \in \N$)  are measurable functions on a set $E \subset \R^n$ with values on $\R$, and that $f_k \xrightarrow{m} f$ and $g_k \xrightarrow{m} g$. Prove that $f_k + g_k \xrightarrow{m} f+g$. \\
+\end{hw}
+
+
+% HW 12 (4.4): Convergence in Measure
+% Problem 2
+\begin{hw} \label{hw:24} \hfill
+\begin{enumerate}[(a)]
+\item In addition to the assumptions in the previous problem, suppose $|E| < \infty$. Prove that $f_k g_k \xrightarrow{m} f g$.
+\item Show by an example that the assumption $|E| < \infty$ cannot be omitted in (a). [Hint: You need some boundedness to control the terms in $f_k g_k - fg= (f_k-f)g_k + f (g_k - g)$. Consider that when $\varphi: E \to \R$ is measurable, $E= \bigcup_{j} \{ |\varphi| \leq j \}$.] \\
+\end{enumerate}
+\end{hw}
+
+
+
+\cbf{Integral of Non-negative Functions}
+
+
+
+% HW 13 (5.1): Integral Nonnegative Functions
+% Problem 1
+\begin{hw} \label{hw:25}
+Suppose that $f: E \to [0, \infty)$ is a measurable function, where $E \subset \R^n$. Prove that $\int_E f$ is finite if and only if the series 
+        \[
+        \sum_{j = -\infty}^\infty 2^j \, | \{x \in E \colon f(x)>2^j \}|
+        \]
+converges. [Hint: consider the sets $E_k = \{2^k<f\leq 2^{k+1}\}$ and the function $g(x)= \sum 2^k \chi_{E_k}$. Compare $\int_E g$ to the sum of series, and also to $\int_E f$.] \\
+\end{hw}
+
+
+% HW 13 (5.1): Integral Nonnegative Functions
+% Problem 2
+\begin{hw} \label{hw:26}
+Let $B=\{ x \in \R^n \colon |x|<1 \}$. \hfill
+\begin{enumerate}[(a)]
+\item Prove that $\int_{B} |x|^{-p} \,dx$ is finite when $0<p<n$ and infinite when $p \geq n$. 
+\item Prove that $\int_{B^c} |x|^{-p} \,dx$ is finite when $p>n$ and infinite when $0 < p \leq n$. \\
+\end{enumerate}
+\end{hw}
+
+
+% HW 14 (5.2): Properties of Integral Nonnegative I
+% Problem 1
+\begin{hw} \label{hw:27} \hfill
+\begin{enumerate}[(a)]
+\item Suppose that $f_k: E \to [0, \infty]$ (where $E \subset \R^n$) are measurable functions such that $\int_E f_k \to 0$ as $k \to \infty$. Prove that $f_k \xrightarrow{m} 0$.  
+\item Give an example where $f_k \xrightarrow{m} 0$ but  $\int_E f_k \not\to 0$. \\
+\end{enumerate}
+\end{hw}
+
+
+% HW 14 (5.2): Properties of Integral Nonnegative I
+% Problem 2
+\begin{hw} \label{hw:28}
+For $k \in \N$ define $f_k: [0, 1]\to [0, \infty]$ by 
+        \[
+        f_k(x)= \sum_{j=1}^k \chi_{I(j, k)}, \quad \text{where } I(j, k)= \left[ \frac{j}{k} - \frac{1}{k^3}, \frac{j}{k}+\frac{1}{k^3} \right].
+        \]
+Let $f= \sum_{k=1}^\infty f_k$. Prove that $\int_{[0, 1]} f <\infty$. \\
+\end{hw}
+
+
+% HW 15 (5.2B) Properties of Integral Nonnegative 2
+% Problem 1
+\begin{hw} \label{hw:29}
+Suppose that $f: \R^n \to [0, \infty)$ is a measurable function such that $\int_{\R^n} f < \infty$. Also suppose $\{ E_k \}$ is a sequence of measurable sets $E_k \subset \R^n$. Let $A= \ds\limsup_{k \to \infty} E_k$ and $B= \ds\liminf_{k \to \infty} E_k$. Prove that 
+	\[
+	\int_A f \geq \limsup_{k \to \infty} \int_{E_k} f
+	\]
+and 
+	\[
+	\int_B f \leq \liminf_{k \to \infty} \int_{E_k} f.
+	\]
+[Hint: $\int_E f= \int_{\R^n} \chi_E f$.] \\
+\end{hw}
+
+
+% HW 15 (5.2B) Properties of Integral Nonnegative 2
+% Problem 2
+\begin{hw} \label{hw:30}
+Suppose that $f: \R^n \to [0, \infty)$ is a measurable function such that $\int_{\R^n} f < \infty$. Prove that $\int_{\R^n} e^{-k|x|} f(x) \to 0$ as $k \to \infty$. \\
+\end{hw}
+
+
+
+\cbf{Integral of Measurable Functions}
+
+
+
+% HW 16 (5.3A): Integral Measurable Functions I
+% Problem 1
+\begin{hw} \label{hw:31}
+Prove that under the assumptions of the Lebesgue Dominated Convergence Theorem, $\int_E |f_k-f| \to 0$ as $k \to \infty$. \\
+\end{hw}
+
+
+% HW 16 (5.3A): Integral Measurable Functions I
+% Problem 2
+\begin{hw} \label{hw:32}
+Let $f \in L^1(E)$, where $E \subset \R^n$ is a measurable set. Prove that
+        \[
+        \lim_{k \to \infty} k \int_E \sin \left( \frac{f }{k} \right)= \int_E f.
+         \]
+\end{hw}
+
+
+% HW 17 (5.3B): Integral of Measurable Functions 2
+% Problem 1
+\begin{hw} \label{hw:33}
+Let $f: E \to \R$ be a measurable function. Suppose that $|E| < \infty$ and there exists a number $p > 1$ such that 
+        \[
+        \limsup_{\alpha \to \infty} \alpha^p |\{ x \in E \colon |f(x)| > \alpha \}| < \infty.
+        \]
+Prove that $f\in L^1(E)$. [Hint: use an exercise from Homework~\ref{hw:25}.] \\
+\end{hw}
+
+
+% HW 17 (5.3B): Integral of Measurable Functions 2
+% Problem 2
+\begin{hw} \label{hw:34}
+Give an example of a sequence of integrable functions $f_k: [0, 1] \to \R$ such that $f_k \to f$ a.e., $\ds\lim_{k \to \infty} \int_{[0,1]} f_k $ exists and is finite, but $f$ is not integrable on $[0, 1]$. [Hint: approximate $1/x$ by functions with integral $0$.] \\
+\end{hw}
+
+
+
+\cbf{Lebesgue, Riemann, \& Riemann-Stieltjes Integrals}
+
+
+
+% HW 18 (5.4-5): Lebesgue Riemann & Riemann-Stieltjes 
+% Problem 1
+\begin{hw} \label{hw:35}
+Determine the Riemann-Stieltjes integral $\int \alpha \; d(-\omega_f(\alpha))$ corresponding to $\int_E f$ where $E= (0, 3)$ and $f(x)= x + \lfloor x \rfloor $. [You do not need to evaluate the integral. Here $\lfloor x \rfloor$ is the greatest integer not exceeding $x$.] \\
+\end{hw}
+
+
+% HW 18 (5.4-5): Lebesgue Riemann & Riemann-Stieltjes 
+% Problem 2
+\begin{hw} \label{hw:36}
+Suppose $E \subset [0, 1]$. Prove that $\chi_E$ is Riemann integrable on $[0, 1]$ if and only if $|\partial E|=0$. \\
+\end{hw}
+
+
+
+\cbf{Fubini's \& Tonelli's Theorem}
+
+
+
+% HW 19 (6.1) Fubini Theorem
+% Problem 1
+\begin{hw} \label{hw:37} \hfill
+\begin{enumerate}[(a)]
+\item Suppose $E \subset \R^2$ is a Borel set. For $x \in \R$, let $E_x = \{y \in \R \colon (x, y) \in E \}$. Prove that $E_x$ is a Borel set in $\R$. [Hint: For a fixed $x$, prove that $\{ A \subset \R^2 \colon A_x \text{ is Borel in } \R \}$ is a $\sigma$-algebra that contains all open subsets of $\R^2$.]
+\item Suppose $f: \R^{2} \to \R$ is a Borel measurable function. Prove that for every $x \in \R$, the function $g(y)= f(x, y)$ is Borel measurable on $\R$. [Note: In contrast with Fubini's Theorem, this is no ``a.e.'' here.] \\
+\end{enumerate} 
+\end{hw}
+
+
+% HW 19 (6.1) Fubini Theorem
+% Problem 2
+\begin{hw} \label{hw:38}
+Suppose $f: [0, 1] \to \R$ is a measurable function such that the function $g(x,y)= f(x) - f(y)$ is in $L^1([0, 1]^2)$. Prove that $f\in L^1([0, 1])$. \\
+\end{hw}
+
+
+% HW 20 (6.1-2): Fubini & Tonelli
+% Problem 1
+\begin{hw} \label{hw:39}
+Prove that for any $a > 0$ the function $f(x,y)= e^{-xy} \sin x$ is in $L^1(E)$, where $E= \{ (x, y) \in \R^2, \, x > 0, \, y > a \}$. \\
+
+\noindent Remark: We proved in discussing Chapter~5.5 that if a Riemann integral $\int_a^b h(x) \;dx$ exists (with $a,b$ finite), then it is equal to the Lebesgue integral. This can be extended to improper Riemann integrals in two ways: \\
+
+\noindent First, if $h \geq 0$ and $\int_a^b h(x) \;dx$ exists as an Improper Riemann Integral, then it is still equal to the Lebesgue integral, by the MCT (replace $h$ with $\min(h, k) \chi_{[-k, k]}$ and let $k \to \infty$.) \\
+
+\noindent Second, if $h \in L^1((a, b))$ and the improper Riemann integral $\int_a^b h(x)\;dx$  exists, then the two integrals are equal. Indeed, $\int_c^d h(x) \;dx$ is equal to the Lebesgue integral for any $a<c<d<b$, by the above result from Chapter~5.5. As $c \to a$ or $d \to b$, we can pass to the limit in the Lebesgue Integral by the DCT ($|h|$ is dominating), and in the Riemann integral, by the definition of an improper Riemann integral. \\
+\end{hw}
+
+
+% HW 20 (6.1-2): Fubini & Tonelli
+% Problem 2 
+\begin{hw} \label{hw:40}
+Apply Fubini's Theorem to the function $f$ in the previous to prove that 
+        \[
+        \int_0^\infty \frac{e^{-ax} \sin x}{x} \,dx = \tan^{-1} (1/a).
+        \]
+[Hint: Integrate $f$ in two different ways. You do not have to do the antiderivative $\int e^{-xy}\sin x \;dx$ by hand; just look it up. Food for thought (not a part of the homework): how to let $a \to 0$?] \\
+\end{hw}
+
+
+
+\cbf{Application of Fubini's Theorem \& Tonelli's Theorem}
+
+
+
+% HW 21 (6.3A) Applications Fubini & Tonelli I
+% Problem 1
+\begin{hw} \label{hw:41}
+Suppose $f \in L^1([0, 1])$. Let $g(x)= \int_{[x, 1]} \frac{f(t)}{t} \;dt$ for $x \in (0,1]$. Prove that $g \in L^1((0, 1])$ and $\int_{(0, 1]} g= \int_{[0, 1]} f$. \\
+\end{hw}
+
+
+% HW 21 (6.3A) Applications Fubini & Tonelli I
+% Problem 2
+\begin{hw} \label{hw:42}
+Prove that convolution is associative; that is, for $f, g, h \in L^1(\R^n)$ we have $(f*g)*h= f*(g*h)$. [Note: We do not yet have the full change of variables formula, but we do have $\int_{\R^n} f(x-y) \;dx= \int_{\R^n} f(x) \;dx$ as a consequence of the invariance of measure under translation.] \\
+\end{hw}
+
+
+% HW 22 (6.3B): Applications Fubini & Tonelli II
+% Problem 1
+\begin{hw} \label{hw:43}
+Suppose that $g: \R \to \R$ is a Lipschitz function. Let $Z= \{ x \colon g(x)= 0 \}$ and suppose that $\R \sm Z$ is bounded. Let $f(x)=1/x^2$. Prove that the convolution $f*g$ is finite a.e. on $Z$. \\
+\end{hw}
+
+
+% HW 22 (6.3B): Applications Fubini & Tonelli II
+% Problem 2
+\begin{hw} \label{hw:44}
+Let $C \subset [0, 1]$ be the standard ``middle third'' Cantor set. Let $\delta(x)= \dist(x,C)$. For which positive numbers $p$ is the function $\delta^{-p}$ in $L^1([0, 1])$? [Note: Although Tonelli could be applied here, it is easier to use the countable additivity of integral over the set of integration.] \\
+\end{hw}
+
+
+
+\cbf{$\mathbf{L^p}$ Classes}
+
+
+
+% HW 23 (8.1): L^p Classes
+% Problem 1
+\begin{hw} \label{hw:45}
+Prove that for any $q \in (0, \infty]$, there exist:  
+        \begin{enumerate}[(a)]
+        \item A function $f: [2, \infty) \to \R$ such that $f \in L^p([2, \infty)) \iff p > q$.
+        \item A function $f: [2, \infty) \to \R$ such that $f \in L^p([2, \infty)) \iff p \geq q$. \\
+        \end{enumerate}
+\noindent [Hint: Use a suitable power of $x$, with a logarithmic factor, if necessary. Recall that for nonnegative functions, the Improper Riemann Integral agrees with the Lebesgue Integral (Theorem 5.53 of the text).] \\
+\end{hw}
+
+
+% HW 23 (8.1): L^p Classes
+% Problem 2
+\begin{hw} \label{hw:46}
+Prove that for any $q \in (0, \infty]$, there exist:  
+        \begin{enumerate}[a)]
+        \item A function $f: (0, 1) \to \R$ such that $f \in L^p((0, 1)) \iff p < q$;
+        \item A function $f: (0, 1)  \to \R$ such that $f \in L^p((0, 1)) \iff p \leq q$.
+        \end{enumerate}
+Using this and the previous problem, show that for any interval $J \subset (0, \infty]$, there exists a function $f$ on some set $E \subset \R$ such that $f \in L^p(E) \iff p \in J$. \\
+\end{hw}
+
+
+
+\cbf{H\"older \& Minkowski's Inequality}
+
+
+
+% HW 24 (8.2): Holder & Minkowski
+% Problem 1
+\begin{hw} \label{hw:47}
+Fix $r \in (0, 1)$. 
+	\begin{enumerate}[(a)]
+	\item Suppose $f \in L^p([2, \infty))$, where $1\leq p<1/(1-r)$. Prove that 
+		\[
+		\int_2^\infty \dfrac{|f(x)|}{x^r} \;dx < \infty.
+		\]
+	\item Show that the statement in (a) fails with $p= 1/(1-r)$. [Hint: $\int_2^\infty \frac{1}{x\log x} \;dx= \infty$.]
+	\end{enumerate} 
+\end{hw}
+
+
+% HW 24 (8.2): Holder & Minkowski
+% Problem 2
+\begin{hw} \label{hw:48}
+Given any sequence $\{ x_1, x_2,\ldots \}$ of real numbers, define 
+        \[
+        f(x)= \sum_{k=1}^\infty \dfrac{1}{k^2 \sqrt{|x-x_k|}}.
+        \]
+Prove that $f \in L^p([0, 1])$ for $0< p < 2$. \\ 
+\end{hw}
+
+
+
+\cbf{Sequence Classes}
+
+
+
+% HW 25 (8.3): Sequence Classes
+% Problem 1
+\begin{hw} \label{hw:49}
+Suppose $1 \leq p \leq \infty $ and $f \in L^p([1,\infty))$. Define a sequence $a$ by $a_k= \int_k^{k+1} f$, $k \in \N$. Prove that $a \in \ell^p$. \\
+\end{hw}
+
+
+% HW 25 (8.3): Sequence Classes
+% Problem 2
+\begin{hw} \label{hw:50}
+Give an example of a continuous function $f: [1, \infty) \to \R$ such that the sequence $a$ defined in the previous problem is in $\ell^1$, but $f \notin L^1(\R)$. [Hint: $f$ should attain both positive and negative values so that there is some cancellation in $\int_k^{k+1} f$.] \\
+\end{hw}
+
+
+
+\cbf{Banach Space Properties for $\mathbf{L^p}$ and $\mathbf{\ell^p}$}
+
+
+
+% HW 26 (8.4): Banach Space Properties L^p and l^p
+% Problem 1
+\begin{hw} \label{hw:51}
+Suppose that $p, p' \in [1,\infty]$ are conjugate exponents, $f_k \to f$ in $L^p(E)$, and $g_k \to g$ in $L^{p'}(E)$, where $E$ is some measurable set. Prove that $f_k g_k \to fg$ in $L^1(E)$. \\
+\end{hw}
+
+
+% HW 26 (8.4): Banach Space Properties L^p and l^p
+% Problem 2
+\begin{hw} \label{hw:52}
+Fix $p \in [1,\infty]$. Let $D= \{ a\in \ell^p \colon \forall k\in \N \ 0 \leq a_{k+1} \leq a_ k\}$ be the set of all nonnegative non-increasing sequences in $\ell^p$. Prove that $D$ is a closed subset of $\ell^p$. \\
+\end{hw}
+
+
+
+\cbf{Additive Set Function Measures}
+
+
+
+% HW 27 (10.1): Additive Set Function Measures
+% Problem 1
+\begin{hw} \label{hw:53}
+Let $(X,\Sigma,\mu)$ be a measure space. For $A,B \in \Sigma$ let $d(A, B)= \mu(A \,\triangle\, B)$, where $A \,\triangle\, B= (A \sm B)\cup (B \sm A)$ is the symmetric difference of $A$ and $B$. Prove that $d$ satisfies the triangle inequality: $d(A, B) \leq d(A, C) + d(B, C)$ for $A, B, C \in \Sigma$. \\
+\end{hw}
+
+
+% HW 27 (10.1): Additive Set Function Measures
+% Problem 2
+\begin{hw} \label{hw:54}
+Fix a function $w \in L^1(\R^n)$ and define the additive set function $\phi$ on the Lebesgue measurable subsets of $\R^n$ by $\phi(E)= \int_E w$. Prove that the variations of $\phi$ are given by $\overline{V}(E)= \int_E w^+$, $\underline{V}(E)= \int_E w^-$, and $V(E)= \int_E |w|$. \\
+\end{hw}
+
+
+
+\cbf{Hilbert Space Properties of $\mathbf{L^p}$}
+
+
+
+% HW 28 (8.5-6-7): Hilbert Space Properties of L^p
+% Problem 1
+\begin{hw} \label{hw:55}
+For $k \in \N$ let $\phi_k(t)= \sqrt{1/\pi} \sin(k t)$. 
+	\begin{enumerate}[(a)]
+	\item Prove that $\{ \phi_k \colon k \in \N \}$ is an orthonormal system in $L^2([0, 2\pi])$.  [Hint: product-of-sines formula.]
+	\item Prove that the linear span of $\{ \phi_k \}$ is not dense in $L^2([0, 2\pi])$. [Hint: compute $\langle f, \phi_k \rangle$ for the constant function $f \equiv 1$.] \\
+	\end{enumerate}
+\end{hw}
+
+
+% HW 28 (8.5-6-7): Hilbert Space Properties of L^p
+% Problem 2
+\begin{hw} \label{hw:56} \hfill
+\begin{enumerate}[(a)]
+\item Prove that for every $f\in L^2([0, 2\pi])$ 
+        \[
+        \lim_{k \to \infty} \int_{[0, 2\pi]} f(t)  \sin kt\,dt= 0.
+        \]
+\item Prove that (a) holds for every $f \in L^1([0, 2\pi])$; this is known as the Riemann-Lebesgue Lemma. [Hint: Apply (a) to a simple function $g$ such that $\|f - g\|_1$ is small.] \\
+\end{enumerate}
+\end{hw}
+
+
+
+\cbf{Measurable Functions \& Integration}
+
+
+
+% HW 29 (10.2): Measurable Functions & Integration
+% Problem 1
+\begin{hw} \label{hw:57}
+Let $(X,\Sigma,\mu)$ be a measure space, and let $f: X \to \R$ be a measurable function. For each Borel set $E \subset \R$ define $\nu(E)= \mu(f^{-1}(E))$. Prove that $\nu$ is a measure on the Borel $\sigma$-algebra of $\R$. [This measure called the pushforward of $\mu$ under $f$.] \\
+\end{hw}
+
+
+% HW 29 (10.2): Measurable Functions & Integration
+% Problem 2
+\begin{hw} \label{hw:58}
+With the notation of the previous problem, prove that for every nonnegative Borel function $g: \R  \to [0, \infty)$ the function $g \circ f$ is measurable on $X$ and
+        \[
+        \int_X (g \circ f) \;d\mu= \int_{\R} g \;d\nu.
+        \]
+[Hint: Begin with $g= \chi_E$ and proceed toward more general $g$.] \\
+\end{hw}
+
+
+
+\cbf{Absolutely Continuous Functions and Singular ASF}
+
+
+
+% HW 30 (10.3A): Absolute Continuous and Singular ASF
+% Problem 1
+\begin{hw} \label{hw:59}
+Let $(X,\Sigma,\mu)$ be a measure space, and let $f: X \to \overline{\R}$ be an integrable function; that is, $f \in L^1(X,\mu)$. Suppose that $\int_A f= 0$ for every $A \in \Sigma$. Prove that $f= 0$ $\mu$-a.e.; that is, $f=0$ on $X \sm Z$, where $\mu(Z)=0$. \\
+\end{hw}
+
+
+% HW 30 (10.3A): Absolute Continuous and Singular ASF
+% Problem 2
+\begin{hw} \label{hw:60}
+Let $(X,\Sigma,\mu)$ be a measure space. Suppose that $\phi_k: \Sigma \to \R$ is a singular ASF w.r.t $\mu$, for each $k \in \N$. Suppose further that $\phi: \Sigma \to \R$ is an ASF such that $\phi_k(A) \to \phi(A)$ for each $A \in \Sigma$. Prove that $\phi$ is singular with respect to $\mu$. \\
+\end{hw}
+
+
+% HW 31 (10.3B): Absolute Continuous and Singular ASF
+% Problem 1
+\begin{hw} \label{hw:61}
+For $k \in \N$, define $b_k: [0, 1) \to \R$ by $b_k(x)= 1$ if $\lfloor 2^k x\rfloor$ is odd, and $b_k (x)= 0$ otherwise. Let 
+        \[
+        f(x)= \sum_{k=1}^\infty \frac{2 b_k(x)}{3^k}.
+        \]
+Prove that: \hfill
+        \begin{enumerate}[(a)]
+        \item $f$ is a measurable function on $[0,1)$ with respect to the Lebesgue measure. 
+        \item $f([0, 1]) \subset C$, where $C$ is the standard middle-third Cantor set. 
+        \end{enumerate}
+\noindent [Hint: You can use the following characterization of $C$, 
+	\[
+	C= \{ x \in [0, 1] \colon \dist( 3^m x, \Z) \leq 1/3 \text{ for } m= 0,1,2,  \ldots \}. ]
+	\]
+\end{hw}
+
+
+% HW 31 (10.3B): Absolute Continuous and Singular ASF
+% Problem 2
+\begin{hw} \label{hw:62}
+Let $\sigma$ be the pushforward of the Lebesgue measure on $[0, 1)$ under $f$ from the previous problem; that is, $\sigma(A)= |f^{-1}(A)|$ for Borel sets $A  \subset \R$. Prove that: \hfill
+	\begin{enumerate}[(a)]
+	\item $\sigma$ is singular with respect to the Lebesgue measure on the Borel $\sigma$-algebra. 
+	\item $\sigma(\{ p \})= 0$ for every $p \in \R$. [Hint: Show that for distinct $x,y \in [0, 1)$, there exists $k$ such that $b_k(x) \neq b_k(y)$. Deduce that $f(x) \neq f(y)$.]
+	\end{enumerate}
+\end{hw}
 

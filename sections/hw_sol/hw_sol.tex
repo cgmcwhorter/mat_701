@@ -2,38 +2,75 @@
 \newpage
 \section{Homework Solutions}
 
-
-% HW 1
+% HW 1 (3.1): Lebesgue Outer Measure
+% Problem 1
 \begin{hwsol}
-Given an arbitrary set $A \subset \R$ and a number $c>0$, let $B = \{ ca \colon a \in A \}$. Prove that $\ext{B} = c \ext{A}$. \\
+Prove that for every set $E \subset \R^n$ and every $\ep>0$, the Lebesgue outer measure $\ext{E}$ is equal to
+	\[
+	\inf \left\{ \sum \nu(I_k) \colon  E \subset \bigcup_{k=1}^\infty I_k, \text{ and } \diam I_k < \ep \forall k \right\}
+	\]
+[Note: This is the same infimum as in the definition of $\ext{E}$ but with the additional requirement $\diam I_k < \ep$ for all $k$.] \\
 
-\pf Given $\ep>0$, let $\{[s_k, t_k]\}$ be a countable cover of $A$ such that 
-        \[
-        \sum_k (t_k-s_k) \leq  \ext{A} + \ep 
-        \]
-The intervals $[c s_k, c t_k]$ cover $B$, since every point of $B$ is of the form $ca$ where $a\in A$ is covered by some interval $[s_k, t_k]$. Therefore, 
-        \[
-        \ext{B} \leq \sum_k (ct_k-cs_k)= c \sum_k (t_k-s_k) \le  c \ext{A} + \ep
-        \]
-Since $\ep>0$ was arbitrary, it follows that $\ext{B} \le c \ext{A}$.
+\pf Let $S_1$ be the set of all sums $\sum v(I_k)$, where $\{I_k\}$ is any countable cover of $E$ by intervals $I_k$, and let $S_2$ be the set of all sums $\sum \nu(I_k)$, where $\{I_k\}$ is a countable cover of $E$ by intervals $I_k$ which satisfy $\diam I_k < \ep$ for all $k$. By definition, $\ext{E}= \inf S_1$. We want to show $\ext{E}= \inf S_2$. To prove this, we shall show $S_2=S_1$.
 
-It remains to observe that $A=c^{-1} B$, which by the above implies $\ext{A} \leq c^{-1} \ext{B}$, i.e., $\ext{B} \geq c \ext{A}$. Thus,  $\ext{B} = c \ext{A}$. \qed \\
+The fact that $S_2 \subset S_1$ is immediate from the definitions of both sets. Now suppose $z \in S_1$. By the definition of $S_1$, there exists a countable collection of intervals $\{I_k\}$ such that $E \subset \bigcup_k I_k$ and $\sum_k v(I_k)= z$. For each $k$, let $L_k$ be the maximal side-length of $I_k$; that is, $L_k= \max_{j=1,\ldots, n} \{ b_j-a_j \}$. For each $k$, choose an integer $N_k$ sufficiently large so that $L_k/N_k < \ep/\sqrt{n}$. Dividing each edge $[a_j, b_j]$ in $N_k$ into equal 1-dimensional subintervals breaks $[a_j,b_j]$ into $N_k^n$ equal $n$-dimensional subintervals of $I_k$ which cover $I_k$. 
+
+The length of each side was then reduced by a factor of $N_k$. Therefore, the volume (the product of these lengths) is $\nu(I_k)/N_k^n$. But then the sum of the volumes is $\nu(I_k)$. Each piece then has diameter at most 
+	\[
+	\sqrt{\sum_{j=1}^n \left( (b_j-a_j)/N_k \right)^2} \,\leq  \sqrt{\sum_{j=1}^n (L_k/N_k)^2} \,< \sqrt{n} \cdot \dfrac{\ep}{\sqrt{n}}= \ep.
+	\]
+Therefore, the collection of all subintervals obtained after applying the above process to each $k$ is a countable cover of $E$, and the sum of their volumes is exactly $z$. This shows that $z \in S_2$, completing the proof. \qed \\
 \end{hwsol}
 
 
-% HW 2
-\begin{hwsol} 
-Suppose that a set $A \subset \R$ is measurable. Prove that for every $c>0$ the set $B = \{ ca \colon a \in A \}$ is also measurable. \\
+% HW 1 (3.1): Lebesgue Outer Measure
+% Problem 2
+\begin{hwsol}
+Suppose that the sets $E_k \subset \R^n$ are such that the series $\ds\sum_{k=1}^\infty |E_k|_e$ converges. Prove that the outer measure of the set
+	\[
+	\limsup E_k:= \bigcap_{m=1}^\infty \bigcup_{k=m}^\infty E_k
+	\]
+is zero. \\
 
-\pf Given $\ep>0$, let $G$ be an open set that contains $A$ and satisfies $\ext{G \setminus A} <  \ep/c$. Since the function $f(x) = x/c$ is continuous, the preimage of $G$ under this function is also open. This preimage $f^{-1}(G)$ is $cG$. Since $A \subset G$, it follows that $B \subset cG$. Moreover by Problem~\ref{hw:1},
-        \[
-        \ext{(cG)\setminus B}= \ext{c(G\setminus A)}=  c \ext{G \setminus A} < \ep.
-        \]
-Since $\ep$ was arbitrary, this  proves that $B$ is measurable. \qed \\
+\pf Let $A:= \limsup E_k$. Since $\ds\sum_{k=1}^\infty \ext{E_k}$ converges, the tail sums $\ds\sum_{k=m}^\infty \ext{E_k}$ tend to zero as $m \to \infty$. Given $\ep>0$, pick $m$ such that $\ds\sum_{k=m}^\infty \ext{E_k} < \ep$. By the definition of $A$, $A \subset \bigcup_{k=m}^\infty E_k$. The monotonicity and countable subadditivity of outer measure imply 
+	\[
+	\ext{A} \leq \ext{\bigcup_{k=m}^\infty E_k} \leq \sum_{k=m}^\infty \ext{E_k} < \ep.
+	\]
+Since $\ep$ was arbitrary, it follows that $\ext{A} \leq 0$. Since $\ext{\cdot} \geq 0$, we have $\ext{A}=0$. \qed \\
+
+
+\noindent \emph{Remark}: As mentioned in class, this problem can be solved purely on the basis of the three fundamental properties of outer measure. Two of them were mentioned above. The remaining one is $\ext{\emptyset}= 0$. This property implies the outer measure cannot be negative, since $\emptyset \subset A$ holds for every $A$. \\
 \end{hwsol}
 
 
-% HW 3
+% HW 2 (3.2A): Measurable Sets
+% Problem 1
+\begin{hwsol}
+Given an arbitrary set $A \subset \R$ and a number $c>0$, let $B = \{ ca \colon a \in A \}$. Prove that $\ext{B}= c \ext{A}$. \\
+
+\pf Given $\ep>0$, let $\{[s_k, t_k]\}$ be a countable cover of $A$ such that $\sum_k (t_k-s_k) \le  |A|_e + \ep$. The intervals $[cs_k, ct_k]$ cover $B$, since every point of $B$ is of the form $ca$, where $a \in A$ is covered by some interval $[s_k, t_k]$. Therefore, 
+	\[
+	\ext{B} \leq \sum_k \,(ct_k-cs_k) = c \sum_k \,(t_k-s_k) \leq  c|A|_e + \ep.
+	\]
+Since $\ep > 0$ was arbitrary, it follows that $\ext{B} \leq c \ext{A}$. It remains to observe that $A= c^{-1} B$, which by the above implies $\ext{A} \leq c^{-1} \ext{B}$, i.e. $\ext{B} \geq c \ext{A}$. Thus,  $\ext{B} = c \ext{A}$. \qed \\
+\end{hwsol}
+
+
+% HW 2 (3.2A): Measurable Sets
+% Problem 2
+\begin{hwsol}
+Suppose that a set $A\subset\R$ is measurable. Prove that for every $c>0$ the set $B = \{ca\colon a\in A\}$ is also measurable. \\
+
+\pf Given $\ep>0$, let $G$ be an open set that contains $A$ and satisfies $|G\setminus A|_e <  \ep/c$. Since the function $f(x) = x/c$ is continuous, the preimage of $G$ under this function is also open. This preimage $f^{-1}(G)$ is $cG$. Since $A\subset G$, it follows that $B\subset cG$. Moreover, by the previous exercise
+	\[
+	\ext{(cG)\setminus B} = \ext{c(G\setminus A)} =  c \ext{G\setminus A} < \ep.
+	\]
+Since $\ep$ was arbitrary, this proves that $B$ is measurable. \qed \\
+\end{hwsol}
+
+
+% HW 3 (3.2B): Measurable Sets
+% Problem 1
 \begin{hwsol}
 Given a sequence of continuous functions $f_k: \R \to \R$, let $B$ be the set of all points $x \in \R$ such that the sequence $\{ f_k(x) \}$ is bounded. Prove that $B$ is a measurable set. [\emph{Hint: try to construct $B$ from the sets $\{x \colon |f_k(x)| \leq M\}$ by using countable unions and intersections.}] \\
 
@@ -47,13 +84,12 @@ Being the preimage of a closed set under a continuous function, $A(k, m)$ is clo
         \]
 which is also measurable, being obtained from measurable sets by countable set operations. We claim that $A=B$. 
 
-If $x \in A$, then there exists $m \in \N$ such that $|f_k(x)| \leq m$ for all $k \in \N$, which shows the sequence $\{ f_k(x) \}$ is bounded. 
-
-Conversely, if the sequence $\{ f_k(x) \}$ is bounded, then there exists $m \in \N$ such that all elements of the sequence are at most $m$ in absolute value. This means $|f_k(x)| \leq m$ for all $k$, hence $x \in A$. \qed \\
+If $x \in A$, then there exists $m \in \N$ such that $|f_k(x)| \leq m$ for all $k \in \N$, which shows the sequence $\{ f_k(x) \}$ is bounded. Conversely, if the sequence $\{ f_k(x) \}$ is bounded, then there exists $m \in \N$ such that all elements of the sequence are at most $m$ in absolute value. This means $|f_k(x)| \leq m$ for all $k$, hence $x \in A$. \qed \\
 \end{hwsol}
 
 
-% HW 4
+% HW 3 (3.2B): Measurable Sets
+% Problem 2
 \begin{hwsol}
 Given a sequence of continuous functions $f_k \colon \R \to \R$, let $C$ be the set of all points $x \in \R$ such that $\ds \lim_{k \to \infty} f_k(x)= 0$. Prove that $C$ is a measurable set. \\
 
@@ -73,316 +109,1337 @@ Conversely, suppose $x \in C$. Given $m \in \N$, use the definition of the limit
 \end{hwsol}
 
 
-% HW 5
-\begin{hwsol} 
+% HW 4 (3.3): Properties of Lebesgue Measure
+% Problem 1
+\begin{hwsol}
 Prove that the set
-        \[
-        A = \{ x \in \R \colon \exists k \in \N \text{ such that } |2^x-2^k| \leq 1 \}
-        \]
-is measurable and $|A|<\infty$. \\
+	\[
+	A= \{ x \in \R \colon \exists k \in \N \text{ such that } |2^x-2^k| \leq 1 \}
+	\]
+is measurable and $|A| < \infty$. \\
 
-\pf For each $k \in \N$, the inequality $|2^x-2^k| \leq 1$ is equivalent to $\log_2(2^k-1)\leq x \leq \log_2(2^k+1)$. Thus, $A=\bigcup_{k=1}^\infty I_k$, where $I_k = [\log_2(2^k-1), \log_2(2^k+1)]$. Begin an interval, each $I_k$ is measurable. Hence, $A$ is measurable. By countable subadditivity of measure, 
-$|A| \leq \sum_{k=1}^\infty |I_k|$. It remains to show the series $\sum_{k=1}^\infty |I_k|$ converges. This can be done by the comparison test, limit comparison test, or the ratio test. We use the Limit Comparison Test with $\sum_{k=1}^\infty 2^{-k}$ as a reference series:
-        \[
-        \begin{split}
-        \dfrac{|I_k|}{2^{-k}} &= \dfrac{\log_2(2^k+1) -  \log_2(2^k-1)}{2^{-k}} \\ 
-        &= \dfrac{k + \log_2(1+2^{-k}) -  (k+\log_2(1-2^{-k}))}{2^{-k}} \\ 
-        &= \dfrac{\log_2(1+2^{-k}) -  \log_2(1-2^{-k})}{2^{-k}} \\ 
-        &= \dfrac{1}{\log 2} \left\{ \frac{\log(1+2^{-k})}{2^{-k}} +  \frac{\log(1-2^{-k})}{-2^{-k}} \right\} \ma{k\to\infty} \frac{2}{\log 2}
-        \end{split}
-        \]
-Here the last step is based on $\ds\lim_{x \to 0} \dfrac{\log(1+x)}{x}= 1$. Since $\sum_{k=1}^\infty 2^{-k}$ converges, so does $\sum_{k=1}^\infty |I_k|$. \qed \\
+\pf For each $k \in \N$, the inequality $|2^x-2^k|\le 1$ is equivalent to $\log_2(2^k-1) \leq x \leq \log_2(2^k+1)$. Thus, $A=\bigcup_{k=1}^\infty I_k$, where $I_k = [\log_2(2^k-1),  \log_2(2^k+1)]$. Since $I_k$ is an interval, $I_k$ is measurable. Hence, $A$ is measurable. By the countable subadditivity of the measure, $|A| \leq \sum_{k=1}^\infty |I_k|$. It remains to show the series $\sum_{k=1}^\infty |I_k|$ converges. This can be done by the comparison test, limit comparison test, or the ratio test. Using the Limit Comparison Test with $\sum_{k=1}^\infty 2^{-k}$ as a reference series, we have
+	\[
+	\begin{split}
+	\frac{|I_k|}{2^{-k}} & = \frac{\log_2(2^k+1) -  \log_2(2^k-1)}{2^{-k}} \\ 
+	&= \frac{k + \log_2(1+2^{-k}) -  (k+\log_2(1-2^{-k}))}{2^{-k}} \\ 
+	&= \frac{\log_2(1+2^{-k}) -  \log_2(1-2^{-k})}{2^{-k}} \\ 
+	&= \frac{1}{\log 2}\left\{ \frac{\log(1+2^{-k})}{2^{-k}} +  \frac{\log(1-2^{-k})}{-2^{-k}}\right\} \xrightarrow[k\to\infty]{} \frac{2}{\log 2},
+	\end{split}
+	\]
+where we have used the fact that $\ds\lim_{x\to 0}\frac{\log(1+x)}{x}= 1$. Since $\sum_{k=1}^\infty 2^{-k}$ converges, so does $\sum_{k=1}^\infty |I_k|$. \qed \\
 \end{hwsol}
 
 
-% HW 6
-\begin{hwsol} 
+% HW 4 (3.3): Properties of Lebesgue Measure
+% Problem 2
+\begin{hwsol}
 Prove that the set
-        \[
-        A = \{ x \in [0, 1] \colon \forall q \in \N \; \exists p \in \N \text{ such that } |x-p/q| \leq 1/q^2\}
-        \]
+	\[
+	A = \{x\in [0, 1] \colon \forall q\in \N \ \exists p\in\N \text{ such that } |x-p/q|\le 1/q^2\}
+	\]
 is measurable and $|A|=0$. \\
 
-\pf Let $A_q = \bigcup_{p=1}^\infty  E(p,q)$, where $E(p, q) = \left[\frac{p}{q} - \frac{1}{q^2}, \frac{p}{q} + \frac{1}{q^2}\right]\cap [0,1] $. This is a countable union of measurable sets $E(p, q)$ (which are intervals, possibly empty), so it is measurable. Then the set $A= \bigcap_{q \in \N} A_q$ is measurable too. 
+\pf Let $\ds A_q= \bigcup_{p=1}^\infty  E(p, q)$ where $\ds E(p, q) = \left[ \frac{p}{q} - \frac{1}{q^2}, \frac{p}{q} + \frac{1}{q^2} \right] \bigcap \; [0,1] $. This is measurable, being a countable union of measurable sets $E(p, q)$ (which are intervals, possibly empty). Therefore, the set $A=\bigcap_{q \in \N}A_q$ is also measurable. 
 
-We have $|E(p, q)| \leq 2/q^2$ by construction of $E(p, q)$. Also, when $p > q+1$, we have $\frac{p}{q} - \frac{1}{q^2} \geq 1+  \frac{1}{q}-\frac{1}{q^2} \geq 1$, which implies $E(p, q)= \emptyset$. By subadditivity,  
-        \[  
-        |A_q| \leq \sum_{p=1}^\infty |E(p, q)| \leq \sum_{p=1}^{q+1} \frac{2}{q^2}= \frac{2q+2}{q^2} 
-         \]
-By monotonicity, $|A| \leq |A_q|$ for each $q$. Since $|A_q| \ma{q \to \infty} 0$, it follows that $|A|=0$. \qed \\
+We know $|E(p, q)|\le 2/q^2$ by the construction of $E(p, q)$. Also when $p > q+1$, we have $\frac{p}{q} - \frac{1}{q^2}\ge 1+  \frac{1}{q}-\frac{1}{q^2} \ge 1$, which implies $E(p, q) = \emptyset$. By subadditivity, we have 
+	\[
+	|A_q| \le \sum_{p=1}^\infty |E(p, q)| \le \sum_{p=1}^{q+1} \frac{2}{q^2}= \frac{2q+2}{q^2}.
+	 \]
+But then by monotonicity, $|A| \leq |A_q|$ for each $q$. Since $|A_q| \xrightarrow[q\to\infty]{} 0$, it follows that $|A|=0$. \qed \\
 \end{hwsol}
 
 
-% HW 7
+% HW 5 (3.4): Properties of Lebesgue Measure
+% Problem 1
 \begin{hwsol}
-Suppose $E$ and $Z$ are sets in $\mathbb R^n$ such that $E\cup Z$ is measurable and $|Z|=0$. Prove that $E$ is measurable. \\
+Suppose $E$ and $Z$ are sets in $\R^n$ such that $E \cup Z$ is measurable and $|Z|=0$. Prove that $E$ is measurable. \\
 
-\pf Since $Z \setminus E \subset Z$, the monotonicity of outer measure implies $\ext{Z \setminus E}=0$, hence $Z \setminus E$ is measurable. Then 
-        \[
-        E = (E\cup Z)\setminus (Z\setminus E)
-        \]
-is measurable, being the difference of two measurable sets. [This could be done with Carath\'eodory's Theorem or with the ``$G_\delta$ minus a null set'' theorem, but it is easier without.] \qed \\
+\pf Since $Z \sm E \subset Z$, the monotonicity of outer measure implies $\ext{Z \sm E}=0$, hence $Z \sm E$ is measurable. Then $E = (E \cup Z) \sm (Z \sm E)$  is measurable, being the difference of two measurable sets. \qed \\
+
+\noindent [This could be done with Carath\'eodory theorem or with the ``$G_\delta$ minus a null set'' theorem, but it is easier without.] \\
 \end{hwsol}
 
 
-% HW 8
+% HW 5 (3.4): Properties of Lebesgue Measure
+% Problem 2
 \begin{hwsol}
-Given a continuous function $f \colon \R^n \to \R^n$, define $\mathcal{M}= \{ E \subset \R^n \colon f^{-1}(E) \text{ is Borel} \}$. 
+Given a continuous function $f:  \R^n \to \R^n$, define $\mathcal{M}= \{ E \subset \R^n \colon f^{-1}(E) \text{ is Borel} \}$. 
 	\begin{enumerate}[(a)]
 	\item Prove that $\mathcal{M}$ is a $\sigma$-algebra.
-	\item Prove that if $E$ is Borel, then $f^{-1}(E)$ is Borel. [\emph{Hint: Use (a).}]
+	\item Prove that if $E$ is Borel, then $f^{-1}(E)$ is Borel. [Hint: Use (a).] \\
 	\end{enumerate}
 
-\pf
+\pf \hfill
 \begin{enumerate}[(a)]
-\item This proof does not involve $f$ being continuous; the argument works for any map $f$. Taking preimages commutes with any set operations: for example, 
-        \[
-        f^{-1}(E^C)= \{ x \colon f(x) \in E^C \}= \{ x \colon f(x) \notin E \} = (f^{-1}(E))^C
-        \]
+\item The following argument does not make use of the continuity of $f$ and works for any map $f$: Taking preimages commutes with any set operations. For example, 
+	\[
+	f^{-1}(E^C)= \{ x \colon f(x) \in E^C \}= \{ x \colon f(x) \notin E \} = \big( f^{-1}(E) \big)^C
+	\]
 and 
-        \[
-        f^{-1}\left( \bigcup_i E_i \right)= \{ x \colon \exists i \ f(x) \in E_i \}= \bigcup_i f^{-1}(E_i).
-        \]
-If $E \in \mathcal{M}$, then $f^{-1}(E^C) = f^{-1}(E)^C$ is the complement of a Borel set, and hence is Borel. Hence, $E^C\ in \mathcal{M}$. Also, if $E_k \in \mathcal{M}$ for each $k \in \N$, then 
-        \[
-        f^{-1}\left( \bigcup_k E_k \right)=  \bigcup_k f^{-1}(E_k) 
-        \]
-is the countable union of Borel sets, and hence is Borel. Therefore, $\bigcup_k E_k\in \mathcal M$. 
+	\[
+	f^{-1} \left( \bigcup_i E_i \right)= \{ x \colon \exists i \ f(x) \in E_i \}= \bigcup_i f^{-1}(E_i).
+	\]
+So if $E\in \mathcal{M}$, then $f^{-1}(E^C) = f^{-1}(E)^C$ is the complement of a Borel set, hence is Borel. But then $E^C  \in \mathcal{M}$. Also, if $E_k \in \mathcal{M}$ for each $k \in \N$, then 
+	\[
+	f^{-1} \left( \bigcup_k E_k \right)=  \bigcup_k f^{-1}(E_k) 
+	\]
+is the countable union of Borel sets, hence is Borel. But then $\bigcup_k E_k \in \mathcal{M}$. The definition of a $\sigma$-algebra in the book also requires us to check that $\mathcal{M}$ is nonempty. It suffices to notice that $f^{-1}(\emptyset)= \emptyset$ is Borel, hence $\emptyset \in \mathcal{M}$.
 
-The definition of a $\sigma$-algebra in the book also requires us to check that $\mathcal{M}$ is nonempty: to do this, it suffices to notice that $f^{-1}(\emptyset)=\emptyset$ is Borel, hence $\emptyset \in \mathcal{M}$.  
+\item Since $f$ is continuous, the preimage of any open set under $f$ is open, hence Borel. This means $\mathcal M$ contains all open sets. By definition, the Borel $\sigma$-algebra $\mathcal B$ is the \emph{smallest} $\sigma$-algebra that contains all open sets. Thus $\mathcal B\subset \mathcal M$, which by definition of $\mathcal M$ means that $f^{-1}(E)$ is Borel whenever $E$ is Borel. \qed \\
+\end{enumerate}
 
-\item Since $f$ is continuous, the preimage of any open set under $f$ is open, and is hence Borel. This means $\mathcal{M}$ contains all open sets. By definition, the Borel $\sigma$-algebra $\mathcal{B}$ is the \emph{smallest} $\sigma$-algebra that contains all open sets. Thus, $\mathcal{B} \subset \mathcal{M}$, which by definition of $\mathcal{M}$ means that $f^{-1}(E)$ is Borel whenever $E$ is Borel.
-
-\noindent [It is tempting to approach statement (b) by ``writing a Borel set $E$ in terms of open/closed sets'' and concluding that $f^{-1}(E)$ can also be written in this way. But there is no such structural formula for Borel sets: one can only get the proper subclasses like $G_\delta$, $G_{\delta\sigma}$, $G_{\delta\sigma\delta}$, and so on. The whole story is complicated: see  \href{https://en.wikipedia.org/wiki/Borel_hierarchy}{Borel hierarchy} on Wikipedia).]
-\end{enumerate} \qed \\
+\noindent Remark: It is tempting to approach statement (b) by ``writing a Borel set $E$ in terms of open/closed sets'' and concluding that $f^{-1}(E)$ can also be written in this way. But there is no such structural formula for Borel sets: one can only get the proper subclasses like $G_\delta$, $G_{\delta\sigma}$, $G_{\delta\sigma\delta}$, and so on. The whole story is complicated: see  \href{https://en.wikipedia.org/wiki/Borel_hierarchy}{Borel hierarchy} on Wikipedia. \\
 \end{hwsol}
 
 
-% HW 9
+% HW 6 (3.5): Lipschitz Transformations
+% Problem 1
 \begin{hwsol}
-Suppose $f \colon \R \to \R$ is a function with a continuous derivative. Prove that for every measurable set $E$, the set $f(E)$ is also measurable. [\emph{Hint: although $f$ need not be Lipschitz, its restriction to any bounded interval is Lipschitz.}] \\
+Suppose $f: \R \to \R$ is a function with a continuous derivative. Prove that for every measurable set $E$, the set $f(E)$ is also measurable. [Hint: Although $f$ need not be Lipschitz, its restriction to any bounded interval is.] \\
 
-\pf For each $j \in \N$, the set $E_j= E \cap [-j, j]$ is measurable, as the intersection of two measurable sets is measurable. Since $E= \bigcup_j E_j$, it follows that  $f(E)=\bigcup_j f(E_j)$. So it suffices to prove $f(E_j)$ is measurable for every $j$.
+\pf For each $j \in \N$, the set $E_j= E \cap [-j, j]$ is measurable, as the intersection of two measurable sets. Since $E=\bigcup_j E_j$, it follows that $f(E)=\bigcup_j f(E_j)$. So it suffices to prove $f(E_j)$ is measurable for every $j$.
 
-The derivative $f'$, being continuous, is bounded on the interval $[-j, j]$. By the Mean Value Theorem, $f$ is Lipschitz on $[-j, j]$: indeed, $|f(a)-f(b)| \leq |a-b| \sup_{[-j, j]} |f'|$. A technical detail arises: we only proved the measurability of images for Lipschitz functions on all of $\R^n$. To get around this, define 
+The derivative $f'$, being continuous, is bounded on the interval $[-j, j]$. By the Mean Value Theorem, $f$ is Lipschitz on $[-j, j]$; Indeed, $|f(a)-f(b)| \leq |a-b| \sup_{[-j, j]} |f'|$. A technical detail arises: we only proved the measurability of images for Lipschitz functions on all of $\R^n$. To get around this, define 
         \[
         f_j(x)= 
         \begin{cases} 
-        f(x),  & x \in [-j, j] \\ 
-        f(-j), & x< -j  \\ 
-        f(j),  & x> j
+        f(x), & x\in [-j, j] \\ 
+        f(-j), & x < -j  \\ 
+        f(j), & x> j  \\ 
         \end{cases}
         \]
-Such an extended function $f_j$ is Lipschitz continuous on all of $\R$. Indeed in each of the three closed intervals $(-\infty, -j]$, $[-j, j]$, $[j, \infty)$, the Lipschitz condition holds by construction. For arbitrary $a<b$, partition the interval $[a, b]$ by the points $\{-j, j\}$ should they lie there, and apply the Lipschitz continuity to each interval, and use the triangle inequality.  
+Such extended function $f_j$ is Lipschitz continuous on all of $\R$. Indeed, in each of three closed interval $(-\infty, -j]$, $[-j, j]$, $[j, \infty)$ the Lipschitz condition holds by construction. For arbitrary $a<b$, partition the interval $[a, b]$ by the points $\{ -j, j \}$ should they lie there. Then apply Lipschitz continuity to each interval, and use the Triangle Inequality. But then $f_j(E_j)$, which is the same as $f(E_j)$, is measurable, and the proof is complete. \qed \\
 
-Conclusion: $f_j(E_j)$, which is the same as $f(E_j)$, is measurable. \qed \\
-
-[Note: In fact, for every set $E \subset \R^n$, any Lipschitz function $f: E \to \R^n$ can be extended to a Lipschitz function $F: \R^n \to \R^n$. Therefore, when discussing the measurability of $f(E)$, it suffices to check that $f$ is Lipschitz on the set $E$. 
+\noindent Note: In fact, for every set $E \subset \R^n$, any Lipschitz function $f: E \to \R^n$ can be extended to a Lipschitz function $F: \R^n \to \R^n$. Therefore, when discussing the measurability of $f(E)$ it suffices to check that $f$ is Lipschitz on the set $E$. \\
 
 \pfsk It suffices to extend a real-valued Lipschitz function $f: E \to \R$, because the vector-valued case follows by extending each component. Let $L$ be the Lipschitz constant of $f$, and define, for every $x \in \R^n$,
         \[
-        F(x)= \inf_{a\in E} (f(a) + L|x-a|).
+        F(x) = \inf_{a \in E} \big( f(a) + L |x-a| \big).
         \]
 It is an exercise with the definition of $\inf$ to prove that $F$ is Lipschitz with constant $L$, and that $F(x)=f(x)$ when $x \in A$. \qed \\
 
-\noindent Remark: Extending a map $f: E \to \R^n$ in the above fashion, one finds the Lipschitz constant of the extension is at most $L \sqrt{n}$, where $L$ is the Lipschitz constant of the original map. There is a deeper extension theorem (due to Kirszbraun) according to which an extension with the same Lipschitz constant $L$ exists.]
+\noindent Remark: Extending a map $f: E \to \R^n$ in the above fashion, one finds the Lipschitz constant of the extension is at most $L \sqrt{n}$, where $L$ is the Lipschitz constant of the original map. There is a deeper extension theorem (due to Kirszbraun) according to which an extension with the same Lipschitz constant $L$ exists. \\
 \end{hwsol}
 
 
-% HW 10
+% HW 6 (3.5): Lipschitz Transformations
+% Problem 2
 \begin{hwsol}
-Given a set $E \subset [0, \infty)$, define a function $f: [0, \infty) \to [0, \infty)$ by $f(x)= \ext{E\cap [0, x]}$. 
+Given a set $E \subset [0, \infty)$, define a function $f: [0, \infty) \to [0, \infty)$ by $f(x) = \ext{E \cap [0, x]}$. 
 	\begin{enumerate}[(a)]
 	\item Prove that $f$ is Lipschitz continuous.
-	\item Prove that for every number $b$ with $0< b< \ext{E}$ there exists a set $F \subset E$ such that $\ext{F}=b$.
+	\item Prove that for every number $b$ with $0<b<\ext{E}$ there exists a set $F \subset E$ such that $\ext{F}= b$. \\
 	\end{enumerate}
 
-\pf 
+\pf \hfill
 \begin{enumerate}[(a)]
-\item We claim that $0 \leq f(b)-f(a) \leq b-a$ for any $a,b \in [0, \infty)$ such that $a<b$; this yields the Lipschitz continuity with constant 1. On one hand, $f(b) \geq f(a)$ by the monotonicity of outer measure: $E \cap [0, a] \subset E \cap [0, b]$. On the other, $ E \cap [0, b] \subset (E \cap [0, a]) \cup [a, b]$, which implies
-        \[
-        f(b) \leq \ext{(E \cap [0, a]) \cup [a, b]} \leq \ext{E \cap [0, a]} + |[a, b]|= f(a) + (b-a)
-        \]
+\item We claim that $0 \leq f(b)-f(a) \leq b-a$ for any $a,b \in [0, \infty)$ such that $a<b$; this yields the Lipschitz continuity with constant 1. On one hand, $f(b) \geq f(a)$ by the monotonicity of the outer measure: $E \cap [0, a] \subset E \cap [0, b]$. On the other, $ E \cap [0, b] \subset ( E \cap [0, a] ) \cup [a, b]$, which implies
+	\[
+	f(b) \leq \ext{(E \cap [0, a] ) \cup [a, b]} \leq \ext{E\cap [0, a]} + |[a, b]| = f(a) + (b-a)
+	\]
 by subadditivity. 
 
-\item By Theorem 3.27 in the textbook, the outer measure is continuous under nested unions even if the sets are not measurable. Since $E=\bigcup_{k \in \N} (E \cap [0, k])$, it follows that
+\item By Theorem~3.27 in the textbook, the outer measure is continuous under nested unions, even if the sets are not measurable. Since $E= \bigcup_{k \in \N} (E \cap [0, k])$, it follows that
         \[
-        \ext{E}= \lim_{k \to \infty} \ext{E\cap [0, k]}= \lim_{k \to \infty} f(k).
+        \ext{E}= \lim_{k \to \infty} \ext{E \cap [0, k]}= \lim_{k \to \infty} f(k).
         \]
-Since $b< \ext{E}$, by the definition of limit there exists $k$ such that $f(k)>b$. Also, $f(0)= |E \cap \{0\}|= 0$. Applying the Intermediate Value Theorem to $f$ on the interval $[0, k]$ (which is possible since $f$ is continuous by part (a)), we conclude that there exists $x \in (0, k)$ such that $f(x)=b$. Then the set $F=|E \cap [0, x]|$ meets the requirements. 
-\end{enumerate} \qed \\
+Since $b< \ext{E}$, by the definition of limit there exists $k$ such that $f(k)>b$. Also, $f(0)= |E \cap \{0\} | = 0$. Applying the Intermediate Value Theorem to $f$ on the interval $[0, k]$ (which is possible since $f$ is continuous by part (a)), we conclude that there exists $x \in (0, k)$ such that $f(x)=b$. Then the set $F= | E\cap [0, x] |$ meets the requirements. \qed \\
+\end{enumerate}
 \end{hwsol}
 
 
-% HW 11
+% HW 7 (3.6): Nonmeasurable Sets
+% Problem 1
 \begin{hwsol}
-Show that there exists a nested sequence of sets $E_1 \supset E_2 \supset \cdots$ such that 
-$\ext{E_1}< \infty$ and $\bigcap_{k=1}^\infty E_k= \emptyset$ but $\ds\lim_{k \to \infty } \ext{E_k}> 0$; that is, outer measure is not continuous under nested intersections. [\emph{Hint: Use the translates of the Vitali set.}] \\
+Show that there exists a nested sequence of sets $E_1 \supset E_2 \supset \cdots$ such that $\ext{E_1} < \infty$ and $\bigcap_{k=1}^\infty E_k= \emptyset$ but $\ds\lim_{k \to \infty} \ext{E_k} > 0$. That is, the outer measure is not continuous under nested intersections. [Hint: Use the translates of the Vitali set.] \\
 
-\pf Let $V \subset [0, 1]$ be the Vitali set described in these notes: recall that  $\ext{V}>0$ and that the sets $V+q$ are disjoint for all $q \in \Q$. Let 
+\pf Let $V \subset [0, 1]$ be the Vitali set described in class: recall that  $\ext{V} > 0$ and that the sets $V+q$ are disjoint for all $q \in \Q$. Let 
         \[
-        E_k= \bigcup_{j=k}^\infty \left( V + \dfrac{1}{j} \right).
+        E_k= \bigcup_{j=k}^\infty \left( V + \frac{1}{j} \right).
         \]
 Then $E_1 \subset V + [0, 1] \subset [0, 2]$, hence $\ext{E_1} \leq 2 < \infty$. 
 
-Suppose $x \in \bigcap_{k=1}^\infty E_k$. This means that for each $k \in \N$ there exists $j \geq k$ such that $x \in V+1/j$. In particular, $x \in V+1/j$ for infinitely many distinct values of $j$. But this is impossible as the sets $V+1/j$ are disjoint, a contradiction. Therefore, $\bigcap_{k=1}^\infty E_k$ is empty.
+Suppose $x \in \bigcap_{k=1}^\infty E_k$. This means that for each $k \in \N$, there exists $j \geq k$ such that $x \in V+1/j$. In particular, $x \in V+1/j$ for infinitely many distinct values of $j$. But this is impossible as the sets $V+1/j$ are disjoint. This contradiction proves that $\bigcap_{k=1}^\infty E_k$ is empty.
 
-The sets $E_k$ are nested by construction, hence $\ext{E_k}$ is a non-increasing sequence. It is bounded from below by $\ext{V}$ because each $E_k$ contains a translated copy of $V$. Thus, $\lim_{k \to \infty} \ext{E_k} \geq \ext{V}> 0$. \qed \\
+The sets $E_k$ are nested by construction, hence $\ext{E_k}$ is a non-increasing sequence. It is bounded from below by $\ext{V}$ because each $E_k$ contains a translated copy of $V$. Thus, $\lim_{k \to \infty} \ext{E_k} \geq \ext{V} > 0$. \qed \\
 \end{hwsol}
 
 
-% HW 12
+% HW 7 (3.6): Nonmeasurable Sets
+% Problem 2
 \begin{hwsol}
-Show that for the standard middle-third Cantor set $C \subset [0, 1]$, the difference set $C-C$ contains a neighborhood of $0$. [\emph{Hint: $C$ is the intersection of nested sets $C_n$ where $C_0=[0, 1]$  and $C_{n+1}= \frac13C_n \cup (\frac13 C_n+\frac23)$. Find $C_n-C_n$ using induction.}] \\
+Show that for the standard middle-third Cantor set $C \subset [0, 1]$, the difference set $C-C$ contains a neighborhood of $0$. [Hint: $C$ is the intersection of nested sets $C_n$, where $C_0=[0, 1]$  and $C_{n+1}=\frac{1}{3} C_n \cup ( \frac{1}{3} C_n + \frac{2}{3})$. Find $C_n - C_n$ using induction.] \\
 
-\noindent\emph{Remark: This shows that having $|E|>0$ is not necessary for $E-E$ to contain a neighborhood of $0$.} \\
+\noindent Remark: This shows that having $|E|>0$ is not necessary for $E - E$ to contain a neighborhood of $0$. \\
 
-\pf Recall that $A-B = \{a-b\colon a\in A, b\in B\}$. This definition implies that 
-	\[
-        (A_1 \cup A_2) - (B_1 \cup B_2)= \bigcup_{i, j=1}^2 (A_i - B_j) \tag{*}
-	\]
-Furthermore, for any  $t \in \R$ we have $(A+t) - B = (A+B)+ t$, $A-(B+t)= (A-B) - t$, and $tA - tB = t(A-B)$; all these follow directly from the definition. 
+\pf Recall that $A - B= \{ a - b \colon a \in A, b \in B \}$. This definition implies that 
+	\begin{equation} \label{eq:distribute}
+	(A_1 \cup A_2) - (B_1 \cup B_2)= \bigcup_{i, j=1}^2 (A_i - B_j).
+	\end{equation}
+Furthermore for any  $t \in \R$, we have $( A + t ) - B= ( A + B ) + t$, $A -( B + t )= ( A - B ) - t$, and $tA - tB = t(A-B)$; all these follow directly from the definition. The equality $C_0 - C_0= [-1, 1]$ holds because  on one hand, $|x-y| \leq 1$ when $x, y \in [0,1]$ while on the other, $C_0 - C_0 \supset [0, 1] - \{ 0,1 \}= [0,1] \cup [-1,0]= [-1,1]$.  
 
-The equality $C_0 - C_0= [-1, 1]$ holds because, on one hand, $|x-y| \leq 1$ when $x, y\in [0, 1]$, while on the other, $C_0-C_0 \supset [0, 1] -\{0, 1\}= [0, 1] \cup [-1, 0]= [-1, 1]$.  
-
-Assume $C_n - C_n = [-1, 1]$. Use the relation $C_{n+1}= \frac13C_n \cup (\frac13 C_n+\frac23)$ and distribute the difference according to (*) and other properties stated at the beginning:  
+Assume $C_n - C_n = [-1,1]$. Using the relation $C_{n+1}= \frac{1}{3} C_n \cup ( \frac{1}{3} C_n + \frac{2}{3})$ and distributing the difference according to \eqref{eq:distribute} and other properties stated at the beginning gives
         \[
         \begin{split}
-        C_{n+1} - C_{n+1}&= \left( \frac13C_n - \frac13C_n \right) \cup \left( \frac13C_n-\frac13C_n + \frac23\right)\cup \left( \frac13C_n-\frac13C_n - \frac23\right) \\ 
-        &= [-1/3, 1/3] \cup ([-1/3, 1/3] + 2/3) \cup ([-1/3, 1/3] - 2/3) \\ 
-        &= [-1/3, 1/3] \cup [1/3, 1] \cup  [-1 , -1/3] = [-1, 1] 
+        C_{n+1}- C_{n+1} &= \left( \frac{1}{3} C_n - \frac{1}{3} C_n \right) \cup \left( \frac{1}{3} C_n - \frac{1}{3} C_n + \frac{2}{3} \right) \cup \left( \frac{1}{3} C_n - \frac{1}{3} C_n - \frac{2}{3} \right) \\ 
+        & = [-1/3,1/3] \cup ( [-1/3, 1/3] + 2/3) \cup ( [-1/3,1/3] - 2/3 ) \\ 
+        & = [-1/3,1/3] \cup [1/3,1] \cup  [-1,-1/3] = [-1,1].
         \end{split}
         \]
-The set $\left( \frac13C_n + \frac23\right)- \left(\frac13C_n +\frac23 \right)$ is not included above because it is the same as $\left( \frac13C_n-\frac13C_n \right)$. By induction, $C_n-C_n=[-1, 1]$ for all $n$. 
+The set $ \left( \frac{1}{3} C_n + \frac{2}{3} \right) - \left( \frac{1}{3} C_n + \frac{2}{3} \right)$ is not included above because it is the same as $\left( \frac{1}{3} C_n - \frac{1}{3} C_n \right)$. By induction, $C_n - C_n= [-1,1]$ for all $n$. 
 
-Since $C \subset C_n$ for every $n$, it follows that $C - C\subset [-1, 1]$. To prove the reverse inclusion, fix $a \in [-1, 1]$. For each $n$, there exist $x_n, y_n \in C_n$ such that $x_n - y_n= a$. Since all these numbers are contained in $[0, 1]$, we can pick a convergent subsequence  $\{ x_{n_k} \}$. So, $x_{n_k}\to x$ and since $x_{n_k} - y_{n_k}= a$, we also have $y_{n_k} \to y$ where $y$ is such that $x - y=a$.  
+Since $C \subset C_n$ for every $n$, it follows that $C - C \subset [-1,1]$. To prove the reverse inclusion, fix $a \in [-1,1]$. For each $n$, there exist $x_n,y_n \in C_n$ such that $x_n - y_n=a$. Since all these numbers are contained in $[0,1]$, we can pick a convergent subsequence  $\{x_{n_k}\}$. So $x_{n_k} \to x$ and since $x_{n_k} - y_{n_k}=a$, we also have $y_{n_k} \to y$ where $y$ is such that $x - y=a$.  
 
-It remains to prove that $x, y \in C$. For each $m \in \N$ we have $x_{n_k}, y_{n_k} \in C_m$ for $k \geq m$ by construction. Since $C_m$ is compact, it follows that $x, y \in C_m$.  And since this holds for every $m \in \N$, we have $x, y \in C$. \qed \\
+It remains to prove that $x, y \in C$. For each $m \in \N$ we have $x_{n_k}, y_{n_k} \in C_m$ for $k \geq m$ by construction. Since $C_m$ is compact, it follows that $x,y \in C_m$.  And since this holds for every $m \in \N$, we have $x,y \in C$. \qed \\
 \end{hwsol}
 
 
-% HW 13
+% HW 8 (4.1A): Measurable Functions I
+% Problem 1
 \begin{hwsol}
-Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
+Suppose that $f: \R^n \to \R$ is a function such that $f(\R^n)$ is countable, and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. \\
 
-\pf Let $B = f(\mathbb R^n)$, a countable subset of $\mathbb R$. For any $a\in \mathbb R$ we have
+\pf Let $B = f(\R^n)$, a countable subset of $\R$. For any $a \in \R$ we have
         \[
-        \{f>a\}= \bigcup_{b \in B, \ b>a} f^{-1}(b),
+        \{ f> a \}= \bigcup_{b \in B, \ b>a} f^{-1}(b),
         \]
-which is a countable union of measurable sets, and is hence measurable. The domain of $f$, which is $\R^n$, is also measurable. Thus $f$ is measurable. \qed \\
+which is a countable union of measurable sets, hence measurable. The domain of $f$, which is $\R^n$, is also measurable. Thus, $f$ is measurable. \qed \\
 \end{hwsol}
 
 
-% HW 14
+% HW 8 (4.1A): Measurable Functions I
+% Problem 2
 \begin{hwsol}
-Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:13} would not be true. \\
+Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in the previous problem would not be true. \\
 
-\pf The statement in Problem~\ref{hw:13} is made for any $n$. To disprove it, it suffices to show it fails for some $n$. With massive loss of generality, let $n=1$. Let $V \subset [0, 1]$ be a Vitali set, and define $f\colon \R \to \R$ by
+\pf The statement in the previous problem is made for any $n$. To disprove it, it suffices to show it fails for some $n$, for example $n=1$. Let $V \subset [0, 1]$ be a Vitali set, and define $f: \R \to \R$ by
         \[
         f(x)= 
         \begin{cases} 
-        x+1, & x \in V \\ 
-        -|x|, & x \notin V 
+        x+1, & x\in V \\ 
+        -|x|, & x \notin V
         \end{cases}
         \]
-By construction $\{f>0\}= V$, which is nonmeasurable. Thus, $f$ is nonmeasurable. On the other hand, for every $t \in \R$ the set $f^{-1}(t)$ is finite and therefore measurable. Indeed, if $t$ is negative, $f(x)=t$ holds for at most two values of $x$; and when $t \geq 0$, there is at most one such value. \qed \\
-\end{hwsol}
+By construction $\{ f> 0 \} = V$, which is nonmeasurable. Thus, $f$ is nonmeasurable. On the other hand, for every $t \in \R$ the set $f^{-1}(t)$ is finite and therefore measurable. Indeed, if $t$ is negative, $f(x)= t$ holds for at most two values of $x$; and when $t\ge 0$, there is at most one such value. \qed \\
 
-\noindent [Remark: If we wanted to construct such an example on $\R^n$ for every $n$, one way is to let 
+\noindent Remark: If we wanted to construct such an example on $\R^n$ for every $n$, one way is to let 
         \[
-        f(x_1,\ldots, x_n)= 
+        f(x_1, \dots, x_n)= 
         \begin{cases} 
-        x_1+1, & \forall i \; x_i \in V; \\ 
-        -|x_1|, & \text{otherwise} 
+        x_1+1, & \forall i\ x_i \in V \\ 
+        -|x_1|, & \text{otherwise}
         \end{cases}
         \]
-Then $\{f>0\}= V^n$ which is nonmeasurable, because on one hand, $V^n + \Q^n= \R^n$ forces $\ext{V^n}>0$; on the other, $V^n + (\Q \cap [0, 1])^n$ is a bounded set containing infinitely many copies of $V^n$, which makes it impossible to have $|V^n|>0$.  
+Then $\{ f>0 \}= V^n$ which is nonmeasurable, because on one hand, $V^n + \Q^n = \R^n$ forces $\ext{V^n}> 0$; on the other, $V^n + (\Q \cap [0, 1])^n$ is a bounded set containing infinitely many copies of $V^n$, which makes it impossible to have $|V^n|> 0$.  
 
-For every $t \in \R$, the preimage $f^{-1}(t)$ consists at most two hyperplanes of the form $\{x\} \times  \R^{n-1}$. So it is covered by countably many sets of the form $\{x\} \times [-j, j]^{n-1}$, $j \in \N$. Here $|\{x\} \times [-j, j]^{n-1}|=0$ because this set is contained in a box of dimensions $(\ep, 2j,\ldots, 2j)$ whose volume can be arbitrarily small. In conclusion, $|f^{-1}(t)|=0$ for every $t$. Thus $f$ is measurable.] \\
-
-
-% HW 15
-\begin{hwsol}
-Suppose that $f: \R \to \R$ is measurable, and $g: \R \to \R$ is continuously differentiable with $g'>0$ everywhere. Prove that $f \circ g$ is measurable. \\
-
-\pf By the Mean Value Theorem, $g$ is strictly increasing; therefore, it has an inverse $h= g^{-1}$. By the Inverse Function Theorem, the inverse function $h$ is also continuously differentiable. 
-
-Given $a \in \R$, consider the set $A= \{ x \colon f(g(x))> a \}$. It can be written as $\{x \colon g(x) \in B \}$, where $B= \{f>a\}$ is measurable; that is, $A= h(B)$. By Problem~\ref{hw:9}, the image of a measurable set under a continuously differentiable function is measurable. Therefore, $A$ is measurable. \qed \\
+For every $t \in \R$, the preimage $f^{-1}(t)$ consists at most two hyperplanes of the form $\{ x \} \times \R^{n-1}$. So it is covered by countably many sets of the form $\{ x \} \times [-j, j]^{n-1}$, $j \in \N$. Here $|\{ x \} \times [-j, j]^{n-1}|= 0$ because this set is contained in a box of dimensions $(\ep, 2j, \ldots, 2j)$ whose volume can be arbitrarily small. In conclusion, $|f^{-1}(t)|= 0$ for every $t$. Thus, $f$ is measurable. \\
 \end{hwsol}
 
 
-% HW 16
+% HW 9 (4.1B): Measurable Functions 2
+% Problem 1
+\begin{hwsol}
+Suppose that $f: \R \to \R$ is measurable, and $g: \R \to \R$ is continuously differentiable with $g' > 0$ everywhere. Prove that $f \circ g$ is measurable. \\
+
+\pf By the Mean Value Theorem, $g$ is strictly increasing. Therefore, $g$ has an inverse $h= g^{-1}$. By the Inverse Function Theorem, the inverse function $h$ is also continuously differentiable. 
+
+Given $a \in \R$, consider the set $A= \{ x \colon f(g(x)) > a \}$. It can be written as $\{ x \colon g(x) \in B \}$ where $B= \{ f>a \}$ is measurable. That is, $A= h(B)$. By Homework~\ref{hw:11}, the image of a measurable set under a continuously differentiable function is measurable. Thus, $A$ is measurable. \qed \\
+\end{hwsol}
+
+
+% HW 9 (4.1B): Measurable Functions 2
+% Problem 2
 \begin{hwsol} \hfill
 \begin{enumerate}[(a)]
-\item Suppose $f\colon \mathbb R^n\to\mathbb R$ is a continuous function such that $f^2$ is measurable. Prove that $f$ is measurable.
+\item Suppose $f\colon \R^n\to\R$ is a continuous function such that $f^2$ is measurable. Prove that $f$ is measurable.
 \item Prove that the statement in (a) is false if $f$ is not assumed continuous. \\
 \end{enumerate}
 
-\pf
+\pf \hfill
 \begin{enumerate}[(a)]
 \item Since $f$ is continuous, it is measurable. 
-\item Let $n=1$, let $V$ be a Vitali set, and define $f(x) = 1$ when $x \in V$ and $f(x)= -1$ when $x \notin V$. Then $f^2 \equiv 1$ is measurable, being continuous. But $\{f>0\}= V$ is not a measurable set, so $f$ is not measurable.
-\end{enumerate} \qed \\
-\end{hwsol}
 
-
-%%%%%%%%%%%%%%%%
-
-
-% HW 17 
-\begin{hwsol}
-Suppose that $f: E \to \R$ is a measurable function, where $E \subset \R^n$ is measurable. 
-\begin{enumerate}[(a)]
-\item Prove that there exists a Borel set $H \subset E$ such that the restriction $f_{|H}$ is Borel measurable and $|E \setminus H|=0$. 
-\item If, in addition, $E$ is a Borel set, prove that there exists a Borel measurable function $g: E \to \R$ such that $f=g$ a.e.. [\emph{Hint: For part (a), take a countable union of closed sets obtained from Lusin's Theorem.}]
+\item Let $n=1$, let $V$ be a Vitali set, and define $f(x)= 1$ when $x\in V$ and $f(x)= -1$ when $x \notin V$. Then $f^2 \equiv 1$ is measurable, being continuous. But $\{ f > 0 \}= V$ is not a measurable set, so $f$ is not measurable. \qed \\
 \end{enumerate}
 \end{hwsol}
 
 
-% HW 18 
+% HW 10 (4.2): Semicont Functions & 2.1 Bounded Variation
+% Problem 1
+\begin{hwsol} \hfill
+\begin{enumerate}[(a)]
+\item Let $E \subset \R^n$ be a set. Consider a sequence of lsc functions $f_k: E \to \overline{\R}$ such that $f_1\leq f_2 \leq f_3 \leq \cdots$. Prove that $\lim_{k \to \infty} f_k$ is also an lsc function. [Note:Tthe limit here is understood in the sense of the extended real line $\overline{\R}$, so it is assured to exist by monotonicity.]
+\item Give an example that shows (a) fails with ``lsc'' replaced by ``usc.'' \\
+\end{enumerate}
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item Recall the limit comparison property: if all terms of a sequence are at most $M$, then its limit (if it exists) is also at most $M$. Apply the contrapositive of this statement to $f(x)= \ds\lim_{k \to \infty} f_k(x)$, and conclude that if $f(x) > M$, then there exists $k$ such that $f_k(x) > M$. Thus, $\{ f>M \} \subset \bigcup_{k \in \N} \{ f_k > M \}$. The reverse inclusion is true as well, because for each $k$, $\{ f_k > M \} \subset \{ f > M \}$, by virtue of $f_k \leq f$. In conclusion, $\{ f > M \}= \bigcup_{k \in \N} \{ f_k > M \}$. Each set on the right is open in $E$ because $f_k$ is lsc; therefore, the set on the left is also open. Since $M$ is arbitrary, this shows $f$ is lsc.  
+
+\item Let $f_k= \chi_{[1/k, \infty)}$, the domain being $\R$. This function is usc because any set of the form $\{ f_k < a \}$ is either $\R$, $\emptyset$, or $(-\infty,1/n)$, and all these sets are open in $\R$. Also, $f_k \leq f_{k+1}$ because $[1/k, \infty) \subset [1/(k+1),\infty)$. But the limit $f= \chi_{(0, \infty)}$ is not usc, since the set $\{ f < 1 \} = (-\infty, 0]$ is not open. \qed \\
+\end{enumerate}
+\end{hwsol}
+
+ 
+% HW 10 (4.2): Semicont Functions & 2.1 Bounded Variation
+% Problem 2
 \begin{hwsol}
-Suppose $\phi\colon [0, \infty )\to [0, \infty)$ is a function such that $\phi(t) \to 0$ as $t \to \infty$. Consider a sequence of measurable functions $\{f_k\}$, $f_k: \R^n \to \R$, such that $|f_k(x)| \leq \phi(|x|)$ for every $k$, and $f_k \to f$ a.e.. Prove that the conclusion of Egorov's Theorem holds in this situation; that is, for every $\ep>0$, there exists a closed set $E(\ep) \subset \R^n$ such that $|\R^n \setminus E(\ep)| < \ep$ and $f_k \to f$ uniformly on $E(\ep)$. [\emph{Hint: Follow the proof of Egorov's theorem.}]
+Fix $a>0$ and define $f: [0, 1] \to \R$ so that $f(1/k)=1/k^a$ for $k \in \N$, and $f(x)=0$ for all other $x$. Prove that $f$ is of bounded variation on $[0, 1]$ when $a>1$, and is not of bounded variation on $[0, 1]$ when $0 < a \leq 1$. \\
+
+\pf Suppose $a > 1$. Let $0= x_0 < x_1 < \cdots < x_n= 1$ be a partition of $[0, 1]$. By the Triangle Inequality, 
+        \[
+        \sum_{i=1}^n |f(x_i)-f(x_{i-1})| \leq \sum_{i=1}^n ( |f(x_i)| + |f(x_{i-1})| ) \leq 2 \sum_{i=1}^n |f(x_i)|. 
+        \]
+[The second inequality holds because each value $|f(x_i)|$ is repeated at most twice.]  Ignoring any terms with $f(x_i)=0$, we get a sum of the form 
+        \[
+        2 \sum_{k \in B} \frac{1}{k^a},\quad \text{where } B= \N \cap \{ 1/x_i \colon i=1,\dots, n \}. 
+        \]
+Since $a>1$, the sum $S= \sum_{k\in \N}1/k^a$ is finite. From $2 \sum_{k \in B} \frac{1}{k^a} \leq 2S$, it follows that $V(f; 0,1) \leq 2S$, hence $f$ is BV. 
+
+Now suppose $0 < a \leq 1$. For $n \in \N$, consider the partition 
+        \[
+        P_n= \left\{ 0, \frac{1}{n} , \frac{1}{n-1/2}, \frac{1}{n-1}, \frac{1}{n-3/2}, \ldots, 
+        \frac{1}{3/2}, 1 \right\},
+        \]
+which can be described as $P_n= \{0\} \cup \{ 1/(n-k/2) \colon k=0,\ldots, 2n-2 \}$. The values of $f$ at the points of $P_n$ are 
+        \[
+        0, \,\frac{1}{n^a},\, 0, \,\frac{1}{(n-1)^2},\, 0,\, \dots,\, 0,\, \frac{1}{1^a}.
+        \]
+Summing the absolute values of the differences of consecutive terms here, we obtain 
+        \[
+        V(f; 0,1) \geq 1 + 2 \sum_{k=2}^n \frac{1}{k^a}.
+        \]
+As $n \to \infty$, the right hand side tends to infinity because the series $\sum_{k \in \N} 1/k^a$ diverges. Thus  $V(f;0, 1)= \infty$. \qed \\
 \end{hwsol}
 
 
-% HW 19
+% HW 11 (4.3): Egorov & Lusin's Theorem 
+% Problem 1
 \begin{hwsol}
-Suppose that $f\colon \R^n \to \R$ is a function such that $f(\R^n)$ is countable and $f^{-1}(t)$ is measurable for every $t \in \R$. Prove that $f$ is measurable. 
+Suppose that $f: E \to \R$ is a measurable function, where $E \subset \R^n$ is measurable. 
+	\begin{enumerate}[(a)]
+	\item Prove that there exists a Borel set $H \subset E$ such that the restriction $f\big|_H$ is Borel measurable and $|E \sm H|=0$. [Hint: Take a countable union of closed sets obtained from Lusin's theorem.] 
+	\item If, in addition, $E$ is a Borel set, prove that there exists a Borel measurable function $g: E \to \R$ such that $f=g$ a.e.. \\
+	\end{enumerate}
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item By Lusin's Theorem, for every $k \in \N$, there exists a closed set $|E_k \subset E$ such that $|E \sm E_k| < 1/k$, and the restriction of $f$ to $E_k$ is continuous. Let $H= \bigcup_{k \in \N} E_k$. Then $H$ is Borel, being a countable union of closed sets. Also, $|E \sm H| \leq |E \sm E_k|<1/k$ for every $k$, which implies $|E \sm H|=0$.
+
+For every $a \in \R$ and every $k \in \N$ the set $A_k =  \{ x \in E_k \colon f(x)>a \}$ is open in $E_k$ because $f\big|_{E_k}$ is continuous. Thus, $A_k = E_k \cap G_k$ for some open set $G_k$ in $\R^n$. Since both $E_k$ and $G_k$ are Borel, it follows that $A_k$ is Borel. Then $\{ x \in H \colon f(x)>a \}= \bigcup_{k \in \N} A_k$ is Borel, which proves that $f\big|_H$ is Borel measurable. 
+
+\item Let $g(x) = f(x)$ for $x \in H$ (with $H$ as above) and $g(x)= 0$ for $x \in E \sm H$. Then $f=g$ a.e. because $|E \sm H|= 0$. If $a \geq 0$, then the set $\{ x \in E \colon  f(x) > a \}$ is equal to $\{ x \in H \colon f(x) > a \}$ which is Borel by (a). If $a<0$, then 
+        \[
+        \{ x \in E \colon f(x) > a \}= \{ x \in H \colon f(x) > a \} \cup ( E \sm H ),
+        \]
+which is Borel as the union of two Borel sets. Thus, $g$ is a Borel measurable function on $E$.  \qed \\
+\end{enumerate}
 \end{hwsol}
 
 
-% HW 20
+% HW 11 (4.3): Egorov & Lusin's Theorem
+% Problem 2
 \begin{hwsol}
-Prove that without the assumption ``$f(\R^n)$ is countable'' the statement in Problem~\ref{hw:19} would not be true.   
+Suppose $\phi \colon [0, \infty) \to [0,\infty)$ is a function such that $\phi(t) \to 0$ as $t \to \infty$. Consider a sequence of measurable functions $f_k: \R^n \to \R$ such that $|f_k(x)|\leq \phi(|x|)$ for every $k$, and $f_k \to f$ a.e.. Prove that the conclusion of Egorov's Theorem holds in this situation: that is, for every $\ep>0$ there exists a closed set $E(\ep) \subset \R^n$ such that $|\R^n \sm E(\ep)| < \ep$ and $f_k \to f$ uniformly on $E(\ep)$.  [Hint: Follow the proof of Egorov's Theorem.] \\
+
+\pf The proof of Egorov's theorem consists of two parts. Part 1 does not need the assumption $|E| < \infty$, and is included here unchanged for the sake of completeness. \\
+
+\noindent Part 1: It suffices to find, for each $j \in \N$, a measurable set $E_j$ such that $|E_j^C| < \ep/2^j$ and $\sup_{E_j} |f_k-f| \leq 1/j$ for all sufficiently large $k$. Indeed, if we can do this then the set $F= \bigcap E_j$ satisfies $|F^C|< \sum_{j \in \N} \ep/2^j= \ep$. On this set, $f_k$ converge uniformly to $f$ since for every $j$, the inequality $|f_k-f| \leq 1/j$ holds on $F$ for all sufficiently large $k$. Since $F$ is measurable, it contains a closed subset $F'$ where $|F \sm F'|$ can be as small as we wish. So we can choose $F'$ so that $|(F')^C| < \ep$ as well. \\
+
+\noindent Part 2: To find $E_j$ as above, fix $j$ and consider the sets $G_m = \{ x \colon |f_k(x) - f(x)| < 1/j \ \forall k \geq m\}$. By construction, the set $\bigcap_{m \in \N} G_m^C$ consists of points where $f_k(x) \not\to f(x)$, and thus has measure zero. We would like to conclude that $|G_m^C| < \ep/2^j$ for some $m$, which provides the desired set $E_j= G_m$.  In general this does not work because the continuity of measure for nested intersections requires finite $|G_1^C|$. But here we have help from the function $\phi$. 
+
+Since $\phi(x) \to 0$ as $|x| \to \infty$, there exists $R$ such that $\phi(x) < 1/(2j)$ on the set $A_R= \{ x \colon  |x| > R \}$. Hence $|f_k| < 1/(2j)$ on $A_R$ for every $k$, and consequently $|f| \leq 1/(2j)$ a.e. on $A_R$. It follows that $|f_k-f| < 1/j$ a.e. on $A_R$, which implies  $|G_1^C \cap A_R|= 0$. Hence $G_1^C \leq |\{ x \colon |x| \leq R \}| < \infty$. This allows us to apply the continuity of measure for nested intersections, and conclude that $|G_m^C| \to 0$ as $m \to \infty$; in particular there exists $m$ such that $|G_m^C|< \ep/2^j$. \qed \\
+
+\noindent Remark: The function $\phi$ plays the role of a  ``dominating  function'' for this sequence, which can be informally described as a function that mitigates the effects of ``escaping to infinity.'' We will see more of this idea in Chapter 5 of the text. \\
 \end{hwsol}
 
 
+% HW 12 (4.4): Convergence in Measure
+% Problem 1
+\begin{hwsol}
+Suppose that $f, g, f_k, g_k$, where $k \in \N$, are measurable functions on a set $E \subset \R^n$ with values on $\R$, and that $f_k \xrightarrow{m} f$ and $g_k \xrightarrow{m} g$. Prove that $f_k + g_k \xrightarrow{m} f+g$. \\
+
+\pf Recall that $f_k \to f$ in measure if and only if for every $\ep > 0$ there exists $N$ such that $|\{ |f_k-f| > \ep \}| < \ep$ for all $k \geq N$. Given $\ep > 0$, choose $N_1$ such that $|\{ |f_k-f| > \ep/2 \}| < \ep/2$ for all $k \geq N$. Also choose $N_1$ such that $|\{ |g_k-g| > \ep/2 \}| < \ep/2$ for all $k \geq N$. By the Triangle Inequality, $|(f_k+g_k) - (f+g)| \leq |f_k-f| + |g_k-g|$. Hence, 
+        \[
+        \{ |(f_k+g_k) - (f+g)| > \ep \} \subset \{ |f_k-f| > \ep/2 \} \cup \{ |g_k-g| > \ep/2 \},
+        \]
+which implies $|\{ |(f_k+g_k) - (f+g)| > \ep \}| < \ep/2 + \ep/2= \ep$ for all $k \geq \max\{ N_1, N_2 \}$. Thus, $f_k+g_k \to f+g$. \qed \\
+\end{hwsol}
 
 
+% HW 12 (4.4): Convergence in Measure
+% Problem 2
+\begin{hwsol} \hfill
+\begin{enumerate}[(a)]
+\item In addition to the assumptions in the previous problem, suppose $|E| < \infty$. Prove that $f_k \, g_k \xrightarrow{m} fg$.
+\item Show by an example that the assumption $|E| < \infty$ cannot be omitted in (a). [Hint: You need some boundedness to control the terms in $f_k g_k - fg= (f_k-f)g_k + f (g_k - g)$. Consider that when $\varphi: E \to \R$ is measurable, $E= \bigcup_{j} \{ |\varphi| \leq j \}$.] \\
+\end{enumerate}
+
+\pf \hfill
+\begin{enumerate}[(a)] 
+\item Fix $\ep > 0$. For $m \in \N$, let $A_m= \{ x \in E \colon |f(x)| \leq m, |g(x)| \leq m\}$. Since both $f$ and $g$ are finite ($\R$-valued) functions, it follows that $\bigcup_{m \in \N}A_m= E$. Using the continuity of measure together with $|E| < \infty$, we conclude that there exists $m$ such that $|E \sm A_m| < \ep/3$. Be sure that $m > \ep$, by taking larger $m$ if necessary. Because $f_k \xrightarrow{m} f$, there exists $K_1$ such that $|\{ |f_k - f| > \ep/(4m) \}| < \ep/3$ for all $k \geq K_1$. Furthermore because $g_k \xrightarrow{m} g$, there exists $K_2$ such that $|\{ |g_k-g| > \ep/(2m) \}| < \ep/3$ for all $k \geq K_2$. 
+
+On the set where $|f_k - f| \leq \ep/(4m)$, $|g_k - g| \leq \ep/(4m)$, $|f| \leq m$, and $|g| \leq m$ we have $|g_k| \leq m + \ep/(4m) < 2m$ (since $m > \ep$) and therefore 
+        \[
+        |f_kg_k - fg| \leq |f_k-f|\, |g_k| + |f|\, |g_k-g| \leq \frac{\ep}{4m} \cdot 2m + m \cdot \frac{\ep}{2m}= \ep.
+        \]
+This means
+        \[
+        \{ |f_kg_k - fg| > \ep \} \subset ( E \sm A_m) \cup \{ |f_k - f| > \ep/(2m) \} \cup \{ |g_k - g| > \ep/(4m) \},
+        \]
+and the measure of this union is less than $\ep/3 + \ep/3 + \ep/3= \ep$.
+
+\item Let $f_k(x)= 1/k$ and $g_k(x)= x$ on $\R$. Then $f_k \to 0$ uniformly, hence in measure. Also, $g_k$ converges to $x$, being a constant sequence. But $f_k(x) g_k(x)= x/k$ does not converge to $0$ in measure because 
+        \[
+        |\{ |x/k| > \ep \}| =  |\{ |x| > k \ep \}|= \infty
+        \]
+for every $k$. \qed \\
+\end{enumerate}
+\end{hwsol}
 
 
+% HW 13 (5.1): Integral Nonnegative Functions
+% Problem 1
+\begin{hwsol}
+Suppose that $f: E \to [0, \infty)$ is a measurable function, where $E \subset \R^n$. Prove that $\int_E f$ is finite if and only if the series 
+        \[
+        \sum_{j = -\infty}^\infty 2^j \,| \{x \in E \colon f(x)>2^j \}|
+        \]
+converges. [Hint: consider the sets $E_k = \{2^k<f\leq 2^{k+1}\}$ and the function $g(x)= \sum 2^k \chi_{E_k}$. Compare $\int_E g$ to the sum of series, and also to $\int_E f$.] \\
+
+\noindent Note: The convergence of a doubly-infinite series $\sum_{j= -\infty}^\infty c_j$ means that both $\sum_{j=0}^\infty c_j$ and $\sum_{j=1}^\infty c_{-j}$ converge. In case of nonnegative terms the convergence is equivalent to partial sums $\sum_{j = -N}^N c_j$ being bounded. \\
+
+\pf Let $E_k$ and $g$ be as above. By construction, $f= 0$ if and only if $g=0$, and $g < f \leq 2g$ on each set $E_k$, which together cover $\{ f > 0 \}$. Thus, $g \leq f \leq 2g$. Since $g$ has countable range, its integral is computed (using countable additivity over the domain) as $\int_E g= \sum_{k= -\infty}^\infty 2^k |E_k|$. For the same reason, $\int_E 2g=  \sum_{k= -\infty}^\infty 2^{k+1} |E_k|$. [Note that although it's true that $\int 2g= 2 \int g$ for general measurable $g$, we don't need this fact from Chapter~5.2 here.] These facts together with inequalities $g \leq f \leq 2g$ yield that $\int_E f < \infty$ if and only if $\sum_{k= -\infty}^\infty 2^k |E_k| < \infty$.
+
+Let $F_k= \{ x \in E \colon f(x) > 2^k \}$. It remains to prove that 
+	\begin{equation} \label{eq:iff}
+	\sum_{k= -\infty}^\infty 2^k \, |F_k| < \infty \iff \sum_{k=-\infty}^\infty 2^k |E_k| < \infty.
+	\end{equation} 
+To this end, note that $F_k = \bigcup_{j=k}^\infty E_j$, which is a disjoint union. Hence
+        \[
+        \begin{split}
+        \sum_{k= -\infty}^\infty 2^k |F_k|&= \sum_{k= -\infty}^\infty \sum_{j=k}^\infty 2^k  |E_j| \\ 
+        &= \sum_{j= -\infty}^\infty \sum_{k= -\infty }^{j} 2^k |E_j|  \\ 
+        &= \sum_{j= -\infty}^\infty  2^{j+1} |E_j|  \\ 
+        \end{split}
+        \]
+which proves \eqref{eq:iff}. \qed \\
+\end{hwsol}
 
 
+% HW 13 (5.1): Integral Nonnegative Functions
+% Problem 2
+\begin{hwsol}
+Let $B=\{ x \in \R^n \colon |x|<1 \}$.
+        \begin{enumerate}[(a)]
+        \item Prove that $\int_{B} |x|^{-p} \,dx$ is finite when $0<p<n$ and infinite when $p \geq n$. 
+        \item Prove that $\int_{B^c} |x|^{-p} \,dx$ is finite when $p>n$ and infinite when $0 < p \leq n$. \\
+        \end{enumerate}
+
+\noindent Note: These integrals are Lebesgue integrals, and we do not yet have anything like the Fundamental Theorem of Calculus for such integrals. Use the previous problem. You can also use the fact that the measure of a ball of radius $R$ is $C_n R^n$ for some constant $C_n$ that depends on $n$. \\
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item Let $f= |x|^{-p}$ and $F_k= \{x \in \R^n \colon f(x) > 2^k \}$. Note that $F_k= \{ x \colon |x| < 2^{-k/p} \}$, so $|F_k|= C_n 2^{-kn/p}$.   
+
+By the previous problem, $\int_B f < \infty \iff \sum_{k= -\infty}^\infty 2^k |B \cap F_k| < \infty$. When $k \leq 0$, we have $B \subset F_k$, hence $|B \cap F_k|=|B|$. The geometric series $\sum_{k \leq 0}2^k |B|= 2|B|$ converges regardless of $p$. For $k \geq 1$, $F_k \subset B$, so $|B  \cap F_k|= |F_k|$, hence 
+        \[
+        \sum_{k=1}^\infty 2^k |B \cap F_k|= C_n \sum_{k=1}^\infty 2^{k(1-n/p)},
+        \]
+which is a geometric series that converges if and only if $1-n/p < 0$. This proves (a). 
+
+\item By the previous problem, $\int_{B^C} f < \infty \iff \sum_{k=-\infty}^\infty 2^k |B^C \cap F_k | < \infty$. As noted above, $F_k \subset B$ when $k \geq 1$, which implies $B^C \cap F_k= \emptyset$. When $k \leq 0$, we have $B \subset F_k$, hence $|B^C \cap F_k|= |F_k|-|B|$. Since the sum $\sum_{k \leq 0}2^k |B|= 2|B|$ converges regardless of $p$, it remains to consider the convergence of $\sum_{k \leq 0} 2^k |F_k|$. Writing $j= -k$, we arrive at 
+        \[
+        \sum_{k \leq 0} 2^k |F_k|= \sum_{j=0}^\infty 2^{-j} C_n 2^{j n/p}= C_n \sum_{j=0}^\infty    2^{j (n/p - 1)},
+        \]
+which is a geometric series that converges if and only if $n/p - 1 < 0$. This proves (b). \qed \\
+\end{enumerate}
+\end{hwsol}
 
 
+% HW 14 (5.2): Properties of Integral nonnegative I
+% Problem 1
+\begin{hwsol} \hfill
+\begin{enumerate}[(a)]
+\item Suppose that $f_k: E \to [0, \infty]$ (where $E \subset \R^n$) are measurable functions such that $\int_E f_k \to 0$ as $k \to \infty$. Prove that $f_k \xrightarrow{m} 0$.  
+\item Give an example where $f_k \xrightarrow{m} 0$ but  $\int_E f_k \not\to 0$. \\
+\end{enumerate}
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item For any $\ep > 0$, Chebyshev's Inequality yields
+        \[
+        |\{ f_k > \ep \}| \leq \frac{1}{\ep} \int_E f_k \to 0,
+        \]
+which means $f_k\xrightarrow{m}0$.
+
+\item Either of $f_k= k \chi_{(0,1/k)}$ or $g_k= k^{-1} \chi_{(0, k)}$ works. (Or even $h_k \equiv 1/k$). Indeed, $\{ f_k \neq 0 \} \to 0$, and $g_k, h_k$ converge to zero uniformly (which is stronger than convergence in measure). Yet $\int f_k= 1$, $\int g_k= 1$, and $\int h_k= \infty$. \qed \\
+\end{enumerate}
+\end{hwsol}
 
 
+% HW 14 (5.2): Properties of Integral nonnegative I
+% Problem 2
+\begin{hwsol}
+For $k \in \N$, define $f_k: [0, 1]\to [0, \infty]$ by 
+        \[
+        f_k(x)= \sum_{j=1}^k \chi_{I(j, k)}, \quad \text{where } I(j, k)= \left[ \frac{j}{k} - \frac{1}{k^3}, \frac{j}{k}+\frac{1}{k^3} \right].
+        \]
+Let $f= \sum_{k=1}^\infty f_k$. Prove that $\int_{[0, 1]} f <\infty$. \\
+
+\pf Note that $\int_E \chi_F= |E \cap F|$ by the formula for the integral of a simple function. Applying this (and the additivity of the integral) to $f_k$ yields
+        \[
+        \int_{[0, 1]} f_k= \sum_{j=1}^k |I(j, k) \cap [0, 1]| \leq \sum_{j=1}^k |I(j, k)|= \sum_{j=1}^k \frac{2}{k^3}= \frac{2}{k^2}.
+        \]
+By the countable additivity over nonnegative functions (Theorem 5.16), 
+        \[ 
+        \int_{[0, 1]} f=  \sum_{k=1}^\infty \int_{[0, 1]} f_k \leq \sum_{k=1}^\infty \frac{2}{k^2} < \infty.
+        \]
+[One can also say that partial sums converge to $f$ in an increasing way, but this argument was already made in the proof of Theorem 5.16]. \qed \\
+\end{hwsol}
 
 
+% HW 15 (5.2B) Properties of Integral Nonnegative 2
+% Problem 1
+\begin{hwsol}
+Suppose that $f: \R^n \to [0, \infty)$ is a measurable function such that $\int_{\R^n} f < \infty$. Also suppose $\{ E_k \}$ is a sequence of measurable sets $E_k \subset \R^n$. Let $A= \ds\limsup_{k \to \infty} E_k$ and $B= \ds\liminf_{k \to \infty} E_k$. Prove that 
+	\[
+	\int_A f \geq \limsup_{k \to \infty} \int_{E_k} f
+	\]
+and 
+	\[
+	\int_B f \leq \liminf_{k \to \infty} \int_{E_k} f.
+	\]
+[Hint: $\int_E f= \int_{\R^n} \chi_E f$.] \\
+
+\pf The second inequality follows from Fatou's Lemma, using the fact (discussed in class) that $\chi_B= \ds\liminf_{k\to\infty} \chi_{E_k}$: 
+        \[
+        \int_B f= \int_{\R^n} \chi_B f= \int_{\R^n} \liminf_{ k \to \infty} \chi_{E_k} f \leq \liminf_{k \to \infty} \int_{\R^n} \chi_{E_k} f= \liminf_{k \to \infty} \int_{E_k} f.
+        \]
+To prove the inequality for $\int_A f$, note that $f - \chi_{E_{k}} f \geq 0$, and apply Fatou's Lemma to this sequence:
+        \[
+        \int_{\R^n} \liminf_{k \to \infty} (f - \chi_{E_k} f) \leq \liminf_{k \to \infty} \int_{\R^n} (f - \chi_{E_k} f).
+        \]
+Expand both sides, recalling that $\liminf (-a_k)= -\limsup a_k$, and using the assumption that $\int_{\R^n} f$ is finite yields
+        \[
+        \int_{\R^n} f - \int_{\R^n} \limsup_{k \to \infty} \chi_{E_k} f  \leq \int_{\R^n} f - \limsup_{k \to \infty} \int_{\R^n} \chi_{E_k} f.
+        \]
+Canceling $\int_{\R^n} f$, we get
+        \[
+        \int_{\R^n} \limsup_{k \to \infty} \chi_{E_k} f \geq \limsup_{k \to \infty} \int_{\R^n} \chi_{E_k} f,
+        \]
+which is precisely $\ds \int_{A} f \geq \limsup_{k \to \infty} \int_{E_k}f$. \qed \\
+\end{hwsol}
 
 
+% HW 15 (5.2B) Properties of Integral Nonnegative 2
+% Problem 2
+\begin{hwsol}
+Suppose that $f: \R^n \to [0, \infty)$ is a measurable function such that $\int_{\R^n} f < \infty$. Prove that $\int_{\R^n} e^{-k|x|} f(x) \to 0$ as $k \to \infty$. \\
+
+\pf For all $x \neq 0$ we have $e^{-k|x|} f(x) \to 0$ as $k \to \infty$; thus, the functions converge a.e. to $0$. Also, $f$ is a dominating function, since its integral is finite and $e^{-k|x|} f(x) \leq f(x)$ for all $x$ and all $k$. By the Dominated Convergence Theorem, 
+	\[ 
+	\int_{\R^n} e^{-k|x|} f(x) \to \int_{\R^n} 0= 0.
+	\] \qed \\
+\end{hwsol}
 
 
+% HW 16 (5.3A): Integral Measurable Functions I
+% Problem 1
+\begin{hwsol}
+Prove that under the assumptions of the Lebesgue Dominated Convergence Theorem, $\int_E |f_k-f| \to 0$ as $k \to \infty$. \\
+
+\pf By assumption, there is an integrable dominating function for $\{f_k\}$, call it $\varphi$. By passing to the limit, $|f| \leq \varphi$ a.e., which implies $|f_k - f| \leq |f_k|+|f| \leq 2\varphi$ a.e.. Note that $\int_E 2\varphi= 2 \int_E \varphi < \infty$. Since  $f_k \to f$ a.e., it follows that $|f_k - f| \to 0$ a.e.. By the DCT,
+        \[
+        \int_E |f_k - f| \to \int_E 0= 0.
+        \] \qed \\
+\end{hwsol}
 
 
+% HW 16 (5.3A): Integral Measurable Functions I
+% Problem 2
+\begin{hwsol}
+Let $f \in L^1(E)$, where $E \subset \R^n$ is a measurable set. Prove that
+        \[
+        \lim_{k \to \infty} k \int_E \sin \left( \frac{f }{k} \right)= \int_E f.
+         \]
+ 
+\pf By the Mean Value Theorem, $\sin t= \sin t - \sin 0= (\cos \xi) \, t$ for some $\xi$ between $0$ and $t$. This implies two things: 
+	\begin{enumerate}[(a)]
+	\item $|\sin t| \leq |t|$ because $|\cos \xi| \leq 1$
+	\item as $ t \to 0$, we have $(\sin t)/t \to 1$ because $\cos \xi \to 1$.
+	\end{enumerate}  
+Applying (a) to $\sin \left( \frac{f }{k} \right)$, we find that 
+        \[
+        k \left| \sin \left( \frac{f }{k} \right) \right| \leq k \;\frac{|f|}{k}= |f|,
+        \]
+which means $|f|$ is a dominating function for the sequence $f_k= k \sin(f/k)$. 
+
+Applying (b), we find that 
+        \[
+        f_k= \frac{\sin(f/k)}{f/k}\; f \to f, \quad k \to \infty.
+        \]
+By the Dominated Convergence Theorem, $\int_E f_k \to \int_E f$. \qed \\
+\end{hwsol}
 
 
+% HW 17 (5.3B): Integral of Measurable Functions 2
+% Problem 1
+\begin{hwsol}
+Let $f: E \to \R$ be a measurable function. Suppose that $|E| < \infty$ and there exists a number $p > 1$ such that 
+        \[
+        \limsup_{\alpha \to \infty} \alpha^p |\{ x \in E \colon |f(x)| > \alpha \}| < \infty.
+        \]
+Prove that $f\in L^1(E)$. [Hint: use an exercise from Homework~\ref{hw:25}.] \\
+
+\pf Let $M= \ds\limsup_{\alpha \to \infty} \alpha^p |\{ x \in E \colon |f(x)| > \alpha \}|$. By definition, this means
+        \[
+        M= \lim_{\beta \to \infty} \sup_{\alpha \geq \beta} \alpha^p |\{ x \in E \colon |f(x)| > \alpha \}|.
+        \]
+Thus, there exists $\beta$ such that $\ds\sup_{\alpha \geq \beta} \alpha^p |\{ x \in E \colon |f(x)| > \alpha \}| \leq M+1$. Choose an integer $m$ such that $2^m \geq \beta$. Then for $j \geq m$, we have 
+        \[
+        2^{jp} \{ x \in E \colon |f(x)| > 2^j \}| \leq M+1.
+        \]
+Hence,
+        \[
+        \sum_{j=m}^\infty 2^{j} \{ x \in E \colon |f(x)| > 2^j \}| \leq \sum_{j=m}^\infty 2^{j} \frac{M+1}{2^{jp}}= (M+1) \sum_{j=m}^\infty 2^{(1-p)j},
+        \]
+which converges because $2^{1-p}<1$. 
+
+Also, 
+        \[
+        \sum_{j= -\infty}^{m-1} 2^{j} \{ x \in E \colon |f(x)| > 2^j \}| \leq \sum_{j= -\infty}^{m-1} 2^{j} |E|= 2^m |E| <\infty,
+        \]
+by summing a geometric series. Thus, $\ds\sum_{j= -\infty}^{\infty} 2^{j} \{ x \in E \colon |f(x)| > 2^j \}$, which by Homework~\ref{hw:25} implies $|f| \in L^1(E)$. Hence, $f \in L^1(E)$. \qed \\
+\end{hwsol}
 
 
+% HW 17 (5.3B): Integral of Measurable Functions 2
+% Problem 2
+\begin{hwsol}
+Give an example of a sequence of integrable functions $f_k: [0, 1] \to \R$ such that $f_k \to f$ a.e., $\ds\lim_{k \to \infty} \int_{[0,1]} f_k $ exists and is finite, but $f$ is not integrable on $[0, 1]$. [Hint: approximate $1/x$ by functions with integral $0$.] \\
+
+\pf We know that $\int_{[0, 1]} \dfrac{1}{x}= \infty$ from Homework~\ref{hw:26}. Let $C_k= \int_{(1/k, 1]} \frac{1}{x}$ which is finite because the function is bounded by $k$ on this finite interval. Define 
+        \[
+        f_k= -k C_k \chi_{[0, 1/k) } + \dfrac{1}{x} \chi_{(1/k, 1]}.
+        \]
+Then $f_k$ is integrable (sum of two integrable functions) and $\int_{[0, 1]} f_k=  -k C_k |[0, 1/k)| + C_k= 0$. On the other hand, for every $x > 0$ we have $f_k(x)= 1/x$ for all $k$ such that $k > 1/x$; thus, $f_k \to 1/x$ a.e.. \qed \\
+\end{hwsol}
 
 
+% HW 18 (5.4-5): Lebesgue Riemann & Riemann-Stieltjes 
+% Problem 1
+\begin{hwsol}
+Determine the Riemann-Stieltjes integral $\int \alpha \; d(-\omega_f(\alpha))$ corresponding to $\int_E f$ where $E= (0, 3)$ and $f(x)= x + \lfloor x \rfloor $. [You do not need to evaluate the integral. Here $\lfloor x \rfloor$ is the greatest integer not exceeding $x$.] \\
+
+\pf Note that $f(x)=x$ on $(0, 1)$, $f(x)=x+1$ on $[1, 2)$ and $f(x)=x+2$ on $[2, 3)$. Hence, for any $\alpha \in \R$, the set $\{ x \in E \colon f(x) > \alpha \}$ is equal to
+        \[
+        \{ x \in (0, 1) \colon x > \alpha \} \cup \{ x \in [1, 2) \colon x+1 > \alpha \} \cup \{ x \in [2, 3) \colon x+2 > \alpha \}.
+        \]
+The set $(a, b) \cap (c,\infty)$ can be expressed as $\max(a, c) < x < b$, so its measure is $(b - \max(a, c))^+$. This makes it possible to write $\omega_f(\alpha)$ as
+        \[ 
+        \omega_f(\alpha)= (1 - \max(\alpha, 0))^+ + (2 - \max(\alpha, 1))^+ + (3 - \max(\alpha, 2))^+.
+        \]
+Since the range of $f$ is $(0, 5)$, the desired Riemann-Stieltjes integral is  $\int_0^5  \alpha\,d(-\omega_f(\alpha))$ with $\omega_f$ given by the above formula. \qed \\
+ 
+\noindent Note: One can rewrite $\omega_f$ in other ways. For example,
+        \[
+        \omega_f(\alpha) = 
+        \begin{cases}
+        3 - \alpha, & 0 \leq \alpha \leq 1 \\ 
+        2, & 1 \leq \alpha \leq 2 \\ 
+        4 - \alpha, & 2 \leq \alpha \leq 3 \\ 
+        1, & 3 \leq \alpha \leq 4 \\ 
+        5 - \alpha, & 4 \leq \alpha \leq 5  \\ 
+        \end{cases}
+        \] \\
+\end{hwsol}
 
 
+% HW 18 (5.4-5): Lebesgue Riemann & Riemann-Stieltjes 
+% Problem 2
+\begin{hwsol}
+Suppose $E \subset [0, 1]$. Prove that $\chi_E$ is Riemann integrable on $[0, 1]$ if and only if $|\partial E|=0$. \\
+
+\pf More generally, we claim that for any set $E \subset X$ in a metric space $(X,d)$ the boundary $\partial E$ coincides with the set of discontinuities of the characteristic function $\chi_E$. Indeed for $a \in X$ to be a point of continuity for $\chi_E$, we must have for every $\ep > 0$ some $\delta > 0$ such that $d(x,a) < \delta \implies |\chi_E(x) - \chi_E(a)| < \ep$. By using this with $\ep= 1$ and recalling that $\chi_E$ takes only the values $0,1$, we conclude that $a$ is a point of continuity for $\chi_E$ if and only if $\chi_E$ is constant in some neighborhood of $a$. The latter means exactly one of two things: $\chi_E= 0$ in a neighborhood of $a$ (so, $a$ is an interior point of $E^C$), or $\chi_E= 1$ in a neighborhood of $a$ (so, $a$ is an interior point of $E$). It remains to recall that $\partial E$ is the set of all points that are neither interior for  $E$ nor for $E^C$. 
+
+Applying the above with $X= \R$, we conclude that the set of discontinuities of $\chi_E$ on $\R$ is $\partial E$. When $\chi_E$ is restricted to $[0, 1]$, the discontinuities at $0$ and $1$ may disappear (e.g., the restriction on $\chi_{[0, 1/2]}$ to $[0, 1]$ is continuous at $0$), but the two-point set has measure zero anyway. In conclusion, $|\partial E|= 0$ if and only if the restriction of $\chi_E$ to $[0, 1]$ is continuous a.e.. Since $\chi_E$ is bounded, the latter property is equivalent to Riemann integrability by Theorem 5.54 of the text. \qed \\
+\end{hwsol}
 
 
+% HW 19 (6.1) Fubini Theorem
+% Problem 1
+\begin{hwsol} \hfill
+\begin{enumerate}[(a)]
+\item Suppose $E \subset \R^2$ is a Borel set. For $x \in \R$, let $E_x = \{y \in \R \colon (x, y) \in E \}$. Prove that $E_x$ is a Borel set in $\R$. [Hint: For a fixed $x$, prove that $\{ A \subset \R^2 \colon A_x \text{ is Borel in } \R \}$ is a $\sigma$-algebra that contains all open subsets of $\R^2$.]
+\item Suppose $f: \R^{2} \to \R$ is a Borel measurable function. Prove that for every $x \in \R$, the function $g(y)= f(x, y)$ is Borel measurable on $\R$. [Note: In contrast with Fubini's Theorem, this is no ``a.e.'' here.] \\
+\end{enumerate} 
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item Let $M= \{ A \subset \R^2 \colon A_x \text{ is Borel in } \R \}$. Note that $\emptyset ,  \R^2 \in M$, since their slices are $\emptyset$ and $\R$, respectively. For an arbitrary $A \in M$, we have $(A^C)_x= (A_x)^C$, and since the complement of a Borel set is Borel, $A^C \in M$. Also, for any countable family $A_k \in M$, $(\bigcup_k A_k)_x= \bigcup_k (A_k)_x$ is Borel, which means $A \in M$. Thus, $M$ is a $\sigma$-algebra.    
+
+For any open set $A \subset \R$ the intersection of $A$ with any set $B$ is open as a subset of $B$ (MAT 601; one can also see this as the definition of subspace topology in MAT 661). Therefore, $A_x$ is open in $\R$ for every open set $A \subset \R^2$. This implies that $M$ contains all open sets; and being a $\sigma$-algebra, it contains all Borel sets. In other words, $E_x$ is Borel in $\R$ whenever $E$ is Borel in $\R^2$.  
+
+\item For any $a \in \R$ the set $\{ y \in \R \colon g(y) > a \}$ is the $x$-slice of the set $\{ (u, v) \in \R^2 \colon f(u, v) > a \}$. The latter set is Borel, hence the former is also Borel by part (a). This shows $g$ is Borel measurable. \qed \\
+\end{enumerate}
+
+\noindent Remark: A shorter proof of both (a) and (b) is to observe that, for a fixed $x$, the function $h(y)= (x, y)$ is a continuous map from $\R$ into $\R^2$, and therefore is Borel measurable (in the sense that the preimage of any Borel set is Borel). In class, we proved that the composition of Borel measurable functions is Borel measurable.  Therefore, if $f: \R^2 \to \R$ is Borel measurable, then the composition $f \circ h$ is Borel measurable; this composition is exactly $g$. This  proves (b). Part (a) follows by applying (b) to $f= \chi_E$ and noting that $g= \chi_{E_x}$. \\
+\end{hwsol}
+
+
+% HW 19 (6.1) Fubini Theorem
+% Problem 2
+\begin{hwsol}
+Suppose $f: [0, 1] \to \R$ is a measurable function such that the function $g(x,y)= f(x) - f(y)$ is in $L^1([0, 1]^2)$. Prove that $f\in L^1([0, 1])$. \\
+
+\pf By Fubini's Theorem for almost every $x\in [0, 1]$, the slice-function $y \mapsto g(x,y)$ is integrable. Fix such an $x$. Then $f(x)$ is a finite constant, hence integrable on $[0, 1]$ as well (with respect to $y$). By linearity, $f(y)= f(x) - g(x, y)$ is integrable on $[0, 1]$. \qed \\
+\end{hwsol}
+
+
+% HW 20 (6.1-2): Fubini & Tonelli
+% Problem 1
+\begin{hwsol}
+Prove that for any $a > 0$ the function $f(x,y)= e^{-xy} \sin x$ is in $L^1(E)$, where $E= \{ (x, y) \in \R^2, \, x > 0, \, y > a \}$. \\
+
+\noindent Remark: We proved in discussing Chapter~5.5 that if a Riemann integral $\int_a^b h(x) \;dx$ exists (with $a,b$ finite), then it is equal to the Lebesgue integral. This can be extended to improper Riemann integrals in two ways: \\
+
+\noindent First, if $h \geq 0$ and $\int_a^b h(x) \;dx$ exists as an Improper Riemann Integral, then it is still equal to the Lebesgue integral, by the MCT (replace $h$ with $\min(h, k) \chi_{[-k, k]}$ and let $k \to \infty$.) \\
+
+\noindent Second, if $h \in L^1((a, b))$ and the improper Riemann integral $\int_a^b h(x)\;dx$  exists, then the two integrals are equal. Indeed, $\int_c^d h(x) \;dx$ is equal to the Lebesgue integral for any $a<c<d<b$, by the above result from Chapter~5.5. As $c \to a$ or $d \to b$, we can pass to the limit in the Lebesgue Integral by the DCT ($|h|$ is dominating), and in the Riemann integral, by the definition of an improper Riemann integral. \\
+
+\pf The function $f$ is continuous and therefore measurable on $E$. Since $|\sin x| \leq x$ for $x \geq 0$, we have $|f| \leq g$ where $g(x,y)= xe^{-xy}$ is also continuous, hence measurable. It suffices to prove $g \in L^1(E)$, which can be done using Tonelli's Theorem:
+        \[
+        \int_E g= \int_0^\infty \left( \int_a^{\infty} xe^{-xy} \;dy \right) \;dx= \int_0^\infty e^{-ax}\,dx= \frac{1}{a} < \infty.
+        \] \qed \\
+\end{hwsol}
+
+
+% HW 20 (6.1-2): Fubini & Tonelli
+% Problem 2 
+\begin{hwsol}
+Apply Fubini's Theorem to the function $f$ in the previous to prove that 
+        \[
+        \int_0^\infty \frac{e^{-ax} \sin x}{x} \,dx= \tan^{-1} (1/a).
+        \]
+[Hint: Integrate $f$ in two different ways. You do not have to do the antiderivative $\int e^{-xy}\sin x \;dx$ by hand; just look it up. Food for thought (not a part of the homework): how to let $a \to 0$?] \\
+
+\pf By the previous problem, Fubini's Theorem applies to $f$. On one hand, 
+        \[
+        \int_E f= \int_0^\infty \left( \int_a^{\infty} e^{-xy}\sin x\,dy \right) \,dx= \int_0^\infty \frac{e^{-ax} \sin x}{x} \;dx
+        \]
+On the other, 
+        \begin{align*}
+        \int_E f&= \int_a^\infty \left( \int_0^{\infty} e^{-xy} \sin x \;dx \right) \;dy \\ 
+         &= \int_a^\infty \left( \int_0^{\infty} e^{-xy} \sin x \;dx \right) \;dy \\
+         &= \int_a^\infty \left( -e^{-xy} \dfrac{y \sin x + \cos x}{y^2+1} \bigg|_{x=0}^{x=\infty} \right) \;dy \\ 
+         &= \int_a^\infty \frac{1}{y^2+1} \;dy= \frac{\pi}{2} - \tan^{-1}a= \tan^{-1}(1/a),
+        \end{align*}
+using the facts that $e^{-xy} \to 0$ as $x \to \infty$ (with $y>0$), and that $\tan^{-1} x \to \pi/2$ as $x \to \infty$. \qed \\
+\end{hwsol}
+
+
+% HW 21 (6.3A) Applications Fubni & Tonelli I
+% Problem 1
+\begin{hwsol}
+Suppose $f \in L^1([0, 1])$. Let $g(x)= \int_{[x, 1]} \frac{f(t)}{t} \;dt$ for $x \in (0,1]$. Prove that $g \in L^1((0, 1])$ and $\int_{(0, 1]} g= \int_{[0, 1]} f$. \\
+
+\pf Let $h(x,t)= f(t)/t$ if $0 \leq x \leq t \leq 1$ and $h(x,t)=0$ otherwise. This is a measurable function on $[0,1] \times [0,1]$, because: 
+        \begin{itemize}
+        \item The function $(x,t) \mapsto f(t)$ is measurable, as discussed in class: level sets are products of the level sets of $f$ with $[0,1]$;   
+        \item $1/t$ is continuous a.e., hence measurable.
+        \item The characteristic function of the closed set $\{ (x,t) \colon 0 \leq x \leq t \leq 1 \}$ is measurable.  
+        \end{itemize}
+Thus, Tonelli's Theorem applies to $|h|$. Using this fact and the fact that $f \in L^1([0,1])$, we have
+        \begin{equation} \label{eq:21e1}
+        \int_{[0, 1]\times [0, 1]} |h|= \int_{[0, 1]} \int_{[0, t]} \frac{|f(t)|}{t} \;dx \;dt = \int_{[0, 1]} |f(t)|  \;dt < \infty.
+        \end{equation}
+Thus, $h \in L^1([0, 1]\times [0, 1])$, which means Fubini's Theorem applies to $h$. Similar to \eqref{eq:21e1}, we get   
+        \begin{equation}\label{eq:21e2}
+        \int_{[0, 1]\times [0, 1]} h= \int_{[0, 1]} \int_{[0, t]} \frac{f(t)}{t} \;dx \;dt= \int_{[0, 1]} f(t)  \;dt < \infty.
+        \end{equation}
+However, the same integral is also equal to 
+        \begin{equation}\label{eq:21e3}
+        \int_{[0, 1]\times [0, 1]} h= \int_{[0, 1]} \int_{[x, 1]} \frac{f(t)}{t} \;dt \;dx= \int_{[0, 1]} g(x)  \;dx.
+        \end{equation}
+From \eqref{eq:21e2} and \eqref{eq:21e3}, the result follows. \qed \\
+\end{hwsol}
+ 
+
+% HW 21 (6.3A) Applications Fubni & Tonelli I
+% Problem 2
+\begin{hwsol}
+Prove that convolution is associative; that is, for $f, g, h \in L^1(\R^n)$ we have $(f*g)*h= f*(g*h)$. [Note: We do not yet have the full change of variables formula, but we do have $\int_{\R^n} f(x-y) \;dx= \int_{\R^n} f(x) \;dx$ as a consequence of the invariance of measure under translation.] \\
+
+\pf Since $f,g,h \in L^1$, the convolutions are in $L^1$ as well. Using the commutativity of convolution, $(f*g)*h= (g*f)*h$ which can be written as (with all integrals over $\R^n$)
+        \begin{equation} \label{eq:i1}
+        \int (g*f)(x-t) h(t) \;dt= \int \left(\int f(s) g(x-t-s) \;ds \right) h(t) \;dt.
+        \end{equation}
+The convolution $f*(g*h)$ can be written as $(g*h)*f$, which is  
+        \begin{equation} \label{eq:i2}
+        \int (g*h)(x-t) f(t) \;dt= \int \left( \int g(x-t-s) h(s) \;ds \right) f(t) \;dt.
+        \end{equation}
+In \eqref{eq:i2}, relabel $t$ as $s$ and $s$ as $t$ --- this is not using any theorem, just changing the labels. Then the desired equality of \eqref{eq:i1} and \eqref{eq:i2} becomes
+        \begin{equation} \label{eq:i3}
+         \int \left( \int f(s) g(x-t-s) h(t) \;ds \right) \;dt \overset{?}{=} \int \left( \int f(s) g(x-t-s) h(t) \,dt \right) \;ds.
+        \end{equation}
+The measurability of each of the functions $(s,t) \mapsto f(s)$, $(s,t) \mapsto g(x-t-s)$, $(s, t) \mapsto h(t)$, follows as in the proof of the commutativity of convolution (the composition of a measurable function with a linear transformation is measurable). 
+
+Since the convolution $(|f|*|g|)*|h|$ is in $L^1$, it is finite a.e.. Let $x$ be such that $(|f|*|g|)*|h|$ is finite at $x$. This means that 
+        \[
+         \int \left( \int |f(s)| \, |g(x-t-s)| \, |h(t)| \;ds \right) \;  dt < \infty.
+        \]
+By Tonelli's Theorem, the function $(s,t) \mapsto f(s) g(x-t-s) h(t)$ is in $L^1(\R^{2n})$. Hence, Fubini's Theorem can be applied to the integrals in \eqref{eq:i3}, meaning they are equal. Thus, $(f*g)*h= f*(g*h)$ a.e. in $\R^n$. \qed \\
+
+\noindent Note: It is not clear whether  $(f*g)*h= f*(g*h)$ holds in the stricter sense of both convolutions having the same domain and being identically equal on that domain. This is true when $f, g, h \geq 0$, since then we can apply Tonelli's Theorem directly to \eqref{eq:i3}. \\ 
+\end{hwsol}
+
+
+% HW 22 (6.3B): Applications Fubini & Tonelli II
+% Problem 1
+\begin{hwsol}
+Suppose that $g: \R \to \R$ is a Lipschitz function. Let $Z= \{ x \colon g(x)= 0 \}$ and suppose that $\R \sm Z$ is bounded. Let $f(x)=1/x^2$. Prove that the convolution $f*g$ is finite a.e. on $Z$. \\
+
+\pf Since $f$ is continuous, $Z$ is closed. Since $\R \sm Z$ is bounded, there exists $b > 0$ such that $\R \sm Z \subset [-b, b]$. Let $B= (-b-1,b+1)$, $K= Z \cap B$, and $\delta(y)= \dist(y, K)$. The Marcinkiewitz Integral,
+        \[
+        M_1(x)= \int_B \dfrac{\delta(y)}{(x-y)^2} \;dy
+        \]
+is finite a.e. on $K$. Since $g=0$ on $K$, the Lipschitz property implies $|g(y)|\leq L\delta(y)$. Also, since $g=0$ on $B^C$, we have 
+        \[
+        \int_{\R} \dfrac{|g(y)|}{(x-y)^2} \;dy= \int_{B} \dfrac{|g(y)|}{(x-y)^2} \;dy \leq L M_1(x) < \infty
+        \]
+for a.e. $x \in K$. By the Integral Triangle Inequality, $f*g$ is finite a.e. on $K$. 
+
+It remains to consider $x \in Z \sm B$. We have $|x - y| \geq 1$ for every $y \in \R \sm Z$ since $y \in [-b, b]$ and $x \notin (-b-1,b+1)$. Thus, 
+        \[
+        \int_{\R} \dfrac{|g(y)|}{(x-y)^2} \;dy \leq \int_{[-b, b]} |g(y)| \;dy < \infty
+        \]
+is finite, as an integral of a continuous function over a bounded set. \qed \\
+\end{hwsol}
+
+
+% HW 22 (6.3B): Applications Fubini & Tonelli II
+% Problem 2
+\begin{hwsol}
+Let $C \subset [0, 1]$ be the standard ``middle third'' Cantor set. Let $\delta(x)= \dist(x,C)$. For which positive numbers $p$ is the function $\delta^{-p}$ in $L^1([0, 1])$? [Note: although Tonelli could be applied here, it is easier to use the countable additivity of integral over the set of integration.] \\
+
+\pf The set $[0, 1] \sm C$ is the union of intervals $I_{k,j}$, where for each $k \in \N$, we have $2^{k-1}$ intervals of length $1/3^k$. Say $I_{k, j} = (a, b)$; then for $x \in (a, b)$, we have $\delta(x)= \min(x-a, b-x)$. By symmetry and substitution, 
+        \[
+        \int_{a}^b \delta^{-p} = 2 \int_0^{(b-a)/2} t^{-p}\,dt.
+        \]
+This immediately rules out $p \geq 1$, when the above integral diverges. For $0<p<1$, it evaluates to 
+        \[
+        \frac{2}{1-p} \left( \dfrac{b-a}{2} \right)^{1-p}= \dfrac{2^p}{1-p} |I_{k, j}|^{1-p}.
+        \]
+Sum this over $k, j$, recalling that $|I_{k, j}|= 1/3^k$ and that there are $2^{k-1}$ such intervals: 
+        \[
+        \sum_{k, j} \int_{I_{k,j}} \delta^{-p}= \frac{2^p}{1-p} \sum_{k\in\N} \frac{2^{k-1}}{3^{(1-p)k}}.
+        \]
+This is a geometric series with ratio $2/3^{1-p}$, so it converges if and only if $2 < 3^{1-p}$, which is equivalent to $p < 1 - \log 2/\log 3$. \qed \\
+\end{hwsol}
+
+
+% HW 23 (8.1): L^p Classes
+% Problem 1
+\begin{hwsol}
+Prove that for any $q \in (0, \infty]$, there exist:  
+        \begin{enumerate}[(a)]
+        \item A function $f: [2, \infty) \to \R$ such that $f \in L^p([2, \infty)) \iff p > q$.
+        \item A function $f: [2, \infty) \to \R$ such that $f \in L^p([2, \infty)) \iff p \geq q$. \\
+        \end{enumerate}
+\noindent [Hint: Use a suitable power of $x$, with a logarithmic factor, if necessary. Recall that for nonnegative functions, the Improper Riemann Integral agrees with the Lebesgue Integral (Theorem 5.53 of the text).] \\
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item If $q= \infty$, we need $f$ such that $f \in L^p([2, \infty)) \iff p > \infty$. Since $p > \infty$ is false for all $p$, this means $f \notin L^p([2, \infty))$ for all $p$. This is achieved by choosing $f(x)= x$, since this function tends to infinity as $x \to \infty$, and so do all of its positive powers. 
+
+If $0< q < \infty$, let $f(x)= x^{-1/q}$. Then 
+        \[
+        \int_2^\infty |f|^p= \int_2^\infty x^{-p/q},
+        \]
+which converges iff $p/q >1$; that is, iff $p > q$. Here and below, we use the fact (Theorem~5.53 of the text) that the convergence of an Improper Riemann Integral of a nonnegative function implies its Lebesgue Integrability. 
+
+\item If $q= \infty$, let $f(x) \equiv 1$. Then $f \in L^\infty$ but $f^p \equiv 1$ is never integrable, so $f \in L^p$ when $p < \infty$.  
+
+If $0< q < \infty$, let $f(x)= (x\log^2 x)^{-1/q}$. When $p > q$, 
+        \[
+        \int_2^\infty |f|^p= \int_2^\infty x^{-p/q} \log^{-2p/q} x \leq \log^{-2p/q} 2 \int_2^\infty x^{-p/q} < \infty.
+        \]
+When $p= q$, the antiderivative of $x^{-1} \log^{-2} x$ is $C-1/\log x$ (check by differentiation). Since the antiderivative has a finite limit as $x \to \infty$, the integral converges.  
+
+When $p< q$, we have 
+        \[
+        \int_2^M |f|^p= \int_2^M x^{-p/q} \log^{-2p/q} x \geq \log^{-2p/q} M \int_2^M x^{-p/q}= \log^{-2p/q} M \frac{M^{1-p/q} - 2^{1-p/q}}{1-p/q}.
+        \]
+l'H\^ospital's rule implies $\ds\lim_{x \to \infty} \frac{x^\ep}{\log x}= \infty$ for every $\ep > 0$. Therefore,  $(\log M)^{-2p/q} M^{1-p/q} \to \infty$ as $M \to \infty$, and the integral diverges. \qed \\
+\end{enumerate}
+
+\noindent Remark: One can avoid logarithms in all these examples by using piecewise constant functions such as 
+        \[ 
+        f(x)= \sum_{j \in \N} j^{-2/q} 2^{-j/q} \chi_{[2^j, 2^{j+1})}.
+        \]
+Indeed, $\int_2^\infty |f|^p$ is 
+        \[ 
+        f(x)= \sum_{j \in \N} j^{-2p/q} 2^{-jp/q} 2^j= \sum_{j \in \N} j^{-2p/q} 2^{(1-p/q)j},
+        \]
+which quickly shows convergence for $p \geq q$ and divergence for $p \leq q$. When $p \neq q$, the ratio test yields this result; when $p= q$, the sum is $\sum j^{-2}<\infty$. A similar example works for the next problem, using intervals $(2^{-j-1}, 2^{-j}]$ instead. \\
+\end{hwsol}
+
+
+% HW 23 (8.1): L^p Classes
+% Problem 2
+\begin{hwsol}
+Prove that for any $q \in (0, \infty]$, there exist:  
+        \begin{enumerate}[(a)]
+        \item A function $f: (0, 1) \to \R$ such that $f \in L^p((0, 1)) \iff p < q$;
+        \item A function $f: (0, 1)  \to \R$ such that $f \in L^p((0, 1)) \iff p \leq q$.
+        \end{enumerate}
+Using this and the previous problem, show that for any interval $J \subset (0, \infty]$, there exists a function $f$ on some set $E \subset \R$ such that $f \in L^p(E) \iff p \in J$. \\
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item If $q= \infty$, let $f(x)= \log x$. Then $f \notin L^\infty((0, 1))$ but for every $p \in (0, \infty)$ we have $\lim_{x \to 0} (\log x)/x^{p/2}= 0$ by L'H\^ospital, hence $(\log x)/x^{p/2}$ is bounded on $(0,1)$. This means $|\log x|^p \leq C/x^{1/2}$ for some constant $C$, and since $\int_0^1 C/x^{1/2} < \infty$, we have $\log x\in L^p((0, 1))$. 
+
+If $0<  q < \infty$, let $f(x)= x^{-1/q}$. Then 
+        \[
+        \int_0^1 |f|^p= \int_0^1 x^{-p/q},
+        \]
+which converges if and only if $p/q<1$; that is, if and only if $p < q$. 
+
+\item If $q= \infty$, let $f(x)= 1$, which is in $L^p$ for all $p \in (0, \infty]$. 
+
+If $0< q < \infty$, let $f(x)= (x\log^2 x)^{-1/q}\chi_{(0, 1/2)}$, where the cut-off function 
+$\chi_{(0, 1/2)}$ is needed to avoid a problem with $\log x \to0 $ as $x \to 1$. When $p < q$, 
+        \[
+        \int_0^{1} |f|^p= \int_0^{1/2} x^{-p/q} |\log x|^{-2p/q} \leq \log^{-2p/q} 2 \int_0^{1/2} x^{-p/q} < \infty.
+        \]
+When $p= q$, the antiderivative of $x^{-1} \log^{-2} x$ is $C-1/\log x$ (check by differentiation). Since the antiderivative has a finite limit as $x \to 0$, the integral converges.  
+
+When $p > q$, we have 
+        \[
+        \begin{split}
+        \int_\delta^{1/2} |f|^p&= \int_\delta^{1/2} x^{-p/q}|\log x|^{-2p/q}  \geq \log^{-2p/q}(1/\delta) \int_\delta^{1/2} x^{-p/q} \\ 
+        &= \log^{-2p/q} (1/\delta) \frac{(1/2)^{1-p/q}-\delta^{1-p/q}}{1-p/q}.
+        \end{split}
+        \]
+l'H\^ospital's rule implies $\ds\lim_{x \to \infty} \frac{x^\ep}{\log x}= \infty$ for every $\ep >0$. Therefore,  $(1/\delta)^{p/q - 1} \log^{-2p/q} (1/\delta) \to \infty$ as $\delta \to 0$, and the integral diverges. \qed \\
+\end{enumerate}
+\end{hwsol}
+
+
+% HW 24 (8.2): Holder & Minkowski
+% Problem 1
+\begin{hwsol}
+Fix $r \in (0, 1)$. 
+	\begin{enumerate}[(a)]
+	\item Suppose $f \in L^p([2, \infty))$, where $1\leq p<1/(1-r)$. Prove that 
+		\[
+		\int_2^\infty \dfrac{|f(x)|}{x^r} \;dx < \infty.
+		\]
+	\item Show that the statement in (a) fails with $p= 1/(1-r)$. [Hint: $\int_2^\infty \frac{1}{x\log x} \;dx= \infty$.] \\
+	\end{enumerate} 
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item Let $g(x)= 1/x^r$ and $p'= p/(p-1)$. By H\"older's Inequality $\int_2^\infty |fg| \leq \|f\|_p \|g\|_{p'}$ so it remains to show $\|g\|_{p'} < \infty$. If $p= 1$, then $p'= \infty$ and $\|g\|_\infty= 1 < \infty$. Otherwise, $1< p < 1/(1-r)$ implies $1-r < 1/p < 1$, hence $1 < 1/p' < r$. Then $\int_2^\infty |g|^{p'}= \int_2^\infty x^{-rp'} < \infty$ because $rp' > 1$. 
+
+\item Let $f(x)= \dfrac{1}{x^{1-r}\log x}$. Then 
+        \[
+        \int_2^\infty \frac{|f(x)|}{x^r} \;dx= \int_2^\infty \frac{1}{x \log x} \;dx= \infty.
+        \]
+(Using again the fact that improper Riemann integral of a nonnegative function is equal to its Lebesgue integral.) On the other hand, $f\in L^{p}$ with $p=1/(1-r)$: 
+        \[
+        \int_2^\infty |f(x)|^{p} \;dx= \int_2^\infty \frac{1}{x \log^p x} \;dx < \infty
+        \]
+because $p > 1$. \qed \\
+\end{enumerate}
+ \end{hwsol}
+
+
+% HW 24 (8.2): Holder & Minkowski
+% Problem 2
+\begin{hwsol}
+Given any sequence $\{ x_1, x_2,\ldots \}$ of real numbers, define 
+        \[
+        f(x)= \sum_{k=1}^\infty \dfrac{1}{k^2 \sqrt{|x-x_k|}}.
+        \]
+Prove that $f \in L^p([0, 1])$ for $0< p < 2$. \\ 
+
+\pf \hfill \\
+\noindent Lemma: For $0< p < 2$ there exists a number $C_p \in (0, \infty)$ such that 
+        \[
+        \int_0^1 |x-a|^{-p/2} \;dx \leq C_p
+        \]
+for all $a \in \R$. Assume the lemma for now; its proof appears below. \\
+
+When $1 \leq p < 2$, Minkowski's Inequality for infinite series yields
+        \[
+        \|f\|_p \leq \sum_{k=1}^\infty \left(\int_0^1 \frac{1}{k^{2p} |x-x_k|^{p/2}} \right)^{1/p} \leq C_p^{1/p} \sum_{k=1}^\infty \frac{1}{k^2} < \infty.
+        \]
+This proves that $f \in L^p([0, 1])$. For $0< p < 1$, use the relation between $L^p$ spaces on a set of finite measure: $f \in L^1([0, 1])\implies f \in L^p([0, 1])$ for any $p \in (0,1)$. \\
+
+\noindent Proof of Lemma, Version 1: If $a\in [0, 1]$, then by translation
+        \begin{equation} \label{eq:241}
+        \int_0^1 |x-a|^{-p/2} \;dx= \int_{-a}^{1-a} |x|^{-p/2} \;dx \leq \int_{-1}^{1} |x|^{-p/2} \;dx.
+        \end{equation}
+So we can use $C_p= \int_{-1}^{1} |x|^{-p/2} \;dx$ which is finite because $p/2 < 1$. If $a < 0$, then $|x - a|= x - a > x$ for all $x \in [0, 1]$. Hence, $\int_0^1 |x - a|^{-p/2} \;dx \leq \int_0^1 x^{-p/2} \;dx \leq C_p$ by \eqref{eq:241}. If $a > 1$, then $|x - a|= a - x > 1 - x$ for all $x \in [0, 1]$, hence $\int_0^1 |x - a|^{-p/2} \;dx \leq \int_0^1 |x - 1|^{-p/2} \;dx \leq C_p$ by \eqref{eq:241}. \\
+
+\noindent Proof of Lemma, Version 2: Let $I= [-a,1-a]$ and $J= [-1/2,1/2]$. It suffices to prove that 
+	\[
+	\int_I |x|^{-p/2} \;dx \leq \int_J |x|^{-p/2} \;dx,
+	\]
+because then $C_p= \int_J |x|^{-p/2}\,dx$ suffices. Note that 
+        \begin{equation} \label{eq:24bounds}
+        |x|^{-p/2} \geq 2^{p/2} \ \text{  on } J, \text{ and } \ |x|^{-p/2}\leq 2^{p/2} \ \text{ on } J^C.
+        \end{equation}
+By canceling out the integral over $I \cap J$ (which may be empty) and using \eqref{eq:24bounds}, we obtain  
+        \[
+        \begin{split}
+        \int_J |x|^{-p/2} \;dx - \int_I |x|^{-p/2} \;dx &= \int_{J \sm I} |x|^{-p/2} \;dx - \int_{I \sm J}  |x|^{-p/2} \;dx \\ 
+        &\geq \int_{J \sm I} 2^{p/2} \;dx - \int_{I \sm J}  2^{p/2} \;dx \\ 
+        &= 2^{p/2} (|J \sm I| - |I \sm J| )= 0,
+        \end{split}
+        \]
+where the last step follows from $|I|=|J|$. \\
+
+The second proof is longer, but it gives the best possible bound $C_p$, and this idea generalizes to other sets and functions. \qed \\
+\end{hwsol}
+
+
+% HW 25 (8.3): Sequence Classes
+% Problem 1
+\begin{hwsol}
+Suppose $1 \leq p \leq \infty $ and $f \in L^p([1,\infty))$. Define a sequence $a$ by $a_k= \int_k^{k+1} f$, $k \in \N$. Prove that $a \in \ell^p$. \\
+
+\pf \hfill \\
+\noindent Case $p=\infty$: By the definition of $L^\infty$, there exists $M \in \R$ such that $|f| \leq M$ a.e. on $[1, \infty)$. Hence 
+        \[
+        |a_k| \leq \int_k^{k+1} |f| \leq \int_k^{k+1} M= M
+        \]
+for every $k$, which yields $\|a\|_\infty \leq M < \infty$. \\
+
+\noindent Case $1\leq p<\infty$: Note that $\|\chi_{[k, k+1)}\|_{p'}= 1$ for any $k$ and any $p'$: for $p'<\infty$ this is because $\int_{k}^{k+1} 1= 1$, and for $p'= \infty$ this is clear from the definition of the norm. By H\"older's inequality,  
+        \[
+        \int |f\chi_{[k, k+1)}| \leq \left( \int_k^{k+1} |f|^p \right)^{1/p} \|\chi_{[k, k+1)} \|_{p'}= \left(\int_k^{k+1} |f|^p\right)^{1/p}.
+        \]
+Therefore, using the countable additivity of integral over the domain of integration, we have
+        \[
+        \sum_{k=1}^\infty |a_k|^p \leq \sum_{k=1}^\infty  \int_k^{k+1} |f|^p= \int_1^\infty |f|^p  < \infty.
+        \] \qed \\
+\end{hwsol}
+
+
+% HW 25 (8.3): Sequence Classes
+% Problem 2
+\begin{hwsol}
+Give an example of a continuous function $f: [1, \infty) \to \R$ such that the sequence $a$ defined in the previous problem is in $\ell^1$, but $f \notin L^1(\R)$. [Hint: $f$ should attain both positive and negative values so that there is some cancellation in $\int_k^{k+1} f$.] \\
+
+\pf Let $f(x)= \sin (2\pi x)$. Then 
+        \[
+        a_k = \int_k^{k+1} \sin (2\pi x)\,dx =
+        \frac{-1}{2 \pi} \sin (2\pi x)\bigg|_{k}^{k+1} = 0
+        \]
+for every $k$, so $a\in \ell^1$. 
+
+On the other hand, using symmetry properties of the sine function ($\sin (t+\pi) = -\sin t$), we get  
+        \[ 
+        \begin{split}
+        \int_k^{k+1} |\sin (2\pi x)| \;dx&= 2\int_k^{k+1/2} \sin (2\pi x) \;dx \\
+        &= \frac{-1}{\pi} \sin (2\pi x) \bigg|_{k}^{k+1/2} \\  
+        &=  \frac{-1}{\pi}(-1-1)= \frac{2}{\pi}.
+        \end{split} 
+        \]
+Therefore, using the countable additivity of integral over the domain of integration, we have
+        \[
+        \int_1^\infty |f|= \sum_{k=1}^\infty  \int_k^{k+1} |f|= \sum_{k=1}^\infty  \frac{2}{\pi}= \infty.
+        \]
+This shows $f \notin L^1([1, \infty)$. \qed \\
+\end{hwsol}
+
+
+% HW 26 (8.4): Banach Space Properties L^p and l^p
+% Problem 1
+\begin{hwsol}
+Suppose that $p, p' \in [1,\infty]$ are conjugate exponents, $f_k \to f$ in $L^p(E)$, and $g_k \to g$ in $L^{p'}(E)$, where $E$ is some measurable set. Prove that $f_k g_k \to fg$ in $L^1(E)$. \\
+
+\pf In any metric space, a convergent sequence is bounded; hence, $\{ \|f_k\|_p \}$, which is $\{ d(f_k, 0) \}$ in terms of the metric $d$ on $\ell^p$, is a bounded sequence. (One can also say that $\|f_k\|_p \leq \|f\|_p + \|f - f_k\|_p$ where the second term tends to zero, hence is bounded. But I wanted to emphasize that we can bring concepts from metric space theory, such as bounded sequences, into the study of $\ell^p$ and $L^p$ spaces.) Choose $M$ such that $\|f_k\|_p \leq M$ for all $k$. By the Triangle Inequality and H\"older's inequality, 
+        \[
+        \begin{split}
+        \|f_kg_k - fg\|_1&= \|f_kg_k - f_kg + f_kg - fg\|_1 \\
+        &\leq \|f_kg_k - f_kg\|_1 + \|f_kg - fg\|_1 \\
+        &\leq \|f_k\|_p \|g_k - g\|_{p'} + \|f_k - f\|_p \|g\|_{p'} \\
+        &\leq M \|g_k - g\|_{p'} + \|f_k - f\|_p \|g\|_{p'} \to 0,
+        \end{split}
+        \]
+where the convergence to $0$ follows from $\|g_k - g\|_{p'} \to 0$ and $\|f_k - f\|_p \to 0$. \qed \\
+\end{hwsol}
+ 
+
+% HW 26 (8.4): Banach Space Properties L^p and l^p
+% Problem 2
+\begin{hwsol}
+Fix $p \in [1,\infty]$. Let $D= \{ a\in \ell^p \colon \forall k\in \N \ 0 \leq a_{k+1} \leq a_ k\}$ be the set of all nonnegative non-increasing sequences in $\ell^p$. Prove that $D$ is a closed subset of $\ell^p$. \\
+
+\pf Suppose that $a^{(j)}$ is a sequence of elements of $D$ such that $a^{(j)} \to a$ in $\ell^p$. Our goal is to prove that $a \in D$. 
+
+The definition of $\ell^p$ norm (either a sum or a $\sup$) implies $|b_k| \leq \|b\|_p$ for every index $k$ and any sequence $b \in \ell^p$. In our case, this yields  $|a_k^{(j)} - a_k|\leq \|a^{(j)} - a\|_p \to 0$, which means $a_k= \ds\lim_{j\to\infty} a_k^{(j)}$. It then follows that:
+        \begin{itemize}
+        \item $a_k \geq 0$, by letting $j \to 0$ in the inequality  $a_k^{(j)} \geq 0$. 
+        \item $a_k \geq a_{k+1}$, by letting $j\to 0$ in the inequality  $a_k^{(j)} \geq a_{k+1}^{(j)}$. 
+        \end{itemize}
+[This is using the comparison property of limits: if both sides of a non-strict inequality have limits, the inequality holds for the limits as well.]  Thus, $a \in D$. \qed \\
+
+\noindent Remark: There is no need to prove that $a\in \ell^p$, this is a part of the assumption ``$a^{(j)} \to a$ in $\ell^p$.'' \\
+\end{hwsol}
+
+
+% HW 27 (10.1): Additive Set Function Measures
+% Problem 1
+\begin{hwsol}
+Let $(X,\Sigma,\mu)$ be a measure space. For $A,B \in \Sigma$ let $d(A, B)= \mu(A \,\triangle\, B)$, where $A \,\triangle\, B= (A \sm B)\cup (B \sm A)$ is the symmetric difference of $A$ and $B$. Prove that $d$ satisfies the triangle inequality: $d(A, B) \leq d(A, C) + d(B, C)$ for $A, B, C \in \Sigma$. \\
+
+\pf We claim
+        \begin{equation} \label{eq:inc}
+        A \,\triangle\, B \subset (A \,\triangle\, C) \cup (B \,\triangle\, C).
+        \end{equation}
+To prove \eqref{eq:inc}, let $x \in A \,\triangle\, B$. Then either $x\in A \sm B$ or $x\in B \sm A$; we may assume $x\in A\sm B$, because the other case is handled by relabeling $A$ and $B$.  Consider two cases: \\
+
+\noindent Case 1: $x \in C$, then we have $x \in C \sm B$, hence $x \in B \,\triangle\, C$. \\
+
+\noindent Case 2:  $x \notin C$, then $x \in A \sm C$, hence $x \in A \,\triangle\, C$. In either case \eqref{eq:inc} holds, completing the proof of the claim. \\
+
+Since $\mu$ is a measure, it is monotone with respect to inclusion and subadditive (p.243 of the textbook). Therefore, \eqref{eq:inc} implies
+        \[ 
+        \mu(A \,\triangle\, B) \leq \mu( (A \,\triangle\, C) \cup (B \,\triangle\, C)) \leq \mu(A \,\triangle\, C)  + \mu(B \,\triangle\, C),
+        \]
+which was to be proved. \qed \\
+\end{hwsol}
+ 
+
+% HW 27 (10.1): Additive Set Function Measures
+% Problem 2
+\begin{hwsol}
+Fix a function $w \in L^1(\R^n)$ and define the additive set function $\phi$ on the Lebesgue measurable subsets of $\R^n$ by $\phi(E)= \int_E w$. Prove that the variations of $\phi$ are given by $\overline{V}(E)= \int_E w^+$, $\underline{V}(E)= \int_E w^-$, and $V(E)= \int_E |w|$. \\
+
+\pf Fix a measurable set $E$.  For any arbitrary measurable set $A \subset E$, we have 
+        \[
+        \int_A w= \int_A w^+ - \int_A w^- \leq \int_A w^+ \leq \int_E w^+,
+        \]
+using the fact that $w^+, w^-\geq 0$. Thus,  $\overline{V}(E) \leq \int_E w^+$. To prove the reverse inequality, observe that the set $P= \{ x  \in \mathbb{E} \colon w(x) \geq 0 \}$ satisfies $\int_P w^+= \int_E w^+$ (because $w^+\equiv 0$ on $E  \sm P$) and $\int_P w^-= 0$ (because $w^- \equiv 0$ on $P$). Thus,
+        \[
+        \int_P w= \int_P w^+ - \int_P w^-= \int_E w^+,
+        \]
+completing the proof of $\overline{V}(E)= \int_E w^+$. 
+
+Applying the previous result to $-w$, we obtain 
+        \[
+        \sup_{A \subset E} \int_A (-w)= \int_E (-w)^+.
+        \]
+Since $(-w)^+ = w^-$, this yields
+        \[
+        \underline{V}(E)= - \inf_{A \subset E} \int_A w= \sup_{A \subset E} \int_A (-w)= \int_E w ^-.
+        \]
+Finally, $V(E)= \overline{V}(E) + \underline{V}(E) = \int_E (w^+ + w^-)= \int_E |w|$. \qed \\
+\end{hwsol}
+
+
+% HW 28 (8.5-6-7): Hilbert Space Properties of L^p
+% Problem 1
+\begin{hwsol}
+For $k \in \N$ let $\phi_k(t)= \sqrt{1/\pi} \sin(k t)$. 
+	\begin{enumerate}[(a)]
+	\item Prove that $\{ \phi_k \colon k \in \N \}$ is an orthonormal system in $L^2([0, 2\pi])$.  [Hint: product-of-sines formula.]
+	\item Prove that the linear span of $\{ \phi_k \}$ is not dense in $L^2([0, 2\pi])$. [Hint: compute $\langle f, \phi_k \rangle$ for the constant function $f \equiv 1$.] \\
+	\end{enumerate}
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item By the product of sines formula, 
+        \[
+        \phi_k(t)\phi_j(t)= \frac{1}{2\pi} \left( \cos((k-j)t) - \cos((k+j)(t) \right).
+        \]
+The integral  $\int_0^{2\pi} \cos mt \;dt$, with $m \in \Z$, is equal to $2\pi$ when $m= 0$ and is $0$ otherwise, because the antiderivative $m^{-1} \sin mt$ is $2\pi$-periodic. Hence, 
+        \[
+        \langle \phi_k, \phi_j \rangle= \int_0^{2\pi}\phi_k(t)\phi_j(t)=
+        \begin{cases}
+        1, & k=j \\ 
+        0, & k \neq j
+        \end{cases}
+        \]
+which means $\{ \phi_k \}$ is an orthonormal system.
+
+\item For every $k \in \N$ the integral $\int_0^{2\pi}1 \phi_k \;dt$ is $0$ because the antiderivative of $\phi_k$ is $-\sqrt{1/k} \cos(kt)$ which is $2\pi$-periodic. Thus, all Fourier coefficients $c_k= \langle 1, \phi_k \rangle$ are zeros. Recall from class that the following are equivalent for an orthonormal system in $L^2$ (and in Hilbert spaces in general): 
+        \begin{enumerate}[(i)]
+        \item The closure of its linear span contains $f$.
+        \item $\sum c_k \phi_k= f$ (the Fourier series converges to $f$ in $L^2$)
+        \item $\sum |c_k|^2= \|f\|_2^2$ (Parseval's Identity holds)
+        \end{enumerate}
+The conclusion follows by observing that (ii) fails here (or, that (ii) fails). \qed \\
+\end{enumerate}
+\end{hwsol}
+ 
+
+% HW 28 (8.5-6-7): Hilbert Space Properties of L^p
+% Problem 2
+\begin{hwsol} \hfill
+\begin{enumerate}[(a)]
+\item Prove that for every $f\in L^2([0, 2\pi])$ 
+        \[
+        \lim_{k \to \infty} \int_{[0, 2\pi]} f(t)  \sin kt\,dt= 0.
+        \]
+\item Prove that (a) holds for every $f \in L^1([0, 2\pi])$; this is known as the Riemann-Lebesgue Lemma. [Hint: Apply (a) to a simple function $g$ such that $\|f - g\|_1$ is small.] \\
+\end{enumerate}
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item We know from the previous problem that the functions $\phi_k(t)= \sqrt{1/\pi} \sin(k t)$ form an orthonormal system in $L^2([0, 2\pi])$. The integral $\int_{[0, 2\pi]} f(t) \sin kt \;dt$ is $\sqrt{\pi} c_k$, where $c_k= \langle f, \phi_k \rangle$. Bessel's Inequality $\sum |c_k|^2 \leq \|f\|^2$ implies $c_k \to 0$, which proves (a). 
+
+\item Given $\ep>0$, pick a simple function $g$ such that $\|f-g\|_1 < \ep/2$ (such $g$ exists by the density of simple functions in $L^p$ for $1 \leq p < \infty$, Section~8.4). Since $g$ is a bounded function on a bounded interval, it belongs to all $L^p$ spaces. In particular, $g \in L^2$. By part (a), there exists $N$ such that 
+        \[
+        \left| \int_{[0, 2\pi]} g(t) \sin kt \;dt \right| < \dfrac{\ep}{2} \quad \forall k \geq N.
+        \]
+By H\"older's inequality (which is just a comparison of integrals in this case),
+        \[
+        \left|  \int_{[0, 2\pi]} \big( f(t) - g(t) \big) \sin kt \;dt \right| \leq \|f - g\|_1 \| \sin kt \|_\infty < \frac{\ep}{2}
+        \]
+for all $k$. Thus, 
+        \[
+        \left| \int_{[0, 2\pi]} f(t) \sin kt\,dt \right| < \ep \quad \forall k \geq N,
+        \]
+which means $ \int_{[0, 2\pi]} f(t) \sin kt \;dt \to 0$ by definition. \qed \\
+\end{enumerate}
+\end{hwsol}
+
+
+% HW 29 (10.2): Measurable Functions & Integration
+% Problem 1
+\begin{hwsol}
+Let $(X,\Sigma,\mu)$ be a measure space, and let $f: X \to \R$ be a measurable function. For each Borel set $E \subset \R$ define $\nu(E)= \mu(f^{-1}(E))$. Prove that $\nu$ is a measure on the Borel $\sigma$-algebra of $\R$. [This measure called the pushforward of $\mu$ under $f$.] \\
+
+\pf Recall that a real-valued function is measurable if and only if the preimages of all Borel sets are measurable. Thus, $\nu$ is well-defined. Also, $\nu(E) \geq 0$ for every Borel $E$ because $\mu \geq 0$. 
+
+Given disjoint Borel sets $E_k \subset \R$, observe that $f^{-1}(E_k)$ are also disjoint, since taking pre-images commutes with all set operations. Hence  
+        \[
+        \begin{split}
+        \nu \left( \bigcup_k E_k \right)&= \mu \left( f^{-1} \left( \bigcup_k E_k \right) \right) \\ 
+        &= \mu \left( \bigcup_k f^{-1}(E_k) \right) \\ 
+        &= \sum_k \mu \left( f^{-1}(E_k) \right) \\ 
+        &= \sum_k \nu \left( E_k \right),
+        \end{split}
+        \]
+which proves the countable additivity of $\nu$. \qed \\
+\end{hwsol}
+ 
+
+% HW 29 (10.2): Measurable Functions & Integration
+% Problem 2
+\begin{hwsol}
+With the notation of the previous problem, prove that for every nonnegative Borel function $g: \R  \to [0, \infty)$ the function $g \circ f$ is measurable on $X$ and
+        \[
+        \int_X (g \circ f) \;d\mu= \int_{\R} g \;d\nu.
+        \]
+[Hint: Begin with $g= \chi_E$ and proceed toward more general $g$.] \\
+
+\pf For every Borel set $E \subset \R$ we have $(g \circ f)^{-1}(E)= f^{-1}(g^{-1}(E))$, where $g^{-1}(E)$ is Borel by assumption and therefore $f^{-1}(g^{-1}(E))$ is measurable. This shows that $g \circ f$ is measurable. 
+
+If $g= \chi_E$ for some Borel set $E \subset \R$, then $g \circ f= \chi_{f^{-1}(E)}$. Hence, 
+        \[
+        \int_X (g \circ f) \;d\mu= \mu(f^{-1}(E))= \nu(E)= \int_{\R} g  \;d\nu.
+        \]
+By the linearity of integrals, the equality $\int_X (g \circ f) \;d\mu= \int_{\R} g \;d\nu$ extends from characteristic functions to all simple functions. 
+
+Given a general Borel function $g: \R \to [0,\infty)$, let $g_k \nearrow g$ be an approximating sequence of simple Borel functions, for example $g_k= \min(k, 2^{-k} \lfloor 2^k g \rfloor)$. By definition of measurability, $g_k$ is measurable in whatever $\sigma$-algebra $g$ is measurable, in this case Borel. Therefore, $\int_X (g_k \circ f) \;d\mu= \int_{\R} g_k \;d\nu$ holds by the preceding case. Note that $g_k \circ f \nearrow g \circ f$.
+Letting $k \to \infty$ and using the Monotone Convergence Theorem, we obtain $\int_X (g \circ f) \;d\mu= \int_{\R} g \;d\nu$. \qed \\
+\end{hwsol}
+
+
+% HW 30 (10.3A): Absolute Continuous and Singular ASF
+% Problem 1
+\begin{hwsol}
+Let $(X,\Sigma,\mu)$ be a measure space, and let $f: X \to \overline{\R}$ be an integrable function; that is, $f \in L^1(X,\mu)$. Suppose that $\int_A f= 0$ for every $A \in \Sigma$. Prove that $f= 0$ $\mu$-a.e.; that is, $f=0$ on $X \sm Z$, where $\mu(Z)=0$. \\
+
+\pf For $k  \in \N$, let $E_k= \{ x \in X \colon f(x) \geq 1/k  \}$. Then 
+        \[
+        0= \int_{E_k} f \;d\mu \geq \int_{E_k} \dfrac{1}{k} \;d\mu=  \dfrac{1}{k} \mu(E_k),
+        \]
+which shows $\mu(E_k)= 0$. Taking the union over $k$, we obtain $\mu(\{ f  > 0 \})= 0$. By applying this argument to $-f$ we get $\mu(\{ f < 0 \})= 0$. Thus $f= 0$ $\mu$-a.e.. \qed \\
+\end{hwsol}
+ 
+
+% HW 30 (10.3A): Absolute Continuous and Singular ASF
+% Problem 2
+\begin{hwsol}
+Let $(X,\Sigma,\mu)$ be a measure space. Suppose that $\phi_k: \Sigma \to \R$ is a singular ASF w.r.t $\mu$, for each $k \in \N$. Suppose further that $\phi: \Sigma \to \R$ is an ASF such that $\phi_k(A) \to \phi(A)$ for each $A \in \Sigma$. Prove that $\phi$ is singular with respect to $\mu$. \\
+
+\pf  By the definition of a singular ASF, for each $k$ there exists a set $Z_k \subset X$ such that $\mu(Z_k)= 0$ and $\phi_k(A)= 0$ for all $A\subset Z_k^C$. Let $Z= \bigcup_k Z_k$. Then $\mu(Z)= 0$ by countable additivity. Also, for any set $A \subset Z^C$ we have $A \subset Z_k^C$ for all $k$, hence $\phi_k(A)= 0$ for all $k$, hence $\phi(A)= 0$. This shows $\phi$ is singular w.r.t $\mu$. \qed \\
+\end{hwsol}
+
+
+% HW 31 (10.3B): Absolute Continuous and Singular ASF
+% Problem 1
+\begin{hwsol}
+For $k \in \N$, define $b_k: [0, 1) \to \R$ by $b_k(x)= 1$ if $\lfloor 2^k x\rfloor$ is odd, and $b_k (x)= 0$ otherwise. Let 
+        \[
+        f(x)= \sum_{k=1}^\infty \frac{2 b_k(x)}{3^k}.
+        \]
+Prove that: \hfill
+        \begin{enumerate}[(a)]
+        \item $f$ is a measurable function on $[0,1)$ with respect to the Lebesgue measure. 
+        \item $f([0, 1]) \subset C$, where $C$ is the standard middle-third Cantor set. 
+        \end{enumerate}
+\noindent [Hint: You can use the following characterization of $C$, 
+	\[
+	C= \{ x \in [0, 1] \colon \dist( 3^m x, \Z) \leq 1/3 \text{ for } m= 0,1,2,  \ldots \}. ]
+	\]
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item Each term of the sum, namely $\dfrac{2 b_k(x)}{3^k}$, has countably many discontinuities (specifically, the points $x$ such that $2^k x$ is an integer). By the converse part of Lusin's Theorem, it is measurable. Every partial sum of the series is measurable as  the sum of measurable function. Finally, the series converges for every $x$, as its $k$th term is at most $2/3^k$. The limit of a sequence if measurable functions is measurable.  
+
+\item Given $m \in \{0,1,2, \ldots\}$, observe that 
+        \[
+        3^m f(x)= \sum_{k=1}^m 2 b_k(x)  3^{m-k} + \sum_{k=m+1}^\infty \frac{2 b_k(x)}{3^{k-m}},
+        \]
+where the first sum is an integer, call it $q$. The second (tail) sum is nonnegative and does not exceed $\ds\sum_{k=m+1}^\infty \frac{2  }{3^{k-m}}= \frac{2/3}{1-1/3}= 1$. Thus, $q \leq 3^{m}f(x) \leq q+1$. 
+
+To refine this further, consider two cases. If $b_{m+1}(x)=0$, then the tail sum is at most 
+        \[
+        \sum_{k=m+2}^\infty \frac{2 }{3^{k-m}}= \frac{2/9}{1-1/3} = \frac{1}{3}.
+        \]
+Hence, $q \leq 3^{m}f(x) \leq q+1/3$, proving that $|3^m f(x) - q| \leq 1/3$.  
+
+If $b_{m+1}(x)= 1$, then the tail sum is at least $\dfrac{2 b_{m+1}(x)}{3^{m+1-m}}= \dfrac{2}{3}$. Hence, $q + 2/3 \leq 3^{m}f(x) \leq q +  1$. This implies $|3^m f(x) - (q+1)|  \leq 1/3$. In either case, $\dist(3^mf(x), \Z) \leq 1/3$. This proves $f(x) \in C$. \qed \\
+\end{enumerate}
+ \end{hwsol}
+ 
+
+% HW 31 (10.3B): Absolute Continuous and Singular ASF
+% Problem 2
+\begin{hwsol}
+Let $\sigma$ be the pushforward of the Lebesgue measure on $[0, 1)$ under $f$ from the previous problem; that is, $\sigma(A)= |f^{-1}(A)|$ for Borel sets $A  \subset \R$. Prove that: \hfill
+	\begin{enumerate}[(a)]
+	\item $\sigma$ is singular with respect to the Lebesgue measure on the Borel $\sigma$-algebra. 
+	\item $\sigma(\{ p \})= 0$ for every $p \in \R$. [Hint: Show that for distinct $x,y \in [0, 1)$, there exists $k$ such that $b_k(x) \neq b_k(y)$. Deduce that $f(x) \neq f(y)$.]
+	\end{enumerate}
+
+\pf \hfill
+\begin{enumerate}[(a)]
+\item We know $|C|= 0$ from earlier in the semester. Also, $\sigma( \R \sm C)= |f^{-1}( \R  \sm C)|= |\emptyset|= 0$ by part (b) of the previous problem. Thus, $\sigma$ is singular.
+
+\item Suppose $x,y$ are distinct points in $[0,1)$. Without loss of generality, $x<y$. For sufficiently large integers $k$, we have $2^k (y-x) \geq 1$, hence $\lfloor 2^k y \rfloor > \lfloor 2^k x \rfloor$ (adding $1$ to a number increases its integer part by $1$). Let $m$ be the smallest integer such that $\lfloor 2^m y\rfloor \neq \lfloor 2^m x \rfloor$. Then $\lfloor 2^{m-1}x \rfloor= \lfloor 2^{m-1} y \rfloor$; call this number $q$. Since $2^{m-1} x, 2^{m-1} j \in [q, q+1)$, it follows that $2^m x, 2^m y \in [2q, 2q+2)$. Therefore, 
+$\lfloor 2^m x \rfloor, \lfloor 2^m y \rfloor \in \{2q, 2q+1\}$. Since these are distinct and $y > x$, we conclude that $\lfloor 2^m y \rfloor= 2q+1$ and $\lfloor 2^m x \rfloor= 2q$. Thus, $b_m(y)= 1$ and $b_m(x)= 0$. Also note that $b_k(x)= b_k(y)$ for all $k < m$ by the minimality of $m$. 
+
+The difference $f(y)-f(x)$ can be estimated from below as follows: 
+        \[
+        \begin{split}
+        f(y)-f(x)&= \sum_{k=1}^{m-1} \dfrac{ 2 (b_k(y) - b_k(x))}{3^k} + \dfrac{2}{3^m} + \sum_{k=m+1}^{\infty} \dfrac{2 (b_k(y) - b_k(x))}{3^k} \\ 
+        &= 0 + \dfrac{2}{3^m} + \sum_{k=m+1}^{\infty} \dfrac{2 (b_k(y) - b_k(x))}{3^k} \\ 
+        &\geq \dfrac{2}{3^m} + \sum_{k=m+1}^{\infty} \dfrac{2 (0 - 1)}{3^k} \\ 
+        &= \dfrac{2}{3^m} - \dfrac{2/3^{m+1}}{1 - 1/3} \\ 
+        &= \dfrac{1}{3^m} > 0.
+        \end{split}\]
+This shows that $f$ is strictly increasing. In particular it is injective, which implies that $\sigma(\{ p \})= |f^{-1}(p)|= 0$ for all $p$, where the set  $f^{-1}(p)$ has either $0$ or $1$ elements. \qed \\
+\end{enumerate}
+\end{hwsol}
 
