@@ -129,8 +129,82 @@ Note $f^* \notin L^1(\R)$.
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+
+We want to show that $f^*$ is `small' if $\| f \|_1$ is small. For this, we will need a lemma.
+
+
+\begin{lem}[Simple Covering Lemma (Vitali)]
+Suppose $E \subset \R^n$ has finite measure, i.e. $|E|<\infty$, and $E \subset \cup_{Q \in \mathcal{K}} Q$, where $\mathcal{K}$ is a collection of cubes. Then there exists a finite disjoint subcollection $\{Q_1,\ldots,Q_N\} \subset \mathcal{K}$ and $\sum_{j=1}^N |Q_j| \geq 5^{-n} |E|$. 
+\end{lem}
+
+\pf Choose a compact set $F \subset E$ with $|F| > (1-\ep) |E|$. For each $Q \in \mathcal{K}$, choose $Q'$ be a slightly larger open cube containing $Q$, i.e. $|Q'| < (1+\ep) |Q|$. Then $\{ Q' \colon Q \in \mathcal{K} \}$ is an open cover of $F$ since this collection covers $E$. Choose a finite subcovering $\mathcal{K}':= \{Q_1',\ldots, Q_M' \}$ of $F$. By possibly relabeling, without loss of generality assume $Q_1'$ be the largest cube in this collection. Again by possibly relabeling, let $Q_2'$ be the largest cube in this collection disjoint from $Q_1'$. Continue this procedure. Since there are finitely many cubes in the collection, this procedure terminates. Say $\{Q_1', \ldots, Q_N' \}$ were the cubes selected. 
+
+We claim $\{ 3Q_1', \ldots, 3Q_N' \}$ cover $F$. Choose $x \in F$. We know that $x \in Q_j'$ for some $Q_j' \in \mathcal{K}'$. If $Q_j' \in \{Q_1', \ldots, Q_N' \}$, we are done. If $Q_j' \notin \{Q_1', \ldots, Q_N' \}$, there must then exist $\tilde{Q} \in \mathcal{K}'$ such that $Q' \cap \tilde{Q} \neq \emptyset$, $|\tilde{Q}| \geq |Q'|$, and $\tilde{Q} \in \{Q_1', \ldots, Q_N' \}$. Since $Q' \subset 3\tilde{Q}$, $x$ is covered by $\{Q_1', \ldots, Q_N' \}$. Hence, 
+	\[
+	\sum |Q_j'| = 3^{-n} \sum |3Q_j'| \geq 3^{-n} |F| > 3^{-n} (1-\ep) |E|.
+	\] 
+But then $\sum |Q_j| > 3^{-n} \left(\frac{1-\ep}{1+\ep}\right) |E| \geq 5^{-n} |E|$. \qed \\
+
+	
+\begin{thm}[Hardy-Littlewood]
+	\[
+	|\{ f^* > \alpha \}| \leq \dfrac{5^n}{\alpha} \, \|f\|_1
+	\]
+for all $\alpha>0$. 
+\end{thm}
+
+\pf Every $x \in E$ is covered by $Q$ with $\frac{1}{|Q|} \int_Q |f| > \alpha$. By the Simple Covering Lemma, choose disjoint cubes $Q_1,\ldots, Q_N$. Then
+	\[
+	\sum_j \int_{Q_j} |f| = \int_{\cup Q_j} |f| \leq \| f \|_1.
+	\]
+But $\sum \int_{Q_j} |f| \geq \alpha \sum |Q_j| \geq \alpha 5^{-n} |E|$. Hence, $|E| \leq \frac{5^n}{\alpha} \, \|f\|$. \qed \\
+
+
+% Ex: f^* \notin L^1, f= \chi_{[0,1]}, \lambda^*= 1/(2x0$. 
+
+
+Proof of LDT: Given $\ep>0$, choose $g \in C_c(\R^n)$ such that $\| f - g \|_1< 5^{-n} \ep^2$. Let $A= \{ (f-g)^* > \ep \}$. Then by Hardy-Littlewood, $|A|<\ep$. Let $B= \{ |f-g|>\ep \}$. Then $|B|<\ep$. For $x \notin A \cup B$, 
+	\[
+	\dfrac{1}{|Q|} \int_Q |f-f(x)| \leq 2\ep + \underbrace{\dfrac{1}{|Q|} \int_Q |g-g(x)|}_{\to 0 \text{ as } Q \searrow x}
+	\]
+% 1/|Q| \int_Q |f-g| < \ep, use \Delta
+Hence, $\limsup_{Q \searrow x} \dfrac{1}{|Q|} \int_Q |f-f(x)| \leq 2 \ep$ for all $x \notin A \cup B$. Then 
+	\[
+	|\{ x \colon \limsup_{Q \searrow x} \dfrac{1}{|Q|} \int_Q |f-f(x)| \geq 2 \ep\}| \leq 2 \ep.
+	\] % (*)
+But this set tends to 0 in measure so that we obtain $\lim_{Q \searrow x} \dfrac{1}{|Q|} \int_Q |f-(x)|= 0$ a.e. $x$. Then by this equation, $\frac{1}{|Q|} \int_Q f \to f(x)$. \qed \\
+
+
+\begin{rem}
+A point where (*) holds is called a Lebesgue point of $f$. 
+\end{rem}
+
+\begin{ex}
+$f(x)= \text{sgn } x$. Then $x=0$ is not a Lebesgue point. 
+\end{ex}
+
+
+If suffices for $f$ to be locally integrable, meaning $\int_{|x|<k} |f|<\infty$ for all $k$. Why? We only need to consider `local sets' in (*); that is, apply LDT to $f \chi_{\{|x|\leq k\}}$ and conclude a.e. point of $\{|x|<k\}$ is a Lebesgue point of $f$. In particular, we can apply to $f= \chi_E$ since its integral is at most 1. LDT says a.e. point of $E$ is a point of density, $|Q \cap E|/|Q| \to 1$ as $Q \searrow x$. 
+
+
+Any cubes containing $x$ can be allowed, meaning they do not need to be centered at $x$.
+
+% Picture: Cube Q, point x in bottom left corner. Bigger cube Q' centered at x containing Q. 
+
+$|Q'| \leq 2^n |Q|$
+$\dfrac{1}{|Q|} \int_Q |f-f(x)| \leq \dfrac{2^n}{|Q'|} \int_{Q'} |f-(x)| \to 0$. 
+
+
+
+
+FTC 1: If $f \in L^1[a,b]$, then $\dfrac{d}{dx} \int_a^x f(t) \;dt= f(x)$ a.e. $x$.  
+
+
+% reason: use LDT with Q= [x,x+h] or [x-h,x]$, h \to 0. Then 1/h \int_a^x+h - \int_a^x = 1/|[x,x+h] \int x^x+h f
 
 
 
