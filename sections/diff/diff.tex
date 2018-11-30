@@ -138,12 +138,12 @@ We want to show that $f^*$ is `small' if $\| f \|_1$ is small. For this, we will
 
 
 \begin{lem}[Simple Covering Lemma (Vitali)]
-Suppose $E \subset \R^n$ has finite measure, i.e. $|E|<\infty$, and $E \subset \cup_{Q \in \mathcal{K}} Q$, where $\mathcal{K}$ is a collection of cubes. Then there exists a finite disjoint subcollection $\{Q_1,\ldots,Q_N\} \subset \mathcal{K}$ and $\sum_{j=1}^N |Q_j| \geq 5^{-n} |E|$. 
+Suppose $E \subset \R^n$ has finite measure, i.e. $|E|<\infty$, and $E \subset \cup_{Q \in \cK} Q$, where $\cK$ is a collection of cubes. Then there exists a finite disjoint subcollection $\{Q_1,\ldots,Q_N\} \subset \cK$ and $\sum_{j=1}^N |Q_j| \geq 5^{-n} |E|$. 
 \end{lem}
 
-\pf Choose a compact set $F \subset E$ with $|F| > (1-\ep) |E|$. For each $Q \in \mathcal{K}$, choose $Q'$ be a slightly larger open cube containing $Q$, i.e. $|Q'| < (1+\ep) |Q|$. Then $\{ Q' \colon Q \in \mathcal{K} \}$ is an open cover of $F$ since this collection covers $E$. Choose a finite subcovering $\mathcal{K}':= \{Q_1',\ldots, Q_M' \}$ of $F$. By possibly relabeling, without loss of generality assume $Q_1'$ be the largest cube in this collection. Again by possibly relabeling, let $Q_2'$ be the largest cube in this collection disjoint from $Q_1'$. Continue this procedure. Since there are finitely many cubes in the collection, this procedure terminates. Say $\{Q_1', \ldots, Q_N' \}$ were the cubes selected. 
+\pf Choose a compact set $F \subset E$ with $|F| > (1-\ep) |E|$. For each $Q \in \cK$, choose $Q'$ be a slightly larger open cube containing $Q$, i.e. $|Q'| < (1+\ep) |Q|$. Then $\{ Q' \colon Q \in \cK \}$ is an open cover of $F$ since this collection covers $E$. Choose a finite subcovering $\cK':= \{Q_1',\ldots, Q_M' \}$ of $F$. By possibly relabeling, without loss of generality assume $Q_1'$ be the largest cube in this collection. Again by possibly relabeling, let $Q_2'$ be the largest cube in this collection disjoint from $Q_1'$. Continue this procedure. Since there are finitely many cubes in the collection, this procedure terminates. Say $\{Q_1', \ldots, Q_N' \}$ were the cubes selected. 
 
-We claim $\{ 3Q_1', \ldots, 3Q_N' \}$ cover $F$. Choose $x \in F$. We know that $x \in Q_j'$ for some $Q_j' \in \mathcal{K}'$. If $Q_j' \in \{Q_1', \ldots, Q_N' \}$, we are done. If $Q_j' \notin \{Q_1', \ldots, Q_N' \}$, there must then exist $\tilde{Q} \in \mathcal{K}'$ such that $Q' \cap \tilde{Q} \neq \emptyset$, $|\tilde{Q}| \geq |Q'|$, and $\tilde{Q} \in \{Q_1', \ldots, Q_N' \}$. Since $Q' \subset 3\tilde{Q}$, $x$ is covered by $\{Q_1', \ldots, Q_N' \}$. Hence, 
+We claim $\{ 3Q_1', \ldots, 3Q_N' \}$ cover $F$. Choose $x \in F$. We know that $x \in Q_j'$ for some $Q_j' \in \cK'$. If $Q_j' \in \{Q_1', \ldots, Q_N' \}$, we are done. If $Q_j' \notin \{Q_1', \ldots, Q_N' \}$, there must then exist $\tilde{Q} \in \cK'$ such that $Q' \cap \tilde{Q} \neq \emptyset$, $|\tilde{Q}| \geq |Q'|$, and $\tilde{Q} \in \{Q_1', \ldots, Q_N' \}$. Since $Q' \subset 3\tilde{Q}$, $x$ is covered by $\{Q_1', \ldots, Q_N' \}$. Hence, 
 	\[
 	\sum |Q_j'| = 3^{-n} \sum |3Q_j'| \geq 3^{-n} |F| > 3^{-n} (1-\ep) |E|.
 	\] 
@@ -205,6 +205,113 @@ FTC 1: If $f \in L^1[a,b]$, then $\dfrac{d}{dx} \int_a^x f(t) \;dt= f(x)$ a.e. $
 
 
 % reason: use LDT with Q= [x,x+h] or [x-h,x]$, h \to 0. Then 1/h \int_a^x+h - \int_a^x = 1/|[x,x+h] \int x^x+h f
+
+
+
+
+%%%%%%%%%%%%%%%%%%%
+
+% Warm up: Suppose $A \subset \R^n$ is closed, nonempty. Let $B= \{ x \in \R^n \colon \dist(x,A)=1 \}$. Prove $|B|=0$. 
+
+% pf: dist function cont function of x. recall if |E|>0, then a.e. $x$ of $E$ is a point of density, i.e. $|E \cap Q|/|Q| \to 1$ as $Q \searrow x$. Suffices to show $B$ has no points of density. Given $x \in B$, let $y \in A$ be a nearest point of $A$ to $x$. Consider a sector (cone) with vertex $x$ and opening angle $\alpha< \frac{\pi}{2}$. If the cone is sufficiently small, then $\dist(z,y)<1$ for all $z$ in the interior of the cone. It is routine to verify $|z-y|<|x-y|$. Since $\dist(z,A)<1$, this cone is disjoint from $B$. But then $x$ cannot be a point of density: consider a sufficiently small cube about $x$, say $Q$. Then $|Q \cap B|/|Q| \leq 1-\ep$. 
+
+% One can use this to show that any union of closed balls of radius 1 is measurable. 
+
+% Give picture: blob and dotted line surrounding it, same shape, just larger. 
+
+
+
+
+% 7.3
+\subsection{Vitali Covering Lemma}
+
+
+\begin{dfn}[Vitali Covering]
+A family of cubes $\cK$ covers a set $E$ in the Vitali sense if every point of $E$ is covered by arbitrarily small cubes $Q \in \cK$. 
+\end{dfn}
+
+
+\begin{lem}[Vitali Covering Lemma] \label{lem:vitali}
+Suppose $\cK$ covers $E$ in the Vitali sense, $0<|E|<\infty$. Then for all $\ep>0$, there exist disjoint $Q_j \in \cK$ such that $|E \sm \cup_j Q_j|= 0$ and $\sum |Q_j| < (1+\ep)|E|$. 
+\end{lem}
+
+\pf Recall the Simple Covering Lemma: disjoint $Q_j$ $\sum |Q_j| \geq 5^{-n} |E|$. Choose $\ep<1/2 5^{-n}$. Choose open $G \supset E$ such that $|G| < (1+\ep)|E|$. Discard the cubes not contained in $G$, we still have a cover of $E$. The Simple Covering gives disjoint $Q_{0,j}$ such that $\sum_j |Q_{0,j}| \geq 5^{-n} |E|$. Hence, $|G \sm \cup Q_{0,j}| < (1+ 5^{-n}/2) |E| - 5^{-n} |E|= (1-5^{-n}/2)|E|$. Let $r$ be this $r<1$. So $|E \sm \cup Q_{0,j}| \leq r|E|$, which is a finite union of closed cubes. Discard any cubes in $\cK$ that meet any $Q_{0,j}$ remaining cubes cover $E_1= E \sm \cup Q_{0,j}$ (because for all $x \in E_1$, there exists a small cube $Q \in \cK$ that contains $x$ is disjoint from $\cup Q_{0,j}$). Repeat for $E_1$, get cubes $Q_{1,j}$ such that $|E_1 \sm \cup Q_{1,j}| \leq r|E_1|$ etc.. Call $E_2$ the set on left, etc.. $E_1 \supset E_2 \supset E_3 \cdots$. IF $|E_m|=0$, stop. Otherwise, $Z= \cap E_m$ has $|Z|=0$ as $|E_m| \leq r^m |E| \to 0$. \qed \\
+
+
+
+% \sum_{m,j} |Q_{m,j}| \leq |G| < (1+\ep)|E| % leq for disjoint
+
+\begin{rem}
+If finitely many cubes $Q_j$ are used, we obtain
+	\[
+	\left| E \sm \bigcup_{j=1}^N Q_j \right| < \ep.
+	\]
+\end{rem}
+
+
+
+
+
+
+
+
+
+
+\subsection{Differentiation of Monotone Functions}
+
+% WTS every monotone function is differentiable a.e. 
+
+
+Given $f: (a,b) \to \R$, define four Dini numbers at each $x \in (a,b)$
+	\[
+	\begin{split}
+	\overline{D}_+f(x)&= \limsup_{h \to 0^+} \dfrac{f(x+h) - f(x)}{h} \\
+	\overline{D}_-f(x)&= \limsup_{h \to 0^-} \dfrac{f(x+h) - f(x)}{h} \\
+	\underline{D}_+f(x)&= \liminf_{h \to 0^+} \dfrac{f(x+h) - f(x)}{h} \\
+	\underline{D}_-f(x)&= \liminf_{h \to 0^-} \dfrac{f(x+h) - f(x)}{h}
+	\end{split}
+	\]
+If $f$ is monotone, we want to prove these are equal and finite a.e. $x$. 
+
+
+\begin{ex}
+$f(x)=$ floor $x$.
+%Give graph
+At $x=1$
+	\[
+	\begin{split}
+	\overline{D}_+&= 0 \\
+	\overline{D}_-&= \infty \\
+	\underline{D}_+&= 0 \\
+	\underline{D}_-&= \infty
+	\end{split}
+	\]
+\end{ex}
+
+
+If $f$ is increasing, Dini numbers $\geq 0$. 
+
+
+\begin{ex}
+Cantor Lebesgue Staircase Function
+
+For each $m \in \N$, the $[0,1] \sm C$ contains $2^m-1$ intervals of size $ \geq 3^{-m}$. [Why? because $2^{m-1}$ holes of size $3^{-m}$ so those $\geq 3^{-m}$ are $1+2+2^2+\cdots+2^{m-1}= 2^m-1$.] Let $f(x)= \dfrac{k}{2^m}$, $k=1,2,\ldots,2^m-1$ on those intervals. This defines $f: [0,1] \sm C \to \R$. If $|x-y| \leq 3^{-m}$, then $|f(x)-f(y)| \leq 2^{-m}$ (exercise, uniformly contin). hence, $f$ uniformly continuous. So has extension to the closure of its domain. 
+\end{ex}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
