@@ -302,16 +302,75 @@ For each $m \in \N$, the $[0,1] \sm C$ contains $2^m-1$ intervals of size $ \geq
 
 
 
+%%%%%%%%
+
+\begin{thm}
+If $f: (a,b) \to \R$ is increasing (not necessarily strictly), then $f'$ exists a.e., $f'>0$ a.e., and $f$ is measurable. 
+\end{thm}
+
+\pf We postpone the existence of $f'$ and prove the rest first. Observe that 
+	\[
+	f_k(x):= \dfrac{f(x+1/k) - f(x)}{1/k} \stackrel{\text{a.e.}}{\to} f'(x)
+	\]
+and each $f_k(x)$ is measurable. However, $f_k$ is defined on $(a,b-1/k)$. To fix this, let $f(x)=f(b-)$ for $x \geq b$. Then $f_k$ is defined on $(a,b)$. But then $f'$ is also measurable. It is clear that $f' \geq 0$ since $f(x+h) - f(x) \geq 0$.
+
+To prove existence, first note that $\overline{D}_{-} \geq \underline{D}_{-}$ and $\overline{D}_+ \geq \underline{D}_+$. We only need show that these inequalities are equalities a.e.. We prove that $\overline{D}_+ \leq \underline{D}_{-}$ a.e.. It suffices to show for all $r>s$, the set $A= \{ x \in (a,b) \colon \overline{D}_+ f(x) > r > s > \underline{D}_{-} f(x) \}$ has $|A|=0$. Now $A$ is measurable as $\overline{D}_+$ and $\underline{D}_{-}$ are measurable (see HW). For all $x \in A$, there exists arbitrarily small $h>0$ such that
+	\[
+	\dfrac{f(x+h) - f(x)}{-h} < s.
+	\]
+But then $f(x) - f(x-h) < sh$. The intervals $[x-h,x]$ cover $A$ in the Vitali sense. By the Vitali Covering Lemma, for all $\ep>0$, there exist disjoint $I_j= [x_j-h_j,x_j]$ such that 
+	\begin{itemize}
+	\item the set $B= A \cap (\cup I_j)$ has $|B|>|A|-\ep$
+	\item $\sum |I_j| < (1+\ep)|A|$
+	\item $f(x_j) - f(x_j-h_j)< sh_j$
+	\end{itemize}
+For every $y \in B$, except for possibly at the endpoints of $I_j$, the fact that $\overline{D}_+ f(x)>r$ provides $k>0$ such that $[y, y+k] \subset I_j$ and $f(y+k) - f(y) > rk$. By the Vitali Covering, there exist disjoint $[y_i,y_i+k_i]$ such that $\sum k_i > |B|- \ep$. Hence, $\sum k_i > |A| - 2\ep$. Then
+	\[
+	\sum (f(y_i + k_i) - f(y_i-)> r (|A|-2\ep),
+	\]
+but
+	\[
+	\sum f(y_i+k_i) - f(y_i) \leq \sum f(x_j) - f(x_j-h_j) \leq s (1+\ep) |A|.
+	\]
+We then obtain $r(|A|-2\ep) \leq s(1+\ep)|A|$, a contradiction unless $|A|=0$, which is what we wanted to show. \qed \\
 
 
 
 
+\begin{cor}
+If $f: (a,b) \to \R$ is increasing (not necessarily strictly), then $f$ is integrable and
+	\[
+	\int_{(a,b)} f' \leq f(b-) - f(a+).
+	\]
+\end{cor}
+
+\pf We know that $f$ is measurable. Now
+	\[
+	\int_{(a,b)} f_k = k \left[ \int_{(a,b)} f(x+1/k) \; dx - \int_{(a,b)} f(x) \right] = \dfrac{\int_b^{b+1/k} f(x)}{1/k} - \dfrac{\int_a^{a+1/k} f(x)}{1/k}= f(b-) - \dfrac{\int_a^{a+1/k} f(x)}{1/k}
+	\]
+Since $f(a+)$ exists, we know that for every $r>f(a+)$, there exists $\delta>0$ such that $f(a+) \leq f \leq r$ on $(a,a+\delta)$. Hence for $k>1/\delta$,
+	\[
+	f(a+) \leq \dfrac{\int_a^{a+1/k} f}{1/k} \leq r.
+	\]
+Hence, $\dfrac{\int_a^{a+1/k} f}{1/k} \to f(a+)$. Then 
+	\[
+	\lim_{k \to \infty} \int_a^b f_k = f(b-) - f(a+)
+	\]
+By Fatou's Lemma, $\int_a^b f' \leq \lim \int_a^b f_k = f(b-) - f(a+)$. \qed \\
+
+
+% Picture: line up and to right from value at x=a to open circle at x=b, then solid point at some larger y-value.
+
+
+% Why \leq? Cantor-Lebesgue f has f' \equiv 0 a.e. but f(1-) - f(0+)=f(1)-f(0)=1 by construction
 
 
 
+\begin{cor}
+BV functions are differentiable a.e.. 
+\end{cor}
 
-
-
+\pf We know that if $f$ is BV, then $f= g-h$, where $g,h$ are increasing functions. But we know that $g,h$ are differentiable a.e.. But then $f$ is differentiable a.e.. \qed \\
 
 
 
