@@ -375,6 +375,96 @@ BV functions are differentiable a.e..
 
 
 
+%%%%%%%%%%
+
+\subsection{Absolutely Continuous and Singular Functions}
+
+% Remind of definition of additive set function: 
+
+
+\begin{dfn}
+A function $f$ is absolutely continuous (AC) on $[a,b]$ if for all $\ep>0$, there exists $\delta>0$ such that for any nonoverlapping intervals $[a_i,b_i] \subseteq [a,b]$ of total length less than $\delta$, we have
+	\[
+	\sum_i |f(b_i) - f(a_i)| < \ep.
+	\]
+\end{dfn}
+
+
+
+If a function is AC then it is uniformly continuous (take one interval). It suffices to check definition for finite collections $[a_i,b_i]$. Indeed, given any countable collection with $\sum (b_i-a_i)<\delta$, where $\{[a_i,b_i]\}$ is the collection, we obtain
+	\[
+	\sum_{i=1}^N |f(b_i)-f(a_i)| < \ep
+	\]
+for every $N$. Hence,
+	\[
+	\sum_{i=1}^\infty |f(b_i) - f(a_i)| < \ep.
+	\]
+If a function is Lipschitz continuous, then it is AC since
+	\[
+	|f(b_i)-f(a_i)| \leq L |b_i-a_i|
+	\]
+so take $\delta= \ep/L$.
+
+
+
+\begin{ex}
+Let $f(x)= \sqrt{x}$ on $[0,1]$ is AC. Given $\ep>0$, Consider $f$ on $[\ep^2/4,1]$. The function is Lipschitz continuous there, hence AC. So there exists $\delta>0$ such that if $[a_i,b_i] \subset [\ep^2/4,1]$, nonoverlapping of total length at most $\delta$. Then $\sum |f(b_i) - f(a_i)| < \ep/2$. 
+
+Also for all nonoverlapping $[c_i,d_i] \subset [0,\ep^2/4]$, we have
+	\[
+	\sum |f(d_i) - f(c_i)| \leq \ep/2
+	\]
+since $f \nearrow$ from 0 to $\ep/2$. Given $[d_i,\beta_i] \subset [0,1]$ total $<\delta$. If $\ep^2/4 \in (d_i,\beta_i)$ forms a partition of $[\alpha_i,\ep^2/4]$ and $[\ep^2/4,\beta_i]$. Partitions does not decrease. $\sum |f(\alpha_i)-f(\beta_i)| \to \ep/2+\ep/2$. 
+\end{ex}
+
+
+\begin{ex}
+Cantor Lebesgue $f$ is not AC. Let $\ep=1$. Given $\delta>0$, choose $m$ such that $2^m/3^m<\delta$, let $[a_i,b_i]$ be $2^m$ intervals of size $3^{-m}$ covering $C$. On each of them $f$ grows by $2^{-m}$. $2^m$ intervals of size $3^{-m}$ remain in $C$ after $m$ steps. 
+\end{ex}
+
+
+\begin{dfn}[Singular]
+$f$ is singular on $[a,b]$ if $f' \equiv 0$ a.e. on $[a,b]$.
+\end{dfn}
+
+
+\begin{thm}
+If $f$ is AC and singular on $[a,b]$, then it is constant.
+\end{thm}
+
+\pf Given $\ep>0$, cover $\{f'\equiv 0\}$ by $[x,x+h]$ with $|f(x+h)-f(x)|<\ep h$. Vitali covering gives disjoint finite collection $[x_i,x_i+h_i]$ which cover $[a,b]$ except for some $E$ with $|E|<\delta$ ($\delta$ from definition of AC). Since $|E|<\delta$. It can be covered by countable collection of intervals of total length $<\delta$. If not disjoint, replace by unions (connected components) to get disjoint collection $[c_i,d_i]$. By AC, $\sum |f(c_i) - f(d_i)| < \ep$. But also $\sum |f(x_i+h_i) - f(x_i)| < \ep \sum h_i \leq \ep(b-a)$. Hence, $|f(b)-f(a)| \leq \ep(1+b-a)$. Then $f(b)=f(a)$. This applies for $[a',b'] \subset [a,b]$ so $f$ is constant. \qed \\
+
+
+
+\begin{rem}
+AC gives more: if $\sum \text{diam }I_j < \delta$, $I_i$ are nonoverlapping then $\sum \text{diam } f(I_j) < \ep$. 
+\end{rem}
+
+
+
+It remains to show that AC implies BV. If $f$ is not BV, we can find finer and finer partitions such that $\sum^N |f(x_i)-f(x_{i-1})| \to \infty$. Consider a partition with $x_i - x_{i-1}< \delta/2$ for all $i$. Group subintervals $[x_{i-1},x_i]$ such that each group has total length $\delta/2 \leq length \leq \delta$. Get $\leq$ $b-a/(\delta/2)$ groups. Sum over groups: $\sum |f(x_i)-f(x_{i-1})| < \ep$ by AC. Hence, variation at most $\ep (b-a)/(\delta/2)$. 
+
+
+
+
+FTC part 2:
+
+$f: [a,b] \to \R$ is AC if and only if $f'$ is integrable and $\int_{[a,b]} f'= f(b)-f(a)$. 
+
+\pf Suppose $F$ integrable. Let $g(x)= \int_{[a,x]} f'$ this is AC (recall AC ASF) So if $f'$ integrable and $f(x)- f(a) = \int_{[a,x]} f'$ then $f$ is AC.
+
+For other, $f$ is AC. Then $f= f_1-f_2$, $f_1,f_2 \nearrow$, then $f'$ is integrable. Let $g(x) = \int_a^x f'$. $f-g$ is AC and $(f-g)'=0$ a.e. Hence $f-g$ constant so that $\equiv f(a)$. \qed \\
+
+% Get from the book. He failed. 
+
+
+
+
+
+
+
+
+
 
 
 
